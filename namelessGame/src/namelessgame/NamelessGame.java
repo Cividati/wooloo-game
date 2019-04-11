@@ -6,8 +6,7 @@
 
 package namelessgame;
 
-import Ui.CriarConta;
-import Ui.Login;
+import Ui.SimpleFrame;
 
 
 public class NamelessGame {
