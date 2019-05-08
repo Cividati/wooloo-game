@@ -1,5 +1,7 @@
 package namelessgame.Ui;
 
+import namelessgame.Exception.GameIdNotFound;
+
 /**
  *
  * @author sin
@@ -23,8 +25,8 @@ public class loadGameFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         name1 = new javax.swing.JLabel();
-        loadButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        loadButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
         BackButton = new javax.swing.JButton();
         idField = new javax.swing.JTextField();
@@ -40,25 +42,25 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(name1);
         name1.setBounds(130, 30, 130, 40);
 
-        loadButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        loadButton.setText("Delete");
-        loadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(loadButton);
-        loadButton.setBounds(1030, 390, 100, 50);
-
         deleteButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        deleteButton.setText("Load");
+        deleteButton.setText("Delete");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
         getContentPane().add(deleteButton);
-        deleteButton.setBounds(890, 390, 100, 50);
+        deleteButton.setBounds(1030, 390, 100, 50);
+
+        loadButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        loadButton.setText("Load");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(loadButton);
+        loadButton.setBounds(890, 390, 100, 50);
 
         id.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         id.setForeground(new java.awt.Color(51, 51, 51));
@@ -98,13 +100,28 @@ public class loadGameFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idFieldActionPerformed
 
-    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loadButtonActionPerformed
-
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        int gameId;
+        
+        try
+        {
+            gameId = Integer.parseInt(idField.getText());
+            
+            // find game id (exception thrown in the method)
+        }
+        catch(NumberFormatException | GameIdNotFound e)
+        {
+            javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.");
+            
+            return;
+        }
+        
+        System.out.println("Loading into game...");
+    }//GEN-LAST:event_loadButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
