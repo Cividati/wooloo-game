@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Ui;
+package namelessgame.Ui;
 
 /**
  *
@@ -31,9 +26,9 @@ public class loadGameFrame extends javax.swing.JFrame {
         loadButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        nameField = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        BackButton = new javax.swing.JButton();
+        idField = new javax.swing.JTextField();
+        savesList = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,25 +66,25 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(id);
         id.setBounds(900, 320, 90, 40);
 
-        jButton1.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
+        BackButton.setText("Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1140, 670, 100, 30);
+        getContentPane().add(BackButton);
+        BackButton.setBounds(1140, 670, 100, 30);
 
-        nameField.addActionListener(new java.awt.event.ActionListener() {
+        idField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
+                idFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(nameField);
-        nameField.setBounds(990, 320, 50, 40);
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(130, 70, 470, 640);
+        getContentPane().add(idField);
+        idField.setBounds(990, 320, 50, 40);
+        getContentPane().add(savesList);
+        savesList.setBounds(130, 70, 470, 640);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PATTERN-BRANCO.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -99,9 +94,9 @@ public class loadGameFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+    private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
+    }//GEN-LAST:event_idFieldActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         // TODO add your handling code here:
@@ -111,11 +106,13 @@ public class loadGameFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
+        
         menuFrame menuBack = new menuFrame();
         menuBack.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        menuBack.setSize(1280, 720);
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,13 +150,13 @@ public class loadGameFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel id;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField idField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;
-    private javax.swing.JTextField nameField;
+    private javax.swing.JScrollPane savesList;
     // End of variables declaration//GEN-END:variables
 }

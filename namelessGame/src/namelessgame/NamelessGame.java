@@ -6,7 +6,7 @@
 
 package namelessgame;
 
-import Ui.SimpleFrame;
+import namelessGame.Ui.SimpleFrame;
 
 
 public class NamelessGame {

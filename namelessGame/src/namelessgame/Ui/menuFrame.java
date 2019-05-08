@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Ui;
+package namelessgame.Ui;
 
 /**
  *
@@ -16,6 +11,7 @@ public class menuFrame extends javax.swing.JFrame {
      */
     public menuFrame() {
         initComponents();
+        this.setSize(1280, 720);
     }
 
     /**
@@ -28,14 +24,13 @@ public class menuFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
+        newGameButton = new javax.swing.JButton();
+        loadGameButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
@@ -44,37 +39,37 @@ public class menuFrame extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(610, 20, 130, 60);
 
-        jButton3.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
-        jButton3.setText("Exit");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(130, 510, 300, 100);
+        getContentPane().add(exitButton);
+        exitButton.setBounds(130, 510, 300, 100);
 
-        jButton1.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
-        jButton1.setText("New Game");
-        jButton1.setMinimumSize(new java.awt.Dimension(300, 100));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        newGameButton.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        newGameButton.setText("New Game");
+        newGameButton.setMinimumSize(new java.awt.Dimension(300, 100));
+        newGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                newGameButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(130, 210, 300, 100);
+        getContentPane().add(newGameButton);
+        newGameButton.setBounds(130, 210, 300, 100);
 
-        jButton2.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
-        jButton2.setText("Load Game");
-        jButton2.setMinimumSize(new java.awt.Dimension(300, 100));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        loadGameButton.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        loadGameButton.setText("Load Game");
+        loadGameButton.setMinimumSize(new java.awt.Dimension(300, 100));
+        loadGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                loadGameButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(130, 360, 300, 100);
+        getContentPane().add(loadGameButton);
+        loadGameButton.setBounds(130, 360, 300, 100);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PATTERN-BRANCO.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -84,22 +79,23 @@ public class menuFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.dispose();
         newGameFrame newG = new newGameFrame();
         newG.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        newG.setSize(1280, 720);
+    }//GEN-LAST:event_newGameButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         this.dispose();
         loadGameFrame loadG = new loadGameFrame();
         loadG.setVisible(true);
         loadG.setSize(1280, 720);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_loadGameButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,10 +133,10 @@ public class menuFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton loadGameButton;
+    private javax.swing.JButton newGameButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Ui;
+package namelessgame.Ui;
+
+import java.util.List;
+import java.util.ArrayList;
+import namelessgame.Game.Player;
 
 /**
  *
@@ -17,6 +16,16 @@ public class newGameFrame extends javax.swing.JFrame {
     public newGameFrame() {
         initComponents();
     }
+    
+    public static List<Player> playerList = new ArrayList<>();
+    
+    private char sex = 'M';
+    private int nextIndexMale = 0;
+    private int nextIndexFemale = 0;
+    
+    String[] maleImages = {"/img/kirito.png", "/img/Naofumi.png"};
+    String[] femaleImages = {};
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,15 +38,14 @@ public class newGameFrame extends javax.swing.JFrame {
 
         MaleButton = new javax.swing.JButton();
         FemButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
+        CreateCharButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
         name = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
@@ -49,7 +57,7 @@ public class newGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MaleButton);
-        MaleButton.setBounds(700, 450, 100, 50);
+        MaleButton.setBounds(460, 460, 100, 50);
 
         FemButton.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
         FemButton.setText("Female");
@@ -59,27 +67,27 @@ public class newGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemButton);
-        FemButton.setBounds(510, 450, 100, 50);
+        FemButton.setBounds(750, 460, 100, 50);
 
-        jButton1.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
+        BackButton.setText("Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1130, 660, 100, 30);
+        getContentPane().add(BackButton);
+        BackButton.setBounds(1130, 660, 100, 30);
 
-        jButton2.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
-        jButton2.setText("Create");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        CreateCharButton.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        CreateCharButton.setText("Create");
+        CreateCharButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                CreateCharButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(560, 620, 180, 70);
+        getContentPane().add(CreateCharButton);
+        CreateCharButton.setBounds(560, 620, 180, 70);
 
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +117,16 @@ public class newGameFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleButtonActionPerformed
-        // TODO add your handling code here:
+        sex = 'M';
+        
+        nextIndexMale++;
+        
+        if(nextIndexMale >= maleImages.length)
+            nextIndexMale = 0;
+        
+        String chosenImg = maleImages[nextIndexMale];
+        
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));      
     }//GEN-LAST:event_MaleButtonActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -117,18 +134,47 @@ public class newGameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nameFieldActionPerformed
 
     private void FemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemButtonActionPerformed
+        sex = 'F';
         
+        if(femaleImages.length == 0)
+            return;
+        
+        nextIndexFemale++;
+        
+        if(nextIndexFemale >= femaleImages.length)
+            nextIndexFemale = 0;
+        
+        String chosenImg = femaleImages[nextIndexFemale];
+        
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));     
     }//GEN-LAST:event_FemButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        this.dispose();
+        
+        menuFrame menuBack = new menuFrame();
+        menuBack.setVisible(true);
+        menuBack.setSize(1280, 720);
+    }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void CreateCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCharButtonActionPerformed
+        String characterName = nameField.getText();
+        
+        if(characterName.length() < 1 || characterName.length() > 25)
+        {
+            javax.swing.JOptionPane.showMessageDialog(null, "Your nickname must contain atleast 1 character and less than 25.");
+            
+            return;
+        }
+        
+        System.out.println("Character created successfully.");
+        playerList.add(new Player(characterName, sex));
+        
         this.dispose();
         menuFrame menuBack = new menuFrame();
         menuBack.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        menuBack.setSize(1280, 720);
+    }//GEN-LAST:event_CreateCharButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,18 +204,16 @@ public class newGameFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new newGameFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new newGameFrame().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
+    private javax.swing.JButton CreateCharButton;
     private javax.swing.JButton FemButton;
     private javax.swing.JButton MaleButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel name;
