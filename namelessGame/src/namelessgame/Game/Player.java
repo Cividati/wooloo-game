@@ -9,6 +9,7 @@ public class Player extends Creature {
     private int level; 
     private int exp;
     private long gold;
+    private int maxHP;
     private int statusPoints;                       // Pontos de status disponíveis para distribuir.
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -66,6 +67,14 @@ public class Player extends Creature {
 
     public void setPlayerGold(long gold) {
         this.gold = gold;
+    }
+    
+    public int getPlayerMaxHealth() {
+        return maxHP;
+    }
+
+    public void setPlayerMaxHealth(int maxHP) {
+        this.maxHP = maxHP;
     }
 
     public int getPlayerStatusPoints() {

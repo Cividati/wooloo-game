@@ -1,6 +1,9 @@
 package namelessgame.Ui;
 
+import java.util.List;
+import java.util.ArrayList;
 import namelessgame.Exception.GameIdNotFound;
+import namelessgame.Game.Player;
 
 /**
  *
@@ -13,6 +16,15 @@ public class loadGameFrame extends javax.swing.JFrame {
      */
     public loadGameFrame() {
         initComponents();
+        
+        String displayChars = "";
+        
+        for (Player player : newGameFrame.playerList) {
+            displayChars += "Nickname: " + player.getName();
+            
+        }
+        
+        
     }
 
     /**
@@ -31,6 +43,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         BackButton = new javax.swing.JButton();
         idField = new javax.swing.JTextField();
         savesList = new javax.swing.JScrollPane();
+        savesText = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,6 +98,12 @@ public class loadGameFrame extends javax.swing.JFrame {
         });
         getContentPane().add(idField);
         idField.setBounds(990, 320, 50, 40);
+
+        savesText.setEditable(false);
+        savesText.setColumns(20);
+        savesText.setRows(5);
+        savesList.setViewportView(savesText);
+
         getContentPane().add(savesList);
         savesList.setBounds(130, 70, 470, 640);
 
@@ -175,5 +194,6 @@ public class loadGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;
     private javax.swing.JScrollPane savesList;
+    private javax.swing.JTextArea savesText;
     // End of variables declaration//GEN-END:variables
 }

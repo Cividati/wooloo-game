@@ -6,7 +6,6 @@ package namelessgame.Game;
  */
 public class PlayerDungeon extends Player {
     private int HP;
-    private int maxHP;
 
     public PlayerDungeon(String name, char sex) {
         super(name, sex);
@@ -20,26 +19,16 @@ public class PlayerDungeon extends Player {
     {
         this.HP += HP;
         
-        if(this.HP > this.maxHP)
-            this.HP = this.maxHP;
+        if(this.HP > this.getPlayerMaxHealth())
+            this.HP = this.getPlayerMaxHealth();
     }
 
     public void setPlayerHealth(int HP) {
         this.HP = HP;
         
-        if(this.HP > this.maxHP)
-            this.HP = this.maxHP;
+        if(this.HP > this.getPlayerMaxHealth())
+            this.HP = this.getPlayerMaxHealth();
     }
-
-    public int getPlayerMaxHealth() {
-        return maxHP;
-    }
-
-    public void setPlayerMaxHealth(int maxHP) {
-        this.maxHP = maxHP;
-    }
-    
-    
 
 }
 
