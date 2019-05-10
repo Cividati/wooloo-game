@@ -5,16 +5,16 @@ package namelessgame.Game;
  * @author Henrique Barcia Lang
  */
 public abstract class Creature {
+
     private String name;
-    
+
     /* Status base (sem equip. no caso de players) */
-    
     private int str;
-    private int dex;
+    private int agi;
+    private int inte;
     private int con;
-    
+
     /* *********** */
-    
     public String getName() {
         return name;
     }
@@ -22,11 +22,11 @@ public abstract class Creature {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public int getStr() {
         return str;
     }
-    
+
     public void addStr(int str) {
         this.str += str;
     }
@@ -35,22 +35,34 @@ public abstract class Creature {
         this.str = str;
     }
 
-    public int getDex() {
-        return dex;
-    }
-    
-    public void addDex(int dex) {
-        this.dex += dex;
+    public int getAgi() {
+        return agi;
     }
 
-    public void setDex(int dex) {
-        this.dex = dex;
+    public void addAgi(int agi) {
+        this.agi += agi;
+    }
+
+    public void setAgi(int agi) {
+        this.agi = agi;
+    }
+
+    public int getInte() {
+        return inte;
+    }
+    public void addInte(int inte) {
+        this.inte += inte;
+    }
+    
+
+    public void setInte(int inte) {
+        this.inte = inte;
     }
 
     public int getCon() {
         return con;
     }
-    
+
     public void addCon(int con) {
         this.con += con;
     }
@@ -59,4 +71,3 @@ public abstract class Creature {
         this.con = con;
     }
 }
-
