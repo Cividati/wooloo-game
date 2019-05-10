@@ -162,7 +162,7 @@ public class newGameFrame extends javax.swing.JFrame {
         
         if(characterName.length() < 1 || characterName.length() > 25)
         {
-            javax.swing.JOptionPane.showMessageDialog(null, "Your nickname must contain at least 1 character and less than 25.");
+            javax.swing.JOptionPane.showMessageDialog(null, "Your nickname must contain at least 1 character and less than 25.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
             return;
         }

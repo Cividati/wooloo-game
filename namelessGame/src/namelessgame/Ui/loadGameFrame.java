@@ -42,8 +42,14 @@ public class loadGameFrame extends javax.swing.JFrame {
         id = new javax.swing.JLabel();
         BackButton = new javax.swing.JButton();
         idField = new javax.swing.JTextField();
-        savesList = new javax.swing.JScrollPane();
-        savesText = new javax.swing.JTextArea();
+        Char4 = new javax.swing.JButton();
+        Char1 = new javax.swing.JButton();
+        Char2 = new javax.swing.JButton();
+        Char3 = new javax.swing.JButton();
+        Char5 = new javax.swing.JButton();
+        Char6 = new javax.swing.JButton();
+        Char7 = new javax.swing.JButton();
+        Char8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,14 +104,22 @@ public class loadGameFrame extends javax.swing.JFrame {
         });
         getContentPane().add(idField);
         idField.setBounds(990, 320, 50, 40);
-
-        savesText.setEditable(false);
-        savesText.setColumns(20);
-        savesText.setRows(5);
-        savesList.setViewportView(savesText);
-
-        getContentPane().add(savesList);
-        savesList.setBounds(130, 70, 470, 640);
+        getContentPane().add(Char4);
+        Char4.setBounds(50, 430, 210, 80);
+        getContentPane().add(Char1);
+        Char1.setBounds(50, 100, 210, 80);
+        getContentPane().add(Char2);
+        Char2.setBounds(50, 210, 210, 80);
+        getContentPane().add(Char3);
+        Char3.setBounds(50, 320, 210, 80);
+        getContentPane().add(Char5);
+        Char5.setBounds(350, 100, 210, 80);
+        getContentPane().add(Char6);
+        Char6.setBounds(350, 210, 210, 80);
+        getContentPane().add(Char7);
+        Char7.setBounds(350, 320, 210, 80);
+        getContentPane().add(Char8);
+        Char8.setBounds(350, 430, 210, 80);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PATTERN-BRANCO.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -134,7 +148,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         }
         catch(NumberFormatException | GameIdNotFound e)
         {
-            javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.");
+            javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
             return;
         }
@@ -187,13 +201,19 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
+    private javax.swing.JButton Char1;
+    private javax.swing.JButton Char2;
+    private javax.swing.JButton Char3;
+    private javax.swing.JButton Char4;
+    private javax.swing.JButton Char5;
+    private javax.swing.JButton Char6;
+    private javax.swing.JButton Char7;
+    private javax.swing.JButton Char8;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel id;
     private javax.swing.JTextField idField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;
-    private javax.swing.JScrollPane savesList;
-    private javax.swing.JTextArea savesText;
     // End of variables declaration//GEN-END:variables
 }
