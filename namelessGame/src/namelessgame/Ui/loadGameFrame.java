@@ -97,8 +97,9 @@ public class loadGameFrame extends javax.swing.JFrame {
         id.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         id.setForeground(new java.awt.Color(51, 51, 51));
         id.setText("Game id:");
+        id.setEnabled(false);
         getContentPane().add(id);
-        id.setBounds(930, 550, 100, 40);
+        id.setBounds(930, 570, 100, 20);
 
         namLabel.setBackground(new java.awt.Color(0, 0, 0));
         namLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -187,8 +188,9 @@ public class loadGameFrame extends javax.swing.JFrame {
         idField.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         idField.setForeground(new java.awt.Color(0, 0, 0));
         idField.setText("id");
+        idField.setEnabled(false);
         getContentPane().add(idField);
-        idField.setBounds(1040, 550, 60, 30);
+        idField.setBounds(1040, 570, 60, 20);
 
         BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         BG.setText("jLabel1");
