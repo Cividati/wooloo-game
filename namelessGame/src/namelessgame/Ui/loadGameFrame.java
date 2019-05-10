@@ -53,6 +53,8 @@ public class loadGameFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         name1.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -121,7 +123,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(Char8);
         Char8.setBounds(350, 430, 210, 80);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PATTERN-BRANCO.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1270, 750);
