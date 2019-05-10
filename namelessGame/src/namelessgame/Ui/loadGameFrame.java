@@ -1,9 +1,7 @@
 package namelessgame.Ui;
 
-import java.util.List;
-import java.util.ArrayList;
+import javax.swing.JButton;
 import namelessgame.Exception.GameIdNotFound;
-import namelessgame.Game.Player;
 
 /**
  *
@@ -14,17 +12,72 @@ public class loadGameFrame extends javax.swing.JFrame {
     /**
      * Creates new form loadGameFrame
      */
+    private int chosenId;
+    
+    public void setupPlayerInfo()
+    {
+        try
+        {
+            nameLabel.setText("Name: " + newGameFrame.playerList.get(chosenId).getName());
+            levelLabel.setText("Level: " + newGameFrame.playerList.get(chosenId).getPlayerLevel());
+            goldLabel.setText("Gold: " + newGameFrame.playerList.get(chosenId).getPlayerGold());
+            strLabel.setText("Strength: " + newGameFrame.playerList.get(chosenId).getStr());
+            //intLabel.setText("Inteligence " + newGameFrame.playerList.get(chosenId));
+            constLabel.setText("Constitution: " + newGameFrame.playerList.get(chosenId).getCon());
+            //agiLabel.setText("Agility " + newGameFrame.playerList.get(chosenId).getPlayerLevel());
+        }
+        catch(ArrayIndexOutOfBoundsException e) {}
+    }
+
     public loadGameFrame() {
         initComponents();
-        
-        String displayChars = "";
-        
-        for (Player player : newGameFrame.playerList) {
-            displayChars += "Nickname: " + player.getName();
+
+        for (int i = 0; i < newGameFrame.playerList.size(); i++) {
+            String name = newGameFrame.playerList.get(i).getName();
+            int level = newGameFrame.playerList.get(i).getPlayerLevel();
             
+            JButton charButton = null;
+
+            switch (i) {
+                case 0:
+                    charButton = Char1;
+
+                    break;
+                case 1:
+                    charButton = Char2;
+
+                    break;
+                case 2:
+                    charButton = Char3;
+
+                    break;
+                case 3:
+                    charButton = Char4;
+
+                    break;
+                case 4:
+                    charButton = Char5;
+
+                    break;
+                case 5:
+                    charButton = Char6;
+
+                    break;
+                case 6:
+                    charButton = Char7;
+
+                    break;
+                case 7:
+                    charButton = Char8;
+
+                    break;
+            }
+            
+            if(charButton != null)
+                charButton.setText(name + " - lv. " + level);
+
         }
-        
-        
+
     }
 
     /**
@@ -40,13 +93,13 @@ public class loadGameFrame extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
-        namLabel = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
         goldLabel = new javax.swing.JLabel();
         strLabel = new javax.swing.JLabel();
         intLabel = new javax.swing.JLabel();
-        cosntLabel = new javax.swing.JLabel();
-        agiLabel1 = new javax.swing.JLabel();
+        constLabel = new javax.swing.JLabel();
+        agiLabel = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         BackButton = new javax.swing.JButton();
         Char4 = new javax.swing.JButton();
@@ -101,54 +154,54 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(id);
         id.setBounds(930, 570, 100, 20);
 
-        namLabel.setBackground(new java.awt.Color(0, 0, 0));
-        namLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        namLabel.setForeground(new java.awt.Color(0, 0, 0));
-        namLabel.setText("Name: ");
-        getContentPane().add(namLabel);
-        namLabel.setBounds(880, 180, 140, 20);
+        nameLabel.setBackground(new java.awt.Color(0, 0, 0));
+        nameLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        nameLabel.setText("Name: ");
+        getContentPane().add(nameLabel);
+        nameLabel.setBounds(880, 180, 180, 20);
 
         levelLabel.setBackground(new java.awt.Color(0, 0, 0));
         levelLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         levelLabel.setForeground(new java.awt.Color(0, 0, 0));
         levelLabel.setText("Level: ");
         getContentPane().add(levelLabel);
-        levelLabel.setBounds(880, 230, 130, 28);
+        levelLabel.setBounds(880, 230, 160, 28);
 
         goldLabel.setBackground(new java.awt.Color(0, 0, 0));
         goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         goldLabel.setForeground(new java.awt.Color(0, 0, 0));
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
-        goldLabel.setBounds(1080, 180, 130, 20);
+        goldLabel.setBounds(1080, 180, 160, 20);
 
         strLabel.setBackground(new java.awt.Color(0, 0, 0));
         strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         strLabel.setForeground(new java.awt.Color(0, 0, 0));
         strLabel.setText("Strength: ");
         getContentPane().add(strLabel);
-        strLabel.setBounds(880, 320, 160, 20);
+        strLabel.setBounds(880, 320, 160, 30);
 
         intLabel.setBackground(new java.awt.Color(0, 0, 0));
         intLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         intLabel.setForeground(new java.awt.Color(0, 0, 0));
         intLabel.setText("Intelligence: ");
         getContentPane().add(intLabel);
-        intLabel.setBounds(880, 350, 210, 20);
+        intLabel.setBounds(880, 360, 210, 30);
 
-        cosntLabel.setBackground(new java.awt.Color(0, 0, 0));
-        cosntLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        cosntLabel.setForeground(new java.awt.Color(0, 0, 0));
-        cosntLabel.setText("Constituition:");
-        getContentPane().add(cosntLabel);
-        cosntLabel.setBounds(1070, 350, 190, 20);
+        constLabel.setBackground(new java.awt.Color(0, 0, 0));
+        constLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        constLabel.setForeground(new java.awt.Color(0, 0, 0));
+        constLabel.setText("Constituition:");
+        getContentPane().add(constLabel);
+        constLabel.setBounds(1090, 360, 190, 30);
 
-        agiLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        agiLabel1.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        agiLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        agiLabel1.setText("Agility: ");
-        getContentPane().add(agiLabel1);
-        agiLabel1.setBounds(1070, 320, 210, 20);
+        agiLabel.setBackground(new java.awt.Color(0, 0, 0));
+        agiLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        agiLabel.setForeground(new java.awt.Color(0, 0, 0));
+        agiLabel.setText("Agility: ");
+        getContentPane().add(agiLabel);
+        agiLabel.setBounds(1090, 320, 210, 30);
 
         jProgressBar1.setForeground(new java.awt.Color(204, 0, 255));
         jProgressBar1.setValue(30);
@@ -164,20 +217,73 @@ public class loadGameFrame extends javax.swing.JFrame {
         });
         getContentPane().add(BackButton);
         BackButton.setBounds(80, 600, 130, 50);
+
+        Char4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char4MousePressed(evt);
+            }
+        });
         getContentPane().add(Char4);
         Char4.setBounds(50, 430, 210, 80);
+
+        Char1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char1MousePressed(evt);
+            }
+        });
+        Char1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Char1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(Char1);
         Char1.setBounds(50, 100, 210, 80);
+
+        Char2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char2MousePressed(evt);
+            }
+        });
         getContentPane().add(Char2);
         Char2.setBounds(50, 210, 210, 80);
+
+        Char3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char3MousePressed(evt);
+            }
+        });
         getContentPane().add(Char3);
         Char3.setBounds(50, 320, 210, 80);
+
+        Char5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char5MousePressed(evt);
+            }
+        });
         getContentPane().add(Char5);
         Char5.setBounds(350, 100, 210, 80);
+
+        Char6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char6MousePressed(evt);
+            }
+        });
         getContentPane().add(Char6);
         Char6.setBounds(350, 210, 210, 80);
+
+        Char7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char7MousePressed(evt);
+            }
+        });
         getContentPane().add(Char7);
         Char7.setBounds(350, 320, 210, 80);
+
+        Char8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Char8MousePressed(evt);
+            }
+        });
         getContentPane().add(Char8);
         Char8.setBounds(350, 430, 210, 80);
 
@@ -207,31 +313,80 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         int gameId;
-        
-        try
-        {
+
+        try {
             gameId = Integer.parseInt(idField.getText());
-            
+
             // find game id (exception thrown in the method)
-        }
-        catch(NumberFormatException | GameIdNotFound e)
-        {
+        } catch (NumberFormatException | GameIdNotFound e) {
             javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
+
             return;
         }
-        
+
         System.out.println("Loading into game...");
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
-        
+
         menuFrame menuBack = new menuFrame();
         menuBack.setVisible(true);
         menuBack.setSize(1280, 720);
     }//GEN-LAST:event_BackButtonActionPerformed
 
+    private void Char1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Char1ActionPerformed
+
+    }//GEN-LAST:event_Char1ActionPerformed
+    
+    private void Char1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char1MousePressed
+        chosenId = 0;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char1MousePressed
+
+    private void Char5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char5MousePressed
+        chosenId = 4;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char5MousePressed
+
+    private void Char2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char2MousePressed
+        chosenId = 1;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char2MousePressed
+
+    private void Char6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char6MousePressed
+        chosenId = 5;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char6MousePressed
+
+    private void Char3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char3MousePressed
+        chosenId = 2;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char3MousePressed
+
+    private void Char7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char7MousePressed
+        chosenId = 6;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char7MousePressed
+
+    private void Char4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char4MousePressed
+        chosenId = 3;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char4MousePressed
+
+    private void Char8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char8MousePressed
+        chosenId = 7;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char8MousePressed
+    
     /**
      * @param args the command line arguments
      */
@@ -258,7 +413,7 @@ public class loadGameFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(loadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-         
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -278,9 +433,9 @@ public class loadGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton Char6;
     private javax.swing.JButton Char7;
     private javax.swing.JButton Char8;
-    private javax.swing.JLabel agiLabel1;
+    private javax.swing.JLabel agiLabel;
     private javax.swing.JLabel charImage;
-    private javax.swing.JLabel cosntLabel;
+    private javax.swing.JLabel constLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel goldLabel;
     private javax.swing.JLabel id;
@@ -289,8 +444,8 @@ public class loadGameFrame extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JButton loadButton;
-    private javax.swing.JLabel namLabel;
     private javax.swing.JLabel name1;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel strLabel;
     // End of variables declaration//GEN-END:variables
 }
