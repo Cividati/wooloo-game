@@ -77,6 +77,7 @@ public class menuFrame extends javax.swing.JFrame {
         jLabel2.setBounds(0, 0, 1270, 740);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
