@@ -23,7 +23,7 @@ public class newGameFrame extends javax.swing.JFrame {
     private int nextIndexMale = 0;
     private int nextIndexFemale = 0;
     
-    String[] maleImages = {"/img/kirito.png", "/img/Naofumi.png"};
+    String[] maleImages = {"/namelessgame/img/kirito.png", "/namelessgame/img/Naofumi.png"};
     String[] femaleImages = {};
     
 
@@ -45,7 +45,8 @@ public class newGameFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
@@ -104,16 +105,17 @@ public class newGameFrame extends javax.swing.JFrame {
         name.setBounds(600, 530, 110, 40);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/kirito.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(380, -160, 660, 620);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PATTERN-BRANCO.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 1280, 750);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleButtonActionPerformed
@@ -123,10 +125,9 @@ public class newGameFrame extends javax.swing.JFrame {
         
         if(nextIndexMale >= maleImages.length)
             nextIndexMale = 0;
-        
         String chosenImg = maleImages[nextIndexMale];
         
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));      
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));    
     }//GEN-LAST:event_MaleButtonActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
