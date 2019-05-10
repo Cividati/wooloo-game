@@ -50,10 +50,10 @@ public abstract class Creature {
     public int getInte() {
         return inte;
     }
+
     public void addInte(int inte) {
         this.inte += inte;
     }
-    
 
     public void setInte(int inte) {
         this.inte = inte;

@@ -231,11 +231,7 @@ public class loadGameFrame extends javax.swing.JFrame {
                 Char1MousePressed(evt);
             }
         });
-        Char1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Char1ActionPerformed(evt);
-            }
-        });
+        
         getContentPane().add(Char1);
         Char1.setBounds(50, 100, 210, 80);
 
@@ -287,7 +283,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(Char8);
         Char8.setBounds(350, 430, 210, 80);
 
-        charImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.png"))); // NOI18N
+        charImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.gif"))); // NOI18N
         getContentPane().add(charImage);
         charImage.setBounds(580, 160, 280, 280);
 
@@ -335,21 +331,13 @@ public class loadGameFrame extends javax.swing.JFrame {
         menuBack.setSize(1280, 720);
     }//GEN-LAST:event_BackButtonActionPerformed
 
-    private void Char1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Char1ActionPerformed
-
-    }//GEN-LAST:event_Char1ActionPerformed
-    
     private void Char1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char1MousePressed
         chosenId = 0;
         
         setupPlayerInfo();
     }//GEN-LAST:event_Char1MousePressed
 
-    private void Char5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char5MousePressed
-        chosenId = 4;
-        
-        setupPlayerInfo();
-    }//GEN-LAST:event_Char5MousePressed
+    
 
     private void Char2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char2MousePressed
         chosenId = 1;
@@ -357,17 +345,31 @@ public class loadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }//GEN-LAST:event_Char2MousePressed
 
+private void Char3MousePressed(java.awt.event.MouseEvent evt) {
+        chosenId = 2;
+        
+        setupPlayerInfo();
+    }
+
+	private void Char5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char5MousePressed
+        chosenId = 4;
+        
+        setupPlayerInfo();
+    }//GEN-LAST:event_Char5MousePressed
+
+private void Char4MousePressed(java.awt.event.MouseEvent evt) {
+        chosenId = 3;
+        
+        setupPlayerInfo();
+    }
+
     private void Char6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char6MousePressed
         chosenId = 5;
         
         setupPlayerInfo();
     }//GEN-LAST:event_Char6MousePressed
 
-    private void Char3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char3MousePressed
-        chosenId = 2;
-        
-        setupPlayerInfo();
-    }//GEN-LAST:event_Char3MousePressed
+    
 
     private void Char7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char7MousePressed
         chosenId = 6;
@@ -375,11 +377,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }//GEN-LAST:event_Char7MousePressed
 
-    private void Char4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char4MousePressed
-        chosenId = 3;
-        
-        setupPlayerInfo();
-    }//GEN-LAST:event_Char4MousePressed
+    
 
     private void Char8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char8MousePressed
         chosenId = 7;
