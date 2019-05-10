@@ -42,18 +42,24 @@ public class loadGameFrame extends javax.swing.JFrame {
         id = new javax.swing.JLabel();
         BackButton = new javax.swing.JButton();
         idField = new javax.swing.JTextField();
-        savesList = new javax.swing.JScrollPane();
-        savesText = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        LoadGame1 = new javax.swing.JButton();
+        LoadGame2 = new javax.swing.JButton();
+        LoadGame3 = new javax.swing.JButton();
+        LoadGame4 = new javax.swing.JButton();
+        LoadGame5 = new javax.swing.JButton();
+        LoadGame6 = new javax.swing.JButton();
+        Bg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         name1.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         name1.setForeground(new java.awt.Color(51, 51, 51));
         name1.setText("Your games:");
         getContentPane().add(name1);
-        name1.setBounds(130, 30, 130, 40);
+        name1.setBounds(120, 190, 180, 40);
 
         deleteButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         deleteButton.setText("Delete");
@@ -79,7 +85,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         id.setForeground(new java.awt.Color(51, 51, 51));
         id.setText("Game id:");
         getContentPane().add(id);
-        id.setBounds(900, 320, 90, 40);
+        id.setBounds(890, 320, 100, 40);
 
         BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
         BackButton.setText("Back");
@@ -99,20 +105,85 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(idField);
         idField.setBounds(990, 320, 50, 40);
 
-        savesText.setEditable(false);
-        savesText.setColumns(20);
-        savesText.setRows(5);
-        savesList.setViewportView(savesText);
+        LoadGame1.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        LoadGame1.setText("Save 1");
+        LoadGame1.setActionCommand("Game");
+        LoadGame1.setMinimumSize(new java.awt.Dimension(300, 100));
+        LoadGame1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadGame1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoadGame1);
+        LoadGame1.setBounds(120, 240, 230, 80);
 
-        getContentPane().add(savesList);
-        savesList.setBounds(130, 70, 470, 640);
+        LoadGame2.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        LoadGame2.setText("Save 2");
+        LoadGame2.setActionCommand("Game");
+        LoadGame2.setMinimumSize(new java.awt.Dimension(300, 100));
+        LoadGame2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadGame2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoadGame2);
+        LoadGame2.setBounds(400, 240, 230, 80);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PATTERN-BRANCO.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1270, 750);
+        LoadGame3.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        LoadGame3.setText("Save 3");
+        LoadGame3.setActionCommand("Game");
+        LoadGame3.setMinimumSize(new java.awt.Dimension(300, 100));
+        LoadGame3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadGame3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoadGame3);
+        LoadGame3.setBounds(120, 350, 230, 80);
+
+        LoadGame4.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        LoadGame4.setText("Save 4");
+        LoadGame4.setActionCommand("Game");
+        LoadGame4.setMinimumSize(new java.awt.Dimension(300, 100));
+        LoadGame4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadGame4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoadGame4);
+        LoadGame4.setBounds(400, 350, 230, 80);
+
+        LoadGame5.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        LoadGame5.setText("Save 5");
+        LoadGame5.setActionCommand("Game");
+        LoadGame5.setMinimumSize(new java.awt.Dimension(300, 100));
+        LoadGame5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadGame5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoadGame5);
+        LoadGame5.setBounds(120, 460, 230, 80);
+
+        LoadGame6.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
+        LoadGame6.setText("Save 6");
+        LoadGame6.setActionCommand("Game");
+        LoadGame6.setMinimumSize(new java.awt.Dimension(300, 100));
+        LoadGame6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadGame6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoadGame6);
+        LoadGame6.setBounds(400, 460, 230, 80);
+
+        Bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
+        Bg.setText("jLabel1");
+        getContentPane().add(Bg);
+        Bg.setBounds(0, 0, 1270, 750);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
@@ -149,6 +220,34 @@ public class loadGameFrame extends javax.swing.JFrame {
         menuBack.setVisible(true);
         menuBack.setSize(1280, 720);
     }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void LoadGame1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGame1ActionPerformed
+        this.dispose();
+
+        newGameFrame newG = new newGameFrame();
+        newG.setVisible(true);
+        newG.setSize(1280, 720);
+    }//GEN-LAST:event_LoadGame1ActionPerformed
+
+    private void LoadGame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGame2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoadGame2ActionPerformed
+
+    private void LoadGame3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGame3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoadGame3ActionPerformed
+
+    private void LoadGame4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGame4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoadGame4ActionPerformed
+
+    private void LoadGame5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGame5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoadGame5ActionPerformed
+
+    private void LoadGame6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadGame6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LoadGame6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,13 +286,17 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
+    private javax.swing.JLabel Bg;
+    private javax.swing.JButton LoadGame1;
+    private javax.swing.JButton LoadGame2;
+    private javax.swing.JButton LoadGame3;
+    private javax.swing.JButton LoadGame4;
+    private javax.swing.JButton LoadGame5;
+    private javax.swing.JButton LoadGame6;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel id;
     private javax.swing.JTextField idField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;
-    private javax.swing.JScrollPane savesList;
-    private javax.swing.JTextArea savesText;
     // End of variables declaration//GEN-END:variables
 }

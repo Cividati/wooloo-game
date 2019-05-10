@@ -31,13 +31,16 @@ public class menuFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
+        setMaximumSize(new java.awt.Dimension(300, 300));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("MENU");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(610, 20, 130, 60);
+        jLabel1.setBounds(580, 20, 160, 60);
 
         exitButton.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
         exitButton.setText("Exit");
@@ -71,12 +74,16 @@ public class menuFrame extends javax.swing.JFrame {
         getContentPane().add(loadGameButton);
         loadGameButton.setBounds(130, 360, 300, 100);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PATTERN-BRANCO.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         jLabel2.setText("jLabel2");
+        jLabel2.setMaximumSize(new java.awt.Dimension(300, 300));
+        jLabel2.setMinimumSize(new java.awt.Dimension(300, 300));
+        jLabel2.setPreferredSize(new java.awt.Dimension(300, 300));
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 1270, 740);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
