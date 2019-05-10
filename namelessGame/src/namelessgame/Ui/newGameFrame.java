@@ -46,6 +46,9 @@ public class newGameFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1280, 720));
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
@@ -155,7 +158,7 @@ public class newGameFrame extends javax.swing.JFrame {
         
         menuFrame menuBack = new menuFrame();
         menuBack.setVisible(true);
-        menuBack.setSize(1280, 720);
+       
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void CreateCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCharButtonActionPerformed

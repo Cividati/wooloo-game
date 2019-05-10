@@ -40,8 +40,15 @@ public class loadGameFrame extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
+        namLabel = new javax.swing.JLabel();
+        levelLabel = new javax.swing.JLabel();
+        goldLabel = new javax.swing.JLabel();
+        strLabel = new javax.swing.JLabel();
+        intLabel = new javax.swing.JLabel();
+        cosntLabel = new javax.swing.JLabel();
+        agiLabel1 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         BackButton = new javax.swing.JButton();
-        idField = new javax.swing.JTextField();
         Char4 = new javax.swing.JButton();
         Char1 = new javax.swing.JButton();
         Char2 = new javax.swing.JButton();
@@ -50,18 +57,21 @@ public class loadGameFrame extends javax.swing.JFrame {
         Char6 = new javax.swing.JButton();
         Char7 = new javax.swing.JButton();
         Char8 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        charImage = new javax.swing.JLabel();
+        idField = new javax.swing.JLabel();
+        BG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        name1.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        name1.setBackground(new java.awt.Color(0, 0, 0));
+        name1.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
         name1.setForeground(new java.awt.Color(51, 51, 51));
-        name1.setText("Your games:");
+        name1.setText("Your games");
         getContentPane().add(name1);
-        name1.setBounds(130, 30, 130, 40);
+        name1.setBounds(180, 20, 280, 70);
 
         deleteButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         deleteButton.setText("Delete");
@@ -71,7 +81,7 @@ public class loadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(deleteButton);
-        deleteButton.setBounds(1030, 390, 100, 50);
+        deleteButton.setBounds(1030, 630, 120, 50);
 
         loadButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         loadButton.setText("Load");
@@ -81,15 +91,70 @@ public class loadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(loadButton);
-        loadButton.setBounds(890, 390, 100, 50);
+        loadButton.setBounds(910, 630, 110, 50);
 
+        id.setBackground(new java.awt.Color(0, 0, 0));
         id.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         id.setForeground(new java.awt.Color(51, 51, 51));
         id.setText("Game id:");
         getContentPane().add(id);
-        id.setBounds(900, 320, 90, 40);
+        id.setBounds(930, 550, 100, 40);
 
-        BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
+        namLabel.setBackground(new java.awt.Color(0, 0, 0));
+        namLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        namLabel.setForeground(new java.awt.Color(0, 0, 0));
+        namLabel.setText("Name: ");
+        getContentPane().add(namLabel);
+        namLabel.setBounds(880, 180, 140, 20);
+
+        levelLabel.setBackground(new java.awt.Color(0, 0, 0));
+        levelLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        levelLabel.setForeground(new java.awt.Color(0, 0, 0));
+        levelLabel.setText("Level: ");
+        getContentPane().add(levelLabel);
+        levelLabel.setBounds(880, 230, 130, 28);
+
+        goldLabel.setBackground(new java.awt.Color(0, 0, 0));
+        goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        goldLabel.setForeground(new java.awt.Color(0, 0, 0));
+        goldLabel.setText("Gold:");
+        getContentPane().add(goldLabel);
+        goldLabel.setBounds(1080, 180, 130, 20);
+
+        strLabel.setBackground(new java.awt.Color(0, 0, 0));
+        strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        strLabel.setForeground(new java.awt.Color(0, 0, 0));
+        strLabel.setText("Strength: ");
+        getContentPane().add(strLabel);
+        strLabel.setBounds(880, 320, 160, 20);
+
+        intLabel.setBackground(new java.awt.Color(0, 0, 0));
+        intLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        intLabel.setForeground(new java.awt.Color(0, 0, 0));
+        intLabel.setText("Intelligence: ");
+        getContentPane().add(intLabel);
+        intLabel.setBounds(880, 350, 210, 20);
+
+        cosntLabel.setBackground(new java.awt.Color(0, 0, 0));
+        cosntLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        cosntLabel.setForeground(new java.awt.Color(0, 0, 0));
+        cosntLabel.setText("Constituition:");
+        getContentPane().add(cosntLabel);
+        cosntLabel.setBounds(1070, 350, 190, 20);
+
+        agiLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        agiLabel1.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        agiLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        agiLabel1.setText("Agility: ");
+        getContentPane().add(agiLabel1);
+        agiLabel1.setBounds(1070, 320, 210, 20);
+
+        jProgressBar1.setForeground(new java.awt.Color(204, 0, 255));
+        jProgressBar1.setValue(30);
+        getContentPane().add(jProgressBar1);
+        jProgressBar1.setBounds(880, 260, 340, 30);
+
+        BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         BackButton.setText("Back");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,15 +162,7 @@ public class loadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BackButton);
-        BackButton.setBounds(1140, 670, 100, 30);
-
-        idField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(idField);
-        idField.setBounds(990, 320, 50, 40);
+        BackButton.setBounds(80, 600, 130, 50);
         getContentPane().add(Char4);
         Char4.setBounds(50, 430, 210, 80);
         getContentPane().add(Char1);
@@ -123,18 +180,24 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(Char8);
         Char8.setBounds(350, 430, 210, 80);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1270, 750);
+        charImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.png"))); // NOI18N
+        getContentPane().add(charImage);
+        charImage.setBounds(580, 160, 280, 280);
+
+        idField.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        idField.setForeground(new java.awt.Color(0, 0, 0));
+        idField.setText("id");
+        getContentPane().add(idField);
+        idField.setBounds(1040, 550, 60, 30);
+
+        BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
+        BG.setText("jLabel1");
+        getContentPane().add(BG);
+        BG.setBounds(0, 0, 1270, 750);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idFieldActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
@@ -203,6 +266,7 @@ public class loadGameFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BG;
     private javax.swing.JButton BackButton;
     private javax.swing.JButton Char1;
     private javax.swing.JButton Char2;
@@ -212,11 +276,19 @@ public class loadGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton Char6;
     private javax.swing.JButton Char7;
     private javax.swing.JButton Char8;
+    private javax.swing.JLabel agiLabel1;
+    private javax.swing.JLabel charImage;
+    private javax.swing.JLabel cosntLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JLabel goldLabel;
     private javax.swing.JLabel id;
-    private javax.swing.JTextField idField;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel idField;
+    private javax.swing.JLabel intLabel;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JLabel levelLabel;
     private javax.swing.JButton loadButton;
+    private javax.swing.JLabel namLabel;
     private javax.swing.JLabel name1;
+    private javax.swing.JLabel strLabel;
     // End of variables declaration//GEN-END:variables
 }

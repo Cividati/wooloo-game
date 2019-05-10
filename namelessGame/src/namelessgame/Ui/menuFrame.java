@@ -87,7 +87,6 @@ public class menuFrame extends javax.swing.JFrame {
         
         newGameFrame newG = new newGameFrame();
         newG.setVisible(true);
-        newG.setSize(1280, 720);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
