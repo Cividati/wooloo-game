@@ -1,4 +1,4 @@
-package namelessgame.Game;
+package namelessgame.Gameplay;
 
 /**
  *

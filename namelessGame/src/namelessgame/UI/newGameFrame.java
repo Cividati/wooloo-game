@@ -1,8 +1,8 @@
-package namelessgame.Ui;
+package namelessgame.UI;
 
 import java.util.List;
 import java.util.ArrayList;
-import namelessgame.Game.Player;
+import namelessgame.Gameplay.Player;
 
 /**
  *
@@ -15,11 +15,13 @@ public class newGameFrame extends javax.swing.JFrame {
      */
     public newGameFrame() {
         initComponents();
+        
+        charAvatar.setVisible(false);
     }
     
     public static List<Player> playerList = new ArrayList<>();
     
-    private char sex = 'M';
+    private char sex = 'U';
     private int nextIndexMale = 0;
     private int nextIndexFemale = 0;
     
@@ -42,13 +44,11 @@ public class newGameFrame extends javax.swing.JFrame {
         CreateCharButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
         name = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        charAvatar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
@@ -107,10 +107,10 @@ public class newGameFrame extends javax.swing.JFrame {
         getContentPane().add(name);
         name.setBounds(600, 530, 110, 40);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(380, -160, 660, 620);
+        charAvatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.png"))); // NOI18N
+        getContentPane().add(charAvatar);
+        charAvatar.setBounds(380, -160, 660, 620);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -123,14 +123,14 @@ public class newGameFrame extends javax.swing.JFrame {
 
     private void MaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleButtonActionPerformed
         sex = 'M';
-        
-        nextIndexMale++;
-        
+
         if(nextIndexMale >= maleImages.length)
             nextIndexMale = 0;
-        String chosenImg = maleImages[nextIndexMale];
         
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));    
+        String chosenImg = maleImages[nextIndexMale++];
+        
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));    
+        charAvatar.setVisible(true);
     }//GEN-LAST:event_MaleButtonActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -143,14 +143,13 @@ public class newGameFrame extends javax.swing.JFrame {
         if(femaleImages.length == 0)
             return;
         
-        nextIndexFemale++;
-        
         if(nextIndexFemale >= femaleImages.length)
             nextIndexFemale = 0;
         
-        String chosenImg = femaleImages[nextIndexFemale];
+        String chosenImg = femaleImages[nextIndexFemale++];
         
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));     
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));    
+        charAvatar.setVisible(true);
     }//GEN-LAST:event_FemButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
@@ -164,9 +163,15 @@ public class newGameFrame extends javax.swing.JFrame {
     private void CreateCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCharButtonActionPerformed
         String characterName = nameField.getText();
         
-        if(characterName.length() < 1 || characterName.length() > 25)
+        if(characterName.length() < 1 || characterName.length() > 10)
         {
-            javax.swing.JOptionPane.showMessageDialog(null, "Your nickname must contain at least 1 character and less than 25.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(null, "Your nickname must contain at least 1 character and less than 10.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            return;
+        }
+        else if(sex == 'U')
+        {
+            javax.swing.JOptionPane.showMessageDialog(null, "You must select a gender for your character.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
             return;
         }
@@ -218,7 +223,7 @@ public class newGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton CreateCharButton;
     private javax.swing.JButton FemButton;
     private javax.swing.JButton MaleButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel charAvatar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel name;
     private javax.swing.JTextField nameField;

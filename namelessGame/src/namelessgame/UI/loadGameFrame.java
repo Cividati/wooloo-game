@@ -1,7 +1,8 @@
-package namelessgame.Ui;
+package namelessgame.UI;
 
 import javax.swing.JButton;
 import namelessgame.Exception.GameIdNotFound;
+import namelessgame.Gameplay.Game;
 
 /**
  *
@@ -12,25 +13,34 @@ public class loadGameFrame extends javax.swing.JFrame {
     /**
      * Creates new form loadGameFrame
      */
-    private int chosenId;
+    private int chosenId = -1;
     
     public void setupPlayerInfo()
     {
+        if(chosenId >= newGameFrame.playerList.size())
+            return;
+        
         try
         {
-            nameLabel.setText("Name: " + newGameFrame.playerList.get(chosenId).getName());
+            nameLabel.setText("Name: " + newGameFrame.playerList.get(chosenId).getName() + " (" + newGameFrame.playerList.get(chosenId).getPlayerSex() + ")");
             levelLabel.setText("Level: " + newGameFrame.playerList.get(chosenId).getPlayerLevel());
             goldLabel.setText("Gold: " + newGameFrame.playerList.get(chosenId).getPlayerGold());
             strLabel.setText("Strength: " + newGameFrame.playerList.get(chosenId).getStr());
             //intLabel.setText("Inteligence " + newGameFrame.playerList.get(chosenId));
             constLabel.setText("Constitution: " + newGameFrame.playerList.get(chosenId).getCon());
             //agiLabel.setText("Agility " + newGameFrame.playerList.get(chosenId).getPlayerLevel());
+            
+            charAvatar.setVisible(true);
+            expBar.setVisible(true);
         }
         catch(ArrayIndexOutOfBoundsException e) {}
     }
 
     public loadGameFrame() {
         initComponents();
+        
+        charAvatar.setVisible(false);
+        expBar.setVisible(false);
 
         for (int i = 0; i < newGameFrame.playerList.size(); i++) {
             String name = newGameFrame.playerList.get(i).getName();
@@ -92,7 +102,6 @@ public class loadGameFrame extends javax.swing.JFrame {
         name1 = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
-        id = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
         goldLabel = new javax.swing.JLabel();
@@ -100,7 +109,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         intLabel = new javax.swing.JLabel();
         constLabel = new javax.swing.JLabel();
         agiLabel = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        expBar = new javax.swing.JProgressBar();
         BackButton = new javax.swing.JButton();
         Char4 = new javax.swing.JButton();
         Char1 = new javax.swing.JButton();
@@ -110,12 +119,10 @@ public class loadGameFrame extends javax.swing.JFrame {
         Char6 = new javax.swing.JButton();
         Char7 = new javax.swing.JButton();
         Char8 = new javax.swing.JButton();
-        charImage = new javax.swing.JLabel();
-        idField = new javax.swing.JLabel();
+        charAvatar = new javax.swing.JLabel();
         BG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -128,6 +135,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
         deleteButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         deleteButton.setText("Delete");
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                deleteButtonMousePressed(evt);
+            }
+        });
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -146,18 +158,10 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(loadButton);
         loadButton.setBounds(910, 630, 110, 50);
 
-        id.setBackground(new java.awt.Color(0, 0, 0));
-        id.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        id.setForeground(new java.awt.Color(51, 51, 51));
-        id.setText("Game id:");
-        id.setEnabled(false);
-        getContentPane().add(id);
-        id.setBounds(930, 570, 100, 20);
-
         nameLabel.setBackground(new java.awt.Color(0, 0, 0));
         nameLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         nameLabel.setForeground(new java.awt.Color(0, 0, 0));
-        nameLabel.setText("Name: ");
+        nameLabel.setText("Name:");
         getContentPane().add(nameLabel);
         nameLabel.setBounds(880, 180, 180, 20);
 
@@ -173,7 +177,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         goldLabel.setForeground(new java.awt.Color(0, 0, 0));
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
-        goldLabel.setBounds(1080, 180, 160, 20);
+        goldLabel.setBounds(1120, 180, 160, 20);
 
         strLabel.setBackground(new java.awt.Color(0, 0, 0));
         strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -203,10 +207,10 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(agiLabel);
         agiLabel.setBounds(1090, 320, 210, 30);
 
-        jProgressBar1.setForeground(new java.awt.Color(204, 0, 255));
-        jProgressBar1.setValue(30);
-        getContentPane().add(jProgressBar1);
-        jProgressBar1.setBounds(880, 260, 340, 30);
+        expBar.setForeground(new java.awt.Color(204, 0, 255));
+        expBar.setValue(30);
+        getContentPane().add(expBar);
+        expBar.setBounds(880, 260, 340, 30);
 
         BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         BackButton.setText("Back");
@@ -231,7 +235,6 @@ public class loadGameFrame extends javax.swing.JFrame {
                 Char1MousePressed(evt);
             }
         });
-        
         getContentPane().add(Char1);
         Char1.setBounds(50, 100, 210, 80);
 
@@ -283,16 +286,9 @@ public class loadGameFrame extends javax.swing.JFrame {
         getContentPane().add(Char8);
         Char8.setBounds(350, 430, 210, 80);
 
-        charImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.gif"))); // NOI18N
-        getContentPane().add(charImage);
-        charImage.setBounds(580, 160, 280, 280);
-
-        idField.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        idField.setForeground(new java.awt.Color(0, 0, 0));
-        idField.setText("id");
-        idField.setEnabled(false);
-        getContentPane().add(idField);
-        idField.setBounds(1040, 570, 60, 20);
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.gif"))); // NOI18N
+        getContentPane().add(charAvatar);
+        charAvatar.setBounds(580, 160, 280, 280);
 
         BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         BG.setText("jLabel1");
@@ -308,20 +304,31 @@ public class loadGameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        int gameId;
-
-        try {
-            gameId = Integer.parseInt(idField.getText());
-
-            // find game id (exception thrown in the method)
-        } catch (NumberFormatException | GameIdNotFound e) {
+        try
+        {
+            Game.setPlayer(newGameFrame.playerList.get(chosenId));
+        }
+        catch(GameIdNotFound | ArrayIndexOutOfBoundsException e)
+        {
             javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
+            
             return;
         }
-
+        
         System.out.println("Loading into game...");
+        
     }//GEN-LAST:event_loadButtonActionPerformed
+	
+    private void deleteButtonMousePressed(java.awt.event.MouseEvent evt) {
+        try
+        {
+            Game.deletePlayerById(chosenId);
+        }
+        catch(GameIdNotFound | ArrayIndexOutOfBoundsException e)
+        {
+            javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
@@ -332,54 +339,72 @@ public class loadGameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void Char1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char1MousePressed
+        if(Char1.getText().equals(""))
+            return;
+
         chosenId = 0;
         
         setupPlayerInfo();
     }//GEN-LAST:event_Char1MousePressed
 
-    
-
     private void Char2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char2MousePressed
+        if(Char2.getText().equals(""))
+            return;
+        
         chosenId = 1;
         
         setupPlayerInfo();
     }//GEN-LAST:event_Char2MousePressed
 
-private void Char3MousePressed(java.awt.event.MouseEvent evt) {
+    private void Char3MousePressed(java.awt.event.MouseEvent evt) {
+        if(Char3.getText().equals(""))
+            return;
+        
         chosenId = 2;
         
         setupPlayerInfo();
     }
-
-	private void Char5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char5MousePressed
-        chosenId = 4;
+	
+    private void Char4MousePressed(java.awt.event.MouseEvent evt) {
+        if(Char4.getText().equals(""))
+            return;
         
-        setupPlayerInfo();
-    }//GEN-LAST:event_Char5MousePressed
-
-private void Char4MousePressed(java.awt.event.MouseEvent evt) {
         chosenId = 3;
         
         setupPlayerInfo();
     }
 
+    private void Char5MousePressed(java.awt.event.MouseEvent evt) {
+        if(Char5.getText().equals(""))
+            return;
+            
+            chosenId = 4;
+        
+        setupPlayerInfo();
+    }
+
     private void Char6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char6MousePressed
+        if(Char6.getText().equals(""))
+            return;
+        
         chosenId = 5;
         
         setupPlayerInfo();
     }//GEN-LAST:event_Char6MousePressed
 
-    
-
     private void Char7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char7MousePressed
+        if(Char7.getText().equals(""))
+            return;
+        
         chosenId = 6;
         
         setupPlayerInfo();
     }//GEN-LAST:event_Char7MousePressed
 
-    
-
     private void Char8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char8MousePressed
+        if(Char8.getText().equals(""))
+            return;
+        
         chosenId = 7;
         
         setupPlayerInfo();
@@ -432,14 +457,12 @@ private void Char4MousePressed(java.awt.event.MouseEvent evt) {
     private javax.swing.JButton Char7;
     private javax.swing.JButton Char8;
     private javax.swing.JLabel agiLabel;
-    private javax.swing.JLabel charImage;
+    private javax.swing.JLabel charAvatar;
     private javax.swing.JLabel constLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JProgressBar expBar;
     private javax.swing.JLabel goldLabel;
-    private javax.swing.JLabel id;
-    private javax.swing.JLabel idField;
     private javax.swing.JLabel intLabel;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;

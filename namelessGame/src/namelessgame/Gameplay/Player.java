@@ -1,4 +1,4 @@
-package namelessgame.Game;
+package namelessgame.Gameplay;
 
 /**
  *
@@ -88,6 +88,13 @@ public class Player extends Creature {
 
     public void setPlayerStatusPoints(int statusPoints) {
         this.statusPoints = statusPoints;
+    }
+    
+    public javax.swing.ImageIcon getPlayerAvatar()
+    {
+        // TODO
+        
+        return new javax.swing.ImageIcon();
     }
 
 }

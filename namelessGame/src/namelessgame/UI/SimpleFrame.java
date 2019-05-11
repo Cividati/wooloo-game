@@ -1,4 +1,4 @@
-package namelessGame.Ui;
+package namelessgame.UI;
 
 /**
  *
