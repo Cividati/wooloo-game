@@ -12,11 +12,11 @@ public class Monster extends Creature {
         
     }
 
-    public int getMonsterExpGiven() {
+    public int getExpGiven() {
         return expGiven;
     }
 
-    public void setMonsterExpGiven(int expGiven) {
+    public void setExpGiven(int expGiven) {
         this.expGiven = expGiven;
     }
     

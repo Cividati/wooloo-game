@@ -5,92 +5,114 @@ package namelessgame.Gameplay;
  * @author Henrique Barcia Lang
  */
 public class Player extends Creature {
+    private int id;
     private char sex;
     private int level; 
     private int exp;
     private long gold;
     private int maxHP;
-    private int statusPoints;                       // Pontos de status disponíveis para distribuir.
+    
+    // Available attribute points to distribute.
+    private int statusPoints;
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public Player(String name, char sex)
+    public Player(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int inte, int con)
     {
+        this.id = id;
+        
         this.setName(name);
         
         this.sex = sex;
+        this.level = level;
+        this.exp = exp;
+        this.gold = gold;
+        this.statusPoints = statusPoints;
+        
+        this.setStr(str);
+        this.setAgi(agi);
+        this.setInte(inte);
+        this.setCon(con);
     }
 
-    public char getPlayerSex() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public char getSex() {
         return sex;
     }
 
-    public void setPlayerSex(char sex) {
+    public void setSex(char sex) {
         this.sex = sex;
     }
 
-    public int getPlayerLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void addPlayerLevel(int level)
+    public void addLevel(int level)
     {
         this.level += level;
     }
     
-    public void setPlayerLevel(int level) {
+    public void setLevel(int level) {
         this.level = level;
     }
     
-    public int getPlayerExp() {
+    public int getExp() {
         return exp;
     }
 
-    public void addPlayerExp(int exp)
+    public void addExp(int exp)
     {
         this.exp += exp;
         
         // se exp > exp_requerida_próx_level, avançar 1 lv.
     }
     
-    public void setPlayerExp(int exp) {
+    public void setExp(int exp) {
         this.exp = exp;
     }
 
-    public long getPlayerGold() {
+    public long getGold() {
         return gold;
     }
     
-    public void addPlayerGold(long gold)
+    public void addGold(long gold)
     {
         this.gold += gold;
     }
 
-    public void setPlayerGold(long gold) {
+    public void setGold(long gold) {
         this.gold = gold;
     }
     
-    public int getPlayerMaxHealth() {
+    public int getMaxHealth() {
         return maxHP;
     }
 
-    public void setPlayerMaxHealth(int maxHP) {
+    public void setMaxHealth(int maxHP) {
         this.maxHP = maxHP;
     }
 
-    public int getPlayerStatusPoints() {
+    public int getStatusPoints() {
         return statusPoints;
     }
     
-    public void addPlayerStatusPoints(int statusPoints)
+    public void addStatusPoints(int statusPoints)
     {
         this.statusPoints += statusPoints;
     }
 
-    public void setPlayerStatusPoints(int statusPoints) {
+    public void setStatusPoints(int statusPoints) {
         this.statusPoints = statusPoints;
     }
     
-    public javax.swing.ImageIcon getPlayerAvatar()
+    public javax.swing.ImageIcon getAvatar()
     {
         // TODO
         

@@ -1,5 +1,7 @@
 package namelessgame.UI;
 
+
+
 import java.util.List;
 import java.util.ArrayList;
 import namelessgame.Gameplay.Player;
@@ -177,7 +179,8 @@ public class newGameFrame extends javax.swing.JFrame {
         }
         
         System.out.println("Character created successfully.");
-        playerList.add(new Player(characterName, sex));
+        // TODO set default values
+        //playerList.add(new Player(characterName, sex));
         
         this.dispose();
         menuFrame menuBack = new menuFrame();

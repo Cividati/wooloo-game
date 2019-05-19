@@ -1,5 +1,7 @@
 package namelessgame.UI;
 
+
+
 import javax.swing.JButton;
 import namelessgame.Exception.GameIdNotFound;
 import namelessgame.Gameplay.Game;
@@ -22,9 +24,9 @@ public class loadGameFrame extends javax.swing.JFrame {
         
         try
         {
-            nameLabel.setText("Name: " + newGameFrame.playerList.get(chosenId).getName() + " (" + newGameFrame.playerList.get(chosenId).getPlayerSex() + ")");
-            levelLabel.setText("Level: " + newGameFrame.playerList.get(chosenId).getPlayerLevel());
-            goldLabel.setText("Gold: " + newGameFrame.playerList.get(chosenId).getPlayerGold());
+            nameLabel.setText("Name: " + newGameFrame.playerList.get(chosenId).getName() + " (" + newGameFrame.playerList.get(chosenId).getSex() + ")");
+            levelLabel.setText("Level: " + newGameFrame.playerList.get(chosenId).getLevel());
+            goldLabel.setText("Gold: " + newGameFrame.playerList.get(chosenId).getGold());
             strLabel.setText("Strength: " + newGameFrame.playerList.get(chosenId).getStr());
             //intLabel.setText("Inteligence " + newGameFrame.playerList.get(chosenId));
             constLabel.setText("Constitution: " + newGameFrame.playerList.get(chosenId).getCon());
@@ -44,7 +46,7 @@ public class loadGameFrame extends javax.swing.JFrame {
 
         for (int i = 0; i < newGameFrame.playerList.size(); i++) {
             String name = newGameFrame.playerList.get(i).getName();
-            int level = newGameFrame.playerList.get(i).getPlayerLevel();
+            int level = newGameFrame.playerList.get(i).getLevel();
             
             JButton charButton = null;
 

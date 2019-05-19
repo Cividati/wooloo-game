@@ -7,27 +7,27 @@ package namelessgame.Gameplay;
 public class PlayerDungeon extends Player {
     private int HP;
 
-    public PlayerDungeon(String name, char sex) {
-        super(name, sex);
+    public PlayerDungeon(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int inte, int con) {
+        super(id, name, sex, level, exp, gold, statusPoints, str, agi, inte, con);
     }
 
-    public int getPlayerHealth() {
+    public int getHealth() {
         return HP;
     }
     
-    public void addPlayerHealth(int HP)
+    public void addHealth(int HP)
     {
         this.HP += HP;
         
-        if(this.HP > this.getPlayerMaxHealth())
-            this.HP = this.getPlayerMaxHealth();
+        if(this.HP > this.getMaxHealth())
+            this.HP = this.getMaxHealth();
     }
 
-    public void setPlayerHealth(int HP) {
+    public void setHealth(int HP) {
         this.HP = HP;
         
-        if(this.HP > this.getPlayerMaxHealth())
-            this.HP = this.getPlayerMaxHealth();
+        if(this.HP > this.getMaxHealth())
+            this.HP = this.getMaxHealth();
     }
 
 }

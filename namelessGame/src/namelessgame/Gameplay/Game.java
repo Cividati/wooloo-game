@@ -16,9 +16,9 @@ public class Game {
     public static Player getPlayerById(int uid) throws GameIdNotFound
     {
         // TODO
-        Player p = new Player("Test", 'M');
+        //Player p = new Player("Test", 'M');
         
-        return p;
+        return null;
     }
     
     public static void deletePlayerById(int uid) throws GameIdNotFound
