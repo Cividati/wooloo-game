@@ -1,10 +1,11 @@
 package namelessgame.UI;
 
-
-
+import java.util.List;
 import javax.swing.JButton;
+import namelessgame.Database.PlayerDAO;
 import namelessgame.Exception.GameIdNotFound;
 import namelessgame.Gameplay.Game;
+import namelessgame.Gameplay.Player;
 
 /**
  *
@@ -16,6 +17,7 @@ public class loadGameFrame extends javax.swing.JFrame {
      * Creates new form loadGameFrame
      */
     private int chosenId = -1;
+    public List<Player> playerList;
     
     public void setupPlayerInfo()
     {
@@ -28,9 +30,9 @@ public class loadGameFrame extends javax.swing.JFrame {
             levelLabel.setText("Level: " + newGameFrame.playerList.get(chosenId).getLevel());
             goldLabel.setText("Gold: " + newGameFrame.playerList.get(chosenId).getGold());
             strLabel.setText("Strength: " + newGameFrame.playerList.get(chosenId).getStr());
-            //intLabel.setText("Inteligence " + newGameFrame.playerList.get(chosenId));
+            intLabel.setText("Inteligence " + newGameFrame.playerList.get(chosenId).getInte());
             constLabel.setText("Constitution: " + newGameFrame.playerList.get(chosenId).getCon());
-            //agiLabel.setText("Agility " + newGameFrame.playerList.get(chosenId).getPlayerLevel());
+            agiLabel.setText("Agility " + newGameFrame.playerList.get(chosenId).getAgi());
             
             charAvatar.setVisible(true);
             expBar.setVisible(true);
@@ -43,14 +45,18 @@ public class loadGameFrame extends javax.swing.JFrame {
         
         charAvatar.setVisible(false);
         expBar.setVisible(false);
+        
+        playerList = (new PlayerDAO()).loadPlayers();
 
-        for (int i = 0; i < newGameFrame.playerList.size(); i++) {
-            String name = newGameFrame.playerList.get(i).getName();
-            int level = newGameFrame.playerList.get(i).getLevel();
+        for (int i = 0; i < playerList.size(); i++) 
+        {
+            String name = playerList.get(i).getName();
+            int level = playerList.get(i).getLevel();
             
             JButton charButton = null;
 
-            switch (i) {
+            switch (i) 
+            {
                 case 0:
                     charButton = Char1;
 
@@ -308,11 +314,11 @@ public class loadGameFrame extends javax.swing.JFrame {
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         try
         {
-            Game.setPlayer(newGameFrame.playerList.get(chosenId));
+            Game.setPlayer(playerList.get(chosenId));
         }
-        catch(GameIdNotFound | ArrayIndexOutOfBoundsException e)
+        catch(ArrayIndexOutOfBoundsException e)
         {
-            javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            Game.sendErrorMessage("Invalid game id.");
             
             return;
         }
@@ -324,11 +330,65 @@ public class loadGameFrame extends javax.swing.JFrame {
     private void deleteButtonMousePressed(java.awt.event.MouseEvent evt) {
         try
         {
-            Game.deletePlayerById(chosenId);
+            (new PlayerDAO()).deletePlayer(playerList.get(chosenId));
+            
+            int oldSize = playerList.size();         
+            playerList.remove(chosenId);
+            
+            if(oldSize != playerList.size())
+            {
+                for (int i = 0; i < playerList.size(); i++) 
+                {
+                    String name = playerList.get(i).getName();
+                    int level = playerList.get(i).getLevel();
+
+                    JButton charButton = null;
+
+                    switch (i) 
+                    {
+                        case 0:
+                            charButton = Char1;
+
+                            break;
+                        case 1:
+                            charButton = Char2;
+
+                            break;
+                        case 2:
+                            charButton = Char3;
+
+                            break;
+                        case 3:
+                            charButton = Char4;
+
+                            break;
+                        case 4:
+                            charButton = Char5;
+
+                            break;
+                        case 5:
+                            charButton = Char6;
+
+                            break;
+                        case 6:
+                            charButton = Char7;
+
+                            break;
+                        case 7:
+                            charButton = Char8;
+
+                            break;
+                    }
+
+                    if(charButton != null)
+                        charButton.setText(name + " - lv. " + level);
+
+                }
+            }
         }
-        catch(GameIdNotFound | ArrayIndexOutOfBoundsException e)
+        catch(ArrayIndexOutOfBoundsException e)
         {
-            javax.swing.JOptionPane.showMessageDialog(null, "Invalid game id.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            Game.sendErrorMessage("Invalid game id.");
         }
     }
 
@@ -342,7 +402,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void Char1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char1MousePressed
         if(Char1.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
 
         chosenId = 0;
         
@@ -351,7 +415,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void Char2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char2MousePressed
         if(Char2.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
         
         chosenId = 1;
         
@@ -360,7 +428,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void Char3MousePressed(java.awt.event.MouseEvent evt) {
         if(Char3.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
         
         chosenId = 2;
         
@@ -369,7 +441,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 	
     private void Char4MousePressed(java.awt.event.MouseEvent evt) {
         if(Char4.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
         
         chosenId = 3;
         
@@ -378,7 +454,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void Char5MousePressed(java.awt.event.MouseEvent evt) {
         if(Char5.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
             
             chosenId = 4;
         
@@ -387,7 +467,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void Char6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char6MousePressed
         if(Char6.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
         
         chosenId = 5;
         
@@ -396,7 +480,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void Char7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char7MousePressed
         if(Char7.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
         
         chosenId = 6;
         
@@ -405,7 +493,11 @@ public class loadGameFrame extends javax.swing.JFrame {
 
     private void Char8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char8MousePressed
         if(Char8.getText().equals(""))
+        {
+            chosenId = -1;
+            
             return;
+        }
         
         chosenId = 7;
         

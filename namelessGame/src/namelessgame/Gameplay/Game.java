@@ -13,17 +13,14 @@ public class Game {
         Game.loggedPlayer = loggedPlayer;
     }
     
-    public static Player getPlayerById(int uid) throws GameIdNotFound
+    public static void sendErrorMessage(String message)
     {
-        // TODO
-        //Player p = new Player("Test", 'M');
-        
-        return null;
+        javax.swing.JOptionPane.showMessageDialog(null, message, "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public static void deletePlayerById(int uid) throws GameIdNotFound
+    public static void sendSuccessMessage(String message)
     {
-        System.out.println("Deleting character...");
+        javax.swing.JOptionPane.showMessageDialog(null, message, "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

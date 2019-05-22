@@ -4,6 +4,8 @@ package namelessgame.UI;
 
 import java.util.List;
 import java.util.ArrayList;
+import namelessgame.Database.PlayerDAO;
+import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
 
 /**
@@ -167,21 +169,20 @@ public class newGameFrame extends javax.swing.JFrame {
         
         if(characterName.length() < 1 || characterName.length() > 10)
         {
-            javax.swing.JOptionPane.showMessageDialog(null, "Your nickname must contain at least 1 character and less than 10.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            Game.sendErrorMessage("Your nickname must contain at least 1 character and less than 10.");
             
             return;
         }
         else if(sex == 'U')
         {
-            javax.swing.JOptionPane.showMessageDialog(null, "You must select a gender for your character.", "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
+            Game.sendErrorMessage("You must select a gender for your character.");
             return;
         }
         
-        System.out.println("Character created successfully.");
-        // TODO set default values
-        //playerList.add(new Player(characterName, sex));
-        
+        PlayerDAO dbPlayer = new PlayerDAO();
+        dbPlayer.insertPlayer(new Player(-1, characterName, sex, 1, 0, 0, 0, 5, 5, 5, 5));
+
+        //playerList.add(new Player(characterName, sex)); 
         this.dispose();
         menuFrame menuBack = new menuFrame();
         menuBack.setVisible(true);

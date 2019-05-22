@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import namelessgame.Gameplay.Player;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import namelessgame.Gameplay.Game;
 
 /**
  *
@@ -16,13 +19,17 @@ public class PlayerDAO extends DAO {
             return;
         
         try {
-            String query = "INSERT INTO player(name, sex, level, exp, gold, status_points, str, agi, inte, con) VALUES (" +
-                            player.getName() + ", " + player.getSex() + ", " + player.getLevel() + ", " + player.getExp() + ", " +
+            String query = "INSERT INTO player(name, sex, level, exp, gold, status_points, str, agi, inte, con) VALUES (?, " + 
+                            player.getSex() + ", " + player.getLevel() + ", " + player.getExp() + ", " +
                             player.getGold() + ", " + player.getStatusPoints() + ", " + player.getStr() + ", " + player.getAgi() + 
                             ", " + player.getInte() + ", " + player.getCon() + ");";
             
             pst = con.prepareStatement(query);
+            pst.setString(1, player.getName());
             pst.execute();
+            con.close();
+            
+            Game.sendSuccessMessage("Character created successfully.");
         } catch (SQLException e) {
             System.err.println("Error when inserting new player on database..." + e.getMessage());
         }
@@ -38,17 +45,31 @@ public class PlayerDAO extends DAO {
                         ", status_points = " + player.getStatusPoints() + ", str = " + player.getStr() + ", agi = " + player.getAgi() +
                         ", inte = " + player.getInte() + ", con = " + player.getCon() + " WHERE id = " + player.getId() + ";";
                         
+        try {
+            pst = con.prepareStatement(query);
+            pst.executeUpdate();
+            pst.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error when saving player on database...");
+        }
         
     }
     
     public void deletePlayer(Player player)
-    {
-        String query = "DELETE FROM player WHERE id = " + player.getId() + ";";
-        
+    { 
         if(!connectToDatabase())
             return;
         
-        System.out.println("deleting...");
+        String query = "DELETE FROM player WHERE id = " + player.getId() + ";";
+        
+        try {
+            pst = con.prepareStatement(query);
+            pst.execute();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error when deleting player from database...");
+        }
     }
     
     public List<Player> loadPlayers()
@@ -81,6 +102,7 @@ public class PlayerDAO extends DAO {
             }
             
             st.close();
+            con.close();
         } catch (SQLException e) {
             System.err.println("Error when loading players from database..." + e.getMessage());
         }

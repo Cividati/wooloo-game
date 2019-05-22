@@ -57,6 +57,9 @@ public class Player extends Creature {
     public void addLevel(int level)
     {
         this.level += level;
+        
+        setExp(0);
+        addStatusPoints(level * 5);
     }
     
     public void setLevel(int level) {
@@ -71,7 +74,15 @@ public class Player extends Creature {
     {
         this.exp += exp;
         
-        // se exp > exp_requerida_próx_level, avançar 1 lv.
+        if(exp >= getExpNeededToLevelUp())
+        {
+            int remainingExp = exp - getExpNeededToLevelUp();
+            
+            addLevel(1);
+            
+            if(remainingExp > 0)
+                addExp(remainingExp); 
+        }
     }
     
     public void setExp(int exp) {
@@ -117,6 +128,16 @@ public class Player extends Creature {
         // TODO
         
         return new javax.swing.ImageIcon();
+    }
+    
+    public int getTotalExpToLevelUp()
+    {
+        return getLevel() * 10;
+    }
+    
+    public int getExpNeededToLevelUp()
+    {
+        return getTotalExpToLevelUp() - getExp();
     }
 
 }
