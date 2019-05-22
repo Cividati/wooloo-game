@@ -4,6 +4,8 @@ import namelessgame.Exception.GameIdNotFound;
 
 public class Game {
     private static Player loggedPlayer;
+    
+    final public static int MAX_LEVEL = 100;
 
     public static Player getPlayer() {
         return loggedPlayer;

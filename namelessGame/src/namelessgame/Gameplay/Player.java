@@ -56,7 +56,13 @@ public class Player extends Creature {
 
     public void addLevel(int level)
     {
+        if(getLevel() >= Game.MAX_LEVEL)
+            return;
+        
         this.level += level;
+        
+        if(getLevel() > Game.MAX_LEVEL)
+            setLevel(Game.MAX_LEVEL);
         
         setExp(0);
         addStatusPoints(level * 5);
@@ -64,6 +70,9 @@ public class Player extends Creature {
     
     public void setLevel(int level) {
         this.level = level;
+        
+        if(getLevel() > Game.MAX_LEVEL)
+            this.level = Game.MAX_LEVEL;
     }
     
     public int getExp() {
@@ -72,6 +81,9 @@ public class Player extends Creature {
 
     public void addExp(int exp)
     {
+        if(getLevel() >= Game.MAX_LEVEL)
+            return;
+        
         this.exp += exp;
         
         if(exp >= getExpNeededToLevelUp())
