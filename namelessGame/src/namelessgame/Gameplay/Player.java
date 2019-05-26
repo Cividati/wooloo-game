@@ -4,7 +4,7 @@ package namelessgame.Gameplay;
  *
  * @author Henrique Barcia Lang
  */
-public class Player extends Creature {
+public class Player extends Creature implements Comparable<Player> {
     private int id;
     private char sex;
     private int level; 
@@ -150,6 +150,17 @@ public class Player extends Creature {
     public int getExpNeededToLevelUp()
     {
         return getTotalExpToLevelUp() - getExp();
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        if(getLevel() > o.getLevel())
+            return -1;
+        else if(getLevel() < o.getLevel())
+            return 1;
+        else
+            return 0;
+            
     }
 
 }

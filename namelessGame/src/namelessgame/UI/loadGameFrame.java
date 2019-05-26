@@ -1,5 +1,8 @@
 package namelessgame.UI;
 
+
+
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
 import namelessgame.Database.PlayerDAO;
@@ -47,6 +50,8 @@ public class loadGameFrame extends javax.swing.JFrame {
         expBar.setVisible(false);
         
         playerList = (new PlayerDAO()).loadPlayers();
+        
+        Collections.sort(playerList);
 
         for (int i = 0; i < playerList.size(); i++) 
         {
