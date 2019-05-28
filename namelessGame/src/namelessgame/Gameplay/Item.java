@@ -11,6 +11,7 @@ public class Item {
     private int con;
     private int heal;
     private int slot;
+    private int minLevel;
 
     public int getStr() {
         return str;
@@ -58,6 +59,14 @@ public class Item {
 
     public void setSlot(int slot) {
         this.slot = slot;
+    }
+
+    public int getMinLevel() {
+        return minLevel;
+    }
+
+    public void setMinLevel(int minLevel) {
+        this.minLevel = minLevel;
     }
     
 }

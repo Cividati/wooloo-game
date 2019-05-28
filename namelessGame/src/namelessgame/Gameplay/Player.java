@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import namelessgame.Exception.InventoryFullException;
+import namelessgame.Exception.NotEnoughLevelException;
 import namelessgame.Exception.StashFullException;
 
 /**
@@ -59,6 +60,8 @@ public class Player extends Creature implements Comparable<Player> {
     {
         if((getInventory()).size() == Game.MAX_INVENTORY_SIZE)
             throw new InventoryFullException();
+        else if(getLevel() < item.getMinLevel())
+            throw new NotEnoughLevelException();
         
         (getInventory()).add(item);
     }
@@ -66,6 +69,9 @@ public class Player extends Creature implements Comparable<Player> {
     public void equipItem(Item item)
     {
         int slot = item.getSlot();
+        
+        if(getLevel() < item.getMinLevel())
+            throw new NotEnoughLevelException();
         
         if((getEquip()).get(slot) != null)
         {
