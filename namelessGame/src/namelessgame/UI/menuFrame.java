@@ -1,9 +1,5 @@
 package namelessgame.UI;
 
-
-
-
-
 import namelessgame.Database.PlayerDAO;
 
 /**

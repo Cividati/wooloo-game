@@ -1,5 +1,12 @@
 package namelessgame.Gameplay;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import namelessgame.Exception.InventoryFullException;
+import namelessgame.Exception.StashFullException;
+
 /**
  *
  * @author Henrique Barcia Lang
@@ -14,6 +21,10 @@ public class Player extends Creature implements Comparable<Player> {
     
     // Available attribute points to distribute.
     private int statusPoints;
+    
+    private List<Item> stash = new ArrayList<>();
+    private List<Item> inventory = new ArrayList<>();
+    private Map<Integer, Item> equip = new HashMap<>();
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Player(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int inte, int con)
@@ -32,6 +43,59 @@ public class Player extends Creature implements Comparable<Player> {
         this.setAgi(agi);
         this.setInte(inte);
         this.setCon(con);
+        
+        // TODO add stash, inventory and equip 
+    }
+    
+    public void addItemToStash(Item item)
+    {
+        if((getStash()).size() == Game.MAX_STASH_SIZE)
+            throw new StashFullException();
+        
+        (getStash()).add(item);
+    }
+    
+    public void addItemToInventory(Item item)
+    {
+        if((getInventory()).size() == Game.MAX_INVENTORY_SIZE)
+            throw new InventoryFullException();
+        
+        (getInventory()).add(item);
+    }
+    
+    public void equipItem(Item item)
+    {
+        int slot = item.getSlot();
+        
+        if((getEquip()).get(slot) != null)
+        {
+            try
+            {
+                addItemToStash((getEquip()).get(slot));
+            }
+            catch(StashFullException e)
+            {
+                Game.sendErrorMessage("Your stash is full.");
+            }
+        }
+        
+        (getEquip()).put(slot, item);
+        removeItemFromStash(item);
+    }
+    
+    public void removeItemFromStash(Item item)
+    {
+        (getStash()).remove(item);
+    }
+    
+    public void removeItemFromInventory(Item item)
+    {
+        (getInventory()).remove(item);
+    }
+    
+    public void removeItemFromEquip(Item item)
+    {
+        (getEquip()).put(item.getSlot(), null);
     }
 
     public int getId() {
@@ -152,6 +216,30 @@ public class Player extends Creature implements Comparable<Player> {
         return getTotalExpToLevelUp() - getExp();
     }
 
+    public List<Item> getStash() {
+        return stash;
+    }
+
+    public void setStash(List<Item> stash) {
+        this.stash = stash;
+    }
+
+    public List<Item> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(List<Item> inventory) {
+        this.inventory = inventory;
+    }
+
+    public Map<Integer, Item> getEquip() {
+        return equip;
+    }
+
+    public void setEquip(Map<Integer, Item> equip) {
+        this.equip = equip;
+    }
+    
     @Override
     public int compareTo(Player o) {
         if(getLevel() > o.getLevel())
@@ -162,6 +250,6 @@ public class Player extends Creature implements Comparable<Player> {
             return 0;
             
     }
-
+    
 }
 

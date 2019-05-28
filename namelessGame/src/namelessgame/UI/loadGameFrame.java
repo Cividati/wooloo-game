@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
 import namelessgame.Database.PlayerDAO;
-import namelessgame.Exception.GameIdNotFound;
+import namelessgame.Exception.StashFullException;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
 

@@ -18,6 +18,7 @@ public class PlayerDAO extends DAO {
         if(!connectToDatabase())
             return;
         
+        // TODO load player stash, inventory and equip
         try {
             String query = "INSERT INTO player(name, sex, level, exp, gold, status_points, str, agi, inte, con) VALUES (?, " + 
                             player.getSex() + ", " + player.getLevel() + ", " + player.getExp() + ", " +

@@ -1,5 +1,7 @@
 package namelessgame.Gameplay;
 
+import namelessgame.Exception.InventoryEmptyException;
+
 /**
  *
  * @author Henrique Barcia Lang
@@ -28,6 +30,17 @@ public class PlayerDungeon extends Player {
         
         if(this.HP > this.getMaxHealth())
             this.HP = this.getMaxHealth();
+    }
+    
+    public void useHealthPotion()
+    {
+        if((getInventory()).isEmpty())
+            throw new InventoryEmptyException();
+        
+        Item potion = (getInventory()).get(0);
+        
+        addHealth(potion.getHeal());
+        removeItemFromInventory(potion);
     }
 
 }
