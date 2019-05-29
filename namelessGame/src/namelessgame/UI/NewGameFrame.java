@@ -1,9 +1,5 @@
 package namelessgame.UI;
 
-
-
-
-
 import java.util.List;
 import java.util.ArrayList;
 import namelessgame.Database.PlayerDAO;
@@ -14,12 +10,12 @@ import namelessgame.Gameplay.Player;
  *
  * @author sin
  */
-public class newGameFrame extends javax.swing.JFrame {
+public class NewGameFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form newGameFrame
      */
-    public newGameFrame() {
+    public NewGameFrame() {
         initComponents();
         
         charAvatar.setVisible(false);
@@ -31,7 +27,7 @@ public class newGameFrame extends javax.swing.JFrame {
     private int nextIndexMale = 0;
     private int nextIndexFemale = 0;
     
-    String[] maleImages = {"/namelessgame/img/kirito.png", "/namelessgame/img/Naofumi.png"};
+    String[] maleImages = {"/namelessgame/img/avatars/kirito.png", "/namelessgame/img/avatars/Naofumi.png"};
     String[] femaleImages = {};
     
 
@@ -161,9 +157,8 @@ public class newGameFrame extends javax.swing.JFrame {
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
         
-        menuFrame menuBack = new menuFrame();
-        menuBack.setVisible(true);
-       
+        MenuFrame menuBack = new MenuFrame();
+        menuBack.setVisible(true);    
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void CreateCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCharButtonActionPerformed
@@ -181,14 +176,14 @@ public class newGameFrame extends javax.swing.JFrame {
             return;
         }
         
-        PlayerDAO dbPlayer = new PlayerDAO();
-        dbPlayer.insertPlayer(new Player(-1, characterName, sex, 1, 0, 0, 0, 5, 5, 5, 5));
+        Player player = new Player(-1, characterName, sex, 1, 0, 0, 0, 5, 5, 5);
 
-        //playerList.add(new Player(characterName, sex)); 
+        (new PlayerDAO()).insertPlayer(player);
+        Game.setPlayer(player);
+        
         this.dispose();
-        menuFrame menuBack = new menuFrame();
-        menuBack.setVisible(true);
-        menuBack.setSize(1280, 720);
+        GameFrame gameBack = new GameFrame();
+        gameBack.setVisible(true);   
     }//GEN-LAST:event_CreateCharButtonActionPerformed
 
     /**
@@ -208,19 +203,20 @@ public class newGameFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(newGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(newGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(newGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(newGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new newGameFrame().setVisible(true);
+            new NewGameFrame().setVisible(true);
         });
     }
 

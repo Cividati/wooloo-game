@@ -12,6 +12,8 @@ public class Item {
     private int heal;
     private int slot;
     private int minLevel;
+    private String name;
+    private String icon;
 
     public int getStr() {
         return str;
@@ -68,6 +70,21 @@ public class Item {
     public void setMinLevel(int minLevel) {
         this.minLevel = minLevel;
     }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     
 }
-

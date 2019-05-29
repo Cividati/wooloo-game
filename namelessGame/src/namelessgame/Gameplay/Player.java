@@ -28,7 +28,7 @@ public class Player extends Creature implements Comparable<Player> {
     private Map<Integer, Item> equip = new HashMap<>();
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public Player(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int inte, int con)
+    public Player(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int con)
     {
         this.id = id;
         
@@ -42,7 +42,6 @@ public class Player extends Creature implements Comparable<Player> {
         
         this.setStr(str);
         this.setAgi(agi);
-        this.setInte(inte);
         this.setCon(con);
         
         // TODO add stash, inventory and equip 
@@ -255,6 +254,63 @@ public class Player extends Creature implements Comparable<Player> {
         else
             return 0;
             
+    }
+    
+    @Override
+    public int getStr()
+    {
+        int str = super.getStr();
+        Map<Integer, Item> playerEquip = getEquip();
+        
+        for(int i = 0; i < 6; i++)
+        {
+            Item item = playerEquip.get(i);
+            
+            if(item == null)
+                continue;
+            
+            str += item.getStr();
+        }
+        
+        return str;
+    }
+    
+    @Override
+    public int getAgi()
+    {
+        int agi = super.getAgi();
+        Map<Integer, Item> playerEquip = getEquip();
+        
+        for(int i = 0; i < 6; i++)
+        {
+            Item item = playerEquip.get(i);
+            
+            if(item == null)
+                continue;
+            
+            agi += item.getAgi();
+        }
+        
+        return agi;
+    }
+    
+    @Override
+    public int getCon()
+    {
+        int con = super.getCon();
+        Map<Integer, Item> playerEquip = getEquip();
+        
+        for(int i = 0; i < 6; i++)
+        {
+            Item item = playerEquip.get(i);
+            
+            if(item == null)
+                continue;
+            
+            con += item.getCon();
+        }
+        
+        return con;
     }
     
 }

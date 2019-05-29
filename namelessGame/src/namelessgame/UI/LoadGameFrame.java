@@ -14,7 +14,7 @@ import namelessgame.Gameplay.Player;
  *
  * @author sin
  */
-public class loadGameFrame extends javax.swing.JFrame {
+public class LoadGameFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form loadGameFrame
@@ -24,18 +24,24 @@ public class loadGameFrame extends javax.swing.JFrame {
     
     public void setupPlayerInfo()
     {
-        if(chosenId >= newGameFrame.playerList.size())
+        if(chosenId >= NewGameFrame.playerList.size())
             return;
         
         try
         {
-            nameLabel.setText("Name: " + newGameFrame.playerList.get(chosenId).getName() + " (" + newGameFrame.playerList.get(chosenId).getSex() + ")");
-            levelLabel.setText("Level: " + newGameFrame.playerList.get(chosenId).getLevel());
-            goldLabel.setText("Gold: " + newGameFrame.playerList.get(chosenId).getGold());
-            strLabel.setText("Strength: " + newGameFrame.playerList.get(chosenId).getStr());
-            intLabel.setText("Inteligence " + newGameFrame.playerList.get(chosenId).getInte());
-            constLabel.setText("Constitution: " + newGameFrame.playerList.get(chosenId).getCon());
-            agiLabel.setText("Agility " + newGameFrame.playerList.get(chosenId).getAgi());
+            Player player = NewGameFrame.playerList.get(chosenId);
+            
+            nameLabel.setText("Name: " + player.getName() + " (" + player.getSex() + ")");
+            levelLabel.setText("Level: " + player.getLevel());
+            playerGoldLabel.setText(Long.toString(player.getGold()));
+            strLabel.setText("Strength: " + player.getStr());
+            constLabel.setText("Constitution: " + player.getCon());
+            agiLabel.setText("Agility " + player.getAgi());
+            expBar.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
+            expBar.setString(((player.getExp() / player.getExpNeededToLevelUp()) * 100) + "%");
+            
+            // TODO set player avatar
+            // TODO show equipment?
             
             charAvatar.setVisible(true);
             expBar.setVisible(true);
@@ -43,7 +49,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         catch(ArrayIndexOutOfBoundsException e) {}
     }
 
-    public loadGameFrame() {
+    public LoadGameFrame() {
         initComponents();
         
         charAvatar.setVisible(false);
@@ -118,6 +124,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
         goldLabel = new javax.swing.JLabel();
+        playerGoldLabel = new javax.swing.JLabel();
         strLabel = new javax.swing.JLabel();
         intLabel = new javax.swing.JLabel();
         constLabel = new javax.swing.JLabel();
@@ -142,7 +149,7 @@ public class loadGameFrame extends javax.swing.JFrame {
         name1.setBackground(new java.awt.Color(0, 0, 0));
         name1.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
         name1.setForeground(new java.awt.Color(51, 51, 51));
-        name1.setText("Your games");
+        name1.setText("Your saves");
         getContentPane().add(name1);
         name1.setBounds(180, 20, 280, 70);
 
@@ -173,10 +180,9 @@ public class loadGameFrame extends javax.swing.JFrame {
 
         nameLabel.setBackground(new java.awt.Color(0, 0, 0));
         nameLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
-        nameLabel.setText("Name:");
+        nameLabel.setForeground(new java.awt.Color(255, 255, 0));
         getContentPane().add(nameLabel);
-        nameLabel.setBounds(880, 180, 180, 20);
+        nameLabel.setBounds(1170, 180, 90, 20);
 
         levelLabel.setBackground(new java.awt.Color(0, 0, 0));
         levelLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -188,9 +194,17 @@ public class loadGameFrame extends javax.swing.JFrame {
         goldLabel.setBackground(new java.awt.Color(0, 0, 0));
         goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         goldLabel.setForeground(new java.awt.Color(0, 0, 0));
+        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
-        goldLabel.setBounds(1120, 180, 160, 20);
+        goldLabel.setBounds(1090, 180, 80, 20);
+
+        playerGoldLabel.setBackground(new java.awt.Color(0, 0, 0));
+        playerGoldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        playerGoldLabel.setForeground(new java.awt.Color(0, 0, 0));
+        playerGoldLabel.setText("Name:");
+        getContentPane().add(playerGoldLabel);
+        playerGoldLabel.setBounds(880, 180, 180, 20);
 
         strLabel.setBackground(new java.awt.Color(0, 0, 0));
         strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -221,7 +235,6 @@ public class loadGameFrame extends javax.swing.JFrame {
         agiLabel.setBounds(1090, 320, 210, 30);
 
         expBar.setForeground(new java.awt.Color(204, 0, 255));
-        expBar.setValue(30);
         getContentPane().add(expBar);
         expBar.setBounds(880, 260, 340, 30);
 
@@ -400,7 +413,7 @@ public class loadGameFrame extends javax.swing.JFrame {
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
 
-        menuFrame menuBack = new menuFrame();
+        MenuFrame menuBack = new MenuFrame();
         menuBack.setVisible(true);
         menuBack.setSize(1280, 720);
     }//GEN-LAST:event_BackButtonActionPerformed
@@ -526,20 +539,21 @@ public class loadGameFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadGameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new loadGameFrame().setVisible(true);
+                new LoadGameFrame().setVisible(true);
             }
         });
     }
@@ -566,6 +580,7 @@ public class loadGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel playerGoldLabel;
     private javax.swing.JLabel strLabel;
     // End of variables declaration//GEN-END:variables
 }

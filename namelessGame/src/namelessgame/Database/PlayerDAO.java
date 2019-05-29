@@ -20,10 +20,10 @@ public class PlayerDAO extends DAO {
         
         // TODO load player stash, inventory and equip
         try {
-            String query = "INSERT INTO player(name, sex, level, exp, gold, status_points, str, agi, inte, con) VALUES (?, " + 
+            String query = "INSERT INTO player(name, sex, level, exp, gold, status_points, str, agi, con) VALUES (?, " + 
                             player.getSex() + ", " + player.getLevel() + ", " + player.getExp() + ", " +
                             player.getGold() + ", " + player.getStatusPoints() + ", " + player.getStr() + ", " + player.getAgi() + 
-                            ", " + player.getInte() + ", " + player.getCon() + ");";
+                            ", " + player.getCon() + ");";
             
             pst = con.prepareStatement(query);
             pst.setString(1, player.getName());
@@ -44,13 +44,15 @@ public class PlayerDAO extends DAO {
         
         String query = "UPDATE player SET level = " + player.getLevel() + ", exp = " + player.getExp() + ", gold = " + player.getGold() + 
                         ", status_points = " + player.getStatusPoints() + ", str = " + player.getStr() + ", agi = " + player.getAgi() +
-                        ", inte = " + player.getInte() + ", con = " + player.getCon() + " WHERE id = " + player.getId() + ";";
+                        ", con = " + player.getCon() + " WHERE id = " + player.getId() + ";";
                         
         try {
             pst = con.prepareStatement(query);
             pst.executeUpdate();
             pst.close();
             con.close();
+            
+            Game.sendSuccessMessage("You successfully saved your progress.");
         } catch (SQLException ex) {
             System.out.println("Error when saving player on database...");
         }
@@ -96,10 +98,9 @@ public class PlayerDAO extends DAO {
                 int statusPoints = rs.getInt("status_points");
                 int str = rs.getInt("str");
                 int agi = rs.getInt("agi");
-                int inte = rs.getInt("inte");
                 int cons = rs.getInt("con");
                 
-                playerList.add(new Player(id, name, sex, level, exp, gold, statusPoints, str, agi, inte, cons));
+                playerList.add(new Player(id, name, sex, level, exp, gold, statusPoints, str, agi, cons));
             }
             
             st.close();

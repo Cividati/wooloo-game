@@ -6,12 +6,12 @@ import namelessgame.Database.PlayerDAO;
  *
  * @author sin
  */
-public class menuFrame extends javax.swing.JFrame {
+public class MenuFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form menuFrame
      */
-    public menuFrame() {
+    public MenuFrame() {
         initComponents();
         this.setSize(1280, 720);
     }
@@ -86,14 +86,14 @@ public class menuFrame extends javax.swing.JFrame {
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.dispose();
         
-        newGameFrame newG = new newGameFrame();
+        NewGameFrame newG = new NewGameFrame();
         newG.setVisible(true);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         this.dispose();
         
-        loadGameFrame loadG = new loadGameFrame();
+        LoadGameFrame loadG = new LoadGameFrame();
         loadG.setVisible(true);
         loadG.setSize(1280, 720);
     }//GEN-LAST:event_loadGameButtonActionPerformed
@@ -119,20 +119,21 @@ public class menuFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menuFrame().setVisible(true);
+                new MenuFrame().setVisible(true);
             }
         });
     }

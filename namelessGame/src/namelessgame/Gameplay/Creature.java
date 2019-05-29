@@ -11,7 +11,6 @@ public abstract class Creature {
     /* Status base (sem equip. no caso de players) */
     private int str;
     private int agi;
-    private int inte;
     private int con;
 
     /* *********** */
@@ -45,18 +44,6 @@ public abstract class Creature {
 
     public void setAgi(int agi) {
         this.agi = agi;
-    }
-
-    public int getInte() {
-        return inte;
-    }
-
-    public void addInte(int inte) {
-        this.inte += inte;
-    }
-
-    public void setInte(int inte) {
-        this.inte = inte;
     }
 
     public int getCon() {
