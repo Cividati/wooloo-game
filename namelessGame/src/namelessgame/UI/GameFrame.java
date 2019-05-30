@@ -84,6 +84,11 @@ public class GameFrame extends javax.swing.JFrame {
         dungeonButton.setBounds(130, 100, 90, 32);
 
         stashButton.setText("Stash");
+        stashButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stashButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(stashButton);
         stashButton.setBounds(290, 100, 80, 32);
 
@@ -123,7 +128,10 @@ public class GameFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void shopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopButtonActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        
+        ShopFrame newShop = new ShopFrame();
+        newShop.setVisible(true);
     }//GEN-LAST:event_shopButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -136,6 +144,13 @@ public class GameFrame extends javax.swing.JFrame {
         StatusFrame newStatus = new StatusFrame();
         newStatus.setVisible(true);
     }//GEN-LAST:event_statusButtonActionPerformed
+
+    private void stashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stashButtonActionPerformed
+        this.dispose();
+        
+        StashFrame newStash = new StashFrame();
+        newStash.setVisible(true);
+    }//GEN-LAST:event_stashButtonActionPerformed
 
     /**
      * @param args the command line arguments

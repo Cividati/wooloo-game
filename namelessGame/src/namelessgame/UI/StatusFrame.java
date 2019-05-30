@@ -118,7 +118,7 @@ public class StatusFrame extends javax.swing.JFrame {
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
-        goldLabel.setBounds(58, 140, 60, 18);
+        goldLabel.setBounds(48, 140, 70, 32);
 
         strLabel.setForeground(new java.awt.Color(0, 0, 0));
         strLabel.setText("Strength:");

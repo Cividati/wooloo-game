@@ -126,7 +126,6 @@ public class LoadGameFrame extends javax.swing.JFrame {
         goldLabel = new javax.swing.JLabel();
         playerGoldLabel = new javax.swing.JLabel();
         strLabel = new javax.swing.JLabel();
-        intLabel = new javax.swing.JLabel();
         constLabel = new javax.swing.JLabel();
         agiLabel = new javax.swing.JLabel();
         expBar = new javax.swing.JProgressBar();
@@ -197,7 +196,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
-        goldLabel.setBounds(1090, 180, 80, 20);
+        goldLabel.setBounds(1080, 160, 90, 40);
 
         playerGoldLabel.setBackground(new java.awt.Color(0, 0, 0));
         playerGoldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -212,13 +211,6 @@ public class LoadGameFrame extends javax.swing.JFrame {
         strLabel.setText("Strength: ");
         getContentPane().add(strLabel);
         strLabel.setBounds(880, 320, 160, 30);
-
-        intLabel.setBackground(new java.awt.Color(0, 0, 0));
-        intLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        intLabel.setForeground(new java.awt.Color(0, 0, 0));
-        intLabel.setText("Intelligence: ");
-        getContentPane().add(intLabel);
-        intLabel.setBounds(880, 360, 210, 30);
 
         constLabel.setBackground(new java.awt.Color(0, 0, 0));
         constLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -575,7 +567,6 @@ public class LoadGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteButton;
     private javax.swing.JProgressBar expBar;
     private javax.swing.JLabel goldLabel;
-    private javax.swing.JLabel intLabel;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;

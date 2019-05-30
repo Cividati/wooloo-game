@@ -5,8 +5,15 @@
  */
 package namelessgame.UI;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import namelessgame.Database.ItemDAO;
+import namelessgame.Exception.StashFullException;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
+import namelessgame.Gameplay.ShopItem;
 
 /**
  *
@@ -17,12 +24,108 @@ public class ShopFrame extends javax.swing.JFrame {
     /**
      * Creates new form ShopFrame
      */
+    
+    private List<ShopItem> shop = new ArrayList<>();
+    private Map<javax.swing.JButton, ShopItem> shopMap = new HashMap<>();
+    
+    private void addItemToShop(String name, long price)
+    {
+        ShopItem newItem = (ShopItem) (new ItemDAO()).loadItemByName(name); 
+        newItem.setPrice(price);
+        
+        shop.add(newItem);
+    }
+    
+    private void fillShop()
+    {
+        //addItemToShop("Health Potion", 50);
+    }
+    
     public ShopFrame() {
         Player player = Game.getPlayer();
+        javax.swing.JPanel shopPanel = new javax.swing.JPanel();
         
         initComponents();
+        fillShop();
         
         goldLabel.setText(Long.toString(player.getGold()));
+        
+        for(ShopItem item : shop)
+        {
+            javax.swing.JButton itemButton = new javax.swing.JButton();
+            
+            itemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
+            itemButton.setToolTipText(item.getName() + " (" + item.getPrice() + "g)");
+            
+            itemButton.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    ShopItemActionPerformed(evt);
+                }
+            });
+            
+            shopMap.put(itemButton, item);
+            
+            shopPanel.add(itemButton);
+        }
+        
+        shopPanel.setLayout(new java.awt.GridLayout(shop.size() / 4, 4));
+        shopPanel.setSize(300, 300);
+        shopPanel.setVisible(true);
+        
+        add(shopPanel);
+        
+        shopScrollPane.getViewport().add(shopPanel, null);
+    }
+    
+    private void ShopItemActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        javax.swing.JButton itemButton = (javax.swing.JButton) evt.getSource();
+        
+        Player player = Game.getPlayer();
+        ShopItem item = shopMap.get(itemButton);
+        String itemInfo = "";
+        
+        if(item == null)
+            return;
+        
+        itemInfo += item.getName() + " (lv. " + item.getMinLevel() + ")\n\n";
+        
+        if(item.getHeal() > 0)
+            itemInfo += "Heals for " + item.getHeal() + " health.";
+        else
+            itemInfo += "Attack: " + item.getStr() + "\n"
+                      + "Agility: " + item.getAgi() + "\n"
+                      + "Constitution: " + item.getCon();
+        
+        itemInfo += "\n\n    Price: " + item.getPrice() + "g";
+        
+        int decision = javax.swing.JOptionPane.showConfirmDialog(null, itemInfo, "Buy", javax.swing.JOptionPane.YES_NO_OPTION);
+        
+        if(decision == 1)
+            return;
+        
+        long pGold = player.getGold() - item.getPrice();
+            
+        if(pGold < 0)
+        {
+            Game.sendErrorMessage("You don't have enough gold.");
+
+            return;
+        }
+        
+        try
+        {
+            player.addItemToStash(item);
+            
+            Game.sendSuccessMessage("You bought a(n) " + item.getName() + ".");
+            player.setGold(pGold);
+            playerGold.setText(Long.toString(pGold));
+        }
+        catch(StashFullException e)
+        {
+            Game.sendErrorMessage("You don't have space in your stash.");
+        }
+
     }
 
     /**
@@ -34,14 +137,18 @@ public class ShopFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        shopScrollPane = new javax.swing.JScrollPane();
         infoLabel = new javax.swing.JLabel();
         sellerLabel = new javax.swing.JLabel();
         playerGold = new javax.swing.JLabel();
         goldLabel = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
+        getContentPane().add(shopScrollPane);
+        shopScrollPane.setBounds(0, 130, 650, 460);
 
         infoLabel.setBackground(new java.awt.Color(0, 0, 0));
         infoLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
@@ -54,11 +161,21 @@ public class ShopFrame extends javax.swing.JFrame {
         getContentPane().add(sellerLabel);
         sellerLabel.setBounds(620, 10, 280, 570);
         getContentPane().add(playerGold);
-        playerGold.setBounds(210, 50, 40, 20);
+        playerGold.setBounds(210, 40, 50, 30);
 
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
         getContentPane().add(goldLabel);
-        goldLabel.setBounds(180, 50, 20, 16);
+        goldLabel.setBounds(170, 40, 40, 30);
+
+        backButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backButton);
+        backButton.setBounds(710, 620, 130, 50);
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         getContentPane().add(backgroundLabel);
@@ -66,6 +183,13 @@ public class ShopFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.dispose();
+
+        GameFrame gameBack = new GameFrame();
+        gameBack.setVisible(true);  
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,10 +227,12 @@ public class ShopFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JLabel goldLabel;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel playerGold;
     private javax.swing.JLabel sellerLabel;
+    private javax.swing.JScrollPane shopScrollPane;
     // End of variables declaration//GEN-END:variables
 }
