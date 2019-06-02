@@ -7,6 +7,7 @@ import java.util.List;
  * @author Henrique Barcia Lang
  */
 public class Monster extends Creature {
+    private int id;
     private int expGiven;
     private int goldMin;
     private int goldMax;
@@ -14,7 +15,7 @@ public class Monster extends Creature {
     
     private List<LootItem> loots;
     
-    public Monster(String name, int str, int agi, int con, int expGiven, int goldMin, int goldMax, int round, List<LootItem> loots)
+    public Monster(String name, int str, int agi, int con, int expGiven, int goldMin, int goldMax, int round)
     {
         setName(name);
         setStr(str);
@@ -24,9 +25,16 @@ public class Monster extends Creature {
         setGoldMin(goldMin);
         setGoldMax(goldMax);
         setRound(round);
-        setLoots(loots);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getExpGiven() {
         return expGiven;
     }

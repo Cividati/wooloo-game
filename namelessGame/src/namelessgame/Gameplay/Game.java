@@ -1,5 +1,6 @@
 package namelessgame.Gameplay;
 
+import java.util.List;
 import namelessgame.Exception.StashFullException;
 
 public class Game {
@@ -16,6 +17,8 @@ public class Game {
     final public static int SHIELD = 4;
     final public static int LEGS = 5;
     final public static int BOOTS = 6;
+    
+    private static List<Dungeon> dungeons = null;
 
     public static Player getPlayer() {
         return loggedPlayer;
@@ -35,4 +38,12 @@ public class Game {
         javax.swing.JOptionPane.showMessageDialog(null, message, "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public static List<Dungeon> getDungeons() {
+        return dungeons;
+    }
+
+    public static void setDungeons(List<Dungeon> dungeons) {
+        Game.dungeons = dungeons;
+    }
+    
 }

@@ -222,7 +222,7 @@ public class PlayerDAO extends DAO {
                             continue;
                     }
                     
-                    equip.put(toSlot, (new ItemDAO()).loadItemById(con, itemId, 1));
+                    equip.put(toSlot, (new ItemDAO()).loadItemById(itemId, 1));
 
                 }
                 
@@ -243,7 +243,7 @@ public class PlayerDAO extends DAO {
                     int itemId = rs.getInt("item_id");
                     int count = rs.getInt("count");
 
-                    Item item = (new ItemDAO()).loadItemById(con, itemId, count);
+                    Item item = (new ItemDAO()).loadItemById(itemId, count);
 
                     inventory.add(item);
                 }
@@ -259,7 +259,7 @@ public class PlayerDAO extends DAO {
                     int itemId = rs.getInt("item_id");
                     int count = rs.getInt("count");
 
-                    Item item = (new ItemDAO()).loadItemById(con, itemId, count);
+                    Item item = (new ItemDAO()).loadItemById(itemId, count);
 
                     stash.add(item);
                 }

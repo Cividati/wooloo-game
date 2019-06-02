@@ -5,6 +5,7 @@
  */
 package namelessgame.UI;
 
+import namelessgame.Database.DungeonDAO;
 import namelessgame.Database.PlayerDAO;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
@@ -22,14 +23,16 @@ public class GameFrame extends javax.swing.JFrame {
         Player player = Game.getPlayer();
         
         initComponents();
-        
+         
         playerName.setText(player.getName());
         playerLevel.setText(Integer.toString(player.getLevel()));
         playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
         playerExp.setString(((player.getExp() / player.getExpNeededToLevelUp()) * 100) + "%");
-        
         // TODO set player avatar
         
+        if(Game.getDungeons() == null)
+            Game.setDungeons((new DungeonDAO()).loadDungeons());
+ 
     }
 
     /**

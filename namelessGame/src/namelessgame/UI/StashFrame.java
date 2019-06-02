@@ -24,6 +24,11 @@ public class StashFrame extends javax.swing.JFrame {
     
     Player player = Game.getPlayer();
     
+    public void stashSliderAction(Item item, int count)
+    {
+        // TODO
+    }
+    
     public void updatePlayerEquipment(int slot)
     {
         if(slot < 0 || slot > 5)
@@ -81,14 +86,16 @@ public class StashFrame extends javax.swing.JFrame {
         String path;
         List<Item> playerInv = player.getInventory();
         
-        path = playerInv.get(0) != null ? (playerInv.get(0)).getIcon() : "/namelessgame/img/slots/back.png";
+        // TODO write inventory like stash
+        
+        /* path = playerInv.get(0) != null ? (playerInv.get(0)).getIcon() : "/namelessgame/img/slots/back.png";
         playerInv1.setIcon(new javax.swing.ImageIcon(getClass().getResource(path))); 
         
         path = playerInv.get(1) != null ? (playerInv.get(1)).getIcon() : "/namelessgame/img/slots/back.png";
         playerInv2.setIcon(new javax.swing.ImageIcon(getClass().getResource(path))); 
         
         path = playerInv.get(2) != null ? (playerInv.get(2)).getIcon() : "/namelessgame/img/slots/back.png";
-        playerInv3.setIcon(new javax.swing.ImageIcon(getClass().getResource(path))); 
+        playerInv3.setIcon(new javax.swing.ImageIcon(getClass().getResource(path))); */
     }
     
     public void updatePlayerStash()

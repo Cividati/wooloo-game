@@ -87,16 +87,19 @@ public class ItemDAO extends DAO {
             st.close();
             con.close();
         } catch (SQLException ex) {
-            System.out.println("Error when loading item by name...");
+            System.out.println("Error when loading item by id (without count)...");
         } 
        
         return item;
     }
     
-    public Item loadItemById(Connection con, int id, int count)
+    public Item loadItemById(int id, int count)
     {
         String query = "SELECT * FROM item WHERE id = " + id + ";";
         Item item = null;
+        
+        if(!connectToDatabase())
+            return item;
         
         try {
             st = con.createStatement();

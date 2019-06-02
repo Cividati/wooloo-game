@@ -12,6 +12,7 @@ import java.util.Map;
 import namelessgame.Database.ItemDAO;
 import namelessgame.Exception.StashFullException;
 import namelessgame.Gameplay.Game;
+import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
 import namelessgame.Gameplay.ShopItem;
 
@@ -25,8 +26,38 @@ public class ShopFrame extends javax.swing.JFrame {
      * Creates new form ShopFrame
      */
     
+    private Player player = null;
     private List<ShopItem> shop = new ArrayList<>();
     private Map<javax.swing.JButton, ShopItem> shopMap = new HashMap<>();
+    
+    public void shopSliderAction(ShopItem item, int count)
+    {
+        long totalPrice = item.getPrice() * count;
+        
+        long pGold = player.getGold() - totalPrice;
+            
+        if(pGold < 0)
+        {
+            Game.sendErrorMessage("You don't have enough gold.");
+
+            return;
+        }
+
+        try
+        {
+            item.setCount(count);
+            player.addItemToStash(item);
+
+            Game.sendSuccessMessage("You bought " + count + "x " + item.getName() + "(s).");
+            player.setGold(pGold);
+            playerGold.setText(Long.toString(pGold));
+        }
+        catch(StashFullException e)
+        {
+            Game.sendErrorMessage("You don't have space in your stash.");
+        }
+
+    }
     
     private void addItemToShop(String name, long price)
     {
@@ -42,10 +73,11 @@ public class ShopFrame extends javax.swing.JFrame {
     }
     
     public ShopFrame() {
-        Player player = Game.getPlayer();
         javax.swing.JPanel shopPanel = new javax.swing.JPanel();
         
         initComponents();
+        
+        setPlayer(Game.getPlayer());
         fillShop();
         
         goldLabel.setText(Long.toString(player.getGold()));
@@ -81,7 +113,6 @@ public class ShopFrame extends javax.swing.JFrame {
     private void ShopItemActionPerformed(java.awt.event.ActionEvent evt) {                                               
         javax.swing.JButton itemButton = (javax.swing.JButton) evt.getSource();
         
-        Player player = Game.getPlayer();
         ShopItem item = shopMap.get(itemButton);
         String itemInfo = "";
         
@@ -97,35 +128,51 @@ public class ShopFrame extends javax.swing.JFrame {
                       + "Agility: " + item.getAgi() + "\n"
                       + "Constitution: " + item.getCon();
         
-        itemInfo += "\n\n    Price: " + item.getPrice() + "g";
+        itemInfo += "\n\n    Price per unit: " + item.getPrice() + "g";
         
         int decision = javax.swing.JOptionPane.showConfirmDialog(null, itemInfo, "Buy", javax.swing.JOptionPane.YES_NO_OPTION);
         
         if(decision == 1)
             return;
         
-        long pGold = player.getGold() - item.getPrice();
+        if(item.isStackable())
+        {
+            ItemSliderFrame newS = new ItemSliderFrame();
+            newS.setVisible(true);
+        }
+        else
+        {
+            long pGold = player.getGold() - item.getPrice();
             
-        if(pGold < 0)
-        {
-            Game.sendErrorMessage("You don't have enough gold.");
+            if(pGold < 0)
+            {
+                Game.sendErrorMessage("You don't have enough gold.");
 
-            return;
-        }
-        
-        try
-        {
-            player.addItemToStash(item);
-            
-            Game.sendSuccessMessage("You bought a(n) " + item.getName() + ".");
-            player.setGold(pGold);
-            playerGold.setText(Long.toString(pGold));
-        }
-        catch(StashFullException e)
-        {
-            Game.sendErrorMessage("You don't have space in your stash.");
+                return;
+            }
+
+            try
+            {
+                player.addItemToStash(item);
+
+                Game.sendSuccessMessage("You bought a(n) " + item.getName() + ".");
+                player.setGold(pGold);
+                playerGold.setText(Long.toString(pGold));
+            }
+            catch(StashFullException e)
+            {
+                Game.sendErrorMessage("You don't have space in your stash.");
+            }
         }
 
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     /**
