@@ -299,9 +299,9 @@ public class StatusFrame extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         Player player = Game.getPlayer();
         
-        player.setStr(str);
-        player.setAgi(agi);
-        player.setCon(con);
+        player.setStr(player.getBaseStr() + (str - player.getStr()));
+        player.setAgi(player.getBaseAgi() + (str - player.getAgi()));
+        player.setCon(player.getBaseCon() + (str - player.getCon()));
         player.setStatusPoints(statusPoints);
     }//GEN-LAST:event_confirmButtonActionPerformed
 

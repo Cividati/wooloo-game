@@ -9,12 +9,13 @@ public class Game {
     final public static int MAX_STASH_SIZE = 10;
     final public static int MAX_INVENTORY_SIZE = 3;
     
-    final public static int HEAD = 0;
-    final public static int BODY = 1;
-    final public static int WEAPON = 2;
-    final public static int SHIELD = 3;
-    final public static int LEGS = 4;
-    final public static int BOOTS = 5;
+    final public static int INVENTORY = 0;
+    final public static int HEAD = 1;
+    final public static int BODY = 2;
+    final public static int WEAPON = 3;
+    final public static int SHIELD = 4;
+    final public static int LEGS = 5;
+    final public static int BOOTS = 6;
 
     public static Player getPlayer() {
         return loggedPlayer;

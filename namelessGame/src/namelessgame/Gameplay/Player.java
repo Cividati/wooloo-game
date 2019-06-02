@@ -28,21 +28,21 @@ public class Player extends Creature implements Comparable<Player> {
     private Map<Integer, Item> equip = new HashMap<>();
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public Player(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int con)
+    public Player(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int con, Map<Integer, Item> equip)
     {
-        this.id = id;
+        setId(id);
+        setName(name);
+        setSex(sex);
+        setLevel(level);
+        setExp(exp);
+        setGold(gold);
         
-        this.setName(name);
+        setStatusPoints(statusPoints);
+        setStr(str);
+        setAgi(agi);
+        setCon(con);
         
-        this.sex = sex;
-        this.level = level;
-        this.exp = exp;
-        this.gold = gold;
-        this.statusPoints = statusPoints;
-        
-        this.setStr(str);
-        this.setAgi(agi);
-        this.setCon(con);
+        setEquip(equip);
         
         // TODO add stash, inventory and equip 
     }
@@ -256,13 +256,28 @@ public class Player extends Creature implements Comparable<Player> {
             
     }
     
+    public int getBaseStr()
+    {
+        return super.getStr();
+    }
+    
+    public int getBaseAgi()
+    {
+        return super.getAgi();
+    }
+    
+    public int getBaseCon()
+    {
+        return super.getCon();
+    }
+    
     @Override
     public int getStr()
     {
-        int str = super.getStr();
+        int str = getBaseStr();
         Map<Integer, Item> playerEquip = getEquip();
         
-        for(int i = 0; i < 6; i++)
+        for(int i = Game.HEAD; i < Game.BOOTS; i++)
         {
             Item item = playerEquip.get(i);
             
@@ -278,10 +293,10 @@ public class Player extends Creature implements Comparable<Player> {
     @Override
     public int getAgi()
     {
-        int agi = super.getAgi();
+        int agi = getBaseAgi();
         Map<Integer, Item> playerEquip = getEquip();
         
-        for(int i = 0; i < 6; i++)
+        for(int i = Game.HEAD; i < Game.BOOTS; i++)
         {
             Item item = playerEquip.get(i);
             
@@ -297,10 +312,10 @@ public class Player extends Creature implements Comparable<Player> {
     @Override
     public int getCon()
     {
-        int con = super.getCon();
+        int con = getBaseCon();
         Map<Integer, Item> playerEquip = getEquip();
         
-        for(int i = 0; i < 6; i++)
+        for(int i = Game.HEAD; i < Game.BOOTS; i++)
         {
             Item item = playerEquip.get(i);
             

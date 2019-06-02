@@ -2,6 +2,7 @@ package namelessgame.UI;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 import namelessgame.Database.PlayerDAO;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
@@ -176,7 +177,7 @@ public class NewGameFrame extends javax.swing.JFrame {
             return;
         }
         
-        Player player = new Player(-1, characterName, sex, 1, 0, 0, 0, 5, 5, 5);
+        Player player = new Player(-1, characterName, sex, 1, 0, 0, 0, 5, 5, 5, new HashMap<>());
 
         (new PlayerDAO()).insertPlayer(player);
         Game.setPlayer(player);
