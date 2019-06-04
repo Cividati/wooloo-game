@@ -39,6 +39,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             agiLabel.setText("Agility " + player.getAgi());
             expBar.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
             expBar.setString(((player.getExp() / player.getExpNeededToLevelUp()) * 100) + "%");
+            expBar.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
             
             // TODO set player avatar
             // TODO show equipment?

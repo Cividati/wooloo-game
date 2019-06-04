@@ -104,6 +104,22 @@ public class StashFrame extends javax.swing.JFrame {
         List<Item> playerStash = player.getStash();
         javax.swing.JPanel stashPanel = new javax.swing.JPanel();
         
+        /*int strDiff = player.getStr(item) - player.getStr();
+        int agiDiff = player.getAgi(item) - player.getAgi();
+        int conDiff = player.getCon(item) - player.getCon();
+
+        String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
+        String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
+        String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
+
+        String htmlTootip = "<html>" + 
+                            (item.isStackable() ? ("<font color=\"red\">" + item.getCount() + "</font>x unit(s).<br><br>") : "") +
+                            (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
+                            "Strenght: <font color=" + strFont + ">" + strDiff + "</font><br>" +
+                            "Agility: <font color=" + agiFont + ">" + agiDiff + "</font><br>" +
+                            "Constitution: <font color=" + conFont + ">" + conDiff + "</font><br>")) +
+                            "</html>";*/
+        
         /*for(Item item : playerStash)
         {
             javax.swing.JButton itemButton = new javax.swing.JButton();

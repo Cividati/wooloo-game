@@ -271,6 +271,69 @@ public class Player extends Creature implements Comparable<Player> {
         return super.getCon();
     }
     
+    public int getStr(Item item)
+    {
+        int str = getBaseStr();
+        int slot = item.getSlot();
+        Map<Integer, Item> playerEquip = new HashMap<>(getEquip());
+        
+        if(slot < Game.HEAD || slot > Game.BOOTS)
+            return getStr();
+        
+        playerEquip.put(slot, item);
+        
+        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        {
+            Item equipItem = playerEquip.get(i);          
+            
+            str += item.getStr();
+        }
+        
+        return str;      
+    }
+    
+    public int getAgi(Item item)
+    {
+        int agi = getBaseAgi();
+        int slot = item.getSlot();
+        Map<Integer, Item> playerEquip = new HashMap<>(getEquip());
+        
+        if(slot < Game.HEAD || slot > Game.BOOTS)
+            return getAgi();
+        
+        playerEquip.put(slot, item);
+        
+        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        {
+            Item equipItem = playerEquip.get(i);          
+            
+            agi += item.getAgi();
+        }
+        
+        return agi;      
+    }
+    
+    public int getCon(Item item)
+    {
+        int con = getBaseCon();
+        int slot = item.getSlot();
+        Map<Integer, Item> playerEquip = new HashMap<>(getEquip());
+        
+        if(slot < Game.HEAD || slot > Game.BOOTS)
+            return getCon();
+        
+        playerEquip.put(slot, item);
+        
+        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        {
+            Item equipItem = playerEquip.get(i);          
+            
+            con += item.getCon();
+        }
+        
+        return con;      
+    }
+    
     @Override
     public int getStr()
     {
