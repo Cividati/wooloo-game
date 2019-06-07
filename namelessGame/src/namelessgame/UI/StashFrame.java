@@ -431,8 +431,8 @@ public class StashFrame extends javax.swing.JFrame {
                         if(fromPanel == null)
                         {
                             Game.sendErrorMessage("You can't move that here.");
-                            event.rejectDrop();
                             
+                            event.dropComplete(true);                           
                             return;
                         }
                         
@@ -464,8 +464,8 @@ public class StashFrame extends javax.swing.JFrame {
                         if(toSlot == -1 || movedItem.getSlot() != toSlot)
                         {
                             Game.sendErrorMessage("You can't move that here.");
-                            event.rejectDrop();
                             
+                            event.dropComplete(true);                            
                             return;
                         }
                         else if(movedItem.isStackable())
@@ -473,8 +473,8 @@ public class StashFrame extends javax.swing.JFrame {
                             System.out.println("Support for stackable items on equipment is not yet implemented.");
                             
                             Game.sendErrorMessage("You can't move that here.");
-                            event.rejectDrop();
                             
+                            event.dropComplete(true);
                             return;
                         }
                                        
@@ -489,6 +489,7 @@ public class StashFrame extends javax.swing.JFrame {
                         catch(NotEnoughLevelException e)
                         {
                             Game.sendErrorMessage("You don't have enough level to equip this item (" + movedItem.getMinLevel() + ").");
+                            event.dropComplete(true);
                         }
 
                     } else {
@@ -531,9 +532,9 @@ public class StashFrame extends javax.swing.JFrame {
                         if(movedItem.isStackable())
                         {
                             ItemSliderFrame amountSelector = new ItemSliderFrame(StashFrame.this, fromItemContainer, toItemContainer, movedItem, localItem, movedItem.getCount());
-
-                            setEnabled(false);
+                           
                             amountSelector.setVisible(true);
+                            setEnabled(false);
                         }
                         else
                         {
@@ -542,6 +543,7 @@ public class StashFrame extends javax.swing.JFrame {
                                 Game.sendErrorMessage("Your " +
                                                              (toItemContainer == stash ? "stash" : "inventory") + " is full.");
 
+                                event.dropComplete(true);
                                 return;
                             }
 
@@ -574,9 +576,6 @@ public class StashFrame extends javax.swing.JFrame {
 	
                         }
     
-                        //JLabelAnimal newAnimalLabel = new JLabelAnimal(an);
-                        //newAnimalLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("body.png")));
-                        //this.panel.add(newAnimalLabel);
                         event.dropComplete(true);
                         this.panel.validate();
                     }
@@ -600,15 +599,18 @@ public class StashFrame extends javax.swing.JFrame {
         add(stashPanel);
         stashScrollPane.getViewport().add(stashPanel, null);
         
+        inventoryPanel.setLayout(new GridLayout(Game.MAX_INVENTORY_SIZE / Game.INVENTORY_COLUMNS, Game.INVENTORY_COLUMNS));
+        inventoryPanel.setVisible(true);
+        
+        add(inventoryPanel);
+        inventoryScrollPane.getViewport().add(inventoryPanel, null);
+        
         for(int i = Game.HEAD; i <= Game.BOOTS; i++)
             updatePlayerEquipment(i);
         
+        updatePlayerStash();
         updatePlayerInventory();
-
-        
-        
-        
-        
+ 
     }
 
     /**
