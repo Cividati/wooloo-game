@@ -1,6 +1,6 @@
-package namelessgame.UI;
+package Test;
 
-import namelessgame.Database.PlayerDAO;
+
 
 /**
  *

@@ -19,7 +19,7 @@ import namelessgame.Gameplay.Item;
 public class ItemDAO extends DAO {
     public Item loadItemByName(String name)
     {
-        String query = "SELECT * FROM item WHERE name = " + name + ";";
+        String query = "SELECT * FROM item WHERE name = '" + name + "';";
         Item item = null;
 
         if(!connectToDatabase())

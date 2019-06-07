@@ -21,17 +21,17 @@ public class PlayerDAO extends DAO {
         if(!connectToDatabase())
             return;
         
-        String playerQuery = "INSERT INTO player(name, sex) VALUES (?, " + player.getSex() + ");";
+        String playerQuery = "INSERT INTO player(name, sex) VALUES (?, '" + player.getSex() + "');";
         String inventoryQuery = "INSERT INTO inventory(player_id) VALUES ((SELECT MAX(id) FROM player));";
         String stashQuery = "INSERT INTO stash(player_id) VALUES ((SELECT MAX(id) FROM player));";
         
         // TODO load player stash, inventory and equip
         try {
             pst = con.prepareStatement(playerQuery);
-            pst.setString(1, player.getName());
+            pst.setString(1, player.getName());          
             pst.execute();
             
-            pst = con.prepareStatement(inventoryQuery);
+            pst = con.prepareStatement(inventoryQuery);          
             pst.execute();
             
             pst = con.prepareStatement(stashQuery);
@@ -61,7 +61,7 @@ public class PlayerDAO extends DAO {
                         ", shield = " + (equip.get(Game.SHIELD) != null ? equip.get(Game.SHIELD).getName() : "NULL") + ", legs = " + (equip.get(Game.LEGS) != null ? equip.get(Game.LEGS).getName() : "NULL") +
                         ", boots = " + (equip.get(Game.BOOTS) != null ? equip.get(Game.BOOTS).getName() : "NULL") + " WHERE id = " + player.getId() + ";";
                        
-        String deleteInventory = "DELETE ii.* FROM inventory_has_item AS ii INNER JOIN inventory AS i ON ii.stash_id = i.id WHERE i.player_id = " + player.getId() + ";";
+        String deleteInventory = "DELETE ii.* FROM inventory_has_item AS ii INNER JOIN inventory AS i ON ii.inventory_id = i.id WHERE i.player_id = " + player.getId() + ";";
         String deleteStash = "DELETE si.* FROM stash_has_item AS si INNER JOIN stash AS s ON si.stash_id = s.id WHERE s.player_id = " + player.getId() + ";";     
         
         String updateInventory = "INSERT INTO inventory_has_item VALUES ";
@@ -93,6 +93,7 @@ public class PlayerDAO extends DAO {
                 
                 updateInventory += ";";
                 
+                System.out.println("4");
                 pst = con.prepareStatement(updateInventory);
                 pst.execute();
             }
@@ -113,6 +114,7 @@ public class PlayerDAO extends DAO {
                 
                 updateStash += ";";
                 
+                System.out.println("5");
                 pst = con.prepareStatement(updateStash);
                 pst.execute();
             }
@@ -121,8 +123,8 @@ public class PlayerDAO extends DAO {
             con.close();
             
             Game.sendSuccessMessage("You successfully saved your progress.");
-        } catch (SQLException ex) {
-            System.out.println("Error when saving player on database...");
+        } catch (SQLException e) {
+            System.out.println("Error when saving player on database..." + e.getMessage());
         }
         
     }
@@ -146,8 +148,8 @@ public class PlayerDAO extends DAO {
     public List<Player> loadPlayers()
     {
         String query = "SELECT * FROM player;";
-        String inventoryQuery = "SELECT ii.item_id, ii.count FROM inventory_use_item AS ii INNER JOIN inventory AS i ON ii.inventory_id = i.id WHERE i.player_id = ?;";
-        String stashQuery = "SELECT si.item_id, si.count FROM stash_use_item AS si INNER JOIN stash AS s ON si.inventory_id = s.id WHERE s.player_id = ?;";
+        String inventoryQuery = "SELECT ii.item_id, ii.count FROM inventory_has_item AS ii INNER JOIN inventory AS i ON ii.inventory_id = i.id WHERE i.player_id = ?;";
+        String stashQuery = "SELECT si.item_id, si.count FROM stash_has_item AS si INNER JOIN stash AS s ON si.stash_id = s.id WHERE s.player_id = ?;";
         List<Player> playerList = new ArrayList<>();
         
         if(!connectToDatabase())

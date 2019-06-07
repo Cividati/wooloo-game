@@ -1,5 +1,16 @@
-package namelessgame.UI;
+package Test;
 
+
+
+
+
+
+
+
+
+
+
+import Test.MenuFrame;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,8 +32,6 @@ public class NewGameFrame extends javax.swing.JFrame {
         
         charAvatar.setVisible(false);
     }
-    
-    public static List<Player> playerList = new ArrayList<>();
     
     private char sex = 'U';
     private int nextIndexMale = 0;
@@ -184,7 +193,7 @@ public class NewGameFrame extends javax.swing.JFrame {
         
         this.dispose();
         GameFrame gameBack = new GameFrame();
-        gameBack.setVisible(true);   
+        gameBack.setVisible(true);
     }//GEN-LAST:event_CreateCharButtonActionPerformed
 
     /**

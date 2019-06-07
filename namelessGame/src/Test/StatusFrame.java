@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package namelessgame.UI;
+package Test;
 
 import java.util.Map;
 import namelessgame.Gameplay.Game;
@@ -39,8 +34,8 @@ public class StatusFrame extends javax.swing.JFrame {
         playerAgi.setText(Integer.toString(agi));
         playerConst.setText(Integer.toString(con));
         playerLevel.setText(Integer.toString(player.getLevel()));
-        playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
-        playerExp.setString(((player.getExp() / player.getExpNeededToLevelUp()) * 100) + "%");
+        playerExp.setStringPainted(true);
+        playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);       
         playerExp.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
         playerPoints.setText(Integer.toString(statusPoints));
         
@@ -113,7 +108,7 @@ public class StatusFrame extends javax.swing.JFrame {
         nameLabel.setForeground(new java.awt.Color(0, 0, 0));
         nameLabel.setText("Name:");
         getContentPane().add(nameLabel);
-        nameLabel.setBounds(90, 90, 36, 16);
+        nameLabel.setBounds(10, 90, 60, 16);
 
         goldLabel.setForeground(new java.awt.Color(0, 0, 0));
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
@@ -136,26 +131,26 @@ public class StatusFrame extends javax.swing.JFrame {
         getContentPane().add(constLabel);
         constLabel.setBounds(90, 250, 80, 16);
         getContentPane().add(playerAgi);
-        playerAgi.setBounds(140, 220, 0, 0);
+        playerAgi.setBounds(140, 220, 30, 20);
 
         playerName.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(playerName);
-        playerName.setBounds(140, 90, 100, 20);
+        playerName.setBounds(80, 90, 150, 20);
 
         playerGold.setForeground(new java.awt.Color(255, 255, 0));
         getContentPane().add(playerGold);
-        playerGold.setBounds(130, 140, 60, 0);
+        playerGold.setBounds(130, 140, 60, 30);
         getContentPane().add(playerStr);
-        playerStr.setBounds(150, 190, 0, 0);
+        playerStr.setBounds(150, 190, 30, 20);
         getContentPane().add(playerConst);
-        playerConst.setBounds(170, 250, 0, 0);
+        playerConst.setBounds(170, 250, 30, 20);
 
         levelLabel.setForeground(new java.awt.Color(0, 0, 0));
         levelLabel.setText("Lv.:");
         getContentPane().add(levelLabel);
         levelLabel.setBounds(240, 90, 36, 16);
         getContentPane().add(playerLevel);
-        playerLevel.setBounds(270, 90, 0, 0);
+        playerLevel.setBounds(270, 90, 20, 20);
 
         playerExp.setForeground(new java.awt.Color(204, 0, 255));
         getContentPane().add(playerExp);
@@ -232,7 +227,7 @@ public class StatusFrame extends javax.swing.JFrame {
 
         playerPoints.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(playerPoints);
-        playerPoints.setBounds(230, 310, 0, 0);
+        playerPoints.setBounds(220, 310, 30, 20);
 
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +261,11 @@ public class StatusFrame extends javax.swing.JFrame {
 
     private void addStrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStrButtonActionPerformed
         if(statusPoints <= 0)
+        {
+            Game.sendErrorMessage("You do not have points to distribute.");
+            
             return;
+        }
         
         str++;
         statusPoints--;
@@ -277,7 +276,11 @@ public class StatusFrame extends javax.swing.JFrame {
 
     private void addAgiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAgiButtonActionPerformed
         if(statusPoints <= 0)
+        {
+            Game.sendErrorMessage("You do not have points to distribute.");
+            
             return;
+        }
         
         agi++;
         statusPoints--;
@@ -288,7 +291,11 @@ public class StatusFrame extends javax.swing.JFrame {
 
     private void addConstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstButtonActionPerformed
         if(statusPoints <= 0)
+        {
+            Game.sendErrorMessage("You do not have points to distribute.");
+            
             return;
+        }
         
         con++;
         statusPoints--;

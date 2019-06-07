@@ -1,10 +1,21 @@
+package Test;
+
+
+
+
+
+
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package namelessgame.UI;
 
+
+import Test.MenuFrame;
 import namelessgame.Database.DungeonDAO;
 import namelessgame.Database.PlayerDAO;
 import namelessgame.Gameplay.Game;
@@ -26,8 +37,10 @@ public class GameFrame extends javax.swing.JFrame {
          
         playerName.setText(player.getName());
         playerLevel.setText(Integer.toString(player.getLevel()));
+        
+        playerExp.setStringPainted(true);
         playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
-        playerExp.setString(((player.getExp() / player.getExpNeededToLevelUp()) * 100) + "%");
+        playerExp.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
         // TODO set player avatar
         
         if(Game.getDungeons() == null)
@@ -55,6 +68,7 @@ public class GameFrame extends javax.swing.JFrame {
         shopButton = new javax.swing.JButton();
         statusButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,20 +81,20 @@ public class GameFrame extends javax.swing.JFrame {
         levelLabel.setForeground(new java.awt.Color(0, 0, 0));
         levelLabel.setText("Lv.:");
         getContentPane().add(levelLabel);
-        levelLabel.setBounds(600, 470, 36, 16);
+        levelLabel.setBounds(590, 460, 50, 16);
         getContentPane().add(playerName);
-        playerName.setBounds(650, 440, 0, 0);
+        playerName.setBounds(630, 430, 110, 20);
         getContentPane().add(playerLevel);
-        playerLevel.setBounds(640, 470, 50, 20);
+        playerLevel.setBounds(630, 460, 50, 20);
 
         playerExp.setForeground(new java.awt.Color(204, 0, 255));
         getContentPane().add(playerExp);
-        playerExp.setBounds(710, 460, 210, 30);
+        playerExp.setBounds(710, 450, 210, 30);
 
         nameLabel.setForeground(new java.awt.Color(0, 0, 0));
         nameLabel.setText("Name:");
         getContentPane().add(nameLabel);
-        nameLabel.setBounds(600, 440, 36, 16);
+        nameLabel.setBounds(580, 430, 50, 16);
 
         dungeonButton.setText("Dungeon");
         getContentPane().add(dungeonButton);
@@ -122,6 +136,15 @@ public class GameFrame extends javax.swing.JFrame {
         getContentPane().add(saveButton);
         saveButton.setBounds(290, 190, 80, 32);
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backButton);
+        backButton.setBounds(870, 570, 59, 32);
+
         backgroundLabel.setForeground(new java.awt.Color(0, 0, 0));
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         getContentPane().add(backgroundLabel);
@@ -154,6 +177,16 @@ public class GameFrame extends javax.swing.JFrame {
         StashFrame newStash = new StashFrame();
         newStash.setVisible(true);
     }//GEN-LAST:event_stashButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.dispose();
+        
+        Game.setPlayer(null);
+        
+        MenuFrame newMenu = new MenuFrame();
+        newMenu.setVisible(true);
+        
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +224,7 @@ public class GameFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JButton dungeonButton;
     private javax.swing.JLabel levelLabel;

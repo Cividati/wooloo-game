@@ -1,4 +1,14 @@
-package namelessgame.UI;
+package Test;
+
+
+
+
+
+
+
+
+
+
 
 import java.awt.Component;
 import java.awt.Cursor;
@@ -145,7 +155,7 @@ public class StashFrame extends javax.swing.JFrame {
     
     public void updatePlayerEquipment(int slot)
     {
-        if(slot < 0 || slot > 5)
+        if(slot < Game.HEAD || slot > Game.BOOTS)
             return;
         
         String defaultPath = "/namelessgame/img/slots/head.png";
@@ -203,11 +213,13 @@ public class StashFrame extends javax.swing.JFrame {
         inventoryList.clear();
         
         for(int i = 0; i < Game.MAX_INVENTORY_SIZE; i++)
-        {
+        {          
+            // TODO check for list bounds
+            
             Item item = inventory.get(i);
             
             ItemLabel itemLabel = new ItemLabel();
-            DragSource itemDragSource;                   
+            DragSource itemDragSource;    
             
             path = item == null ? "/namelessgame/img/slots/body.png" : item.getIcon();
             
