@@ -214,34 +214,39 @@ public class StashFrame extends javax.swing.JFrame {
         
         for(int i = 0; i < Game.MAX_INVENTORY_SIZE; i++)
         {          
-            // TODO check for list bounds
+            Item item = null;
             
-            Item item = inventory.get(i);
+            if(i < inventory.size())
+                item = inventory.get(i);
             
             ItemLabel itemLabel = new ItemLabel();
             DragSource itemDragSource;    
             
-            path = item == null ? "/namelessgame/img/slots/body.png" : item.getIcon();
+            path = item == null ? "/namelessgame/img/slots/back.png" : item.getIcon();
             
-            int strDiff = player.getStr(item) - player.getStr();
-            int agiDiff = player.getAgi(item) - player.getAgi();
-            int conDiff = player.getCon(item) - player.getCon();
-
-            String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
-            String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
-            String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
-
-            String htmlTootip = "<html>" + 
-                                (item.isStackable() ? ("<font color=\"red\">" + item.getCount() + "</font>x unit(s).<br><br>") : "") +
-                                (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
-                                "Strenght: <font color=" + strFont + ">" + strDiff + "</font><br>" +
-                                "Agility: <font color=" + agiFont + ">" + agiDiff + "</font><br>" +
-                                "Constitution: <font color=" + conFont + ">" + conDiff + "</font><br>")) +
-                                "</html>";
-       
             itemLabel.setItem(item);          
             itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
-            itemLabel.setToolTipText(htmlTootip);
+            
+            if(item != null)
+            {
+                int strDiff = player.getStr(item) - player.getStr();
+                int agiDiff = player.getAgi(item) - player.getAgi();
+                int conDiff = player.getCon(item) - player.getCon();
+
+                String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
+                String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
+                String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
+
+                String htmlTootip = "<html>" + 
+                                    (item.isStackable() ? ("<font color=\"red\">" + item.getCount() + "</font>x unit(s).<br><br>") : "") +
+                                    (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
+                                    "Strenght: <font color=" + strFont + ">" + strDiff + "</font><br>" +
+                                    "Agility: <font color=" + agiFont + ">" + agiDiff + "</font><br>" +
+                                    "Constitution: <font color=" + conFont + ">" + conDiff + "</font><br>")) +
+                                    "</html>";
+
+                itemLabel.setToolTipText(htmlTootip);
+            }
             
             inventoryPanel.add(itemLabel);
             inventoryList.add(itemLabel);
@@ -263,32 +268,39 @@ public class StashFrame extends javax.swing.JFrame {
         
         for(int i = 0; i < Game.MAX_STASH_SIZE; i++)
         {
-            Item item = stash.get(i);
+            Item item = null;
+            
+            if(i < stash.size())
+                item = stash.get(i);
             
             ItemLabel itemLabel = new ItemLabel();
             DragSource itemDragSource;                   
             
-            path = item == null ? "/namelessgame/img/slots/body.png" : item.getIcon();
+            path = item == null ? "/namelessgame/img/slots/back.png" : item.getIcon();
             
-            int strDiff = player.getStr(item) - player.getStr();
-            int agiDiff = player.getAgi(item) - player.getAgi();
-            int conDiff = player.getCon(item) - player.getCon();
-
-            String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
-            String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
-            String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
-
-            String htmlTootip = "<html>" + 
-                                (item.isStackable() ? ("<font color=\"red\">" + item.getCount() + "</font>x unit(s).<br><br>") : "") +
-                                (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
-                                "Strenght: <font color=" + strFont + ">" + strDiff + "</font><br>" +
-                                "Agility: <font color=" + agiFont + ">" + agiDiff + "</font><br>" +
-                                "Constitution: <font color=" + conFont + ">" + conDiff + "</font><br>")) +
-                                "</html>";
-       
             itemLabel.setItem(item);          
             itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
-            itemLabel.setToolTipText(htmlTootip);
+            
+            if(item != null)
+            {
+                int strDiff = player.getStr(item) - player.getStr();
+                int agiDiff = player.getAgi(item) - player.getAgi();
+                int conDiff = player.getCon(item) - player.getCon();
+
+                String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
+                String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
+                String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
+
+                String htmlTootip = "<html>" + 
+                                    (item.isStackable() ? ("<font color=\"red\">" + item.getCount() + "</font>x unit(s).<br><br>") : "") +
+                                    (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
+                                    "Strenght: <font color=" + strFont + ">" + strDiff + "</font><br>" +
+                                    "Agility: <font color=" + agiFont + ">" + agiDiff + "</font><br>" +
+                                    "Constitution: <font color=" + conFont + ">" + conDiff + "</font><br>")) +
+                                    "</html>";
+
+                itemLabel.setToolTipText(htmlTootip);
+            }
             
             stashPanel.add(itemLabel);
             stashList.add(itemLabel);
@@ -605,6 +617,12 @@ public class StashFrame extends javax.swing.JFrame {
     public StashFrame() {
         initComponents();
         
+        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
+            updatePlayerEquipment(i);
+        
+        updatePlayerStash();
+        updatePlayerInventory();
+        
         stashPanel.setLayout(new GridLayout(Game.MAX_STASH_SIZE / Game.STASH_COLUMNS, Game.STASH_COLUMNS));
         stashPanel.setVisible(true);
         
@@ -616,12 +634,6 @@ public class StashFrame extends javax.swing.JFrame {
         
         add(inventoryPanel);
         inventoryScrollPane.getViewport().add(inventoryPanel, null);
-        
-        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
-            updatePlayerEquipment(i);
-        
-        updatePlayerStash();
-        updatePlayerInventory();
  
     }
 
@@ -655,16 +667,16 @@ public class StashFrame extends javax.swing.JFrame {
         infoLabel.setForeground(new java.awt.Color(51, 51, 51));
         infoLabel.setText("Stash");
         getContentPane().add(infoLabel);
-        infoLabel.setBounds(30, 10, 120, 70);
+        infoLabel.setBounds(20, 50, 120, 70);
         getContentPane().add(stashScrollPane);
-        stashScrollPane.setBounds(10, 90, 530, 460);
+        stashScrollPane.setBounds(20, 350, 280, 200);
         getContentPane().add(inventoryScrollPane);
-        inventoryScrollPane.setBounds(570, 280, 230, 240);
+        inventoryScrollPane.setBounds(570, 340, 160, 180);
 
         infoInventoryLabel.setForeground(new java.awt.Color(0, 0, 0));
         infoInventoryLabel.setText("Inventory");
         getContentPane().add(infoInventoryLabel);
-        infoInventoryLabel.setBounds(570, 260, 70, 16);
+        infoInventoryLabel.setBounds(570, 310, 70, 16);
 
         playerWeapon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/left-hand.png"))); // NOI18N
         getContentPane().add(playerWeapon);

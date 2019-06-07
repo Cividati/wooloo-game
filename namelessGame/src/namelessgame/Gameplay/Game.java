@@ -10,10 +10,10 @@ public class Game {
     final public static int MAX_LEVEL = 100;
     
     /** Stash max size **/
-    final public static int MAX_STASH_SIZE = 30;
+    final public static int MAX_STASH_SIZE = /*30*/80;
     
     /** Inventory max size **/
-    final public static int MAX_INVENTORY_SIZE = 12;
+    final public static int MAX_INVENTORY_SIZE = /*12*/40;
     
     /** Max units that a stack of item can have (if it is stackable) **/
     final public static int MAX_STACKABLE_AMOUNT = 100;

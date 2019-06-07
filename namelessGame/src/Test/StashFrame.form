@@ -40,14 +40,14 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="10" width="120" height="70"/>
+          <AbsoluteConstraints x="20" y="50" width="120" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
     <Container class="javax.swing.JScrollPane" name="stashScrollPane">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="90" width="530" height="460"/>
+          <AbsoluteConstraints x="20" y="350" width="280" height="200"/>
         </Constraint>
       </Constraints>
 
@@ -56,7 +56,7 @@
     <Container class="javax.swing.JScrollPane" name="inventoryScrollPane">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="570" y="280" width="230" height="240"/>
+          <AbsoluteConstraints x="570" y="340" width="160" height="180"/>
         </Constraint>
       </Constraints>
 
@@ -71,7 +71,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="570" y="260" width="70" height="-1"/>
+          <AbsoluteConstraints x="570" y="310" width="70" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
