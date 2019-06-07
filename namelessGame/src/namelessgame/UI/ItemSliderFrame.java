@@ -5,6 +5,11 @@
  */
 package namelessgame.UI;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.ShopItem;
@@ -13,17 +18,21 @@ import namelessgame.Gameplay.ShopItem;
  *
  * @author Henrique Barcia Lang
  */
-public class ItemSliderFrame extends javax.swing.JFrame {
+public class ItemSliderFrame extends javax.swing.JFrame implements WindowListener {
 
     /**
      * Creates new form ItemSliderFrame
      */
     
     private Item item;
+    private Item toItem;
+    
     private int count = 1;
     private int countMax;    
     
-    javax.swing.JFrame originalFrame;
+    private javax.swing.JFrame originalFrame;
+    private List<Item> fromContainer;
+    private List<Item> toContainer;
     
     public void setItem(Item item)
     {
@@ -60,6 +69,30 @@ public class ItemSliderFrame extends javax.swing.JFrame {
     public void setOriginalFrame(JFrame originalFrame) {
         this.originalFrame = originalFrame;
     }
+
+    public List<Item> getFromContainer() {
+        return fromContainer;
+    }
+
+    public void setFromContainer(List<Item> fromContainer) {
+        this.fromContainer = fromContainer;
+    }
+
+    public List<Item> getToContainer() {
+        return toContainer;
+    }
+
+    public void setToContainer(List<Item> toContainer) {
+        this.toContainer = toContainer;
+    }
+
+    public Item getToItem() {
+        return toItem;
+    }
+
+    public void setToItem(Item toItem) {
+        this.toItem = toItem;
+    }
     
     public ItemSliderFrame() {
         initComponents();
@@ -71,6 +104,21 @@ public class ItemSliderFrame extends javax.swing.JFrame {
         setOriginalFrame(originalFrame);
         setItem(item);
         setCountMax(countMax);
+        
+        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
+        amountLabel.setText(Integer.toString(1));
+    }
+    
+    public ItemSliderFrame(javax.swing.JFrame originalFrame, List<Item> fromContainer, List<Item> toContainer, Item item, Item toItem, int countMax) {
+        initComponents();
+        
+        setOriginalFrame(originalFrame);
+        setItem(item);
+        setToItem(toItem);
+        setCountMax(countMax);
+        
+        setFromContainer(fromContainer);
+        setToContainer(toContainer);
         
         iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
         amountLabel.setText(Integer.toString(1));
@@ -142,12 +190,16 @@ public class ItemSliderFrame extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
+        
+        originalFrame.setEnabled(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         this.dispose();
 
         // TODO if the originalFrame is closed, what happens?
+        
+        originalFrame.setEnabled(true);
         
         if(originalFrame instanceof ShopFrame)
         {
@@ -157,7 +209,11 @@ public class ItemSliderFrame extends javax.swing.JFrame {
                 ((ShopFrame) originalFrame).shopSliderAction((ShopItem) item, count);
         }
         else if(originalFrame instanceof StashFrame)
-            ((StashFrame) originalFrame).stashSliderAction(item, count);
+            try {
+                ((StashFrame) originalFrame).stashSliderAction(fromContainer, toContainer, item, toItem, count);
+            } catch (CloneNotSupportedException ex) {
+                System.out.println("Error when cloning item...");
+            }
         else
             System.out.println("Slider used without being called by a configured frame...");
         
@@ -206,4 +262,41 @@ public class ItemSliderFrame extends javax.swing.JFrame {
     private javax.swing.JButton okButton;
     private javax.swing.JLabel sliderInfo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        // clicked on X button (cancel operation -> set frame enabled)
+        
+        originalFrame.setEnabled(true);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -35,6 +35,8 @@ public class ShopFrame extends javax.swing.JFrame {
         long totalPrice = item.getPrice() * count;
         
         long pGold = player.getGold() - totalPrice;
+        
+        setEnabled(true);
             
         if(pGold < 0)
         {
@@ -137,8 +139,10 @@ public class ShopFrame extends javax.swing.JFrame {
         
         if(item.isStackable())
         {
-            ItemSliderFrame newS = new ItemSliderFrame();
-            newS.setVisible(true);
+            ItemSliderFrame amountSelector = new ItemSliderFrame(this, item, Game.MAX_STACKABLE_AMOUNT);
+            
+            setEnabled(false);
+            amountSelector.setVisible(true);
         }
         else
         {

@@ -47,45 +47,67 @@ public class Player extends Creature implements Comparable<Player> {
         // TODO add stash, inventory and equip 
     }
     
+    public void addItemToContainer(Item item, List<Item> toContainer)
+    {
+        if(toContainer == getStash())
+        {
+            if((getStash()).size() == Game.MAX_STASH_SIZE)
+                throw new StashFullException();
+        }
+        else if(toContainer == getInventory())
+        {
+            if((getInventory()).size() == Game.MAX_INVENTORY_SIZE)
+                throw new InventoryFullException();
+        }
+        
+        // Adds to first index of the container (so the player can reorganize it easily)
+        toContainer.add(0, item);
+    }
+    
+    public boolean isContainerFull(List<Item> toContainer)
+    {
+        if(toContainer == getStash())
+            return (getStash()).size() == Game.MAX_STASH_SIZE;
+        else if(toContainer == getInventory())
+            return (getInventory()).size() == Game.MAX_INVENTORY_SIZE;
+        
+        return false;
+    }
+    
     public void addItemToStash(Item item)
     {
         if((getStash()).size() == Game.MAX_STASH_SIZE)
             throw new StashFullException();
         
-        (getStash()).add(item);
+        (getStash()).add(0, item);
     }
     
     public void addItemToInventory(Item item)
     {
         if((getInventory()).size() == Game.MAX_INVENTORY_SIZE)
             throw new InventoryFullException();
-        else if(getLevel() < item.getMinLevel())
-            throw new NotEnoughLevelException();
         
-        (getInventory()).add(item);
+        (getInventory()).add(0, item);
     }
     
-    public void equipItem(Item item)
+    public void equipItem(Item item, List<Item> fromContainer)
     {
         int slot = item.getSlot();
+        
+        Map<Integer, Item> playerEquip = getEquip();
         
         if(getLevel() < item.getMinLevel())
             throw new NotEnoughLevelException();
         
-        if((getEquip()).get(slot) != null)
-        {
-            try
-            {
-                addItemToStash((getEquip()).get(slot));
-            }
-            catch(StashFullException e)
-            {
-                Game.sendErrorMessage("Your stash is full.");
-            }
-        }
+        // Remove item from container
+        fromContainer.remove(item);
         
-        (getEquip()).put(slot, item);
-        removeItemFromStash(item);
+        // There's an item equipped, store it on the container
+        if(playerEquip.get(slot) != null)
+            fromContainer.add(playerEquip.get(slot));
+        
+        // Equip item
+        playerEquip.put(slot, item);
     }
     
     public void removeItemFromStash(Item item)

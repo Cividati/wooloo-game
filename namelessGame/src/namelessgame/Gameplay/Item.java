@@ -4,7 +4,7 @@ package namelessgame.Gameplay;
  *
  * @author Henrique Barcia Lang
  */
-public class Item {
+public class Item implements Cloneable {
     private int id;
     private int str;
     private int agi;
@@ -35,6 +35,13 @@ public class Item {
         setName(name);
         setIcon(icon);
     }
+    
+    @Override
+    public Object clone() throws
+        CloneNotSupportedException 
+    { 
+        return super.clone(); 
+    } 
 
     public int getId() {
         return id;

@@ -6,10 +6,23 @@ import namelessgame.Exception.StashFullException;
 public class Game {
     private static Player loggedPlayer;
     
+    /** Player max level **/
     final public static int MAX_LEVEL = 100;
-    final public static int MAX_STASH_SIZE = 10;
-    final public static int MAX_INVENTORY_SIZE = 3;
     
+    /** Stash max size **/
+    final public static int MAX_STASH_SIZE = 30;
+    
+    /** Inventory max size **/
+    final public static int MAX_INVENTORY_SIZE = 12;
+    
+    /** Max units that a stack of item can have (if it is stackable) **/
+    final public static int MAX_STACKABLE_AMOUNT = 100;
+    
+    /** Stash and inventory GridLayout information (used on StashFrame.java) **/
+    final public static int STASH_COLUMNS = 5;
+    final public static int INVENTORY_COLUMNS = 3;
+    
+    /** Equipment slots index **/
     final public static int INVENTORY = 0;
     final public static int HEAD = 1;
     final public static int BODY = 2;
