@@ -1,12 +1,4 @@
-package Test;
-
-
-
-
-
-
-
-
+package namelessgame.UI;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,9 +7,12 @@ package Test;
  */
 
 
-import Test.MenuFrame;
+import java.util.Collections;
+import java.util.List;
+import namelessgame.UI.MenuFrame;
 import namelessgame.Database.DungeonDAO;
 import namelessgame.Database.PlayerDAO;
+import namelessgame.Gameplay.Dungeon;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
 
@@ -44,7 +39,12 @@ public class GameFrame extends javax.swing.JFrame {
         // TODO set player avatar
         
         if(Game.getDungeons() == null)
-            Game.setDungeons((new DungeonDAO()).loadDungeons());
+        {
+            List<Dungeon> dungeons = (new DungeonDAO()).loadDungeons();
+            
+            Collections.sort(dungeons);
+            Game.setDungeons(dungeons);
+        }
  
     }
 
@@ -72,7 +72,6 @@ public class GameFrame extends javax.swing.JFrame {
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(720, 480));
         setResizable(false);
         getContentPane().setLayout(null);
 

@@ -35,8 +35,9 @@ public class DungeonDAO extends DAO {
                 String name = rs.getString("name");
                 String descr = rs.getString("descr");
                 int minLv = rs.getInt("min_lv");
+                String background = rs.getString("background");
                 
-                dungeonList.add(new Dungeon(id, minLv, name, descr));  
+                dungeonList.add(new Dungeon(id, minLv, name, descr, background));  
             }
             
             for(Dungeon dungeon : dungeonList)
@@ -57,8 +58,9 @@ public class DungeonDAO extends DAO {
                     int goldMin = rs.getInt("gold_min");
                     int goldMax = rs.getInt("gold_max");
                     int round = rs.getInt("round");
+                    String icon = rs.getString("icon");
                     
-                    monsterList.add(new Monster(name, str, agi, con, exp, goldMin, goldMax, round));
+                    monsterList.add(new Monster(name, str, agi, con, exp, goldMin, goldMax, round, icon));
                 }
                 
                 for(Monster monster : monsterList)

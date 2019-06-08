@@ -1,6 +1,4 @@
-package Test;
-
-
+package namelessgame.UI;
 
 /**
  *

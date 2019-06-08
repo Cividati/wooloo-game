@@ -6,20 +6,23 @@ import java.util.List;
  *
  * @author Henrique Barcia Lang
  */
-public class Dungeon {
+public class Dungeon implements Comparable<Dungeon> {
     private int id;
     private int minLv;
     private String name;
     private String descr;
     
+    String background;
+    
     private List<Monster> monsters;
     
-    public Dungeon(int id, int minLv, String name, String descr)
+    public Dungeon(int id, int minLv, String name, String descr, String background)
     {
         setId(id);
         setMinLv(minLv);
         setName(name);
         setDescr(descr);
+        setBackground(background);
     }
 
     public int getId() {
@@ -61,5 +64,23 @@ public class Dungeon {
     public void setMonsters(List<Monster> monsters) {
         this.monsters = monsters;
     }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = "/namelessgame/img/dungeons/" + background + ".png";
+    }
     
+    @Override
+    public int compareTo(Dungeon o) {
+        if(getMinLv()< o.getMinLv())
+            return -1;
+        else if(getMinLv()> o.getMinLv())
+            return 1;
+        else
+            return 0;
+            
+    }
 }

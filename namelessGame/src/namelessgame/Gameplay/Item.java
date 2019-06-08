@@ -104,7 +104,7 @@ public class Item implements Cloneable {
     }
 
     public void setIcon(String icon) {
-        this.icon = icon;
+        this.icon = "/namelessgame/img/items/" + icon + ".png";
     }
 
     public String getName() {

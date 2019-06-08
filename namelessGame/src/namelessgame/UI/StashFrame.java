@@ -1,14 +1,4 @@
-package Test;
-
-
-
-
-
-
-
-
-
-
+package namelessgame.UI;
 
 import java.awt.Component;
 import java.awt.Cursor;

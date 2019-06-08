@@ -1,4 +1,4 @@
-package Test;
+package namelessgame.UI;
 
 
 
@@ -10,7 +10,7 @@ package Test;
 
 
 
-import Test.MenuFrame;
+import namelessgame.UI.MenuFrame;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;

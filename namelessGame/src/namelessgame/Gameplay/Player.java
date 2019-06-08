@@ -228,7 +228,8 @@ public class Player extends Creature implements Comparable<Player> {
     
     public javax.swing.ImageIcon getAvatar()
     {
-        // TODO
+        // TODO 
+        // /namelessgame/img/avatars
         
         return new javax.swing.ImageIcon();
     }

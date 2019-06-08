@@ -57,4 +57,6 @@ public abstract class Creature {
     public void setCon(int con) {
         this.con = con;
     }
+    
+    public abstract javax.swing.ImageIcon getAvatar();
 }
