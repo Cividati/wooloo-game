@@ -16,7 +16,7 @@ try:
     connection = mysql.connector.connect(host = 'localhost',
                                          database = 'namelessGame',
                                          user = 'root',
-                                         password='admin')
+                                         password = 'admin')
 
     if connection.is_connected():
         cursor = connection.cursor()
