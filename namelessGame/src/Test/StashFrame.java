@@ -672,16 +672,18 @@ public class StashFrame extends javax.swing.JFrame {
         stashScrollPane = new javax.swing.JScrollPane();
         inventoryScrollPane = new javax.swing.JScrollPane();
         infoInventoryLabel = new javax.swing.JLabel();
-        playerWeapon = new ItemLabel();
-        playerHead = new ItemLabel();
-        playerShield = new ItemLabel();
-        playerLegs = new ItemLabel();
-        playerBoots = new ItemLabel();
-        playerBody = new ItemLabel();
+        playerWeapon = new javax.swing.JLabel();
+        playerHead = new javax.swing.JLabel();
+        playerShield = new javax.swing.JLabel();
+        playerLegs = new javax.swing.JLabel();
+        playerBoots = new javax.swing.JLabel();
+        playerBody = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         infoLabel.setBackground(new java.awt.Color(0, 0, 0));
@@ -689,16 +691,15 @@ public class StashFrame extends javax.swing.JFrame {
         infoLabel.setForeground(new java.awt.Color(51, 51, 51));
         infoLabel.setText("Stash");
         getContentPane().add(infoLabel);
-        infoLabel.setBounds(20, 50, 120, 70);
+        infoLabel.setBounds(20, 50, 180, 70);
         getContentPane().add(stashScrollPane);
         stashScrollPane.setBounds(20, 350, 280, 200);
         getContentPane().add(inventoryScrollPane);
         inventoryScrollPane.setBounds(570, 340, 160, 180);
 
-        infoInventoryLabel.setForeground(new java.awt.Color(0, 0, 0));
         infoInventoryLabel.setText("Inventory");
         getContentPane().add(infoInventoryLabel);
-        infoInventoryLabel.setBounds(570, 310, 70, 16);
+        infoInventoryLabel.setBounds(570, 310, 70, 14);
 
         playerWeapon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/left-hand.png"))); // NOI18N
         getContentPane().add(playerWeapon);
@@ -731,13 +732,14 @@ public class StashFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(740, 530, 59, 32);
+        backButton.setBounds(740, 530, 55, 23);
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         getContentPane().add(backgroundLabel);
         backgroundLabel.setBounds(0, 0, 820, 570);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -789,12 +791,12 @@ public class StashFrame extends javax.swing.JFrame {
     private javax.swing.JLabel infoInventoryLabel;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JScrollPane inventoryScrollPane;
-    private ItemLabel playerBody;
-    private ItemLabel playerBoots;
-    private ItemLabel playerHead;
-    private ItemLabel playerLegs;
-    private ItemLabel playerShield;
-    private ItemLabel playerWeapon;
+    private javax.swing.JLabel playerBody;
+    private javax.swing.JLabel playerBoots;
+    private javax.swing.JLabel playerHead;
+    private javax.swing.JLabel playerLegs;
+    private javax.swing.JLabel playerShield;
+    private javax.swing.JLabel playerWeapon;
     private javax.swing.JScrollPane stashScrollPane;
     // End of variables declaration//GEN-END:variables
 }

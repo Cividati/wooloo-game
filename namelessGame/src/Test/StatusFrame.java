@@ -103,37 +103,32 @@ public class StatusFrame extends javax.swing.JFrame {
         backgroundFrame = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
         nameLabel.setText("Name:");
         getContentPane().add(nameLabel);
-        nameLabel.setBounds(10, 90, 60, 16);
+        nameLabel.setBounds(10, 90, 60, 14);
 
-        goldLabel.setForeground(new java.awt.Color(0, 0, 0));
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
         goldLabel.setBounds(48, 140, 70, 32);
 
-        strLabel.setForeground(new java.awt.Color(0, 0, 0));
         strLabel.setText("Strength:");
         getContentPane().add(strLabel);
-        strLabel.setBounds(90, 190, 60, 16);
+        strLabel.setBounds(90, 190, 60, 14);
 
-        agiLabel.setForeground(new java.awt.Color(0, 0, 0));
         agiLabel.setText("Agility:");
         getContentPane().add(agiLabel);
-        agiLabel.setBounds(90, 220, 37, 16);
+        agiLabel.setBounds(90, 220, 33, 14);
 
-        constLabel.setForeground(new java.awt.Color(0, 0, 0));
         constLabel.setText("Constitution:");
         getContentPane().add(constLabel);
-        constLabel.setBounds(90, 250, 80, 16);
+        constLabel.setBounds(90, 250, 80, 14);
         getContentPane().add(playerAgi);
         playerAgi.setBounds(140, 220, 30, 20);
-
-        playerName.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(playerName);
         playerName.setBounds(80, 90, 150, 20);
 
@@ -145,10 +140,9 @@ public class StatusFrame extends javax.swing.JFrame {
         getContentPane().add(playerConst);
         playerConst.setBounds(170, 250, 30, 20);
 
-        levelLabel.setForeground(new java.awt.Color(0, 0, 0));
         levelLabel.setText("Lv.:");
         getContentPane().add(levelLabel);
-        levelLabel.setBounds(240, 90, 36, 16);
+        levelLabel.setBounds(240, 90, 36, 14);
         getContentPane().add(playerLevel);
         playerLevel.setBounds(270, 90, 20, 20);
 
@@ -191,7 +185,7 @@ public class StatusFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(780, 530, 59, 32);
+        backButton.setBounds(780, 530, 55, 23);
 
         addConstButton.setText("+");
         addConstButton.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +203,7 @@ public class StatusFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(addStrButton);
-        addStrButton.setBounds(230, 180, 37, 30);
+        addStrButton.setBounds(230, 180, 41, 30);
 
         addAgiButton.setText("+");
         addAgiButton.addActionListener(new java.awt.event.ActionListener() {
@@ -220,12 +214,9 @@ public class StatusFrame extends javax.swing.JFrame {
         getContentPane().add(addAgiButton);
         addAgiButton.setBounds(230, 210, 37, 30);
 
-        pointsLabel.setForeground(new java.awt.Color(0, 0, 0));
         pointsLabel.setText("Points:");
         getContentPane().add(pointsLabel);
-        pointsLabel.setBounds(170, 310, 41, 16);
-
-        playerPoints.setForeground(new java.awt.Color(0, 0, 0));
+        pointsLabel.setBounds(170, 310, 41, 14);
         getContentPane().add(playerPoints);
         playerPoints.setBounds(220, 310, 30, 20);
 
@@ -236,7 +227,7 @@ public class StatusFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(confirmButton);
-        confirmButton.setBounds(190, 360, 75, 32);
+        confirmButton.setBounds(190, 360, 69, 23);
 
         infoLabel.setBackground(new java.awt.Color(0, 0, 0));
         infoLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
@@ -250,6 +241,7 @@ public class StatusFrame extends javax.swing.JFrame {
         backgroundFrame.setBounds(0, 0, 894, 592);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

@@ -151,11 +151,13 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         amountSlider = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(200, 100));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         sliderInfo.setText("Item amount");
         getContentPane().add(sliderInfo);
-        sliderInfo.setBounds(80, 10, 80, 16);
+        sliderInfo.setBounds(80, 10, 80, 14);
         getContentPane().add(iconLabel);
         iconLabel.setBounds(10, 20, 50, 50);
         getContentPane().add(amountLabel);
@@ -186,9 +188,10 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
             }
         });
         getContentPane().add(amountSlider);
-        amountSlider.setBounds(60, 30, 120, 16);
+        amountSlider.setBounds(60, 30, 120, 26);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void amountSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_amountSliderStateChanged

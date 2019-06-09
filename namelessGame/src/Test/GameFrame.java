@@ -75,17 +75,17 @@ public class GameFrame extends javax.swing.JFrame {
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(988, 618));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.gif"))); // NOI18N
         getContentPane().add(playerAvatar);
         playerAvatar.setBounds(620, 60, 220, 330);
 
-        levelLabel.setForeground(new java.awt.Color(0, 0, 0));
         levelLabel.setText("Lv.:");
         getContentPane().add(levelLabel);
-        levelLabel.setBounds(590, 460, 50, 16);
+        levelLabel.setBounds(590, 460, 50, 14);
         getContentPane().add(playerName);
         playerName.setBounds(630, 430, 110, 20);
         getContentPane().add(playerLevel);
@@ -95,14 +95,13 @@ public class GameFrame extends javax.swing.JFrame {
         getContentPane().add(playerExp);
         playerExp.setBounds(710, 450, 210, 30);
 
-        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
         nameLabel.setText("Name:");
         getContentPane().add(nameLabel);
-        nameLabel.setBounds(580, 430, 50, 16);
+        nameLabel.setBounds(580, 430, 50, 14);
 
         dungeonButton.setText("Dungeon");
         getContentPane().add(dungeonButton);
-        dungeonButton.setBounds(130, 100, 90, 32);
+        dungeonButton.setBounds(130, 100, 90, 23);
 
         stashButton.setText("Stash");
         stashButton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +110,7 @@ public class GameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(stashButton);
-        stashButton.setBounds(290, 100, 80, 32);
+        stashButton.setBounds(290, 100, 80, 23);
 
         shopButton.setText("Shop");
         shopButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +119,7 @@ public class GameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(shopButton);
-        shopButton.setBounds(420, 100, 90, 32);
+        shopButton.setBounds(420, 100, 90, 23);
 
         statusButton.setText("Status");
         statusButton.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +128,7 @@ public class GameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(statusButton);
-        statusButton.setBounds(130, 190, 90, 32);
+        statusButton.setBounds(130, 190, 90, 23);
 
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +137,7 @@ public class GameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(saveButton);
-        saveButton.setBounds(290, 190, 80, 32);
+        saveButton.setBounds(290, 190, 80, 23);
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -147,9 +146,8 @@ public class GameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(870, 570, 59, 32);
+        backButton.setBounds(870, 570, 55, 23);
 
-        backgroundLabel.setForeground(new java.awt.Color(0, 0, 0));
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
         getContentPane().add(backgroundLabel);
         backgroundLabel.setBounds(0, 0, 3480, 2160);

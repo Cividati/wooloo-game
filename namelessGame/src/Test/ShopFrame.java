@@ -187,6 +187,8 @@ public class ShopFrame extends javax.swing.JFrame {
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
         getContentPane().add(shopScrollPane);
         shopScrollPane.setBounds(0, 130, 650, 460);
@@ -196,7 +198,7 @@ public class ShopFrame extends javax.swing.JFrame {
         infoLabel.setForeground(new java.awt.Color(51, 51, 51));
         infoLabel.setText("Shop");
         getContentPane().add(infoLabel);
-        infoLabel.setBounds(30, 20, 110, 70);
+        infoLabel.setBounds(30, 20, 140, 70);
 
         sellerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/erhard.png"))); // NOI18N
         getContentPane().add(sellerLabel);
@@ -208,7 +210,7 @@ public class ShopFrame extends javax.swing.JFrame {
 
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
         getContentPane().add(goldLabel);
-        goldLabel.setBounds(170, 40, 40, 30);
+        goldLabel.setBounds(250, 40, 40, 30);
 
         backButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         backButton.setText("Back");
@@ -225,6 +227,7 @@ public class ShopFrame extends javax.swing.JFrame {
         backgroundLabel.setBounds(0, 0, 3480, 2160);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

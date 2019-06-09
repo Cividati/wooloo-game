@@ -153,6 +153,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         BG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -191,14 +192,12 @@ public class LoadGameFrame extends javax.swing.JFrame {
 
         levelLabel.setBackground(new java.awt.Color(0, 0, 0));
         levelLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        levelLabel.setForeground(new java.awt.Color(0, 0, 0));
         levelLabel.setText("Level: ");
         getContentPane().add(levelLabel);
-        levelLabel.setBounds(880, 230, 160, 28);
+        levelLabel.setBounds(880, 230, 160, 32);
 
         goldLabel.setBackground(new java.awt.Color(0, 0, 0));
         goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        goldLabel.setForeground(new java.awt.Color(0, 0, 0));
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
@@ -206,28 +205,24 @@ public class LoadGameFrame extends javax.swing.JFrame {
 
         playerNameLabel.setBackground(new java.awt.Color(0, 0, 0));
         playerNameLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        playerNameLabel.setForeground(new java.awt.Color(0, 0, 0));
         playerNameLabel.setText("Name:");
         getContentPane().add(playerNameLabel);
         playerNameLabel.setBounds(880, 180, 350, 20);
 
         strLabel.setBackground(new java.awt.Color(0, 0, 0));
         strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        strLabel.setForeground(new java.awt.Color(0, 0, 0));
         strLabel.setText("Strength: ");
         getContentPane().add(strLabel);
         strLabel.setBounds(880, 320, 160, 30);
 
         constLabel.setBackground(new java.awt.Color(0, 0, 0));
         constLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        constLabel.setForeground(new java.awt.Color(0, 0, 0));
         constLabel.setText("Constituition:");
         getContentPane().add(constLabel);
         constLabel.setBounds(1090, 360, 190, 30);
 
         agiLabel.setBackground(new java.awt.Color(0, 0, 0));
         agiLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        agiLabel.setForeground(new java.awt.Color(0, 0, 0));
         agiLabel.setText("Agility: ");
         getContentPane().add(agiLabel);
         agiLabel.setBounds(1090, 320, 210, 30);

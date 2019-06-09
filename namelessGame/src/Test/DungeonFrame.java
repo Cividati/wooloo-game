@@ -31,6 +31,8 @@ public class DungeonFrame extends javax.swing.JFrame {
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         infoLabel.setFont(new java.awt.Font("Yu Gothic Medium", 1, 48)); // NOI18N
