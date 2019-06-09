@@ -1,4 +1,4 @@
-package namelessgame.UI;
+package UI;
 
 import java.awt.Component;
 import java.awt.Cursor;

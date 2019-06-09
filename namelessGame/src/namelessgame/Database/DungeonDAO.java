@@ -28,9 +28,7 @@ public class DungeonDAO extends DAO {
             rs = st.executeQuery(query);
             
             while(rs.next())
-            {
-                Dungeon dungeon;
-                
+            {               
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String descr = rs.getString("descr");
@@ -53,14 +51,14 @@ public class DungeonDAO extends DAO {
                     String name = rs.getString("name");
                     int str = rs.getInt("str");
                     int agi = rs.getInt("agi");
-                    int con = rs.getInt("con");
+                    int cons = rs.getInt("con");
                     int exp = rs.getInt("exp");
                     int goldMin = rs.getInt("gold_min");
                     int goldMax = rs.getInt("gold_max");
                     int round = rs.getInt("round");
                     String icon = rs.getString("icon");
                     
-                    monsterList.add(new Monster(name, str, agi, con, exp, goldMin, goldMax, round, icon));
+                    monsterList.add(new Monster(name, str, agi, cons, exp, goldMin, goldMax, round, icon));
                 }
                 
                 for(Monster monster : monsterList)

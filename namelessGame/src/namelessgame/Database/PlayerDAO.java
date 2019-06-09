@@ -114,7 +114,6 @@ public class PlayerDAO extends DAO {
                 
                 updateStash += ";";
                 
-                System.out.println("5");
                 pst = con.prepareStatement(updateStash);
                 pst.execute();
             }

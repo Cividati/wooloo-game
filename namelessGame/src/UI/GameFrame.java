@@ -1,4 +1,4 @@
-package namelessgame.UI;
+package UI;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,7 +9,7 @@ package namelessgame.UI;
 
 import java.util.Collections;
 import java.util.List;
-import namelessgame.UI.MenuFrame;
+import UI.MenuFrame;
 import namelessgame.Database.DungeonDAO;
 import namelessgame.Database.PlayerDAO;
 import namelessgame.Gameplay.Dungeon;

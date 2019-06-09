@@ -1,4 +1,4 @@
-package namelessgame.UI;
+package UI;
 
 import java.util.Map;
 import namelessgame.Gameplay.Game;

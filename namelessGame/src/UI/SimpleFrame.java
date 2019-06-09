@@ -1,4 +1,4 @@
-package namelessgame.UI;
+package UI;
 
 
 
