@@ -1,4 +1,4 @@
-package UI;
+package Test;
 
 
 
@@ -10,7 +10,7 @@ package UI;
 
 
 
-import UI.MenuFrame;
+import Test.MenuFrame;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;

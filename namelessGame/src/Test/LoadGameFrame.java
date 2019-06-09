@@ -1,4 +1,4 @@
-package UI;
+package Test;
 
 //import namelessgame.UI.MenuFrame;
 import java.util.Collections;

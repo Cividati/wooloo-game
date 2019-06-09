@@ -25,7 +25,7 @@ public abstract class DAO {
     protected ResultSet rs;
     
     private String database = "namelessGame";
-    private String url = "jdbc:mysql://localhost:3306/" + database + "?useTimezone=true&serverTimezone=UTC";
+    private String url = "jdbc:mysql://localhost:3306/" + database + "?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     private String user = "root";
     private String password = "admin";
     

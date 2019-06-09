@@ -1,4 +1,4 @@
-package UI;
+package Test;
 
 import java.awt.Component;
 import java.awt.Cursor;
@@ -42,8 +42,6 @@ public class StashFrame extends javax.swing.JFrame {
     
     private javax.swing.JPanel stashPanel = new javax.swing.JPanel();
     private javax.swing.JPanel inventoryPanel = new javax.swing.JPanel();
-    private List<ItemLabel> stashList = new ArrayList<>();
-    private List<ItemLabel> inventoryList = new ArrayList<>();
     private DataFlavor dataFlavor = new DataFlavor(Item.class,
                     Item.class.getSimpleName());
     
@@ -149,7 +147,8 @@ public class StashFrame extends javax.swing.JFrame {
             return;
         
         String defaultPath = "/namelessgame/img/slots/head.png";
-        javax.swing.JLabel equipRef = playerHead;
+        Item item = (player.getEquip()).get(slot);
+        ItemLabel equipRef = playerHead;
         
         switch(slot)
         {
@@ -166,13 +165,13 @@ public class StashFrame extends javax.swing.JFrame {
                 break;
                 
             case Game.WEAPON:
-                defaultPath = "/namelessgame/img/slots/right-hand.png";
+                defaultPath = "/namelessgame/img/slots/left-hand.png";
                 equipRef = playerWeapon;
                 
                 break;
                 
             case Game.SHIELD:
-                defaultPath = "/namelessgame/img/slots/left-hand.png";
+                defaultPath = "/namelessgame/img/slots/right-hand.png";
                 equipRef = playerShield;
                 
                 break;
@@ -191,8 +190,30 @@ public class StashFrame extends javax.swing.JFrame {
                 
         }
         
-        String path = (player.getEquip()).get(slot) != null ? ((player.getEquip()).get(slot)).getIcon() : defaultPath;
+        DragSource itemDragSource;
+        
+        String path = item != null ? item.getIcon() : defaultPath;
         equipRef.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));  
+        equipRef.setItem(item);
+        
+        if(item != null)
+        {
+            String htmlTootip = "<html>" + item.getName() +               
+                                    (item.isStackable() ? (" - <font color=\"red\">" + item.getCount() + "</font>x unit(s).") : "") + "<br><br>" +
+                                    (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
+                                    "Strenght: " + item.getStr() + "<br>" +
+                                    "Agility: " + item.getAgi() + "<br>" +
+                                    "Constitution: " + item.getCon() + "<br>")) +
+                                    "</html>";
+
+            equipRef.setToolTipText(htmlTootip);
+        }
+        
+        itemDragSource = new DragSource();
+        itemDragSource.createDefaultDragGestureRecognizer(equipRef,
+                       DnDConstants.ACTION_COPY, new DragGestureListImp());
+
+        new MyDropTargetListImp(equipRef, null);
     }
     
     public void updatePlayerInventory()
@@ -200,7 +221,6 @@ public class StashFrame extends javax.swing.JFrame {
         String path;
         
         inventoryPanel.removeAll();
-        inventoryList.clear();
         
         for(int i = 0; i < Game.MAX_INVENTORY_SIZE; i++)
         {          
@@ -227,19 +247,18 @@ public class StashFrame extends javax.swing.JFrame {
                 String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
                 String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
 
-                String htmlTootip = "<html>" + 
-                                    (item.isStackable() ? ("<font color=\"red\">" + item.getCount() + "</font>x unit(s).<br><br>") : "") +
+                String htmlTootip = "<html>" + item.getName() +               
+                                    (item.isStackable() ? (" - <font color=\"red\">" + item.getCount() + "</font>x unit(s).") : "") + "<br><br>" +
                                     (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
-                                    "Strenght: <font color=" + strFont + ">" + strDiff + "</font><br>" +
-                                    "Agility: <font color=" + agiFont + ">" + agiDiff + "</font><br>" +
-                                    "Constitution: <font color=" + conFont + ">" + conDiff + "</font><br>")) +
+                                    "Strenght: " + item.getStr() + " (<font color=" + strFont + ">" + (strDiff > 0 ? ("+" + strDiff) : strDiff) + "</font>)<br>" +
+                                    "Agility: " + item.getAgi() + " (<font color=" + agiFont + ">" + (agiDiff > 0 ? ("+" + agiDiff) : agiDiff) + "</font>)<br>" +
+                                    "Constitution: " + item.getCon() + " (<font color=" + conFont + ">" + (conDiff > 0 ? ("+" + conDiff) : conDiff) + "</font>)<br>")) +
                                     "</html>";
 
                 itemLabel.setToolTipText(htmlTootip);
             }
             
             inventoryPanel.add(itemLabel);
-            inventoryList.add(itemLabel);
             
             itemDragSource = new DragSource();
             itemDragSource.createDefaultDragGestureRecognizer(itemLabel,
@@ -254,14 +273,13 @@ public class StashFrame extends javax.swing.JFrame {
         String path;
         
         stashPanel.removeAll();
-        stashList.clear();
         
         for(int i = 0; i < Game.MAX_STASH_SIZE; i++)
         {
             Item item = null;
             
             if(i < stash.size())
-                item = stash.get(i);
+                item = stash.get(i);                    
             
             ItemLabel itemLabel = new ItemLabel();
             DragSource itemDragSource;                   
@@ -272,7 +290,7 @@ public class StashFrame extends javax.swing.JFrame {
             itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
             
             if(item != null)
-            {
+            {               
                 int strDiff = player.getStr(item) - player.getStr();
                 int agiDiff = player.getAgi(item) - player.getAgi();
                 int conDiff = player.getCon(item) - player.getCon();
@@ -281,19 +299,18 @@ public class StashFrame extends javax.swing.JFrame {
                 String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
                 String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
 
-                String htmlTootip = "<html>" + 
-                                    (item.isStackable() ? ("<font color=\"red\">" + item.getCount() + "</font>x unit(s).<br><br>") : "") +
+                String htmlTootip = "<html>" + item.getName() +               
+                                    (item.isStackable() ? (" - <font color=\"red\">" + item.getCount() + "</font>x unit(s).") : "") + "<br><br>" +
                                     (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
-                                    "Strenght: <font color=" + strFont + ">" + strDiff + "</font><br>" +
-                                    "Agility: <font color=" + agiFont + ">" + agiDiff + "</font><br>" +
-                                    "Constitution: <font color=" + conFont + ">" + conDiff + "</font><br>")) +
+                                    "Strenght: " + item.getStr() + " (<font color=" + strFont + ">" + (strDiff > 0 ? ("+" + strDiff) : strDiff) + "</font>)<br>" +
+                                    "Agility: " + item.getAgi() + " (<font color=" + agiFont + ">" + (agiDiff > 0 ? ("+" + agiDiff) : agiDiff) + "</font>)<br>" +
+                                    "Constitution: " + item.getCon() + " (<font color=" + conFont + ">" + (conDiff > 0 ? ("+" + conDiff) : conDiff) + "</font>)<br>")) +
                                     "</html>";
 
                 itemLabel.setToolTipText(htmlTootip);
             }
             
             stashPanel.add(itemLabel);
-            stashList.add(itemLabel);
             
             itemDragSource = new DragSource();
             itemDragSource.createDefaultDragGestureRecognizer(itemLabel,
@@ -394,6 +411,14 @@ public class StashFrame extends javax.swing.JFrame {
         }
     }
     
+    public void updateContainer(List<Item> container)
+    {
+        if(container == stash)
+            updatePlayerStash();
+        else
+            updatePlayerInventory();
+    }
+    
     class MyDropTargetListImp extends DropTargetAdapter implements
             DropTargetListener {
 
@@ -412,17 +437,23 @@ public class StashFrame extends javax.swing.JFrame {
         @Override
         public void drop(DropTargetDropEvent event) {
             try {
+                System.out.println("maybe here? 1");
                 Transferable tr = event.getTransferable();
+                System.out.println("maybe here? 2");
                 ItemPanel itemPanel = (ItemPanel) tr.getTransferData(dataFlavor);
+                System.out.println("maybe here? 3");
                 
                 // Dragged item
+                System.out.println("maybe here? 4");
                 Item movedItem = itemPanel.getItem();
+                
+                System.out.println("maybe here? 5");
                 
                 // Local item (item on drop location)
                 Item localItem = this.label.getItem();
                 
                 // Clone for transfering
-                Item movedItemClone = null; 
+                Item movedItemClone = null;           
                 
                 JPanel fromPanel = itemPanel.getPanel();
                 JPanel toPanel = this.panel;
@@ -432,11 +463,15 @@ public class StashFrame extends javax.swing.JFrame {
                 List<Item> toItemContainer = null;    
                 
                 Map<Integer, Item> equip = player.getEquip();
+                
+                System.out.println("maybe here? 6");
 
                 if (event.isDataFlavorSupported(dataFlavor)) {
+                    System.out.println("Moving...");
                     event.acceptDrop(DnDConstants.ACTION_COPY);
 
                     if (toPanel == null) {
+                        System.out.println("dropping on equip...");
                         // dropped on equip
                         
                         int toSlot = -1;                                   
@@ -445,8 +480,8 @@ public class StashFrame extends javax.swing.JFrame {
                         if(fromPanel == null)
                         {
                             Game.sendErrorMessage("You can't move that here.");
-                            
-                            event.dropComplete(true);                           
+
+                            event.rejectDrop();                          
                             return;
                         }
                         
@@ -479,7 +514,7 @@ public class StashFrame extends javax.swing.JFrame {
                         {
                             Game.sendErrorMessage("You can't move that here.");
                             
-                            event.dropComplete(true);                            
+                            event.rejectDrop();                          
                             return;
                         }
                         else if(movedItem.isStackable())
@@ -488,7 +523,7 @@ public class StashFrame extends javax.swing.JFrame {
                             
                             Game.sendErrorMessage("You can't move that here.");
                             
-                            event.dropComplete(true);
+                            event.rejectDrop();
                             return;
                         }
                                        
@@ -498,16 +533,20 @@ public class StashFrame extends javax.swing.JFrame {
                         {
                             player.equipItem(movedItem, fromItemContainer);
                             
-                            updatePlayerEquipment(toSlot);
+                            updatePlayerEquipment(toSlot);                          
+                            updateContainer(fromItemContainer);
                         }
                         catch(NotEnoughLevelException e)
                         {
                             Game.sendErrorMessage("You don't have enough level to equip this item (" + movedItem.getMinLevel() + ").");
-                            event.dropComplete(true);
+
+                            event.rejectDrop();
                         }
 
                     } else {
                         // dropped on stash/inventory
+                        
+                        System.out.println("dropping on stash or inventory");
                         
                         if(fromPanel != null)
                             fromItemContainer = fromPanel == stashPanel ? stash : inventory;
@@ -557,29 +596,18 @@ public class StashFrame extends javax.swing.JFrame {
                                 Game.sendErrorMessage("Your " +
                                                              (toItemContainer == stash ? "stash" : "inventory") + " is full.");
 
-                                event.dropComplete(true);
+                                event.rejectDrop();
                                 return;
                             }
 
                             // Adds to first index of the container (so the player can reorganize it easily)
                             toItemContainer.add(0, movedItem);
 
-                            if(fromItemContainer != toItemContainer)
-                            {
-                                if(toItemContainer == stash)
-                                    updatePlayerStash();
-                                else
-                                    updatePlayerInventory();
-                            }   
-
                             if(fromItemContainer != null)
                             {
                                 fromItemContainer.remove(movedItem);
 
-                                if(fromItemContainer == stash)
-                                    updatePlayerStash();
-                                else
-                                    updatePlayerInventory();
+                                updateContainer(fromItemContainer);
                             }
                             else
                             {
@@ -587,18 +615,22 @@ public class StashFrame extends javax.swing.JFrame {
 
                                 updatePlayerEquipment(movedItem.getSlot());
                             }
+                            
+                            if(fromItemContainer != toItemContainer)
+                                updateContainer(toItemContainer);
 	
-                        }
-    
-                        event.dropComplete(true);
-                        this.panel.validate();
+                        }   
+                        
                     }
 
+                    event.dropComplete(true);
                     return;
                 }
+                
                 event.rejectDrop();
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("Some exception occurred when moving an item..." + e.getMessage());
                 event.rejectDrop();
             }
         }
@@ -640,12 +672,12 @@ public class StashFrame extends javax.swing.JFrame {
         stashScrollPane = new javax.swing.JScrollPane();
         inventoryScrollPane = new javax.swing.JScrollPane();
         infoInventoryLabel = new javax.swing.JLabel();
-        playerWeapon = new javax.swing.JLabel();
-        playerHead = new javax.swing.JLabel();
-        playerShield = new javax.swing.JLabel();
-        playerLegs = new javax.swing.JLabel();
-        playerBoots = new javax.swing.JLabel();
-        playerBody = new javax.swing.JLabel();
+        playerWeapon = new ItemLabel();
+        playerHead = new ItemLabel();
+        playerShield = new ItemLabel();
+        playerLegs = new ItemLabel();
+        playerBoots = new ItemLabel();
+        playerBody = new ItemLabel();
         backButton = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
 
@@ -757,12 +789,12 @@ public class StashFrame extends javax.swing.JFrame {
     private javax.swing.JLabel infoInventoryLabel;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JScrollPane inventoryScrollPane;
-    private javax.swing.JLabel playerBody;
-    private javax.swing.JLabel playerBoots;
-    private javax.swing.JLabel playerHead;
-    private javax.swing.JLabel playerLegs;
-    private javax.swing.JLabel playerShield;
-    private javax.swing.JLabel playerWeapon;
+    private ItemLabel playerBody;
+    private ItemLabel playerBoots;
+    private ItemLabel playerHead;
+    private ItemLabel playerLegs;
+    private ItemLabel playerShield;
+    private ItemLabel playerWeapon;
     private javax.swing.JScrollPane stashScrollPane;
     // End of variables declaration//GEN-END:variables
 }

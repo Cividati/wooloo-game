@@ -11,16 +11,17 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import namelessgame.Gameplay.Item;
+import namelessgame.Gameplay.ShopItem;
 
 /**
  *
  * @author Henrique Barcia Lang
  */
 public class ItemDAO extends DAO {
-    public Item loadItemByName(String name)
+    public ShopItem loadShopItemByName(String name, long price)
     {
         String query = "SELECT * FROM item WHERE name = '" + name + "';";
-        Item item = null;
+        ShopItem item = null;
 
         if(!connectToDatabase())
             return item;
@@ -43,7 +44,7 @@ public class ItemDAO extends DAO {
                 
                 boolean stackable = rs.getBoolean("stackable");
                 
-                item = new Item(id, str, agi, cons, heal, slot, minLv, 1, stackable, name, icon);
+                item = new ShopItem(id, str, agi, cons, heal, slot, minLv, 1, stackable, name, icon, price);
             }
             
             st.close();

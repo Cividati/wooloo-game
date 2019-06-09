@@ -305,11 +305,14 @@ public class Player extends Creature implements Comparable<Player> {
         
         playerEquip.put(slot, item);
         
-        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
         {
-            Item equipItem = playerEquip.get(i);          
+            Item equipItem = playerEquip.get(i);  
             
-            str += item.getStr();
+            if(equipItem == null)
+                continue;         
+            
+            str += equipItem.getStr();
         }
         
         return str;      
@@ -326,11 +329,14 @@ public class Player extends Creature implements Comparable<Player> {
         
         playerEquip.put(slot, item);
         
-        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
         {
-            Item equipItem = playerEquip.get(i);          
+            Item equipItem = playerEquip.get(i);  
             
-            agi += item.getAgi();
+            if(equipItem == null)
+                continue;
+            
+            agi += equipItem.getAgi();
         }
         
         return agi;      
@@ -347,11 +353,14 @@ public class Player extends Creature implements Comparable<Player> {
         
         playerEquip.put(slot, item);
         
-        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
         {
-            Item equipItem = playerEquip.get(i);          
+            Item equipItem = playerEquip.get(i);  
             
-            con += item.getCon();
+            if(equipItem == null)
+                continue;         
+            
+            con += equipItem.getCon();
         }
         
         return con;      
@@ -363,7 +372,7 @@ public class Player extends Creature implements Comparable<Player> {
         int str = getBaseStr();
         Map<Integer, Item> playerEquip = getEquip();
         
-        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
         {
             Item item = playerEquip.get(i);
             
@@ -382,7 +391,7 @@ public class Player extends Creature implements Comparable<Player> {
         int agi = getBaseAgi();
         Map<Integer, Item> playerEquip = getEquip();
         
-        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
         {
             Item item = playerEquip.get(i);
             
@@ -401,7 +410,7 @@ public class Player extends Creature implements Comparable<Player> {
         int con = getBaseCon();
         Map<Integer, Item> playerEquip = getEquip();
         
-        for(int i = Game.HEAD; i < Game.BOOTS; i++)
+        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
         {
             Item item = playerEquip.get(i);
             

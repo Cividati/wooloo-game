@@ -22,18 +22,12 @@ try:
         cursor = connection.cursor()
 
         while True:
-            # "Clear" terminal
-            print(chr(27) + "[2J")
-
             print("\t(1) - insert into item")
             print("\t(2) - insert into monster")
             print("\t(3) - insert into dungeon")
             print("\t(4) - quit")
 
             selectedTable = int(input())
-
-            # "Clear" terminal
-            print(chr(27) + "[2J")
 
             if selectedTable == 1:
                 print("\tInserting new item...\n")
@@ -69,10 +63,11 @@ try:
 
                 print("Min. level: " + minLv)
 
-                confirm = bool(input("\tInsert value? (1 -> yes, 0 -> no)"))
+                confirm = int(input("\tInsert value? (1 -> yes, 0 -> no)\n"))
 
-                if confirm:
+                if confirm == 1:
                     cursor.execute("INSERT INTO item(str, agi, con, heal, slot, min_lv, name, icon, stackable) VALUES (" + strenght  + ", " + agility + ", " + constitution  + ", " + heal  + ", " + slot  + ", " + minLv  + ", '" + name  + "', '" + icon  + "', " + stackable + ");")
+                    connection.commit()
 
                     print("\tSuccess inserting new item... Type anything to continue.")
                     input()
@@ -110,9 +105,9 @@ try:
                     print("Chance: " + chance + "%")
                     print("Amount: [" + countMin + ", " + countMax + "]")
 
-                    confirm = bool(input("\tInsert item? (1 -> yes, 0 -> no)"))
+                    confirm = int(input("\tInsert item? (1 -> yes, 0 -> no)\n"))
 
-                    if confirm:
+                    if confirm == 1:
                         lootList.append({
                             "id": itemId,
                             "chance": chance,
@@ -120,9 +115,9 @@ try:
                             "countMax": countMax
                         })
                     
-                    confirm = bool(input("\tInsert new item? (1 -> yes, 0 -> no)"))
+                    confirm = int(input("\tInsert new item? (1 -> yes, 0 -> no)\n"))
 
-                    if not confirm:
+                    if confirm != 1:
                         break
 
                 print("\n\t-- Monster information --")
@@ -145,12 +140,12 @@ try:
                     print("Chance: " + item["chance"] + "%")
                     print("Amount: [" + item["countMin"] + ", " + item["countMax"] + "]")
                 
-                confirm = bool(input("\tInsert value? (1 -> yes, 0 -> no)"))
+                confirm = int(input("\tInsert value? (1 -> yes, 0 -> no)\n"))
 
-                if confirm:
+                if confirm == 1:
                     cursor.execute("INSERT INTO monster(name, str, agi, con, exp, gold_min, gold_max, round, icon, dungeon_id) VALUES ('" + name + "', " + strenght  + ", " + agility + ", " + constitution  + ", " + experience + ", " + goldMin + ", " + goldMax + ", " + monsterRound + ", '" + icon + "', " + dungeonId + ");")
 
-                    lootStr = "INSERT INTO monster_has_item(monster_id, item_id, count_min, count_max, chance) VALUES "
+                    lootStr = "INSERT INTO monster_has_item(monster_id, item_id, count_min, count_max, chance) VALUES "                    
 
                     if len(lootList) > 0:                        
                         firstTime = True
@@ -166,6 +161,8 @@ try:
                         lootStr += ";"
 
                         cursor.execute(lootStr)
+
+                    connection.commit()
 
                     print("\tSuccess inserting new monster... Type anything to continue.")
                     input()
@@ -188,10 +185,11 @@ try:
 
                 print("Min. level: " + minLv)
 
-                confirm = bool(input("\tInsert value? (1 -> yes, 0 -> no)"))
+                confirm = int(input("\tInsert value? (1 -> yes, 0 -> no)\n"))
 
-                if confirm:
+                if confirm == 1:
                     cursor.execute("INSERT INTO dungeon(name, descr, min_lv, background) VALUES ('" + name + "',  '" + description + "', " + minLv + ", '" + background + "');")
+                    connection.commit()
 
                     print("\tSuccess inserting new dungeon... Type anything to continue.")
                     input()

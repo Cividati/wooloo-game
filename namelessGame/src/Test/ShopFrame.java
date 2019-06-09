@@ -1,12 +1,4 @@
-package UI;
-
-
-
-
-
-
-
-
+package Test;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,7 +29,7 @@ public class ShopFrame extends javax.swing.JFrame {
      */
     
     private Player player = null;
-    private List<ShopItem> shop = new ArrayList<>();
+    
     private Map<javax.swing.JButton, ShopItem> shopMap = new HashMap<>();
     
     public void shopSliderAction(ShopItem item, int count)
@@ -71,30 +63,16 @@ public class ShopFrame extends javax.swing.JFrame {
 
     }
     
-    private void addItemToShop(String name, long price)
-    {
-        ShopItem newItem = (ShopItem) (new ItemDAO()).loadItemByName(name); 
-        newItem.setPrice(price);
-        
-        shop.add(newItem);
-    }
-    
-    private void fillShop()
-    {
-        //addItemToShop("Health Potion", 50);
-    }
-    
     public ShopFrame() {
         javax.swing.JPanel shopPanel = new javax.swing.JPanel();
         
         initComponents();
         
         setPlayer(Game.getPlayer());
-        fillShop();
         
-        goldLabel.setText(Long.toString(player.getGold()));
+        playerGold.setText(Long.toString(player.getGold()));
         
-        for(ShopItem item : shop)
+        for(ShopItem item : Game.getShop())
         {
             javax.swing.JButton itemButton = new javax.swing.JButton();
             
@@ -113,7 +91,7 @@ public class ShopFrame extends javax.swing.JFrame {
             shopPanel.add(itemButton);
         }
         
-        shopPanel.setLayout(new java.awt.GridLayout(shop.size() / 4, 4));
+        shopPanel.setLayout(new java.awt.GridLayout(Game.getShop().size() / 4, 4));
         shopPanel.setSize(300, 300);
         shopPanel.setVisible(true);
         
@@ -131,6 +109,8 @@ public class ShopFrame extends javax.swing.JFrame {
         if(item == null)
             return;
         
+        final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(item.getIcon());
+        
         itemInfo += item.getName() + " (lv. " + item.getMinLevel() + ")\n\n";
         
         if(item.getHeal() > 0)
@@ -142,7 +122,7 @@ public class ShopFrame extends javax.swing.JFrame {
         
         itemInfo += "\n\n    Price per unit: " + item.getPrice() + "g";
         
-        int decision = javax.swing.JOptionPane.showConfirmDialog(null, itemInfo, "Buy", javax.swing.JOptionPane.YES_NO_OPTION);
+        int decision = javax.swing.JOptionPane.showConfirmDialog(null, itemInfo, "Buy", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, icon);
         
         if(decision == 1)
             return;
@@ -216,11 +196,13 @@ public class ShopFrame extends javax.swing.JFrame {
         infoLabel.setForeground(new java.awt.Color(51, 51, 51));
         infoLabel.setText("Shop");
         getContentPane().add(infoLabel);
-        infoLabel.setBounds(30, 20, 280, 70);
+        infoLabel.setBounds(30, 20, 110, 70);
 
         sellerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/erhard.png"))); // NOI18N
         getContentPane().add(sellerLabel);
         sellerLabel.setBounds(620, 10, 280, 570);
+
+        playerGold.setForeground(new java.awt.Color(255, 255, 0));
         getContentPane().add(playerGold);
         playerGold.setBounds(210, 40, 50, 30);
 

@@ -56,10 +56,10 @@ public class PlayerDAO extends DAO {
         
         String playerQuery = "UPDATE player SET level = " + player.getLevel() + ", exp = " + player.getExp() + ", gold = " + player.getGold() + 
                         ", status_points = " + player.getStatusPoints() + ", str = " + player.getBaseStr() + ", agi = " + player.getBaseAgi() +
-                        ", con = " + player.getBaseCon() + ", head = " + (equip.get(Game.HEAD) != null ? equip.get(Game.HEAD).getName() : "NULL") +
-                        ", body = " + (equip.get(Game.BODY) != null ? equip.get(Game.BODY).getName() : "NULL") + ", weapon = " + (equip.get(Game.WEAPON) != null ? equip.get(Game.WEAPON).getName() : "NULL") +
-                        ", shield = " + (equip.get(Game.SHIELD) != null ? equip.get(Game.SHIELD).getName() : "NULL") + ", legs = " + (equip.get(Game.LEGS) != null ? equip.get(Game.LEGS).getName() : "NULL") +
-                        ", boots = " + (equip.get(Game.BOOTS) != null ? equip.get(Game.BOOTS).getName() : "NULL") + " WHERE id = " + player.getId() + ";";
+                        ", con = " + player.getBaseCon() + ", head = " + (equip.get(Game.HEAD) != null ? equip.get(Game.HEAD).getId() : "NULL") +
+                        ", body = " + (equip.get(Game.BODY) != null ? equip.get(Game.BODY).getId() : "NULL") + ", weapon = " + (equip.get(Game.WEAPON) != null ? equip.get(Game.WEAPON).getId() : "NULL") +
+                        ", shield = " + (equip.get(Game.SHIELD) != null ? equip.get(Game.SHIELD).getId() : "NULL") + ", legs = " + (equip.get(Game.LEGS) != null ? equip.get(Game.LEGS).getId() : "NULL") +
+                        ", boots = " + (equip.get(Game.BOOTS) != null ? equip.get(Game.BOOTS).getId() : "NULL") + " WHERE id = " + player.getId() + ";";
                        
         String deleteInventory = "DELETE ii.* FROM inventory_has_item AS ii INNER JOIN inventory AS i ON ii.inventory_id = i.id WHERE i.player_id = " + player.getId() + ";";
         String deleteStash = "DELETE si.* FROM stash_has_item AS si INNER JOIN stash AS s ON si.stash_id = s.id WHERE s.player_id = " + player.getId() + ";";     

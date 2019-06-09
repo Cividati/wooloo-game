@@ -1,6 +1,8 @@
 package namelessgame.Gameplay;
 
+import java.util.ArrayList;
 import java.util.List;
+import namelessgame.Database.ItemDAO;
 import namelessgame.Exception.StashFullException;
 
 public class Game {
@@ -32,6 +34,7 @@ public class Game {
     final public static int BOOTS = 6;
     
     private static List<Dungeon> dungeons = null;
+    private static List<ShopItem> shop = new ArrayList<>();
 
     public static Player getPlayer() {
         return loggedPlayer;
@@ -57,6 +60,31 @@ public class Game {
 
     public static void setDungeons(List<Dungeon> dungeons) {
         Game.dungeons = dungeons;
+    }
+
+    public static List<ShopItem> getShop() {
+        return shop;
+    }
+
+    public static void setShop(List<ShopItem> shop) {
+        Game.shop = shop;
+    }
+    
+    public static void addItemToShop(String name, long price)
+    {
+        ShopItem newItem = (new ItemDAO()).loadShopItemByName(name, price); 
+        
+        shop.add(newItem);
+    }
+    
+    // Add items to shop
+    public static void fillShop()
+    {
+        // Item_name, price
+        addItemToShop("Sword", 0);
+        addItemToShop("Sword", 10);
+        addItemToShop("Shield", 0);
+        addItemToShop("Armor", 0);
     }
     
 }
