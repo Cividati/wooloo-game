@@ -21,11 +21,10 @@ public class PlayerDAO extends DAO {
         if(!connectToDatabase())
             return;
         
-        String playerQuery = "INSERT INTO player(name, sex) VALUES (?, '" + player.getSex() + "');";
+        String playerQuery = "INSERT INTO player(name, sex, avatar) VALUES (?, '" + player.getSex() + "', '" + player.getPureAvatar() + "');";
         String inventoryQuery = "INSERT INTO inventory(player_id) VALUES ((SELECT MAX(id) FROM player));";
         String stashQuery = "INSERT INTO stash(player_id) VALUES ((SELECT MAX(id) FROM player));";
         
-        // TODO load player stash, inventory and equip
         try {
             pst = con.prepareStatement(playerQuery);
             pst.setString(1, player.getName());          
@@ -161,8 +160,11 @@ public class PlayerDAO extends DAO {
             while(rs.next())
             {
                 int id = rs.getInt("id");
+                
                 String name = rs.getString("name");
+                String avatar = rs.getString("avatar");
                 char sex = rs.getString("sex").charAt(0);
+                
                 int level = rs.getInt("level");
                 int exp = rs.getInt("exp");
                 long gold = rs.getInt("gold");
@@ -227,7 +229,7 @@ public class PlayerDAO extends DAO {
 
                 }
                 
-                playerList.add(new Player(id, name, sex, level, exp, gold, statusPoints, str, agi, cons, equip));
+                playerList.add(new Player(id, name, avatar, sex, level, exp, gold, statusPoints, str, agi, cons, equip));
             }
             
             for(Player player : playerList)

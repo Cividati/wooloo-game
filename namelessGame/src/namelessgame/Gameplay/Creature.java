@@ -5,8 +5,8 @@ package namelessgame.Gameplay;
  * @author Henrique Barcia Lang
  */
 public abstract class Creature {
-
     private String name;
+    protected String avatar;
 
     /* Status base (sem equip. no caso de players) */
     private int str;
@@ -58,5 +58,10 @@ public abstract class Creature {
         this.con = con;
     }
     
-    public abstract javax.swing.ImageIcon getAvatar();
+    public void setAvatar(String avatar)
+    {
+        this.avatar = avatar;
+    }
+    
+    public abstract String getAvatar();
 }

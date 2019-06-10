@@ -13,11 +13,9 @@ public class Monster extends Creature {
     private int goldMax;
     private int round;
     
-    private String icon;
-    
     private List<LootItem> loots;
     
-    public Monster(String name, int str, int agi, int con, int expGiven, int goldMin, int goldMax, int round, String icon)
+    public Monster(String name, int str, int agi, int con, int expGiven, int goldMin, int goldMax, int round, String avatar)
     {
         setName(name);
         setStr(str);
@@ -27,7 +25,7 @@ public class Monster extends Creature {
         setGoldMin(goldMin);
         setGoldMax(goldMax);
         setRound(round);
-        setIcon(icon);
+        setAvatar(avatar);
     }
 
     public int getId() {
@@ -78,18 +76,10 @@ public class Monster extends Creature {
         this.loots = loots;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = "/namelessgame/img/monsters/" + icon + ".png";
-    }
-
     @Override
-    public javax.swing.ImageIcon getAvatar()
+    public String getAvatar()
     {
-        return new javax.swing.ImageIcon(getClass().getResource(getIcon()));
+        return "/namelessgame/img/monsters/" + avatar + ".png";
     }
 }
 

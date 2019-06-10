@@ -28,7 +28,7 @@ public class Player extends Creature implements Comparable<Player> {
     private Map<Integer, Item> equip = new HashMap<>();
     
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public Player(int id, String name, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int con, Map<Integer, Item> equip)
+    public Player(int id, String name, String avatar, char sex, int level, int exp, long gold, int statusPoints, int str, int agi, int con, Map<Integer, Item> equip)
     {
         setId(id);
         setName(name);
@@ -43,8 +43,7 @@ public class Player extends Creature implements Comparable<Player> {
         setCon(con);
         
         setEquip(equip);
-        
-        // TODO add stash, inventory and equip 
+        setAvatar(avatar);
     }
     
     public void addItemToContainer(Item item, List<Item> toContainer)
@@ -226,12 +225,15 @@ public class Player extends Creature implements Comparable<Player> {
         this.statusPoints = statusPoints;
     }
     
-    public javax.swing.ImageIcon getAvatar()
+    public String getPureAvatar()
     {
-        // TODO 
-        // /namelessgame/img/avatars
-        
-        return new javax.swing.ImageIcon();
+        return avatar;
+    }
+    
+    @Override
+    public String getAvatar()
+    {
+        return "/namelessgame/img/avatars/" + avatar + ".png";
     }
     
     public int getTotalExpToLevelUp()

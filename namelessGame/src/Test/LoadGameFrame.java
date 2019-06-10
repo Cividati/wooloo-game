@@ -37,11 +37,9 @@ public class LoadGameFrame extends javax.swing.JFrame {
             agiLabel.setText("Agility: " + player.getAgi());
             expBar.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
             expBar.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
+            playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
             
-            // TODO set player avatar
-            // TODO show equipment?
-            
-            charAvatar.setVisible(true);
+            playerAvatar.setVisible(true);
             expBar.setVisible(true);
         }
         catch(ArrayIndexOutOfBoundsException e) {}
@@ -62,7 +60,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
     public LoadGameFrame() {
         initComponents();
         
-        charAvatar.setVisible(false);
+        playerAvatar.setVisible(false);
         expBar.setVisible(false);
         expBar.setStringPainted(true);
         
@@ -129,7 +127,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        charAvatar = new javax.swing.JLabel();
+        playerAvatar = new javax.swing.JLabel();
         goldLabel = new javax.swing.JLabel();
         playerNameLabel = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
@@ -157,10 +155,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/kirito.png"))); // NOI18N
-        charAvatar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 4, true));
-        getContentPane().add(charAvatar);
-        charAvatar.setBounds(590, 130, 300, 400);
+        playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/kirito.png"))); // NOI18N
+        playerAvatar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 4, true));
+        getContentPane().add(playerAvatar);
+        playerAvatar.setBounds(590, 130, 300, 400);
 
         goldLabel.setBackground(new java.awt.Color(0, 0, 0));
         goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -583,7 +581,6 @@ public class LoadGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton Char7;
     private javax.swing.JButton Char8;
     private javax.swing.JLabel agiLabel;
-    private javax.swing.JLabel charAvatar;
     private javax.swing.JLabel constLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JProgressBar expBar;
@@ -591,6 +588,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
     private javax.swing.JLabel levelLabel;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;
+    private javax.swing.JLabel playerAvatar;
     private javax.swing.JLabel playerGoldLabel;
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JLabel strLabel;

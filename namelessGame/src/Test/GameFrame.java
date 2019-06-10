@@ -36,7 +36,7 @@ public class GameFrame extends javax.swing.JFrame {
         playerExp.setStringPainted(true);
         playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
         playerExp.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
-        // TODO set player avatar
+        playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
         
         if(Game.getDungeons() == null)
         {

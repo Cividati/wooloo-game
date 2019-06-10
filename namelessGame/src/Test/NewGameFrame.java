@@ -1,15 +1,5 @@
 package Test;
 
-
-
-
-
-
-
-
-
-
-
 import Test.MenuFrame;
 import java.util.List;
 import java.util.ArrayList;
@@ -37,9 +27,10 @@ public class NewGameFrame extends javax.swing.JFrame {
     private int nextIndexMale = 0;
     private int nextIndexFemale = 0;
     
-    String[] maleImages = {"/namelessgame/img/avatars/kirito.png", "/namelessgame/img/avatars/klein.png","/namelessgame/img/avatars/Naofumi.png"};
-    String[] femaleImages = {"/namelessgame/img/avatars/Silica.png","/namelessgame/img/avatars/Minna.png","/namelessgame/img/avatars/asuna.png"};
+    String[] maleImages = {"kirito", "klein","Naofumi"};
+    String[] femaleImages = {"Silica","Minna","asuna"};
     
+    String chosenImg;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,7 +53,6 @@ public class NewGameFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
@@ -108,11 +98,6 @@ public class NewGameFrame extends javax.swing.JFrame {
         CreateCharButton.setBounds(540, 620, 180, 70);
         CreateCharButton.getAccessibleContext().setAccessibleDescription("");
 
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
         getContentPane().add(nameField);
         nameField.setBounds(500, 570, 270, 30);
 
@@ -145,15 +130,11 @@ public class NewGameFrame extends javax.swing.JFrame {
         if(nextIndexMale >= maleImages.length)
             nextIndexMale = 0;
         
-        String chosenImg = maleImages[nextIndexMale++];
+        chosenImg = maleImages[nextIndexMale++];
         
-        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));    
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/" + chosenImg + ".png")));    
         charAvatar.setVisible(true);
     }//GEN-LAST:event_MaleButtonActionPerformed
-
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
 
     private void FemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemButtonActionPerformed
         sex = 'F';
@@ -164,9 +145,9 @@ public class NewGameFrame extends javax.swing.JFrame {
         if(nextIndexFemale >= femaleImages.length)
             nextIndexFemale = 0;
         
-        String chosenImg = femaleImages[nextIndexFemale++];
+        chosenImg = femaleImages[nextIndexFemale++];
         
-        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(chosenImg)));    
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/" + chosenImg + ".png")));    
         charAvatar.setVisible(true);
     }//GEN-LAST:event_FemButtonActionPerformed
 
@@ -192,7 +173,7 @@ public class NewGameFrame extends javax.swing.JFrame {
             return;
         }
         
-        Player player = new Player(-1, characterName, sex, 1, 0, 0, 0, 5, 5, 5, new HashMap<>());
+        Player player = new Player(-1, characterName, chosenImg, sex, 1, 0, 0, 0, 5, 5, 5, new HashMap<>());
 
         (new PlayerDAO()).insertPlayer(player);
         Game.setPlayer(player);

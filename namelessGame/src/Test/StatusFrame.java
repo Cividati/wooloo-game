@@ -38,8 +38,7 @@ public class StatusFrame extends javax.swing.JFrame {
         playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);       
         playerExp.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
         playerPoints.setText(Integer.toString(statusPoints));
-        
-        // TODO set player avatar
+        playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
         
         String path;
         Map<Integer, Item> playerEquip = player.getEquip();
