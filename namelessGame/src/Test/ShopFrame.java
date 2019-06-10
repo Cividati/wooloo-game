@@ -71,30 +71,28 @@ public class ShopFrame extends javax.swing.JFrame {
         setPlayer(Game.getPlayer());
         
         playerGold.setText(Long.toString(player.getGold()));
-        
-        for(ShopItem item : Game.getShop())
-        {
+
+        for (ShopItem item : Game.getShop()) {
             javax.swing.JButton itemButton = new javax.swing.JButton();
             
             itemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
             itemButton.setToolTipText(item.getName() + " (" + item.getPrice() + "g)");
             
-            itemButton.addActionListener(new java.awt.event.ActionListener() {
+            itemButton.addActionListener(new java.awt.event.ActionListener() {           
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     ShopItemActionPerformed(evt);
                 }
             });
-            
+
             shopMap.put(itemButton, item);
-            
+
             shopPanel.add(itemButton);
         }
         
         shopPanel.setLayout(new java.awt.GridLayout(Game.getShop().size() / 4, 4));
         shopPanel.setSize(300, 300);
         shopPanel.setVisible(true);
-        
         add(shopPanel);
         
         shopScrollPane.getViewport().add(shopPanel, null);
@@ -179,38 +177,40 @@ public class ShopFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         shopScrollPane = new javax.swing.JScrollPane();
+        goldLabel = new javax.swing.JLabel();
         infoLabel = new javax.swing.JLabel();
         sellerLabel = new javax.swing.JLabel();
         playerGold = new javax.swing.JLabel();
-        goldLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        backgroundLabel = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
         getContentPane().add(shopScrollPane);
-        shopScrollPane.setBounds(0, 130, 650, 460);
+        shopScrollPane.setBounds(100, 130, 650, 460);
+
+        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/icons/gold.png"))); // NOI18N
+        getContentPane().add(goldLabel);
+        goldLabel.setBounds(770, 130, 40, 30);
 
         infoLabel.setBackground(new java.awt.Color(0, 0, 0));
         infoLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
-        infoLabel.setForeground(new java.awt.Color(51, 51, 51));
+        infoLabel.setForeground(new java.awt.Color(255, 255, 255));
         infoLabel.setText("Shop");
         getContentPane().add(infoLabel);
-        infoLabel.setBounds(30, 20, 140, 70);
+        infoLabel.setBounds(640, 20, 102, 70);
 
         sellerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/erhard.png"))); // NOI18N
         getContentPane().add(sellerLabel);
-        sellerLabel.setBounds(620, 10, 280, 570);
+        sellerLabel.setBounds(960, 30, 280, 570);
 
+        playerGold.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 24)); // NOI18N
         playerGold.setForeground(new java.awt.Color(255, 255, 0));
+        playerGold.setText("0 G");
         getContentPane().add(playerGold);
-        playerGold.setBounds(210, 40, 50, 30);
-
-        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
-        getContentPane().add(goldLabel);
-        goldLabel.setBounds(250, 40, 40, 30);
+        playerGold.setBounds(810, 130, 80, 30);
 
         backButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         backButton.setText("Back");
@@ -220,11 +220,12 @@ public class ShopFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(710, 620, 130, 50);
+        backButton.setBounds(1040, 620, 130, 50);
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
-        getContentPane().add(backgroundLabel);
-        backgroundLabel.setBounds(0, 0, 3480, 2160);
+        background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1280, 720);
 
         pack();
         setLocationRelativeTo(null);
@@ -274,7 +275,7 @@ public class ShopFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JLabel backgroundLabel;
+    private javax.swing.JLabel background;
     private javax.swing.JLabel goldLabel;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel playerGold;

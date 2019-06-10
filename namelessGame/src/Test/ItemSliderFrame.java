@@ -150,14 +150,14 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         okButton = new javax.swing.JButton();
         amountSlider = new javax.swing.JSlider();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(200, 100));
         setResizable(false);
         getContentPane().setLayout(null);
 
         sliderInfo.setText("Item amount");
         getContentPane().add(sliderInfo);
-        sliderInfo.setBounds(80, 10, 80, 14);
+        sliderInfo.setBounds(80, 10, 80, 16);
         getContentPane().add(iconLabel);
         iconLabel.setBounds(10, 20, 50, 50);
         getContentPane().add(amountLabel);
@@ -188,7 +188,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
             }
         });
         getContentPane().add(amountSlider);
-        amountSlider.setBounds(60, 30, 120, 26);
+        amountSlider.setBounds(60, 30, 120, 16);
 
         pack();
         setLocationRelativeTo(null);

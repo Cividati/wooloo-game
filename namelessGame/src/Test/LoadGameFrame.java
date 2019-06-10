@@ -129,17 +129,18 @@ public class LoadGameFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        charAvatar = new javax.swing.JLabel();
+        goldLabel = new javax.swing.JLabel();
+        playerNameLabel = new javax.swing.JLabel();
+        levelLabel = new javax.swing.JLabel();
+        expBar = new javax.swing.JProgressBar();
+        strLabel = new javax.swing.JLabel();
+        agiLabel = new javax.swing.JLabel();
+        constLabel = new javax.swing.JLabel();
+        playerGoldLabel = new javax.swing.JLabel();
         name1 = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
-        playerGoldLabel = new javax.swing.JLabel();
-        levelLabel = new javax.swing.JLabel();
-        goldLabel = new javax.swing.JLabel();
-        playerNameLabel = new javax.swing.JLabel();
-        strLabel = new javax.swing.JLabel();
-        constLabel = new javax.swing.JLabel();
-        agiLabel = new javax.swing.JLabel();
-        expBar = new javax.swing.JProgressBar();
         BackButton = new javax.swing.JButton();
         Char4 = new javax.swing.JButton();
         Char1 = new javax.swing.JButton();
@@ -149,7 +150,6 @@ public class LoadGameFrame extends javax.swing.JFrame {
         Char6 = new javax.swing.JButton();
         Char7 = new javax.swing.JButton();
         Char8 = new javax.swing.JButton();
-        charAvatar = new javax.swing.JLabel();
         BG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -157,12 +157,70 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/kirito.png"))); // NOI18N
+        charAvatar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 4, true));
+        getContentPane().add(charAvatar);
+        charAvatar.setBounds(590, 130, 300, 400);
+
+        goldLabel.setBackground(new java.awt.Color(0, 0, 0));
+        goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        goldLabel.setForeground(new java.awt.Color(204, 204, 204));
+        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
+        goldLabel.setText("Gold:");
+        getContentPane().add(goldLabel);
+        goldLabel.setBounds(900, 140, 90, 40);
+
+        playerNameLabel.setBackground(new java.awt.Color(0, 0, 0));
+        playerNameLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        playerNameLabel.setForeground(new java.awt.Color(204, 204, 204));
+        playerNameLabel.setText("Name:");
+        getContentPane().add(playerNameLabel);
+        playerNameLabel.setBounds(900, 210, 340, 20);
+
+        levelLabel.setBackground(new java.awt.Color(0, 0, 0));
+        levelLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        levelLabel.setForeground(new java.awt.Color(204, 204, 204));
+        levelLabel.setText("Level: ");
+        getContentPane().add(levelLabel);
+        levelLabel.setBounds(900, 260, 160, 28);
+
+        expBar.setForeground(new java.awt.Color(204, 0, 255));
+        getContentPane().add(expBar);
+        expBar.setBounds(900, 300, 340, 40);
+
+        strLabel.setBackground(new java.awt.Color(0, 0, 0));
+        strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        strLabel.setForeground(new java.awt.Color(204, 204, 204));
+        strLabel.setText("Strength: ");
+        getContentPane().add(strLabel);
+        strLabel.setBounds(900, 350, 160, 30);
+
+        agiLabel.setBackground(new java.awt.Color(0, 0, 0));
+        agiLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        agiLabel.setForeground(new java.awt.Color(204, 204, 204));
+        agiLabel.setText("Agility: ");
+        getContentPane().add(agiLabel);
+        agiLabel.setBounds(900, 410, 210, 30);
+
+        constLabel.setBackground(new java.awt.Color(0, 0, 0));
+        constLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        constLabel.setForeground(new java.awt.Color(204, 204, 204));
+        constLabel.setText("Constituition:");
+        getContentPane().add(constLabel);
+        constLabel.setBounds(900, 470, 190, 30);
+
+        playerGoldLabel.setBackground(new java.awt.Color(0, 0, 0));
+        playerGoldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        playerGoldLabel.setForeground(new java.awt.Color(204, 204, 204));
+        getContentPane().add(playerGoldLabel);
+        playerGoldLabel.setBounds(990, 150, 90, 20);
+
         name1.setBackground(new java.awt.Color(0, 0, 0));
         name1.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
-        name1.setForeground(new java.awt.Color(51, 51, 51));
-        name1.setText("Your saves");
+        name1.setForeground(new java.awt.Color(204, 204, 204));
+        name1.setText("Saves");
         getContentPane().add(name1);
-        name1.setBounds(180, 20, 280, 70);
+        name1.setBounds(240, 40, 130, 70);
 
         deleteButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         deleteButton.setText("Delete");
@@ -184,53 +242,6 @@ public class LoadGameFrame extends javax.swing.JFrame {
         getContentPane().add(loadButton);
         loadButton.setBounds(910, 630, 110, 50);
 
-        playerGoldLabel.setBackground(new java.awt.Color(0, 0, 0));
-        playerGoldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        playerGoldLabel.setForeground(new java.awt.Color(255, 255, 0));
-        getContentPane().add(playerGoldLabel);
-        playerGoldLabel.setBounds(970, 120, 90, 20);
-
-        levelLabel.setBackground(new java.awt.Color(0, 0, 0));
-        levelLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        levelLabel.setText("Level: ");
-        getContentPane().add(levelLabel);
-        levelLabel.setBounds(880, 230, 160, 32);
-
-        goldLabel.setBackground(new java.awt.Color(0, 0, 0));
-        goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
-        goldLabel.setText("Gold:");
-        getContentPane().add(goldLabel);
-        goldLabel.setBounds(880, 110, 90, 40);
-
-        playerNameLabel.setBackground(new java.awt.Color(0, 0, 0));
-        playerNameLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        playerNameLabel.setText("Name:");
-        getContentPane().add(playerNameLabel);
-        playerNameLabel.setBounds(880, 180, 350, 20);
-
-        strLabel.setBackground(new java.awt.Color(0, 0, 0));
-        strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        strLabel.setText("Strength: ");
-        getContentPane().add(strLabel);
-        strLabel.setBounds(880, 320, 160, 30);
-
-        constLabel.setBackground(new java.awt.Color(0, 0, 0));
-        constLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        constLabel.setText("Constituition:");
-        getContentPane().add(constLabel);
-        constLabel.setBounds(1090, 360, 190, 30);
-
-        agiLabel.setBackground(new java.awt.Color(0, 0, 0));
-        agiLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        agiLabel.setText("Agility: ");
-        getContentPane().add(agiLabel);
-        agiLabel.setBounds(1090, 320, 210, 30);
-
-        expBar.setForeground(new java.awt.Color(204, 0, 255));
-        getContentPane().add(expBar);
-        expBar.setBounds(880, 260, 340, 30);
-
         BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         BackButton.setText("Back");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +258,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char4);
-        Char4.setBounds(50, 430, 210, 80);
+        Char4.setBounds(50, 460, 210, 80);
 
         Char1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -255,7 +266,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char1);
-        Char1.setBounds(50, 100, 210, 80);
+        Char1.setBounds(50, 130, 210, 80);
 
         Char2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -263,7 +274,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char2);
-        Char2.setBounds(50, 210, 210, 80);
+        Char2.setBounds(50, 240, 210, 80);
 
         Char3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -271,7 +282,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char3);
-        Char3.setBounds(50, 320, 210, 80);
+        Char3.setBounds(50, 350, 210, 80);
 
         Char5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -279,7 +290,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char5);
-        Char5.setBounds(350, 100, 210, 80);
+        Char5.setBounds(330, 130, 210, 80);
 
         Char6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -287,7 +298,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char6);
-        Char6.setBounds(350, 210, 210, 80);
+        Char6.setBounds(330, 240, 210, 80);
 
         Char7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -295,7 +306,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char7);
-        Char7.setBounds(350, 320, 210, 80);
+        Char7.setBounds(330, 350, 210, 80);
 
         Char8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -303,16 +314,13 @@ public class LoadGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Char8);
-        Char8.setBounds(350, 430, 210, 80);
+        Char8.setBounds(330, 460, 210, 80);
 
-        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.gif"))); // NOI18N
-        getContentPane().add(charAvatar);
-        charAvatar.setBounds(580, 160, 280, 280);
-
-        BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
+        BG.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
         BG.setText("jLabel1");
         getContentPane().add(BG);
-        BG.setBounds(0, 0, 1270, 750);
+        BG.setBounds(0, 0, 1280, 720);
 
         pack();
         setLocationRelativeTo(null);

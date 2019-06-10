@@ -37,8 +37,8 @@ public class NewGameFrame extends javax.swing.JFrame {
     private int nextIndexMale = 0;
     private int nextIndexFemale = 0;
     
-    String[] maleImages = {"/namelessgame/img/avatars/kirito.png", "/namelessgame/img/avatars/Naofumi.png"};
-    String[] femaleImages = {};
+    String[] maleImages = {"/namelessgame/img/avatars/kirito.png", "/namelessgame/img/avatars/klein.png","/namelessgame/img/avatars/Naofumi.png"};
+    String[] femaleImages = {"/namelessgame/img/avatars/Silica.png","/namelessgame/img/avatars/Minna.png","/namelessgame/img/avatars/asuna.png"};
     
 
     /**
@@ -57,9 +57,10 @@ public class NewGameFrame extends javax.swing.JFrame {
         nameField = new javax.swing.JTextField();
         name = new javax.swing.JLabel();
         charAvatar = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
@@ -74,7 +75,7 @@ public class NewGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MaleButton);
-        MaleButton.setBounds(460, 460, 100, 50);
+        MaleButton.setBounds(440, 460, 100, 50);
 
         FemButton.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
         FemButton.setText("Female");
@@ -84,9 +85,9 @@ public class NewGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FemButton);
-        FemButton.setBounds(750, 460, 100, 50);
+        FemButton.setBounds(730, 460, 100, 50);
 
-        BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 18)); // NOI18N
+        BackButton.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         BackButton.setText("Back");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +95,7 @@ public class NewGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BackButton);
-        BackButton.setBounds(1130, 660, 100, 30);
+        BackButton.setBounds(1090, 640, 130, 50);
 
         CreateCharButton.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
         CreateCharButton.setText("Create");
@@ -104,7 +105,8 @@ public class NewGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(CreateCharButton);
-        CreateCharButton.setBounds(560, 620, 180, 70);
+        CreateCharButton.setBounds(540, 620, 180, 70);
+        CreateCharButton.getAccessibleContext().setAccessibleDescription("");
 
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,23 +114,26 @@ public class NewGameFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nameField);
-        nameField.setBounds(520, 570, 270, 30);
+        nameField.setBounds(500, 570, 270, 30);
 
         name.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        name.setForeground(new java.awt.Color(51, 51, 51));
+        name.setForeground(new java.awt.Color(255, 255, 255));
         name.setText("Nickname");
         getContentPane().add(name);
-        name.setBounds(600, 530, 110, 40);
+        name.setBounds(580, 530, 110, 40);
 
         charAvatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/kirito.png"))); // NOI18N
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/kirito.png"))); // NOI18N
         getContentPane().add(charAvatar);
-        charAvatar.setBounds(380, -160, 660, 620);
+        charAvatar.setBounds(490, 30, 300, 400);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1280, 750);
+        background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
+        background.setText("jLabel2");
+        background.setMinimumSize(new java.awt.Dimension(1280, 720));
+        background.setPreferredSize(new java.awt.Dimension(1280, 720));
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1280, 720);
 
         pack();
         setLocationRelativeTo(null);
@@ -236,8 +241,8 @@ public class NewGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton CreateCharButton;
     private javax.swing.JButton FemButton;
     private javax.swing.JButton MaleButton;
+    private javax.swing.JLabel background;
     private javax.swing.JLabel charAvatar;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel name;
     private javax.swing.JTextField nameField;
     // End of variables declaration//GEN-END:variables

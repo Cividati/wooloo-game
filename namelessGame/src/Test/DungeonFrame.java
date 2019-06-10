@@ -39,7 +39,7 @@ public class DungeonFrame extends javax.swing.JFrame {
         infoLabel.setForeground(new java.awt.Color(51, 51, 51));
         infoLabel.setText("Dungeons");
         getContentPane().add(infoLabel);
-        infoLabel.setBounds(370, 10, 270, 60);
+        infoLabel.setBounds(530, 10, 270, 60);
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/1200px-LGPE_Kanto_Map.png"))); // NOI18N
         getContentPane().add(backgroundLabel);

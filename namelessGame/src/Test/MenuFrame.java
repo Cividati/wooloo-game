@@ -27,6 +27,7 @@ public class MenuFrame extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         newGameButton = new javax.swing.JButton();
         loadGameButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -36,10 +37,10 @@ public class MenuFrame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("OscineW04-Light", 0, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("MENU");
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("Menu");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(580, 20, 160, 60);
+        jLabel1.setBounds(580, 20, 120, 60);
 
         exitButton.setFont(new java.awt.Font("OscineW04-Light", 0, 36)); // NOI18N
         exitButton.setText("Exit");
@@ -73,10 +74,15 @@ public class MenuFrame extends javax.swing.JFrame {
         getContentPane().add(loadGameButton);
         loadGameButton.setBounds(130, 360, 300, 100);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/PATTERN-BRANCO.png"))); // NOI18N
+        jLabel3.setText("Patch ver.: v0.00.000.01.14");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(1110, 670, 170, 16);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1270, 740);
+        jLabel2.setBounds(0, 0, 1280, 720);
 
         pack();
         setLocationRelativeTo(null);
@@ -141,6 +147,7 @@ public class MenuFrame extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loadGameButton;
     private javax.swing.JButton newGameButton;
     // End of variables declaration//GEN-END:variables
