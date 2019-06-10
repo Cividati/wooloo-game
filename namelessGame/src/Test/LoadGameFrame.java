@@ -35,7 +35,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
             strLabel.setText("Strength: " + player.getStr());
             constLabel.setText("Constitution: " + player.getCon());
             agiLabel.setText("Agility: " + player.getAgi());
-            expBar.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
+            System.out.println("Player.getExp(): "+player.getExp());
+            System.out.println("player.getExpNeededToLevelUp(): "+player.getExpNeededToLevelUp());
+            System.out.println("conta: "+((float)player.getExp() / player.getExpNeededToLevelUp()) * 100);
+            expBar.setValue((int)((float)player.getExp() / player.getExpNeededToLevelUp()) * 100);
             expBar.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
             playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
             
@@ -163,7 +166,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         goldLabel.setBackground(new java.awt.Color(0, 0, 0));
         goldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
         goldLabel.setForeground(new java.awt.Color(204, 204, 204));
-        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
+        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/icons/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         getContentPane().add(goldLabel);
         goldLabel.setBounds(900, 140, 90, 40);
@@ -183,6 +186,8 @@ public class LoadGameFrame extends javax.swing.JFrame {
         levelLabel.setBounds(900, 260, 160, 28);
 
         expBar.setForeground(new java.awt.Color(204, 0, 255));
+        expBar.setToolTipText("");
+        expBar.setValue(50);
         getContentPane().add(expBar);
         expBar.setBounds(900, 300, 340, 40);
 

@@ -139,7 +139,7 @@ public class GameFrame extends javax.swing.JFrame {
         getContentPane().add(statusLabel);
         statusLabel.setBounds(530, 450, 32, 32);
 
-        shopLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/gold.png"))); // NOI18N
+        shopLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/icons/gold.png"))); // NOI18N
         getContentPane().add(shopLabel);
         shopLabel.setBounds(280, 110, 32, 32);
 

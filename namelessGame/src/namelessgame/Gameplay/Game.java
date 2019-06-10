@@ -81,67 +81,11 @@ public class Game {
     public static void fillShop()
     {
         // Item_name, price
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
-          addItemToShop("Henrique", 0);
+          
 //        addItemToShop("Sword", 10);
 //        addItemToShop("Shield", 0);
 //        addItemToShop("Armor", 0);
+        addItemToShop("Small Health Potion", 0);
     }
     
 }

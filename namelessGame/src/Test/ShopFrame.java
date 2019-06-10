@@ -37,12 +37,11 @@ public class ShopFrame extends javax.swing.JFrame {
         long totalPrice = item.getPrice() * count;
         
         long pGold = player.getGold() - totalPrice;
-        
-        setEnabled(true);
             
         if(pGold < 0)
         {
             Game.sendErrorMessage("You don't have enough gold.");
+            setEnabled(true);
 
             return;
         }
@@ -55,6 +54,7 @@ public class ShopFrame extends javax.swing.JFrame {
             Game.sendSuccessMessage("You bought " + count + "x " + item.getName() + "(s).");
             player.setGold(pGold);
             playerGold.setText(Long.toString(pGold));
+            setEnabled(true);
         }
         catch(StashFullException e)
         {
@@ -118,7 +118,7 @@ public class ShopFrame extends javax.swing.JFrame {
                       + "Agility: " + item.getAgi() + "\n"
                       + "Constitution: " + item.getCon();
         
-        itemInfo += "\n\n    Price per unit: " + item.getPrice() + "g";
+        itemInfo += "\n\n\tPrice per unit: " + item.getPrice() + "g";
         
         int decision = javax.swing.JOptionPane.showConfirmDialog(null, itemInfo, "Buy", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, icon);
         
