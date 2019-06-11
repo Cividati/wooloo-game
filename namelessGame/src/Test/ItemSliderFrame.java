@@ -1,13 +1,5 @@
 package Test;
 
-
-
-
-
-
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,8 +10,6 @@ package Test;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.ShopItem;
@@ -151,17 +141,17 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         amountSlider = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(200, 100));
+        setPreferredSize(new java.awt.Dimension(250, 120));
         setResizable(false);
         getContentPane().setLayout(null);
 
         sliderInfo.setText("Item amount");
         getContentPane().add(sliderInfo);
-        sliderInfo.setBounds(80, 10, 80, 16);
+        sliderInfo.setBounds(90, 10, 80, 16);
         getContentPane().add(iconLabel);
         iconLabel.setBounds(10, 20, 50, 50);
         getContentPane().add(amountLabel);
-        amountLabel.setBounds(30, 50, 20, 20);
+        amountLabel.setBounds(200, 30, 40, 20);
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +160,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
             }
         });
         getContentPane().add(cancelButton);
-        cancelButton.setBounds(120, 50, 70, 20);
+        cancelButton.setBounds(130, 60, 80, 30);
 
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +169,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
             }
         });
         getContentPane().add(okButton);
-        okButton.setBounds(60, 50, 60, 20);
+        okButton.setBounds(60, 60, 60, 30);
 
         amountSlider.setValue(1);
         amountSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -188,7 +178,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
             }
         });
         getContentPane().add(amountSlider);
-        amountSlider.setBounds(60, 30, 120, 16);
+        amountSlider.setBounds(60, 40, 120, 16);
 
         pack();
         setLocationRelativeTo(null);
@@ -202,16 +192,12 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
     }//GEN-LAST:event_amountSliderStateChanged
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        this.dispose();
-        
         originalFrame.setEnabled(true);
+        
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        this.dispose();
-
-        // TODO if the originalFrame is closed, what happens?
-        
         originalFrame.setEnabled(true);
         
         if(originalFrame instanceof ShopFrame)
@@ -229,6 +215,8 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
             }
         else
             System.out.println("Slider used without being called by a configured frame...");
+        
+        this.dispose();
         
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -286,11 +274,15 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         // clicked on X button (cancel operation -> set frame enabled)
         
         originalFrame.setEnabled(true);
+        
+        this.dispose();
     }
 
     @Override
     public void windowClosed(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        originalFrame.setEnabled(true);
+        
+        this.dispose();
     }
 
     @Override

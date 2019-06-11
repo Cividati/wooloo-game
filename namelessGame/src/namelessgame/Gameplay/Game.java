@@ -3,7 +3,6 @@ package namelessgame.Gameplay;
 import java.util.ArrayList;
 import java.util.List;
 import namelessgame.Database.ItemDAO;
-import namelessgame.Exception.StashFullException;
 
 public class Game {
     private static Player loggedPlayer;
@@ -12,10 +11,10 @@ public class Game {
     final public static int MAX_LEVEL = 100;
     
     /** Stash max size **/
-    final public static int MAX_STASH_SIZE = /*30*/80;
+    final public static int MAX_STASH_SIZE = 30;
     
     /** Inventory max size **/
-    final public static int MAX_INVENTORY_SIZE = /*12*/40;
+    final public static int MAX_INVENTORY_SIZE = 12;
     
     /** Max units that a stack of item can have (if it is stackable) **/
     final public static int MAX_STACKABLE_AMOUNT = 100;
@@ -74,6 +73,9 @@ public class Game {
     {
         ShopItem newItem = (new ItemDAO()).loadShopItemByName(name, price); 
         
+        if(newItem == null)
+            return;
+        
         shop.add(newItem);
     }
     
@@ -82,9 +84,10 @@ public class Game {
     {
         // Item_name, price
           
-//        addItemToShop("Sword", 10);
-//        addItemToShop("Shield", 0);
-//        addItemToShop("Armor", 0);
+        addItemToShop("Sword", 10);
+        addItemToShop("Sword", 0);
+        addItemToShop("Shield", 0);
+        //addItemToShop("Armor", 0);
         addItemToShop("Small Health Potion", 0);
     }
     

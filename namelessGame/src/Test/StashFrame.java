@@ -221,6 +221,8 @@ public class StashFrame extends javax.swing.JFrame {
         String path;
         
         inventoryPanel.removeAll();
+        inventoryPanel.revalidate();
+        inventoryPanel.repaint();
         
         for(int i = 0; i < Game.MAX_INVENTORY_SIZE; i++)
         {          
@@ -257,7 +259,7 @@ public class StashFrame extends javax.swing.JFrame {
 
                 itemLabel.setToolTipText(htmlTootip);
             }
-            
+          
             inventoryPanel.add(itemLabel);
             
             itemDragSource = new DragSource();
@@ -273,6 +275,8 @@ public class StashFrame extends javax.swing.JFrame {
         String path;
         
         stashPanel.removeAll();
+        stashPanel.revalidate();
+        stashPanel.repaint();
         
         for(int i = 0; i < Game.MAX_STASH_SIZE; i++)
         {
@@ -290,7 +294,7 @@ public class StashFrame extends javax.swing.JFrame {
             itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
             
             if(item != null)
-            {               
+            {              
                 int strDiff = player.getStr(item) - player.getStr();
                 int agiDiff = player.getAgi(item) - player.getAgi();
                 int conDiff = player.getCon(item) - player.getCon();
@@ -300,8 +304,8 @@ public class StashFrame extends javax.swing.JFrame {
                 String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
 
                 String htmlTootip = "<html>" + item.getName() +               
-                                    (item.isStackable() ? (" - <font color=\"red\">" + item.getCount() + "</font>x unit(s).") : "") + "<br><br>" +
-                                    (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
+                                    (item.isStackable() ? ("<p>- " + item.getCount() + "x unit(s).</p>") : "") + "<br><br>" +
+                                    (item.isPotion() ? ("Heals for <font color=\"green\">" + item.getHeal() + "</font> health.") : ("" +
                                     "Strenght: " + item.getStr() + " (<font color=" + strFont + ">" + (strDiff > 0 ? ("+" + strDiff) : strDiff) + "</font>)<br>" +
                                     "Agility: " + item.getAgi() + " (<font color=" + agiFont + ">" + (agiDiff > 0 ? ("+" + agiDiff) : agiDiff) + "</font>)<br>" +
                                     "Constitution: " + item.getCon() + " (<font color=" + conFont + ">" + (conDiff > 0 ? ("+" + conDiff) : conDiff) + "</font>)<br>")) +
@@ -312,6 +316,10 @@ public class StashFrame extends javax.swing.JFrame {
             
             stashPanel.add(itemLabel);
             
+            if(item != null)
+            {
+                System.out.println("setting it");
+            }
             itemDragSource = new DragSource();
             itemDragSource.createDefaultDragGestureRecognizer(itemLabel,
                            DnDConstants.ACTION_COPY, new DragGestureListImp());
@@ -399,24 +407,39 @@ public class StashFrame extends javax.swing.JFrame {
 
         @Override
         public void dragGestureRecognized(DragGestureEvent event) {
+            System.out.println("drag1");
             Cursor cursor = null;
             ItemLabel lblItem = (ItemLabel) event.getComponent();
 
+            System.out.println("drag2");
             if (event.getDragAction() == DnDConstants.ACTION_COPY) {
                 cursor = DragSource.DefaultCopyDrop;
             }
+            System.out.println("drag3");
             
             Item item = lblItem.getItem();
-            event.startDrag(cursor, new TransferableItem(new ItemPanel(item, getComponentPanel(lblItem))));
+            System.out.println("drag4");
+            try
+            {
+                event.startDrag(cursor, new TransferableItem(new ItemPanel(item, getComponentPanel(lblItem))));
+                System.out.println("drag5");
+            }
+            catch(java.awt.dnd.InvalidDnDOperationException e) {}
         }
     }
     
     public void updateContainer(List<Item> container)
     {
         if(container == stash)
+        {
+            System.out.println("updating player stash");
             updatePlayerStash();
+        }
         else
+        {
+            System.out.println("updating player inventory");
             updatePlayerInventory();
+        }
     }
     
     class MyDropTargetListImp extends DropTargetAdapter implements
@@ -438,37 +461,37 @@ public class StashFrame extends javax.swing.JFrame {
         public void drop(DropTargetDropEvent event) {
             try {
                 System.out.println("maybe here? 1");
-                Transferable tr = event.getTransferable();
-                System.out.println("maybe here? 2");
-                ItemPanel itemPanel = (ItemPanel) tr.getTransferData(dataFlavor);
-                System.out.println("maybe here? 3");
                 
-                // Dragged item
-                System.out.println("maybe here? 4");
-                Item movedItem = itemPanel.getItem();
-                
-                System.out.println("maybe here? 5");
-                
-                // Local item (item on drop location)
-                Item localItem = this.label.getItem();
-                
-                // Clone for transfering
-                Item movedItemClone = null;           
-                
-                JPanel fromPanel = itemPanel.getPanel();
-                JPanel toPanel = this.panel;
-                ItemLabel toLabel = this.label;
-                
-                List<Item> fromItemContainer = null;               
-                List<Item> toItemContainer = null;    
-                
-                Map<Integer, Item> equip = player.getEquip();
-                
-                System.out.println("maybe here? 6");
-
                 if (event.isDataFlavorSupported(dataFlavor)) {
                     System.out.println("Moving...");
                     event.acceptDrop(DnDConstants.ACTION_COPY);
+                    Transferable tr = event.getTransferable();
+                    System.out.println("maybe here? 2");
+                    ItemPanel itemPanel = (ItemPanel) tr.getTransferData(dataFlavor);
+                    System.out.println("maybe here? 3");
+
+                    // Dragged item
+                    System.out.println("maybe here? 4");
+                    Item movedItem = itemPanel.getItem();
+
+                    System.out.println("maybe here? 5");
+
+                    // Local item (item on drop location)
+                    Item localItem = this.label.getItem();
+
+                    // Clone for transfering
+                    Item movedItemClone = null;           
+
+                    JPanel fromPanel = itemPanel.getPanel();
+                    JPanel toPanel = this.panel;
+                    ItemLabel toLabel = this.label;
+
+                    List<Item> fromItemContainer = null;               
+                    List<Item> toItemContainer = null;    
+
+                    Map<Integer, Item> equip = player.getEquip();
+                
+                    System.out.println("maybe here? 6");
 
                     if (toPanel == null) {
                         System.out.println("dropping on equip...");
@@ -480,8 +503,8 @@ public class StashFrame extends javax.swing.JFrame {
                         if(fromPanel == null)
                         {
                             Game.sendErrorMessage("You can't move that here.");
-
-                            event.rejectDrop();                          
+                       
+                            event.dropComplete(true);
                             return;
                         }
                         
@@ -513,8 +536,8 @@ public class StashFrame extends javax.swing.JFrame {
                         if(toSlot == -1 || movedItem.getSlot() != toSlot)
                         {
                             Game.sendErrorMessage("You can't move that here.");
-                            
-                            event.rejectDrop();                          
+                                                     
+                            event.dropComplete(true);
                             return;
                         }
                         else if(movedItem.isStackable())
@@ -523,7 +546,7 @@ public class StashFrame extends javax.swing.JFrame {
                             
                             Game.sendErrorMessage("You can't move that here.");
                             
-                            event.rejectDrop();
+                            event.dropComplete(true);
                             return;
                         }
                                        
@@ -540,7 +563,6 @@ public class StashFrame extends javax.swing.JFrame {
                         {
                             Game.sendErrorMessage("You don't have enough level to equip this item (" + movedItem.getMinLevel() + ").");
 
-                            event.rejectDrop();
                         }
 
                     } else {
@@ -596,33 +618,40 @@ public class StashFrame extends javax.swing.JFrame {
                                 Game.sendErrorMessage("Your " +
                                                              (toItemContainer == stash ? "stash" : "inventory") + " is full.");
 
-                                event.rejectDrop();
+                                event.dropComplete(true);
                                 return;
                             }
 
                             // Adds to first index of the container (so the player can reorganize it easily)
-                            toItemContainer.add(0, movedItem);
+                            toItemContainer.add(0, (Item) movedItem.clone());
 
                             if(fromItemContainer != null)
                             {
                                 fromItemContainer.remove(movedItem);
 
+                                System.out.println("updating container... 1");
                                 updateContainer(fromItemContainer);
                             }
                             else
                             {
                                 equip.remove(movedItem.getSlot());
 
+                                System.out.println("updating equip...");
                                 updatePlayerEquipment(movedItem.getSlot());
                             }
                             
                             if(fromItemContainer != toItemContainer)
+                            {
+                                System.out.println("updating container... 2");
+                                
                                 updateContainer(toItemContainer);
+                            }
 	
                         }   
                         
                     }
 
+                    System.out.println("aqui");
                     event.dropComplete(true);
                     return;
                 }

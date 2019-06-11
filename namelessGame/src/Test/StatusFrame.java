@@ -323,13 +323,13 @@ public class StatusFrame extends javax.swing.JFrame {
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/icons/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         playerPanel.add(goldLabel);
-        goldLabel.setBounds(200, 20, 79, 50);
+        goldLabel.setBounds(210, 20, 79, 50);
 
         playerGold.setFont(new java.awt.Font("OscineTrialW01-Regular", 1, 14)); // NOI18N
         playerGold.setForeground(new java.awt.Color(255, 255, 0));
         playerGold.setText("0 G");
         playerPanel.add(playerGold);
-        playerGold.setBounds(280, 30, 50, 30);
+        playerGold.setBounds(300, 30, 30, 30);
 
         playerLevel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerLevel.setForeground(new java.awt.Color(0, 0, 0));

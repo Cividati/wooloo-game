@@ -1,6 +1,5 @@
 package Test;
 
-//import namelessgame.UI.MenuFrame;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
@@ -35,13 +34,9 @@ public class LoadGameFrame extends javax.swing.JFrame {
             strLabel.setText("Strength: " + player.getStr());
             constLabel.setText("Constitution: " + player.getCon());
             agiLabel.setText("Agility: " + player.getAgi());
-            System.out.println("Player.getExp(): "+player.getExp());
-            System.out.println("player.getExpNeededToLevelUp(): "+player.getExpNeededToLevelUp());
-            System.out.println("conta: "+((float)player.getExp() / player.getExpNeededToLevelUp()) * 100);
             expBar.setValue((int)((float)player.getExp() / player.getExpNeededToLevelUp()) * 100);
             expBar.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
             playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
-            
             playerAvatar.setVisible(true);
             expBar.setVisible(true);
         }
@@ -58,6 +53,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         agiLabel.setText("Agility: ");
         expBar.setValue(0);
         expBar.setToolTipText("");
+        playerAvatar.setVisible(false);
     }
 
     public LoadGameFrame() {

@@ -103,7 +103,7 @@ public class Player extends Creature implements Comparable<Player> {
         
         // There's an item equipped, store it on the container
         if(playerEquip.get(slot) != null)
-            fromContainer.add(playerEquip.get(slot));
+            fromContainer.add(0, playerEquip.get(slot));
         
         // Equip item
         playerEquip.put(slot, item);
