@@ -83,12 +83,29 @@ public class Game {
     public static void fillShop()
     {
         // Item_name, price
-          
-        addItemToShop("Sword", 10);
-        addItemToShop("Sword", 0);
+        addItemToShop("Heavy Armor", 0);
+        addItemToShop("Light Armor", 0);
+        addItemToShop("Medium Armor", 0);
+        addItemToShop("Helmet", 0);
+        addItemToShop("Shield+++", 100);
         addItemToShop("Shield", 0);
-        //addItemToShop("Armor", 0);
-        addItemToShop("Small Health Potion", 0);
+        addItemToShop("Shield+", 20);
+        addItemToShop("Shield++", 60);
+        addItemToShop("Spear", 0);
+        addItemToShop("Sword", 0);
+        addItemToShop("Crossbow", 0);
+        addItemToShop("Bow", 0);
+        addItemToShop("Dagger", 0);
+        addItemToShop("Dagger+", 20);
+        addItemToShop("Dagger++", 60);
+        addItemToShop("Axe", 0);
+        addItemToShop("Legs", 0);
+        addItemToShop("Boots", 0);
+        addItemToShop("Boots+", 20);
+        addItemToShop("Boots++", 60);
+        addItemToShop("HP Potion", 10);
+        
+
     }
     
 }
