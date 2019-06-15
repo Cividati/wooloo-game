@@ -197,17 +197,7 @@ public class StashFrame extends javax.swing.JFrame {
         equipRef.setItem(item);
         
         if(item != null)
-        {
-            String htmlTootip = "<html>" + item.getName() +               
-                                    (item.isStackable() ? (" - <font color=\"red\">" + item.getCount() + "</font>x unit(s).") : "") + "<br><br>" +
-                                    (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
-                                    "Strenght: " + item.getStr() + "<br>" +
-                                    "Agility: " + item.getAgi() + "<br>" +
-                                    "Constitution: " + item.getCon() + "<br>")) +
-                                    "</html>";
-
-            equipRef.setToolTipText(htmlTootip);
-        }
+            equipRef.setToolTipText(item.getDescr());
         
         itemDragSource = new DragSource();
         itemDragSource.createDefaultDragGestureRecognizer(equipRef,
@@ -240,25 +230,7 @@ public class StashFrame extends javax.swing.JFrame {
             itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
             
             if(item != null)
-            {
-                int strDiff = player.getStr(item) - player.getStr();
-                int agiDiff = player.getAgi(item) - player.getAgi();
-                int conDiff = player.getCon(item) - player.getCon();
-
-                String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
-                String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
-                String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
-
-                String htmlTootip = "<html>" + item.getName() +               
-                                    (item.isStackable() ? (" - <font color=\"red\">" + item.getCount() + "</font>x unit(s).") : "") + "<br><br>" +
-                                    (item.isPotion() ? ("Heals for <font color=\"white\">" + item.getHeal() + "</font> health.") : ("" +
-                                    "Strenght: " + item.getStr() + " (<font color=" + strFont + ">" + (strDiff > 0 ? ("+" + strDiff) : strDiff) + "</font>)<br>" +
-                                    "Agility: " + item.getAgi() + " (<font color=" + agiFont + ">" + (agiDiff > 0 ? ("+" + agiDiff) : agiDiff) + "</font>)<br>" +
-                                    "Constitution: " + item.getCon() + " (<font color=" + conFont + ">" + (conDiff > 0 ? ("+" + conDiff) : conDiff) + "</font>)<br>")) +
-                                    "</html>";
-
-                itemLabel.setToolTipText(htmlTootip);
-            }
+                itemLabel.setToolTipText(item.getDescr(player));
           
             inventoryPanel.add(itemLabel);
             
@@ -294,32 +266,10 @@ public class StashFrame extends javax.swing.JFrame {
             itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
             
             if(item != null)
-            {              
-                int strDiff = player.getStr(item) - player.getStr();
-                int agiDiff = player.getAgi(item) - player.getAgi();
-                int conDiff = player.getCon(item) - player.getCon();
-
-                String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
-                String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
-                String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
-
-                String htmlTootip = "<html>" + item.getName() +               
-                                    (item.isStackable() ? ("<p>- " + item.getCount() + "x unit(s).</p>") : "") + "<br><br>" +
-                                    (item.isPotion() ? ("Heals for <font color=\"green\">" + item.getHeal() + "</font> health.") : ("" +
-                                    "Strenght: " + item.getStr() + " (<font color=" + strFont + ">" + (strDiff > 0 ? ("+" + strDiff) : strDiff) + "</font>)<br>" +
-                                    "Agility: " + item.getAgi() + " (<font color=" + agiFont + ">" + (agiDiff > 0 ? ("+" + agiDiff) : agiDiff) + "</font>)<br>" +
-                                    "Constitution: " + item.getCon() + " (<font color=" + conFont + ">" + (conDiff > 0 ? ("+" + conDiff) : conDiff) + "</font>)<br>")) +
-                                    "</html>";
-
-                itemLabel.setToolTipText(htmlTootip);
-            }
+                itemLabel.setToolTipText(item.getDescr(player));
             
             stashPanel.add(itemLabel);
             
-            if(item != null)
-            {
-                System.out.println("setting it");
-            }
             itemDragSource = new DragSource();
             itemDragSource.createDefaultDragGestureRecognizer(itemLabel,
                            DnDConstants.ACTION_COPY, new DragGestureListImp());
@@ -407,22 +357,17 @@ public class StashFrame extends javax.swing.JFrame {
 
         @Override
         public void dragGestureRecognized(DragGestureEvent event) {
-            System.out.println("drag1");
             Cursor cursor = null;
             ItemLabel lblItem = (ItemLabel) event.getComponent();
 
-            System.out.println("drag2");
             if (event.getDragAction() == DnDConstants.ACTION_COPY) {
                 cursor = DragSource.DefaultCopyDrop;
             }
-            System.out.println("drag3");
             
             Item item = lblItem.getItem();
-            System.out.println("drag4");
             try
             {
                 event.startDrag(cursor, new TransferableItem(new ItemPanel(item, getComponentPanel(lblItem))));
-                System.out.println("drag5");
             }
             catch(java.awt.dnd.InvalidDnDOperationException e) {}
         }
@@ -431,15 +376,9 @@ public class StashFrame extends javax.swing.JFrame {
     public void updateContainer(List<Item> container)
     {
         if(container == stash)
-        {
-            System.out.println("updating player stash");
             updatePlayerStash();
-        }
         else
-        {
-            System.out.println("updating player inventory");
             updatePlayerInventory();
-        }
     }
     
     class MyDropTargetListImp extends DropTargetAdapter implements
@@ -459,22 +398,14 @@ public class StashFrame extends javax.swing.JFrame {
 
         @Override
         public void drop(DropTargetDropEvent event) {
-            try {
-                System.out.println("maybe here? 1");
-                
+            try {               
                 if (event.isDataFlavorSupported(dataFlavor)) {
-                    System.out.println("Moving...");
                     event.acceptDrop(DnDConstants.ACTION_COPY);
                     Transferable tr = event.getTransferable();
-                    System.out.println("maybe here? 2");
                     ItemPanel itemPanel = (ItemPanel) tr.getTransferData(dataFlavor);
-                    System.out.println("maybe here? 3");
 
                     // Dragged item
-                    System.out.println("maybe here? 4");
                     Item movedItem = itemPanel.getItem();
-
-                    System.out.println("maybe here? 5");
 
                     // Local item (item on drop location)
                     Item localItem = this.label.getItem();
@@ -490,11 +421,8 @@ public class StashFrame extends javax.swing.JFrame {
                     List<Item> toItemContainer = null;    
 
                     Map<Integer, Item> equip = player.getEquip();
-                
-                    System.out.println("maybe here? 6");
 
                     if (toPanel == null) {
-                        System.out.println("dropping on equip...");
                         // dropped on equip
                         
                         int toSlot = -1;                                   
@@ -568,8 +496,6 @@ public class StashFrame extends javax.swing.JFrame {
                     } else {
                         // dropped on stash/inventory
                         
-                        System.out.println("dropping on stash or inventory");
-                        
                         if(fromPanel != null)
                             fromItemContainer = fromPanel == stashPanel ? stash : inventory;
                         
@@ -629,29 +555,22 @@ public class StashFrame extends javax.swing.JFrame {
                             {
                                 fromItemContainer.remove(movedItem);
 
-                                System.out.println("updating container... 1");
                                 updateContainer(fromItemContainer);
                             }
                             else
                             {
                                 equip.remove(movedItem.getSlot());
 
-                                System.out.println("updating equip...");
                                 updatePlayerEquipment(movedItem.getSlot());
                             }
                             
                             if(fromItemContainer != toItemContainer)
-                            {
-                                System.out.println("updating container... 2");
-                                
                                 updateContainer(toItemContainer);
-                            }
 	
                         }   
                         
                     }
 
-                    System.out.println("aqui");
                     event.dropComplete(true);
                     return;
                 }

@@ -104,6 +104,8 @@ public class Game {
         addItemToShop("Boots+", 20);
         addItemToShop("Boots++", 60);
         addItemToShop("HP Potion", 10);
+        addItemToShop("Small Health Potion", 0);
+        addItemToShop("Small Health Potion", 10);
         
 
     }

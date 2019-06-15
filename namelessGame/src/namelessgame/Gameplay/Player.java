@@ -18,7 +18,6 @@ public class Player extends Creature implements Comparable<Player> {
     private int level; 
     private int exp;
     private long gold;
-    private int maxHP;
     
     // Available attribute points to distribute.
     private int statusPoints;
@@ -202,14 +201,6 @@ public class Player extends Creature implements Comparable<Player> {
 
     public void setGold(long gold) {
         this.gold = gold;
-    }
-    
-    public int getMaxHealth() {
-        return maxHP;
-    }
-
-    public void setMaxHealth(int maxHP) {
-        this.maxHP = maxHP;
     }
 
     public int getStatusPoints() {
@@ -423,6 +414,21 @@ public class Player extends Creature implements Comparable<Player> {
         }
         
         return con;
+    }
+    
+    public int getMaxHealth()
+    {
+        return (3 * getCon()) + getStr();
+    }
+    
+    public int getMaxHealth(Item item)
+    {
+        return (3 * getCon(item)) + getStr(item);
+    }
+    
+    public static int getMaxHealth(int str, int con)
+    {
+        return (3 * con) + str;
     }
     
 }

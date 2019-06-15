@@ -31,6 +31,7 @@ public class GameFrame extends javax.swing.JFrame {
         initComponents();
      
         playerName.setText(player.getName());
+        playerHp.setText(Integer.toString(player.getMaxHealth()));
         playerLevel.setText(Integer.toString(player.getLevel()));
         
         playerExp.setStringPainted(true);
@@ -61,12 +62,14 @@ public class GameFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         playerPanel = new javax.swing.JPanel();
-        playerName = new javax.swing.JLabel();
+        playerHp = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
         playerAvatar = new javax.swing.JLabel();
         playerExp = new javax.swing.JProgressBar();
-        nameLabel = new javax.swing.JLabel();
+        hpLabel = new javax.swing.JLabel();
         playerLevel = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        playerName = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         statusLabel = new javax.swing.JLabel();
         shopLabel = new javax.swing.JLabel();
@@ -88,12 +91,11 @@ public class GameFrame extends javax.swing.JFrame {
         playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Player", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 18), new java.awt.Color(102, 102, 102))); // NOI18N
         playerPanel.setLayout(null);
 
-        playerName.setBackground(new java.awt.Color(255, 255, 255));
-        playerName.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 14)); // NOI18N
-        playerName.setForeground(new java.awt.Color(51, 51, 51));
-        playerName.setText("test");
-        playerPanel.add(playerName);
-        playerName.setBounds(160, 30, 120, 30);
+        playerHp.setBackground(new java.awt.Color(255, 255, 255));
+        playerHp.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 14)); // NOI18N
+        playerHp.setForeground(new java.awt.Color(51, 51, 51));
+        playerPanel.add(playerHp);
+        playerHp.setBounds(280, 30, 50, 30);
 
         levelLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         levelLabel.setForeground(new java.awt.Color(102, 102, 102));
@@ -109,18 +111,32 @@ public class GameFrame extends javax.swing.JFrame {
         playerPanel.add(playerExp);
         playerExp.setBounds(110, 80, 210, 30);
 
-        nameLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        nameLabel.setForeground(new java.awt.Color(102, 102, 102));
-        nameLabel.setText("Name:");
-        nameLabel.setPreferredSize(new java.awt.Dimension(1280, 720));
-        playerPanel.add(nameLabel);
-        nameLabel.setBounds(100, 30, 60, 30);
+        hpLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        hpLabel.setForeground(new java.awt.Color(102, 102, 102));
+        hpLabel.setText("HP:");
+        hpLabel.setPreferredSize(new java.awt.Dimension(1280, 720));
+        playerPanel.add(hpLabel);
+        hpLabel.setBounds(240, 30, 30, 30);
 
         playerLevel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 14)); // NOI18N
         playerLevel.setForeground(new java.awt.Color(51, 51, 51));
         playerLevel.setText("0");
         playerPanel.add(playerLevel);
         playerLevel.setBounds(70, 80, 40, 30);
+
+        nameLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        nameLabel.setForeground(new java.awt.Color(102, 102, 102));
+        nameLabel.setText("Name:");
+        nameLabel.setPreferredSize(new java.awt.Dimension(1280, 720));
+        playerPanel.add(nameLabel);
+        nameLabel.setBounds(50, 30, 60, 30);
+
+        playerName.setBackground(new java.awt.Color(255, 255, 255));
+        playerName.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 14)); // NOI18N
+        playerName.setForeground(new java.awt.Color(51, 51, 51));
+        playerName.setText("test");
+        playerPanel.add(playerName);
+        playerName.setBounds(110, 30, 130, 30);
 
         getContentPane().add(playerPanel);
         playerPanel.setBounds(810, 30, 340, 560);
@@ -288,11 +304,13 @@ public class GameFrame extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton dungeonButton;
     private javax.swing.JLabel dungeonLabel;
+    private javax.swing.JLabel hpLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel playerAvatar;
     private javax.swing.JProgressBar playerExp;
+    private javax.swing.JLabel playerHp;
     private javax.swing.JLabel playerLevel;
     private javax.swing.JLabel playerName;
     private javax.swing.JPanel playerPanel;

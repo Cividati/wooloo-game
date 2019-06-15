@@ -199,6 +199,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         originalFrame.setEnabled(true);
+        this.dispose();
         
         if(originalFrame instanceof ShopFrame)
         {
@@ -216,7 +217,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         else
             System.out.println("Slider used without being called by a configured frame...");
         
-        this.dispose();
+        
         
     }//GEN-LAST:event_okButtonActionPerformed
 

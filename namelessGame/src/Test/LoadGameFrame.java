@@ -34,6 +34,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
             strLabel.setText("Strength: " + player.getStr());
             constLabel.setText("Constitution: " + player.getCon());
             agiLabel.setText("Agility: " + player.getAgi());
+            hpLabel.setText("Max HP: " + player.getMaxHealth());
             expBar.setValue((int)((float)player.getExp() / player.getExpNeededToLevelUp()) * 100);
             expBar.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
             playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
@@ -51,6 +52,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         strLabel.setText("Strength: ");
         constLabel.setText("Constitution: ");
         agiLabel.setText("Agility: ");
+        hpLabel.setText("Max HP: ");
         expBar.setValue(0);
         expBar.setToolTipText("");
         playerAvatar.setVisible(false);
@@ -133,6 +135,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         expBar = new javax.swing.JProgressBar();
         strLabel = new javax.swing.JLabel();
         agiLabel = new javax.swing.JLabel();
+        hpLabel = new javax.swing.JLabel();
         constLabel = new javax.swing.JLabel();
         playerGoldLabel = new javax.swing.JLabel();
         name1 = new javax.swing.JLabel();
@@ -200,6 +203,13 @@ public class LoadGameFrame extends javax.swing.JFrame {
         agiLabel.setText("Agility: ");
         getContentPane().add(agiLabel);
         agiLabel.setBounds(900, 410, 210, 30);
+
+        hpLabel.setBackground(new java.awt.Color(0, 0, 0));
+        hpLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
+        hpLabel.setForeground(new java.awt.Color(204, 204, 204));
+        hpLabel.setText("Max HP:");
+        getContentPane().add(hpLabel);
+        hpLabel.setBounds(980, 530, 190, 30);
 
         constLabel.setBackground(new java.awt.Color(0, 0, 0));
         constLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -586,6 +596,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteButton;
     private javax.swing.JProgressBar expBar;
     private javax.swing.JLabel goldLabel;
+    private javax.swing.JLabel hpLabel;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;

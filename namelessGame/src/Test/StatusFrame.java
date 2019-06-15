@@ -14,6 +14,7 @@ public class StatusFrame extends javax.swing.JFrame {
     private int str;
     private int agi;
     private int con;
+    private int maxHp;
     
     /**
      * Creates new form StatusFrame
@@ -27,12 +28,14 @@ public class StatusFrame extends javax.swing.JFrame {
         str = player.getStr();
         agi = player.getAgi();
         con = player.getCon();
+        maxHp = player.getMaxHealth();
         
         playerName.setText(player.getName());
         playerGold.setText(Long.toString(player.getGold()));
         playerStr.setText(Integer.toString(str));
         playerAgi.setText(Integer.toString(agi));
         playerConst.setText(Integer.toString(con));
+        playerHp.setText(Integer.toString(maxHp));
         playerLevel.setText(Integer.toString(player.getLevel()));
         playerExp.setStringPainted(true);
         playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);       
@@ -45,21 +48,33 @@ public class StatusFrame extends javax.swing.JFrame {
         
         path = playerEquip.get(Game.HEAD) != null ? (playerEquip.get(Game.HEAD)).getIcon() : "/namelessgame/img/slots/head.png";       
         playerHead.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
+        if(playerEquip.get(Game.HEAD) != null)
+            playerHead.setToolTipText(playerEquip.get(Game.HEAD).getDescr());
         
         path = playerEquip.get(Game.BODY) != null ? (playerEquip.get(Game.BODY)).getIcon() : "/namelessgame/img/slots/body.png";
-        playerBody.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));  
+        playerBody.setIcon(new javax.swing.ImageIcon(getClass().getResource(path))); 
+        if(playerEquip.get(Game.BODY) != null)
+            playerBody.setToolTipText(playerEquip.get(Game.BODY).getDescr());
         
         path = playerEquip.get(Game.WEAPON) != null ? (playerEquip.get(Game.WEAPON)).getIcon() : "/namelessgame/img/slots/right-hand.png";
-        playerWeapon.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));  
+        playerWeapon.setIcon(new javax.swing.ImageIcon(getClass().getResource(path))); 
+        if(playerEquip.get(Game.WEAPON) != null)
+            playerWeapon.setToolTipText(playerEquip.get(Game.WEAPON).getDescr());
         
         path = playerEquip.get(Game.SHIELD) != null ? (playerEquip.get(Game.SHIELD)).getIcon() : "/namelessgame/img/slots/left-hand.png";
         playerShield.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));  
+        if(playerEquip.get(Game.SHIELD) != null)
+            playerShield.setToolTipText(playerEquip.get(Game.SHIELD).getDescr());
         
         path = playerEquip.get(Game.LEGS) != null ? (playerEquip.get(Game.LEGS)).getIcon() : "/namelessgame/img/slots/legs.png";
         playerLegs.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));  
+        if(playerEquip.get(Game.LEGS) != null)
+            playerLegs.setToolTipText(playerEquip.get(Game.LEGS).getDescr());
         
         path = playerEquip.get(Game.BOOTS) != null ? (playerEquip.get(Game.BOOTS)).getIcon() : "/namelessgame/img/slots/feet.png";
         playerBoots.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));  
+        if(playerEquip.get(Game.BOOTS) != null)
+            playerBoots.setToolTipText(playerEquip.get(Game.BOOTS).getDescr());
     }
 
     /**
@@ -86,6 +101,8 @@ public class StatusFrame extends javax.swing.JFrame {
         playerConst = new javax.swing.JLabel();
         constLabel = new javax.swing.JLabel();
         confirmButton = new javax.swing.JButton();
+        hpLabel = new javax.swing.JLabel();
+        playerHp = new javax.swing.JLabel();
         equipmentsPanel = new javax.swing.JPanel();
         playerLegs = new javax.swing.JLabel();
         playerBody = new javax.swing.JLabel();
@@ -189,12 +206,20 @@ public class StatusFrame extends javax.swing.JFrame {
             }
         });
 
+        hpLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        hpLabel.setForeground(new java.awt.Color(102, 102, 102));
+        hpLabel.setText("Max HP:");
+
+        playerHp.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        playerHp.setForeground(new java.awt.Color(0, 0, 0));
+        playerHp.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -208,9 +233,18 @@ public class StatusFrame extends javax.swing.JFrame {
                                     .addComponent(playerStr, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(constLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(playerConst, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(hpLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(playerHp, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(constLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(playerConst, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addStrButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,11 +255,7 @@ public class StatusFrame extends javax.swing.JFrame {
                         .addComponent(pointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(playerPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,13 +279,17 @@ public class StatusFrame extends javax.swing.JFrame {
                     .addComponent(addConstButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(constLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(playerConst, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(playerHp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(920, 180, 280, 320);
+        jPanel1.setBounds(920, 180, 280, 340);
 
         equipmentsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 18), new java.awt.Color(102, 102, 102))); // NOI18N
         equipmentsPanel.setLayout(null);
@@ -365,9 +399,11 @@ public class StatusFrame extends javax.swing.JFrame {
         }
         
         str++;
+        maxHp = Player.getMaxHealth(str, con);
         statusPoints--;
         
         playerStr.setText(Integer.toString(str));
+        playerHp.setText(Integer.toString(maxHp));
         playerPoints.setText(Integer.toString(statusPoints));
     }//GEN-LAST:event_addStrButtonActionPerformed
 
@@ -395,9 +431,11 @@ public class StatusFrame extends javax.swing.JFrame {
         }
         
         con++;
+        maxHp = Player.getMaxHealth(str, con);
         statusPoints--;
         
         playerConst.setText(Integer.toString(con));
+        playerHp.setText(Integer.toString(maxHp));
         playerPoints.setText(Integer.toString(statusPoints));
     }//GEN-LAST:event_addConstButtonActionPerformed
 
@@ -456,6 +494,7 @@ public class StatusFrame extends javax.swing.JFrame {
     private javax.swing.JLabel constLabel;
     private javax.swing.JPanel equipmentsPanel;
     private javax.swing.JLabel goldLabel;
+    private javax.swing.JLabel hpLabel;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel levelLabel;
@@ -468,6 +507,7 @@ public class StatusFrame extends javax.swing.JFrame {
     private javax.swing.JProgressBar playerExp;
     private javax.swing.JLabel playerGold;
     private javax.swing.JLabel playerHead;
+    private javax.swing.JLabel playerHp;
     private javax.swing.JLabel playerLegs;
     private javax.swing.JLabel playerLevel;
     private javax.swing.JLabel playerName;

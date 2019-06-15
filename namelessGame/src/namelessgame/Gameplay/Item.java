@@ -136,4 +136,37 @@ public class Item implements Cloneable {
         this.stackable = stackable;
     }
     
+    public String getDescr()
+    {
+        return "<html>" + getName() +               
+                (isStackable() ? (" - " + getCount() + "x unit(s).") : "") + "<br><br>" +
+                (isPotion() ? ("Heals for <font color=\"green\">" + getHeal() + "</font> health.") : ("" +
+                "Strenght: " + getStr() + "<br>" +
+                "Agility: " + getAgi() + "<br>" +
+                "Constitution: " + getCon() + "<br>")) +
+                "</html>";
+    }
+    
+    public String getDescr(Player player)
+    {
+        int strDiff = player.getStr(this) - player.getStr();
+        int agiDiff = player.getAgi(this) - player.getAgi();
+        int conDiff = player.getCon(this) - player.getCon();
+        int hpDiff = player.getMaxHealth(this) - player.getMaxHealth();
+
+        String strFont = strDiff > 0 ? "\"green\"" : "\"red\"";
+        String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
+        String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
+        String hpFont = hpDiff > 0 ? "\"green\"" : "\"red\"";
+
+        return "<html>" + getName() +               
+                (isStackable() ? (" - " + getCount() + "x unit(s).") : "") + "<br><br>" +
+                (isPotion() ? ("Heals for <font color=\"green\">" + getHeal() + "</font> health.") : ("" +
+                "Strenght: " + getStr() + " (<font color=" + strFont + ">" + (strDiff > 0 ? ("+" + strDiff) : strDiff) + "</font>)<br>" +
+                "Agility: " + getAgi() + " (<font color=" + agiFont + ">" + (agiDiff > 0 ? ("+" + agiDiff) : agiDiff) + "</font>)<br>" +
+                "Constitution: " + getCon() + " (<font color=" + conFont + ">" + (conDiff > 0 ? ("+" + conDiff) : conDiff) + "</font>)<br>" +
+                "<font color =" + hpFont + ">" + (hpDiff > 0 ? ("+" + hpDiff) : hpDiff) + " health points</font><br>")) +
+                "</html>";
+    }
+    
 }
