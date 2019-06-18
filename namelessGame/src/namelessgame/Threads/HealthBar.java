@@ -74,6 +74,7 @@ public class HealthBar extends Thread {
                 // tomou dmg
                 
                 hpLabelValue--;
+                diffHp--;
                 
                 
             }
@@ -83,6 +84,7 @@ public class HealthBar extends Thread {
                 // healou
                 
                 hpLabelValue++;
+                diffHp++;
             }
             
             hpLabel.setText(Integer.toString(hpLabelValue));

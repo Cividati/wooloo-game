@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
-import namelessgame.Exception.StashFullException;
+import namelessgame.Exception.InventoryFullException;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
@@ -40,10 +40,10 @@ public class DefeatFrame extends javax.swing.JFrame {
     
     private Player player = Game.getPlayer();
     
-    private List<Item> stash = player.getStash();
+    private List<Item> inventory = player.getInventory();
     private List<Item> loot = Game.getLoot();
     
-    private javax.swing.JPanel stashPanel = new javax.swing.JPanel();
+    private javax.swing.JPanel inventoryPanel = new javax.swing.JPanel();
     private javax.swing.JPanel lootPanel = new javax.swing.JPanel();
     private DataFlavor dataFlavor = new DataFlavor(Item.class,
                     Item.class.getSimpleName());
@@ -53,14 +53,14 @@ public class DefeatFrame extends javax.swing.JFrame {
         
         player.setExp((int) (player.getExp() * 0.9));
         
-        updatePlayerStash();
+        updatePlayerInventory();
         updatePlayerLoot();
         
-        stashPanel.setLayout(new GridLayout(Game.MAX_STASH_SIZE / Game.STASH_COLUMNS, Game.STASH_COLUMNS));
-        stashPanel.setVisible(true);
+        inventoryPanel.setLayout(new GridLayout(Game.MAX_INVENTORY_SIZE / Game.INVENTORY_COLUMNS, Game.INVENTORY_COLUMNS));
+        inventoryPanel.setVisible(true);
         
-        add(stashPanel);
-        stashScrollPane.getViewport().add(stashPanel, null);
+        add(inventoryPanel);
+        inventoryScrollPane.getViewport().add(inventoryPanel, null);
         
         lootPanel.setLayout(new GridLayout(Game.MAX_INVENTORY_SIZE / Game.INVENTORY_COLUMNS, Game.INVENTORY_COLUMNS));
         lootPanel.setVisible(true);
@@ -97,7 +97,7 @@ public class DefeatFrame extends javax.swing.JFrame {
         if(fromContainer != toContainer && toItem != null && item.getId() != toItem.getId() && player.isContainerFull(toContainer))
         {
             Game.sendErrorMessage("Your " +
-                                         (toContainer == stash ? "stash" : "loot container") + " is full.");
+                                         (toContainer == inventory ? "inventory" : "loot container") + " is full.");
 
             return;
         }
@@ -116,9 +116,9 @@ public class DefeatFrame extends javax.swing.JFrame {
             {
                 player.addItemToContainer(toItem, toContainer);
             }
-            catch(StashFullException e)
+            catch(InventoryFullException e)
             {
-                Game.sendErrorMessage("Your stash is full.");
+                Game.sendErrorMessage("Your inventory is full.");
             }
             
         }
@@ -153,20 +153,20 @@ public class DefeatFrame extends javax.swing.JFrame {
 
     }
     
-    public void updatePlayerStash()
+    public void updatePlayerInventory()
     {
         String path;
         
-        stashPanel.removeAll();
-        stashPanel.revalidate();
-        stashPanel.repaint();
+        inventoryPanel.removeAll();
+        inventoryPanel.revalidate();
+        inventoryPanel.repaint();
         
-        for(int i = 0; i < Game.MAX_STASH_SIZE; i++)
+        for(int i = 0; i < Game.MAX_INVENTORY_SIZE; i++)
         {
             Item item = null;
             
-            if(i < stash.size())
-                item = stash.get(i);                    
+            if(i < inventory.size())
+                item = inventory.get(i);                    
             
             ItemLabel itemLabel = new ItemLabel();                 
             
@@ -178,9 +178,9 @@ public class DefeatFrame extends javax.swing.JFrame {
             if(item != null)
                 itemLabel.setToolTipText(item.getDescr(player));
             
-            stashPanel.add(itemLabel);
+            inventoryPanel.add(itemLabel);
             
-            new MyDropTargetListImp(itemLabel, stashPanel);
+            new MyDropTargetListImp(itemLabel, inventoryPanel);
         }
   
     }
@@ -193,7 +193,7 @@ public class DefeatFrame extends javax.swing.JFrame {
         lootPanel.revalidate();
         lootPanel.repaint();
         
-        for(int i = 0; i < Game.MAX_STASH_SIZE; i++)
+        for(int i = 0; i < Game.MAX_INVENTORY_SIZE; i++)
         {
             Item item = null;
             
@@ -224,10 +224,10 @@ public class DefeatFrame extends javax.swing.JFrame {
     {
         JPanel panel = null;
         
-        for(Component c : stashPanel.getComponents())
+        for(Component c : inventoryPanel.getComponents())
         {
             if(c == comp)
-                return stashPanel;
+                return inventoryPanel;
         }
         for(Component c : lootPanel.getComponents())
         {
@@ -316,8 +316,8 @@ public class DefeatFrame extends javax.swing.JFrame {
     
     public void updateContainer(List<Item> container)
     {
-        if(container == stash)
-            updatePlayerStash();
+        if(container == inventory)
+            updatePlayerInventory();
         else
             updatePlayerLoot();
     }
@@ -363,14 +363,14 @@ public class DefeatFrame extends javax.swing.JFrame {
 
                     Map<Integer, Item> equip = player.getEquip();
 
-                    if(toPanel == stashPanel)
+                    if(toPanel == inventoryPanel)
                     {
-                        // dropped on stash
+                        // dropped on inventory
                         
                         if(fromPanel != null)
-                            fromItemContainer = fromPanel == stashPanel ? stash : loot;
+                            fromItemContainer = fromPanel == inventoryPanel ? inventory : loot;
                         
-                        toItemContainer = toPanel == stashPanel ? stash : loot;
+                        toItemContainer = toPanel == inventoryPanel ? inventory : loot;
                         
                         // check if is empty space or not (empty space -> local item == null):
                             // if isn't
@@ -405,7 +405,7 @@ public class DefeatFrame extends javax.swing.JFrame {
                             if(fromItemContainer != toItemContainer && player.isContainerFull(toItemContainer))
                             {
                                 Game.sendErrorMessage("Your " +
-                                                             (toItemContainer == stash ? "stash" : "loot container") + " is full.");
+                                                             (toItemContainer == inventory ? "inventory" : "loot container") + " is full.");
 
                                 event.dropComplete(true);
                                 return;
@@ -456,7 +456,7 @@ public class DefeatFrame extends javax.swing.JFrame {
         infoText2 = new javax.swing.JLabel();
         okayButton = new javax.swing.JButton();
         lootScrollPane = new javax.swing.JScrollPane();
-        stashScrollPane = new javax.swing.JScrollPane();
+        inventoryScrollPane = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -498,9 +498,9 @@ public class DefeatFrame extends javax.swing.JFrame {
         getContentPane().add(lootScrollPane);
         lootScrollPane.setBounds(20, 250, 250, 180);
 
-        stashScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Stash", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-        getContentPane().add(stashScrollPane);
-        stashScrollPane.setBounds(290, 250, 250, 180);
+        inventoryScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        getContentPane().add(inventoryScrollPane);
+        inventoryScrollPane.setBounds(290, 250, 250, 180);
 
         pack();
         setLocationRelativeTo(null);
@@ -554,8 +554,8 @@ public class DefeatFrame extends javax.swing.JFrame {
     private javax.swing.JLabel infoText1;
     private javax.swing.JLabel infoText2;
     private javax.swing.JLabel infoText3;
+    private javax.swing.JScrollPane inventoryScrollPane;
     private javax.swing.JScrollPane lootScrollPane;
     private javax.swing.JButton okayButton;
-    private javax.swing.JScrollPane stashScrollPane;
     // End of variables declaration//GEN-END:variables
 }

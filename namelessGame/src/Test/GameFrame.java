@@ -28,6 +28,8 @@ public class GameFrame extends javax.swing.JFrame {
      * Creates new form GameFrame
      */
     public GameFrame() {
+        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
+        
         Player player = Game.getPlayer();
         
         initComponents();
@@ -37,7 +39,7 @@ public class GameFrame extends javax.swing.JFrame {
         playerLevel.setText(Integer.toString(player.getLevel()));
         
         playerExp.setStringPainted(true);
-        playerExp.setValue((player.getExp() / player.getTotalExpToLevelUp()) * 100);
+        playerExp.setValue((int) (((double) player.getExp() / player.getTotalExpToLevelUp()) * 100)); 
         playerExp.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
         playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
         

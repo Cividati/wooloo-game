@@ -52,13 +52,15 @@ public class BattleFrame extends javax.swing.JFrame {
     private List<Item> inventory = player.getInventory();
     private Map<javax.swing.JButton, Item> potionMap = new HashMap<>();
     
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
     public BattleFrame() {
+        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 0)));
+        
         initComponents();
     }
     
     public BattleFrame(Creature target, String background) { 
+        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 0)));
+        
         initComponents();
         
         this.target = target;
@@ -85,15 +87,17 @@ public class BattleFrame extends javax.swing.JFrame {
         
     }
     
-    public void doCombat(Creature attacker, Creature target)
+    public int doCombat(Creature attacker, Creature target)
     {
         if(attacker.getHealth() <= 0 || target.getHealth() <= 0)
-            return;
+            return 0;
         
-        int damageDealt = attacker.getDamageToTarget(target);
+        int damageDealt;
         int hits = attacker.getHits();
         
-        //setEnabled(false);
+        String damageMessage = "";
+        
+        setEnabled(false);
         
         // diminuir barra de HP
         // att texto de HP
@@ -109,7 +113,9 @@ public class BattleFrame extends javax.swing.JFrame {
         {
             // You dealt 3000 damage to x
             // You took 3000 damage from x
-            displayMessage((attacker == player ? "You dealt " : "You took ") + damageDealt + " damage " + (attacker == player ? "to " : "from ") + target.getName());
+            damageDealt = attacker.getDamageToTarget(target);
+            
+            damageMessage += (attacker == player ? "You dealt " : "You took ") + damageDealt + " damage " + (attacker == player ? "to " : "from ") + this.target.getName() + "!\n";
             
             target.addHealth(-damageDealt);
             
@@ -121,12 +127,17 @@ public class BattleFrame extends javax.swing.JFrame {
         
         updateHealthBar(target, totalHits * Shake.getShakes() * 100);
         
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        final String displayDamage = damageMessage;
+        
         ScheduledFuture<?> countdown = scheduler.schedule(new Runnable() {
             @Override
             public void run() {
                 // after updating hp bar
                 
-                //setEnabled(true);
+                setEnabled(true);
+                
+                displayMessage(displayDamage);
                 
                 if(target.getHealth() <= 0)
                 {
@@ -161,6 +172,8 @@ public class BattleFrame extends javax.swing.JFrame {
             }}, totalHits * Shake.getShakes() * 100, TimeUnit.MILLISECONDS);
         
         scheduler.shutdown();
+        
+        return totalHits * Shake.getShakes() * 100;
     }
     
     public void generateLoot(Monster monster, Random random)
@@ -220,6 +233,9 @@ public class BattleFrame extends javax.swing.JFrame {
         
         int diffHp = initialHealth - finalHealth;
         
+        if(diffHp == 0)
+            return;
+        
         // totaltime - hpdiff
         // x - 1 hp
         int timePerHealthPoint = totalTime / Math.abs(diffHp);
@@ -240,7 +256,7 @@ public class BattleFrame extends javax.swing.JFrame {
         log += "\n" + message;
         
         display.setText(log);
-        
+       
         if(scrollPane.getViewport().getComponentCount() == 0 || !(scrollPane.getViewport().getComponent(0) instanceof JTextArea))
         {
             scrollPane.getViewport().removeAll();
@@ -462,8 +478,17 @@ public class BattleFrame extends javax.swing.JFrame {
             secondToAttack = random == 0 ? target : player;
         }
         
-        doCombat(firstToAttack, secondToAttack);
-        doCombat(secondToAttack, firstToAttack);
+        int duration = doCombat(firstToAttack, secondToAttack);
+
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        
+        ScheduledFuture<?> countdown = scheduler.schedule(new Runnable() {
+            @Override
+            public void run() {
+                doCombat(secondToAttack, firstToAttack);
+            }}, duration, TimeUnit.MILLISECONDS);
+        
+        scheduler.shutdown();
     }//GEN-LAST:event_attackButtonActionPerformed
 
     private void potionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potionButtonActionPerformed
@@ -522,26 +547,32 @@ public class BattleFrame extends javax.swing.JFrame {
         
         int healAmount = item.getHeal();
         
+        int hpInitial = player.getHealth();
+        
         player.addHealth(healAmount);
         
-        updateHealthBar(player, 5 * healAmount);
+        int hpFinal = player.getHealth();
         
-        //setEnabled(false);
+        int time = (hpFinal - hpInitial) * 50;
         
-        displayMessage("\nYou recovered " + healAmount + " HP.");
+        // 50ms per health point
+        updateHealthBar(player, time);
         
-        ActionListener taskPerformer = new ActionListener() {
+        setEnabled(false);
+        
+        displayMessage("You recovered " + healAmount + " HP.\n");
+        
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        
+        ScheduledFuture<?> countdown = scheduler.schedule(new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
-                // after updating hp bar
+            public void run() {
+                setEnabled(true);
                 
-                //setEnabled(true);
-                
-                doCombat(target, player);               
-            }
-        };
-        new Timer(5 * healAmount, taskPerformer).start();
-
+                doCombat(target, player);     
+            }}, time, TimeUnit.MILLISECONDS);
+        
+        scheduler.shutdown();
     }
     
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
@@ -577,9 +608,6 @@ public class BattleFrame extends javax.swing.JFrame {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    
-                    // change progress bar color
-                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 0)));
                     break;
                 }
             }

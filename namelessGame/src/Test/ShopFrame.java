@@ -49,7 +49,7 @@ public class ShopFrame extends javax.swing.JFrame {
 
             Game.sendSuccessMessage("You bought " + count + "x " + item.getName() + "(s).");
             player.setGold(pGold);
-            playerGold.setText(Long.toString(pGold));
+            playerGold.setText(pGold + " G");
             setEnabled(true);
         }
         catch(StashFullException e)
@@ -66,7 +66,7 @@ public class ShopFrame extends javax.swing.JFrame {
         
         setPlayer(Game.getPlayer());
         
-        playerGold.setText(Long.toString(player.getGold()));
+        playerGold.setText(player.getGold() + " G");
 
         for (ShopItem item : Game.getShop()) {
             javax.swing.JButton itemButton = new javax.swing.JButton();
@@ -145,7 +145,7 @@ public class ShopFrame extends javax.swing.JFrame {
 
                 Game.sendSuccessMessage("You bought a(n) " + item.getName() + ".");
                 player.setGold(pGold);
-                playerGold.setText(Long.toString(pGold));
+                playerGold.setText(pGold + " G");
             }
             catch(StashFullException e)
             {

@@ -38,10 +38,10 @@ public class DungeonFrame extends javax.swing.JFrame {
             Dungeon dungeon1Data = Game.getDungeons().get(0);
             
             dungeonMap.put(dungeon1, dungeon1Data);
-            dungeon1.setToolTipText("<html>" +
-                                    dungeon1Data.getName() + "<br><br>" +
+            dungeon1.setToolTipText("<html><h1>" +
+                                    dungeon1Data.getName() + "</h1><br>" +
                                     dungeon1Data.getDescr() + "<br><br>" +
-                                    "Min lv.: <font color = " + (player.getLevel() >= dungeon1Data.getMinLv() ? "\"green\"" : "\"red\"") + ">" + dungeon1Data.getMinLv() + "</font><br></html>");
+                                    "Minimum level: <font color = " + (player.getLevel() >= dungeon1Data.getMinLv() ? "\"green\"" : "\"red\"") + ">" + dungeon1Data.getMinLv() + "</font><br></html>");
             
             dungeon1.addActionListener(new java.awt.event.ActionListener() {           
                 @Override

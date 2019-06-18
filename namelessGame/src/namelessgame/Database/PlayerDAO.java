@@ -92,7 +92,6 @@ public class PlayerDAO extends DAO {
                 
                 updateInventory += ";";
                 
-                System.out.println("4");
                 pst = con.prepareStatement(updateInventory);
                 pst.execute();
             }

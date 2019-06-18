@@ -119,8 +119,14 @@ public abstract class Creature {
     
     public int getDamageToTarget(Creature target)
     {
+        int extraDamageFactor = 2;
         int damage = (2 * getOffense()) - target.getDefense();
         
-        return (int) ((new Random()).nextInt((int) (0.4 * damage + 1)) + damage * 0.8);  
+        Random random = new Random();
+        
+        if(damage < 0)
+            damage = random.nextInt(5);
+        
+        return (int) (random.nextInt((int) (0.4 * damage + 1)) + damage * 0.8); 
     }
 }

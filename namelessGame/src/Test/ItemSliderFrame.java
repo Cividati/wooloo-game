@@ -171,6 +171,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         getContentPane().add(okButton);
         okButton.setBounds(60, 60, 60, 30);
 
+        amountSlider.setMinimum(1);
         amountSlider.setValue(1);
         amountSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {

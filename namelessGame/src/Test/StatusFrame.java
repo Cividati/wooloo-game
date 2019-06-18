@@ -22,6 +22,8 @@ public class StatusFrame extends javax.swing.JFrame {
      * Creates new form StatusFrame
      */
     public StatusFrame() {
+        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
+        
         Player player = Game.getPlayer();
         
         initComponents();
@@ -33,14 +35,14 @@ public class StatusFrame extends javax.swing.JFrame {
         maxHp = player.getMaxHealth();
         
         playerName.setText(player.getName());
-        playerGold.setText(Long.toString(player.getGold()));
+        playerGold.setText(player.getGold() + " G");
         playerStr.setText(Integer.toString(str));
         playerAgi.setText(Integer.toString(agi));
         playerConst.setText(Integer.toString(con));
         playerHp.setText(Integer.toString(maxHp));
         playerLevel.setText(Integer.toString(player.getLevel()));
         playerExp.setStringPainted(true);
-        playerExp.setValue((player.getExp() / player.getTotalExpToLevelUp()) * 100);       
+        playerExp.setValue((int) (((double) player.getExp() / player.getTotalExpToLevelUp()) * 100));    
         playerExp.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
         playerPoints.setText(Integer.toString(statusPoints));
         playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
@@ -359,13 +361,13 @@ public class StatusFrame extends javax.swing.JFrame {
         goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/icons/gold.png"))); // NOI18N
         goldLabel.setText("Gold:");
         playerPanel.add(goldLabel);
-        goldLabel.setBounds(210, 20, 79, 50);
+        goldLabel.setBounds(190, 20, 90, 50);
 
         playerGold.setFont(new java.awt.Font("OscineTrialW01-Regular", 1, 14)); // NOI18N
         playerGold.setForeground(new java.awt.Color(255, 255, 0));
         playerGold.setText("0 G");
         playerPanel.add(playerGold);
-        playerGold.setBounds(300, 30, 30, 30);
+        playerGold.setBounds(280, 30, 50, 30);
 
         playerLevel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerLevel.setForeground(new java.awt.Color(0, 0, 0));
@@ -445,8 +447,8 @@ public class StatusFrame extends javax.swing.JFrame {
         Player player = Game.getPlayer();
         
         player.setStr(player.getBaseStr() + (str - player.getStr()));
-        player.setAgi(player.getBaseAgi() + (str - player.getAgi()));
-        player.setCon(player.getBaseCon() + (str - player.getCon()));
+        player.setAgi(player.getBaseAgi() + (agi - player.getAgi()));
+        player.setCon(player.getBaseCon() + (con - player.getCon()));
         player.setStatusPoints(statusPoints);
     }//GEN-LAST:event_confirmButtonActionPerformed
 

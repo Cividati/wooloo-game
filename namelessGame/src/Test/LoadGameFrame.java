@@ -32,12 +32,12 @@ public class LoadGameFrame extends javax.swing.JFrame {
             
             playerNameLabel.setText("Name: " + player.getName() + " (" + player.getSex() + ")");
             levelLabel.setText("Level: " + player.getLevel());
-            playerGoldLabel.setText(Long.toString(player.getGold()));
+            playerGoldLabel.setText(player.getGold() + " G");
             strLabel.setText("Strength: " + player.getStr());
             constLabel.setText("Constitution: " + player.getCon());
             agiLabel.setText("Agility: " + player.getAgi());
             hpLabel.setText("Max HP: " + player.getMaxHealth());
-            expBar.setValue((int)((float)player.getExp() / player.getTotalExpToLevelUp()) * 100);
+            expBar.setValue((int) (((double) player.getExp() / player.getTotalExpToLevelUp()) * 100)); 
             expBar.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
             playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
             playerAvatar.setVisible(true);
@@ -61,6 +61,8 @@ public class LoadGameFrame extends javax.swing.JFrame {
     }
 
     public LoadGameFrame() {
+        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
+        
         initComponents();
         
         playerAvatar.setVisible(false);
@@ -222,7 +224,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
 
         playerGoldLabel.setBackground(new java.awt.Color(0, 0, 0));
         playerGoldLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
-        playerGoldLabel.setForeground(new java.awt.Color(204, 204, 204));
+        playerGoldLabel.setForeground(new java.awt.Color(255, 255, 0));
         getContentPane().add(playerGoldLabel);
         playerGoldLabel.setBounds(990, 150, 90, 20);
 
@@ -560,8 +562,6 @@ public class LoadGameFrame extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     
-                    // change progress bar color
-                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
                     break;
                 }
             }

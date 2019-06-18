@@ -19,8 +19,8 @@ public class Shake extends Thread {
     private JFrame frame;
     private int times;
     
-    final static private int FACTOR = 20;
-    final static private int SHAKES = 4;
+    final static private int FACTOR = 30;
+    final static private int SHAKES = 6;
 
     public JLabel getLabel() {
         return label;

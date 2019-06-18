@@ -20,7 +20,7 @@ public class Attack extends Thread {
     private int times;
     
     final static private int FACTOR = 20;
-    final static private int TACKLES = 2;
+    final static private int TACKLES = 4;
 
     public JLabel getLabel() {
         return label;
@@ -69,7 +69,7 @@ public class Attack extends Thread {
                 if(i == getTackles())
                     signal *= -1;
 
-                try { Thread.sleep (100); } catch (InterruptedException ex) {}
+                try { Thread.sleep (50); } catch (InterruptedException ex) {}
             }
         }
         

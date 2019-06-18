@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import namelessgame.Exception.StashFullException;
+import namelessgame.Exception.InventoryFullException;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
@@ -61,6 +61,8 @@ public class VictoryFrame extends javax.swing.JFrame {
     }
     
     public VictoryFrame(int gold, int exp) {
+        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
+        
         initComponents();
         
         statusPoints = player.getStatusPoints();
@@ -76,7 +78,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         playerPoints.setText(Integer.toString(statusPoints));
         playerLevel.setText(Integer.toString(player.getLevel()));
         playerExp.setStringPainted(true);
-        playerExp.setValue((player.getExp() / player.getTotalExpToLevelUp()) * 100);       
+        playerExp.setValue((int) (((double) player.getExp() / player.getTotalExpToLevelUp()) * 100));  
         playerExp.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
         receivedGold.setText(gold + " G");
         receivedExp.setText("(+ " + exp + ")");
@@ -88,7 +90,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         inventoryPanel.setVisible(true);
         
         add(inventoryPanel);
-        stashScrollPane.getViewport().add(inventoryPanel, null);
+        inventoryScrollPane.getViewport().add(inventoryPanel, null);
         
         lootPanel.setLayout(new GridLayout(Game.MAX_INVENTORY_SIZE / Game.INVENTORY_COLUMNS, Game.INVENTORY_COLUMNS));
         lootPanel.setVisible(true);
@@ -145,9 +147,9 @@ public class VictoryFrame extends javax.swing.JFrame {
             {
                 player.addItemToContainer(toItem, toContainer);
             }
-            catch(StashFullException e)
+            catch(InventoryFullException e)
             {
-                Game.sendErrorMessage("Your stash is full.");
+                Game.sendErrorMessage("Your inventory is full.");
             }
             
         }
@@ -500,7 +502,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         hpLabel = new javax.swing.JLabel();
         playerHp = new javax.swing.JLabel();
         confirmButton = new javax.swing.JButton();
-        stashScrollPane = new javax.swing.JScrollPane();
+        inventoryScrollPane = new javax.swing.JScrollPane();
         lootScrollPane = new javax.swing.JScrollPane();
         nextButton = new javax.swing.JButton();
 
@@ -647,9 +649,9 @@ public class VictoryFrame extends javax.swing.JFrame {
         getContentPane().add(confirmButton);
         confirmButton.setBounds(620, 220, 108, 55);
 
-        stashScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-        getContentPane().add(stashScrollPane);
-        stashScrollPane.setBounds(290, 250, 250, 180);
+        inventoryScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        getContentPane().add(inventoryScrollPane);
+        inventoryScrollPane.setBounds(290, 250, 250, 180);
 
         lootScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Loot", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(lootScrollPane);
@@ -719,11 +721,9 @@ public class VictoryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addConstButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        Player player = Game.getPlayer();
-
         player.setStr(player.getBaseStr() + (str - player.getStr()));
-        player.setAgi(player.getBaseAgi() + (str - player.getAgi()));
-        player.setCon(player.getBaseCon() + (str - player.getCon()));
+        player.setAgi(player.getBaseAgi() + (agi - player.getAgi()));
+        player.setCon(player.getBaseCon() + (con - player.getCon()));
         player.setStatusPoints(statusPoints);
     }//GEN-LAST:event_confirmButtonActionPerformed
 
@@ -781,6 +781,7 @@ public class VictoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel goldLabel;
     private javax.swing.JLabel hpLabel;
     private javax.swing.JPanel infoPanel;
+    private javax.swing.JScrollPane inventoryScrollPane;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JScrollPane lootScrollPane;
     private javax.swing.JButton nextButton;
@@ -794,7 +795,6 @@ public class VictoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel pointsLabel;
     private javax.swing.JLabel receivedExp;
     private javax.swing.JLabel receivedGold;
-    private javax.swing.JScrollPane stashScrollPane;
     private javax.swing.JLabel strLabel;
     // End of variables declaration//GEN-END:variables
 }
