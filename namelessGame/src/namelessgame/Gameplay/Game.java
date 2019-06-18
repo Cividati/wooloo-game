@@ -1,7 +1,10 @@
 package namelessgame.Gameplay;
 
+import Test.BattleFrame;
+import Test.GameFrame;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import namelessgame.Database.ItemDAO;
 
 public class Game {
@@ -34,6 +37,10 @@ public class Game {
     
     private static List<Dungeon> dungeons = null;
     private static List<ShopItem> shop = new ArrayList<>();
+    private static List<Item> loot;
+    
+    private static Dungeon exploredDungeon;
+    private static int roundNow;
 
     public static Player getPlayer() {
         return loggedPlayer;
@@ -107,7 +114,55 @@ public class Game {
         addItemToShop("Small Health Potion", 0);
         addItemToShop("Small Health Potion", 10);
         
+    }
 
+    public static List<Item> getLoot() {
+        return loot;
+    }
+
+    public static void setLoot(List<Item> loot) {
+        Game.loot = loot;
+    }
+    
+    public static void addLoot(Item item)
+    {
+        getLoot().add(item);
+    }
+    
+    public static void exploreDungeon()
+    {
+        try
+        {
+            Monster target = exploredDungeon.getMonsters().get(roundNow);
+            
+            (new BattleFrame(target, exploredDungeon.getBackground())).setVisible(true);
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            (new GameFrame()).setVisible(true);
+
+            sendSuccessMessage("You successfully cleared this dungeon! Good job.");
+        }
+    }
+    
+    public static void advanceDungeon()
+    {
+        roundNow++;
+        
+        exploreDungeon();
+    }
+    
+    public static void startExploringDungeon(Dungeon dungeon) 
+    {
+        exploredDungeon = dungeon;
+        roundNow = 0;
+        
+        getPlayer().setHealth(getPlayer().getMaxHealth());
+        
+        loot = new ArrayList<>();
+        
+        exploreDungeon();
+        
     }
     
 }

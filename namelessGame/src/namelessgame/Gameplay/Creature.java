@@ -1,5 +1,7 @@
 package namelessgame.Gameplay;
 
+import java.util.Random;
+
 /**
  *
  * @author Henrique Barcia Lang
@@ -7,6 +9,7 @@ package namelessgame.Gameplay;
 public abstract class Creature {
     private String name;
     protected String avatar;
+    private int HP;
 
     /* Status base (sem equip. no caso de players) */
     private int str;
@@ -64,4 +67,60 @@ public abstract class Creature {
     }
     
     public abstract String getAvatar();
+    
+    public int getMaxHealth()
+    {
+        return (3 * getCon()) + getStr();
+    }
+    
+    public static int getMaxHealth(int str, int con)
+    {
+        return (3 * con) + str;
+    }
+    
+    public int getHealth() {
+        return HP;
+    }
+    
+    public void addHealth(int HP)
+    {
+        this.HP += HP;
+        
+        if(this.HP > this.getMaxHealth())
+            this.HP = this.getMaxHealth();
+    }
+
+    public void setHealth(int HP) {
+        this.HP = HP;
+        
+        if(this.HP > this.getMaxHealth())
+            this.HP = this.getMaxHealth();
+    }
+    
+    public int getMaxHits()
+    {
+        return 1 + (getAgi() / 100);
+    }
+    
+    public int getHits()
+    {
+        return (new Random()).nextInt(getMaxHits()) + 1;
+    }
+    
+    public int getOffense()
+    {
+        return (int) (0.35 * getStr() + 0.15 * getAgi() + 0.1 * getCon());
+    }
+    
+    public int getDefense()
+    {
+        return (int) (0.4 * getCon() + 0.2 * getAgi());
+    }
+    
+    public int getDamageToTarget(Creature target)
+    {
+        int damage = (2 * getOffense()) - target.getDefense();
+        
+        return (int) ((new Random()).nextInt((int) (0.4 * damage + 1)) + damage * 0.8);  
+    }
 }

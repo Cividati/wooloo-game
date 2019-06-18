@@ -1,8 +1,10 @@
 package Test;
 
+import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.UIManager;
 import namelessgame.Database.PlayerDAO;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
@@ -35,8 +37,8 @@ public class LoadGameFrame extends javax.swing.JFrame {
             constLabel.setText("Constitution: " + player.getCon());
             agiLabel.setText("Agility: " + player.getAgi());
             hpLabel.setText("Max HP: " + player.getMaxHealth());
-            expBar.setValue((int)((float)player.getExp() / player.getExpNeededToLevelUp()) * 100);
-            expBar.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
+            expBar.setValue((int)((float)player.getExp() / player.getTotalExpToLevelUp()) * 100);
+            expBar.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
             playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
             playerAvatar.setVisible(true);
             expBar.setVisible(true);
@@ -557,6 +559,9 @@ public class LoadGameFrame extends javax.swing.JFrame {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    
+                    // change progress bar color
+                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
                     break;
                 }
             }

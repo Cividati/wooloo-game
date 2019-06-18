@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author Henrique Barcia Lang
  */
-public class Monster extends Creature {
+public class Monster extends Creature implements Comparable<Monster> {
     private int id;
     private int expGiven;
     private int goldMin;
@@ -15,8 +15,9 @@ public class Monster extends Creature {
     
     private List<LootItem> loots;
     
-    public Monster(String name, int str, int agi, int con, int expGiven, int goldMin, int goldMax, int round, String avatar)
+    public Monster(int id, String name, int str, int agi, int con, int expGiven, int goldMin, int goldMax, int round, String avatar)
     {
+        setId(id);
         setName(name);
         setStr(str);
         setAgi(agi);
@@ -26,6 +27,7 @@ public class Monster extends Creature {
         setGoldMax(goldMax);
         setRound(round);
         setAvatar(avatar);
+        setHealth(getMaxHealth());
     }
 
     public int getId() {
@@ -81,5 +83,11 @@ public class Monster extends Creature {
     {
         return "/namelessgame/img/monsters/" + avatar + ".png";
     }
+
+    @Override
+    public int compareTo(Monster o) {
+        return Integer.compare(this.getRound(), o.getRound());
+    }
+
 }
 

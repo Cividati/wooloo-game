@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Test;
 
 import java.awt.Component;
@@ -18,8 +23,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
-import namelessgame.Exception.InventoryFullException;
-import namelessgame.Exception.NotEnoughLevelException;
 import namelessgame.Exception.StashFullException;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Item;
@@ -29,17 +32,42 @@ import namelessgame.Gameplay.Player;
  *
  * @author Henrique Barcia Lang
  */
-public class StashFrame extends javax.swing.JFrame {
+public class DefeatFrame extends javax.swing.JFrame {
+
+    /**
+     * Creates new form DefeatFramer
+     */
     
     private Player player = Game.getPlayer();
     
     private List<Item> stash = player.getStash();
-    private List<Item> inventory = player.getInventory(); 
+    private List<Item> loot = Game.getLoot();
     
     private javax.swing.JPanel stashPanel = new javax.swing.JPanel();
-    private javax.swing.JPanel inventoryPanel = new javax.swing.JPanel();
+    private javax.swing.JPanel lootPanel = new javax.swing.JPanel();
     private DataFlavor dataFlavor = new DataFlavor(Item.class,
                     Item.class.getSimpleName());
+    
+    public DefeatFrame() {
+        initComponents();
+        
+        player.setExp((int) (player.getExp() * 0.9));
+        
+        updatePlayerStash();
+        updatePlayerLoot();
+        
+        stashPanel.setLayout(new GridLayout(Game.MAX_STASH_SIZE / Game.STASH_COLUMNS, Game.STASH_COLUMNS));
+        stashPanel.setVisible(true);
+        
+        add(stashPanel);
+        stashScrollPane.getViewport().add(stashPanel, null);
+        
+        lootPanel.setLayout(new GridLayout(Game.MAX_INVENTORY_SIZE / Game.INVENTORY_COLUMNS, Game.INVENTORY_COLUMNS));
+        lootPanel.setVisible(true);
+        
+        add(lootPanel);
+        lootScrollPane.getViewport().add(lootPanel, null);
+    }
     
     public void stashSliderAction(List<Item> fromContainer, List<Item> toContainer, Item item, Item toItem, int count) throws CloneNotSupportedException
     {
@@ -69,7 +97,7 @@ public class StashFrame extends javax.swing.JFrame {
         if(fromContainer != toContainer && toItem != null && item.getId() != toItem.getId() && player.isContainerFull(toContainer))
         {
             Game.sendErrorMessage("Your " +
-                                         (toContainer == stash ? "stash" : "inventory") + " is full.");
+                                         (toContainer == stash ? "stash" : "loot container") + " is full.");
 
             return;
         }
@@ -91,10 +119,6 @@ public class StashFrame extends javax.swing.JFrame {
             catch(StashFullException e)
             {
                 Game.sendErrorMessage("Your stash is full.");
-            }
-            catch(InventoryFullException e)
-            {
-                Game.sendErrorMessage("Your inventory is full.");
             }
             
         }
@@ -129,107 +153,6 @@ public class StashFrame extends javax.swing.JFrame {
 
     }
     
-    public void updatePlayerEquipment(int slot)
-    {
-        if(slot < Game.HEAD || slot > Game.BOOTS)
-            return;
-        
-        String defaultPath = "/namelessgame/img/slots/head.png";
-        Item item = (player.getEquip()).get(slot);
-        ItemLabel equipRef = playerHead;
-        
-        switch(slot)
-        {
-            case Game.HEAD:
-                defaultPath = "/namelessgame/img/slots/head.png";
-                equipRef = playerHead;
-                
-                break;
-                
-            case Game.BODY:
-                defaultPath = "/namelessgame/img/slots/body.png";
-                equipRef = playerBody;
-                
-                break;
-                
-            case Game.WEAPON:
-                defaultPath = "/namelessgame/img/slots/left-hand.png";
-                equipRef = playerWeapon;
-                
-                break;
-                
-            case Game.SHIELD:
-                defaultPath = "/namelessgame/img/slots/right-hand.png";
-                equipRef = playerShield;
-                
-                break;
-                
-            case Game.LEGS:
-                defaultPath = "/namelessgame/img/slots/legs.png";
-                equipRef = playerLegs;
-                
-                break;
-                
-            case Game.BOOTS:
-                defaultPath = "/namelessgame/img/slots/feet.png";
-                equipRef = playerBoots;
-                
-                break;
-                
-        }
-        
-        DragSource itemDragSource;
-        
-        String path = item != null ? item.getIcon() : defaultPath;
-        equipRef.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));  
-        equipRef.setItem(item);
-        
-        if(item != null)
-            equipRef.setToolTipText(item.getDescr());
-        
-        itemDragSource = new DragSource();
-        itemDragSource.createDefaultDragGestureRecognizer(equipRef,
-                       DnDConstants.ACTION_COPY, new DragGestureListImp());
-
-        new MyDropTargetListImp(equipRef, null);
-    }
-    
-    public void updatePlayerInventory()
-    {
-        String path;
-        
-        inventoryPanel.removeAll();
-        inventoryPanel.revalidate();
-        inventoryPanel.repaint();
-        
-        for(int i = 0; i < Game.MAX_INVENTORY_SIZE; i++)
-        {          
-            Item item = null;
-            
-            if(i < inventory.size())
-                item = inventory.get(i);
-            
-            ItemLabel itemLabel = new ItemLabel();
-            DragSource itemDragSource;    
-            
-            path = item == null ? "/namelessgame/img/slots/back.png" : item.getIcon();
-            
-            itemLabel.setItem(item);          
-            itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
-            
-            if(item != null)
-                itemLabel.setToolTipText(item.getDescr(player));
-          
-            inventoryPanel.add(itemLabel);
-            
-            itemDragSource = new DragSource();
-            itemDragSource.createDefaultDragGestureRecognizer(itemLabel,
-                           DnDConstants.ACTION_COPY, new DragGestureListImp());
-            
-            new MyDropTargetListImp(itemLabel, inventoryPanel);
-        }
-    }
-    
     public void updatePlayerStash()
     {
         String path;
@@ -245,8 +168,7 @@ public class StashFrame extends javax.swing.JFrame {
             if(i < stash.size())
                 item = stash.get(i);                    
             
-            ItemLabel itemLabel = new ItemLabel();
-            DragSource itemDragSource;                   
+            ItemLabel itemLabel = new ItemLabel();                 
             
             path = item == null ? "/namelessgame/img/slots/back.png" : item.getIcon();
             
@@ -258,16 +180,47 @@ public class StashFrame extends javax.swing.JFrame {
             
             stashPanel.add(itemLabel);
             
+            new MyDropTargetListImp(itemLabel, stashPanel);
+        }
+  
+    }
+    
+    public void updatePlayerLoot()
+    {
+        String path;
+        
+        lootPanel.removeAll();
+        lootPanel.revalidate();
+        lootPanel.repaint();
+        
+        for(int i = 0; i < Game.MAX_STASH_SIZE; i++)
+        {
+            Item item = null;
+            
+            if(i < loot.size())
+                item = loot.get(i);                    
+            
+            ItemLabel itemLabel = new ItemLabel();
+            DragSource itemDragSource;                   
+            
+            path = item == null ? "/namelessgame/img/slots/back.png" : item.getIcon();
+            
+            itemLabel.setItem(item);          
+            itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
+            
+            if(item != null)
+                itemLabel.setToolTipText(item.getDescr(player));
+            
+            lootPanel.add(itemLabel);
+            
             itemDragSource = new DragSource();
             itemDragSource.createDefaultDragGestureRecognizer(itemLabel,
                            DnDConstants.ACTION_COPY, new DragGestureListImp());
-            
-            new MyDropTargetListImp(itemLabel, stashPanel);
         }
-        
+  
     }
     
-    public JPanel getComponentPanel(Component comp)
+     public JPanel getComponentPanel(Component comp)
     {
         JPanel panel = null;
         
@@ -276,10 +229,10 @@ public class StashFrame extends javax.swing.JFrame {
             if(c == comp)
                 return stashPanel;
         }
-        for(Component c : inventoryPanel.getComponents())
+        for(Component c : lootPanel.getComponents())
         {
             if(c == comp)
-                return inventoryPanel;
+                return lootPanel;
         }
         
         return panel;
@@ -366,7 +319,7 @@ public class StashFrame extends javax.swing.JFrame {
         if(container == stash)
             updatePlayerStash();
         else
-            updatePlayerInventory();
+            updatePlayerLoot();
     }
     
     class MyDropTargetListImp extends DropTargetAdapter implements
@@ -410,84 +363,14 @@ public class StashFrame extends javax.swing.JFrame {
 
                     Map<Integer, Item> equip = player.getEquip();
 
-                    if (toPanel == null) {
-                        // dropped on equip
-                        
-                        int toSlot = -1;                                   
-                        
-                        // From equipment
-                        if(fromPanel == null)
-                        {
-                            Game.sendErrorMessage("You can't move that here.");
-                       
-                            event.dropComplete(true);
-                            return;
-                        }
-                        
-                        // From stash/inventory
-
-                        // check if moved item can be equiped here
-                        // check item level
-                        // can't: 
-                        // error message
-                        // can:
-                        // remove moved item from origin
-                        // remove item from equipment
-                        // equip moved item
-                        // add item to origin
-
-                        if(label == playerHead)
-                            toSlot = Game.HEAD;                          
-                        else if(label == playerBody)
-                            toSlot = Game.BODY;
-                        else if(label == playerWeapon)
-                            toSlot = Game.WEAPON;
-                        else if(label == playerShield)
-                            toSlot = Game.SHIELD;
-                        else if(label == playerLegs)
-                            toSlot = Game.LEGS;
-                        else if(label == playerBoots)
-                            toSlot = Game.BOOTS;
-
-                        if(toSlot == -1 || movedItem.getSlot() != toSlot)
-                        {
-                            Game.sendErrorMessage("You can't move that here.");
-                                                     
-                            event.dropComplete(true);
-                            return;
-                        }
-                        else if(movedItem.isStackable())
-                        {
-                            System.out.println("Support for stackable items on equipment is not yet implemented.");
-                            
-                            Game.sendErrorMessage("You can't move that here.");
-                            
-                            event.dropComplete(true);
-                            return;
-                        }
-                                       
-                        fromItemContainer = fromPanel == stashPanel ? stash : inventory;
-                        
-                        try
-                        {
-                            player.equipItem(movedItem, fromItemContainer);
-                            
-                            updatePlayerEquipment(toSlot);                          
-                            updateContainer(fromItemContainer);
-                        }
-                        catch(NotEnoughLevelException e)
-                        {
-                            Game.sendErrorMessage("You don't have enough level to equip this item (" + movedItem.getMinLevel() + ").");
-
-                        }
-
-                    } else {
-                        // dropped on stash/inventory
+                    if(toPanel == stashPanel)
+                    {
+                        // dropped on stash
                         
                         if(fromPanel != null)
-                            fromItemContainer = fromPanel == stashPanel ? stash : inventory;
+                            fromItemContainer = fromPanel == stashPanel ? stash : loot;
                         
-                        toItemContainer = toPanel == stashPanel ? stash : inventory;
+                        toItemContainer = toPanel == stashPanel ? stash : loot;
                         
                         // check if is empty space or not (empty space -> local item == null):
                             // if isn't
@@ -512,7 +395,7 @@ public class StashFrame extends javax.swing.JFrame {
                                             
                         if(movedItem.isStackable())
                         {
-                            ItemSliderFrame amountSelector = new ItemSliderFrame(StashFrame.this, fromItemContainer, toItemContainer, movedItem, localItem, movedItem.getCount());
+                            ItemSliderFrame amountSelector = new ItemSliderFrame(DefeatFrame.this, fromItemContainer, toItemContainer, movedItem, localItem, movedItem.getCount());
                            
                             amountSelector.setVisible(true);
                             setEnabled(false);
@@ -522,7 +405,7 @@ public class StashFrame extends javax.swing.JFrame {
                             if(fromItemContainer != toItemContainer && player.isContainerFull(toItemContainer))
                             {
                                 Game.sendErrorMessage("Your " +
-                                                             (toItemContainer == stash ? "stash" : "inventory") + " is full.");
+                                                             (toItemContainer == stash ? "stash" : "loot container") + " is full.");
 
                                 event.dropComplete(true);
                                 return;
@@ -536,12 +419,6 @@ public class StashFrame extends javax.swing.JFrame {
                                 fromItemContainer.remove(movedItem);
 
                                 updateContainer(fromItemContainer);
-                            }
-                            else
-                            {
-                                equip.remove(movedItem.getSlot());
-
-                                updatePlayerEquipment(movedItem.getSlot());
                             }
                             
                             if(fromItemContainer != toItemContainer)
@@ -558,33 +435,10 @@ public class StashFrame extends javax.swing.JFrame {
                 event.rejectDrop();
             } catch (Exception e) {
                 //e.printStackTrace();
-                System.out.println("Some exception occurred when moving an item..." + e.getMessage());
+                System.out.println("Some exception occurred when moving an item on victory frame..." + e.getMessage());
                 event.rejectDrop();
             }
         }
-    }
-    
-    public StashFrame() {
-        initComponents();
-        
-        for(int i = Game.HEAD; i <= Game.BOOTS; i++)
-            updatePlayerEquipment(i);
-        
-        updatePlayerStash();
-        updatePlayerInventory();
-        
-        stashPanel.setLayout(new GridLayout(Game.MAX_STASH_SIZE / Game.STASH_COLUMNS, Game.STASH_COLUMNS));
-        stashPanel.setVisible(true);
-        
-        add(stashPanel);
-        stashScrollPane.getViewport().add(stashPanel, null);
-        
-        inventoryPanel.setLayout(new GridLayout(Game.MAX_INVENTORY_SIZE / Game.INVENTORY_COLUMNS, Game.INVENTORY_COLUMNS));
-        inventoryPanel.setVisible(true);
-        
-        add(inventoryPanel);
-        inventoryScrollPane.getViewport().add(inventoryPanel, null);
- 
     }
 
     /**
@@ -596,93 +450,68 @@ public class StashFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        infoLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        playerHead = new Test.ItemLabel();
-        playerBody = new Test.ItemLabel();
-        playerWeapon = new Test.ItemLabel();
-        playerShield = new Test.ItemLabel();
-        playerLegs = new Test.ItemLabel();
-        playerBoots = new Test.ItemLabel();
-        inventoryScrollPane = new javax.swing.JScrollPane();
+        infoPanel = new javax.swing.JPanel();
+        infoText3 = new javax.swing.JLabel();
+        infoText1 = new javax.swing.JLabel();
+        infoText2 = new javax.swing.JLabel();
+        okayButton = new javax.swing.JButton();
+        lootScrollPane = new javax.swing.JScrollPane();
         stashScrollPane = new javax.swing.JScrollPane();
-        backButton = new javax.swing.JButton();
-        backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(786, 529));
+        setPreferredSize(new java.awt.Dimension(800, 500));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        infoLabel.setBackground(new java.awt.Color(0, 0, 0));
-        infoLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 40)); // NOI18N
-        infoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        infoLabel.setText("Stash");
-        getContentPane().add(infoLabel);
-        infoLabel.setBounds(350, 10, 100, 50);
+        infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Defeat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 24), new java.awt.Color(255, 0, 0))); // NOI18N
+        infoPanel.setLayout(null);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Equipments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14))); // NOI18N
-        jPanel1.setLayout(null);
+        infoText3.setFont(new java.awt.Font("OscineW04-Light", 1, 24)); // NOI18N
+        infoText3.setText("sacrifice. Simply click on 'Okay' to resume your journeys in Wooloo!");
+        infoPanel.add(infoText3);
+        infoText3.setBounds(30, 120, 760, 30);
 
-        playerHead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/head.png"))); // NOI18N
-        jPanel1.add(playerHead);
-        playerHead.setBounds(90, 30, 34, 30);
+        infoText1.setFont(new java.awt.Font("OscineW04-Light", 1, 24)); // NOI18N
+        infoText1.setText("Alas! Brave adventurer, you have met a sad fate. But do not despair, ");
+        infoPanel.add(infoText1);
+        infoText1.setBounds(30, 40, 760, 30);
 
-        playerBody.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/body.png"))); // NOI18N
-        jPanel1.add(playerBody);
-        playerBody.setBounds(90, 70, 34, 34);
+        infoText2.setFont(new java.awt.Font("OscineW04-Light", 1, 24)); // NOI18N
+        infoText2.setText("for the gods will bring you back into the world in exchange for a small");
+        infoPanel.add(infoText2);
+        infoText2.setBounds(30, 80, 760, 30);
 
-        playerWeapon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/left-hand.png"))); // NOI18N
-        jPanel1.add(playerWeapon);
-        playerWeapon.setBounds(40, 70, 34, 40);
+        getContentPane().add(infoPanel);
+        infoPanel.setBounds(0, 0, 800, 180);
 
-        playerShield.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/right-hand.png"))); // NOI18N
-        jPanel1.add(playerShield);
-        playerShield.setBounds(140, 70, 34, 40);
+        okayButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        okayButton.setText("Okay");
+        okayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okayButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(okayButton);
+        okayButton.setBounds(660, 410, 108, 55);
 
-        playerLegs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/legs.png"))); // NOI18N
-        jPanel1.add(playerLegs);
-        playerLegs.setBounds(90, 110, 34, 30);
-
-        playerBoots.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/slots/feet.png"))); // NOI18N
-        jPanel1.add(playerBoots);
-        playerBoots.setBounds(90, 150, 34, 30);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(290, 80, 200, 200);
-
-        inventoryScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-        getContentPane().add(inventoryScrollPane);
-        inventoryScrollPane.setBounds(500, 300, 250, 180);
+        lootScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Loot", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        getContentPane().add(lootScrollPane);
+        lootScrollPane.setBounds(20, 250, 250, 180);
 
         stashScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Stash", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(stashScrollPane);
-        stashScrollPane.setBounds(30, 300, 250, 180);
-
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(backButton);
-        backButton.setBounds(360, 430, 70, 50);
-
-        backgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
-        getContentPane().add(backgroundLabel);
-        backgroundLabel.setBounds(0, 0, 790, 530);
+        stashScrollPane.setBounds(290, 250, 250, 180);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+    private void okayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayButtonActionPerformed
         this.dispose();
 
-        GameFrame gameBack = new GameFrame();
-        gameBack.setVisible(true);
-    }//GEN-LAST:event_backButtonActionPerformed
+        (new GameFrame()).setVisible(true);
+               
+    }//GEN-LAST:event_okayButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -701,13 +530,13 @@ public class StashFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StashFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StashFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StashFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StashFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -715,23 +544,18 @@ public class StashFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StashFrame().setVisible(true);
+                new DefeatFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
-    private javax.swing.JLabel backgroundLabel;
-    private javax.swing.JLabel infoLabel;
-    private javax.swing.JScrollPane inventoryScrollPane;
-    private javax.swing.JPanel jPanel1;
-    private Test.ItemLabel playerBody;
-    private Test.ItemLabel playerBoots;
-    private Test.ItemLabel playerHead;
-    private Test.ItemLabel playerLegs;
-    private Test.ItemLabel playerShield;
-    private Test.ItemLabel playerWeapon;
+    private javax.swing.JPanel infoPanel;
+    private javax.swing.JLabel infoText1;
+    private javax.swing.JLabel infoText2;
+    private javax.swing.JLabel infoText3;
+    private javax.swing.JScrollPane lootScrollPane;
+    private javax.swing.JButton okayButton;
     private javax.swing.JScrollPane stashScrollPane;
     // End of variables declaration//GEN-END:variables
 }

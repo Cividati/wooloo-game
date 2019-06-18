@@ -5,6 +5,18 @@
  */
 package Test;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+import namelessgame.Gameplay.Dungeon;
+import namelessgame.Gameplay.Game;
+import namelessgame.Gameplay.Player;
+
 /**
  *
  * @author Henrique Barcia Lang
@@ -14,9 +26,57 @@ public class DungeonFrame extends javax.swing.JFrame {
     /**
      * Creates new form DungeonFrame
      */
+    
+    private Map<javax.swing.JButton, Dungeon> dungeonMap = new HashMap<>();
+    private Player player = Game.getPlayer();
+    
     public DungeonFrame() {
         initComponents();
+        
+        try
+        {
+            Dungeon dungeon1Data = Game.getDungeons().get(0);
+            
+            dungeonMap.put(dungeon1, dungeon1Data);
+            dungeon1.setToolTipText("<html>" +
+                                    dungeon1Data.getName() + "<br><br>" +
+                                    dungeon1Data.getDescr() + "<br><br>" +
+                                    "Min lv.: <font color = " + (player.getLevel() >= dungeon1Data.getMinLv() ? "\"green\"" : "\"red\"") + ">" + dungeon1Data.getMinLv() + "</font><br></html>");
+            
+            dungeon1.addActionListener(new java.awt.event.ActionListener() {           
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    DungeonActionPerformed(evt);
+                }
+            });
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error when setting up dungeons... " + e.getMessage());
+        }
     }
+    
+    private void DungeonActionPerformed(java.awt.event.ActionEvent evt) {
+        javax.swing.JButton selectedButton = (javax.swing.JButton) evt.getSource();
+        Dungeon myDungeon = dungeonMap.get(selectedButton);
+        
+        if(player.getLevel() < myDungeon.getMinLv())
+        {
+            Game.sendErrorMessage("You are not strong enough to explore this dungeon yet.");
+            
+            return;
+        }
+        
+        int enterDungeon = JOptionPane.showConfirmDialog(this, "Are you sure you want to explore this dungeon?", "Explore dungeon", JOptionPane.YES_NO_OPTION);
+
+        if(enterDungeon == 1)
+            return;
+
+        this.dispose();
+        Game.startExploringDungeon(myDungeon);
+        
+    }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,6 +88,8 @@ public class DungeonFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         infoLabel = new javax.swing.JLabel();
+        dungeon2 = new javax.swing.JButton();
+        dungeon1 = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,11 +103,20 @@ public class DungeonFrame extends javax.swing.JFrame {
         getContentPane().add(infoLabel);
         infoLabel.setBounds(530, 10, 270, 60);
 
+        dungeon2.setBackground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(dungeon2);
+        dungeon2.setBounds(280, 170, 30, 25);
+
+        dungeon1.setBackground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(dungeon1);
+        dungeon1.setBounds(280, 380, 30, 25);
+
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/1200px-LGPE_Kanto_Map.png"))); // NOI18N
         getContentPane().add(backgroundLabel);
-        backgroundLabel.setBounds(0, 0, 1200, 849);
+        backgroundLabel.setBounds(0, 0, 1280, 849);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -82,9 +153,39 @@ public class DungeonFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    private static class RoundedBorder implements Border {
+
+    private int radius;
+
+
+    RoundedBorder(int radius) {
+        this.radius = radius;
+    }
+
+
+    @Override
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+    }
+
+
+    @Override
+    public boolean isBorderOpaque() {
+        return true;
+    }
+
+
+    @Override
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundLabel;
+    private javax.swing.JButton dungeon1;
+    private javax.swing.JButton dungeon2;
     private javax.swing.JLabel infoLabel;
     // End of variables declaration//GEN-END:variables
 }

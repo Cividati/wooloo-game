@@ -156,7 +156,7 @@ try:
                             else:
                                 firstTime = False
 
-                            lootStr += "((SELECT MAX(id) FROM monster), " + itemId + ", " + countMin + ", " + countMax + ", " + chance + ")"
+                            lootStr += "((SELECT MAX(id) FROM monster), " + item["id"] + ", " + item["countMin"] + ", " + item["countMax"] + ", " + item["chance"] + ")"
 
                         lootStr += ";"
 

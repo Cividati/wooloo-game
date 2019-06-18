@@ -10,6 +10,8 @@ package Test;
 import java.util.Collections;
 import java.util.List;
 import Test.MenuFrame;
+import java.awt.Color;
+import javax.swing.UIManager;
 import namelessgame.Database.DungeonDAO;
 import namelessgame.Database.PlayerDAO;
 import namelessgame.Gameplay.Dungeon;
@@ -35,8 +37,8 @@ public class GameFrame extends javax.swing.JFrame {
         playerLevel.setText(Integer.toString(player.getLevel()));
         
         playerExp.setStringPainted(true);
-        playerExp.setValue((player.getExp() / player.getExpNeededToLevelUp()) * 100);
-        playerExp.setToolTipText(player.getExp() + " / " + player.getExpNeededToLevelUp());
+        playerExp.setValue((player.getExp() / player.getTotalExpToLevelUp()) * 100);
+        playerExp.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
         playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
         
         if(Game.getDungeons() == null)
@@ -201,6 +203,11 @@ public class GameFrame extends javax.swing.JFrame {
 
         dungeonButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         dungeonButton.setText("Dungeon");
+        dungeonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dungeonButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(dungeonButton);
         dungeonButton.setBounds(360, 330, 110, 60);
 
@@ -265,6 +272,13 @@ public class GameFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void dungeonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dungeonButtonActionPerformed
+        this.dispose();
+        
+        DungeonFrame newDungeon = new DungeonFrame();
+        newDungeon.setVisible(true);
+    }//GEN-LAST:event_dungeonButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +292,9 @@ public class GameFrame extends javax.swing.JFrame {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    
+                    // change progress bar color
+                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
                     break;
                 }
             }

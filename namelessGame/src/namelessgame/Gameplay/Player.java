@@ -175,15 +175,25 @@ public class Player extends Creature implements Comparable<Player> {
         
         this.exp += exp;
         
-        if(exp >= getExpNeededToLevelUp())
+        if(getExpNeededToLevelUp() <= 0)
         {
-            int remainingExp = exp - getExpNeededToLevelUp();
+            int remainingExp = this.exp - getTotalExpToLevelUp();
             
             addLevel(1);
             
             if(remainingExp > 0)
-                addExp(remainingExp); 
+                addExp(remainingExp);
         }
+    }
+    
+    public int getTotalExpToLevelUp()
+    {
+        return getLevel() * 10;
+    }
+    
+    public int getExpNeededToLevelUp()
+    {
+        return getTotalExpToLevelUp() - getExp();
     }
     
     public void setExp(int exp) {
@@ -225,16 +235,6 @@ public class Player extends Creature implements Comparable<Player> {
     public String getAvatar()
     {
         return "/namelessgame/img/avatars/" + avatar + ".png";
-    }
-    
-    public int getTotalExpToLevelUp()
-    {
-        return getLevel() * 10;
-    }
-    
-    public int getExpNeededToLevelUp()
-    {
-        return getTotalExpToLevelUp() - getExp();
     }
 
     public List<Item> getStash() {
@@ -416,20 +416,16 @@ public class Player extends Creature implements Comparable<Player> {
         return con;
     }
     
-    public int getMaxHealth()
-    {
-        return (3 * getCon()) + getStr();
-    }
-    
     public int getMaxHealth(Item item)
     {
         return (3 * getCon(item)) + getStr(item);
     }
     
-    public static int getMaxHealth(int str, int con)
+    public void useHealthPotion()
     {
-        return (3 * con) + str;
+        // show effect
+        
+        
     }
-    
+ 
 }
-

@@ -2,6 +2,7 @@ package namelessgame.Database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import namelessgame.Gameplay.Dungeon;
 import namelessgame.Gameplay.LootItem;
@@ -48,6 +49,7 @@ public class DungeonDAO extends DAO {
             
                 while(rs.next())
                 {
+                    int id = rs.getInt("id");
                     String name = rs.getString("name");
                     int str = rs.getInt("str");
                     int agi = rs.getInt("agi");
@@ -58,14 +60,14 @@ public class DungeonDAO extends DAO {
                     int round = rs.getInt("round");
                     String icon = rs.getString("icon");
                     
-                    monsterList.add(new Monster(name, str, agi, cons, exp, goldMin, goldMax, round, icon));
+                    monsterList.add(new Monster(id, name, str, agi, cons, exp, goldMin, goldMax, round, icon));
                 }
                 
                 for(Monster monster : monsterList)
                 {
                     List<LootItem> lootList = new ArrayList<>();
                     
-                    pst = con.prepareStatement(monsterQuery);
+                    pst = con.prepareStatement(lootQuery);
                     pst.setString(1, Integer.toString(monster.getId()));
                     rs = pst.executeQuery();
                     
@@ -76,7 +78,7 @@ public class DungeonDAO extends DAO {
                         int countMax = rs.getInt("count_max");
                         int chance = rs.getInt("chance");
 
-                        LootItem item = (LootItem) ((new ItemDAO()).loadItemById(itemId));
+                        LootItem item = new LootItem(((new ItemDAO()).loadItemById(itemId)));
                         
                         item.setCountMin(countMin);
                         item.setCountMax(countMax);
@@ -88,6 +90,7 @@ public class DungeonDAO extends DAO {
                     monster.setLoots(lootList);
                 }
                 
+                Collections.sort(monsterList);
                 dungeon.setMonsters(monsterList);
             }
             

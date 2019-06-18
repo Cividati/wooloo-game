@@ -8,6 +8,11 @@ public class LootItem extends Item {
     private int countMin;
     private int countMax;
     private int chance;
+    
+    public LootItem(Item item)
+    {
+        super(item);
+    }
 
     public int getCountMin() {
         return countMin;

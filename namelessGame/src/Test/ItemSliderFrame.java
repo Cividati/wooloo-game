@@ -209,15 +209,31 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
                 ((ShopFrame) originalFrame).shopSliderAction((ShopItem) item, count);
         }
         else if(originalFrame instanceof StashFrame)
+        {
             try {
                 ((StashFrame) originalFrame).stashSliderAction(fromContainer, toContainer, item, toItem, count);
             } catch (CloneNotSupportedException ex) {
-                System.out.println("Error when cloning item...");
+                System.out.println("Error when cloning item on stash frame...");
             }
+        }
+        else if(originalFrame instanceof VictoryFrame)
+        {
+            try {
+                ((VictoryFrame) originalFrame).stashSliderAction(fromContainer, toContainer, item, toItem, count);
+            } catch (CloneNotSupportedException ex) {
+                System.out.println("Error when cloning item on victory frame...");
+            }
+        }
+        else if(originalFrame instanceof DefeatFrame)
+        {
+            try {
+                ((DefeatFrame) originalFrame).stashSliderAction(fromContainer, toContainer, item, toItem, count);
+            } catch (CloneNotSupportedException ex) {
+                System.out.println("Error when cloning item on defeat frame...");
+            }
+        }
         else
             System.out.println("Slider used without being called by a configured frame...");
-        
-        
         
     }//GEN-LAST:event_okButtonActionPerformed
 

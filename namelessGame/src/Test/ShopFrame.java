@@ -7,14 +7,10 @@ package Test;
  */
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import namelessgame.Database.ItemDAO;
 import namelessgame.Exception.StashFullException;
 import namelessgame.Gameplay.Game;
-import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
 import namelessgame.Gameplay.ShopItem;
 

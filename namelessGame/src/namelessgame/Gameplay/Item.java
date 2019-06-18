@@ -21,6 +21,22 @@ public class Item implements Cloneable {
     
     public Item() {}
     
+    public Item(Item item)
+    {
+        setId(item.id);
+        setStr(item.str);
+        setAgi(item.agi);
+        setCon(item.con);
+        setHeal(item.heal);
+        setSlot(item.slot);
+        setMinLevel(item.minLevel);
+        setCount(item.count);
+        setStackable(item.stackable);
+        setName(item.name);
+        
+        this.icon = item.icon;
+    }
+    
     public Item(int id, int str, int agi, int con, int heal, int slot, int minLevel, int count, boolean stackable, String name, String icon)
     {
         setId(id);
