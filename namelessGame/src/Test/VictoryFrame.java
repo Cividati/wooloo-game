@@ -732,10 +732,19 @@ public class VictoryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addConstButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        if(player.getStatusPoints() == statusPoints)
+        {
+            Game.sendErrorMessage("You didn't distribute any points.");
+            
+            return;
+        }
+        
         player.setStr(player.getBaseStr() + (str - player.getStr()));
         player.setAgi(player.getBaseAgi() + (agi - player.getAgi()));
         player.setCon(player.getBaseCon() + (con - player.getCon()));
         player.setStatusPoints(statusPoints);
+        
+        Game.sendSuccessMessage("Point(s) distributed.");
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed

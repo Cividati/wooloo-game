@@ -38,7 +38,7 @@ public class Game {
     
     private static List<Dungeon> dungeons = null;
     private static List<ShopItem> shop = new ArrayList<>();
-    private static Map<String, Long> buy = new HashMap<>();
+    private static Map<String, Long> sell = new HashMap<>();
     private static List<Item> loot;
     
     private static Dungeon exploredDungeon;
@@ -78,12 +78,12 @@ public class Game {
         Game.shop = shop;
     }
 
-    public static Map<String, Long> getBuy() {
-        return buy;
+    public static Map<String, Long> getSell() {
+        return sell;
     }
 
-    public static void setBuy(Map<String, Long> buy) {
-        Game.buy = buy;
+    public static void setSell(Map<String, Long> sell) {
+        Game.sell = sell;
     }
     
     public static void addItemToShop(String name, long price)
@@ -98,7 +98,7 @@ public class Game {
     
     public static void addItemToBuy(String name, long price)
     {
-        buy.put(name, price);
+        sell.put(name, price);
     }
     
     // Add items to shop

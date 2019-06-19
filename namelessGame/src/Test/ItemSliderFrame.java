@@ -24,13 +24,16 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
      * Creates new form ItemSliderFrame
      */
     
+    private int count = 1;
+    private int countMax;   
+    
+    private boolean buying;
+    
     private Item item;
     private Item toItem;
     
-    private int count = 1;
-    private int countMax;    
-    
     private javax.swing.JFrame originalFrame;
+    
     private List<Item> fromContainer;
     private List<Item> toContainer;
     
@@ -60,6 +63,14 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
 
     public void setCountMax(int countMax) {
         this.countMax = countMax;
+    }
+
+    public boolean isBuying() {
+        return buying;
+    }
+
+    public void setBuying(boolean buying) {
+        this.buying = buying;
     }
 
     public JFrame getOriginalFrame() {
@@ -97,13 +108,19 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
     public ItemSliderFrame() {
         initComponents();
     }
-
+    
     public ItemSliderFrame(javax.swing.JFrame originalFrame, Item item, int countMax) {
+        this(originalFrame, item, countMax, false);
+    }
+    
+    public ItemSliderFrame(javax.swing.JFrame originalFrame, Item item, int countMax, boolean buying) {
         initComponents();
         
         setOriginalFrame(originalFrame);
         setItem(item);
         setCountMax(countMax);
+        
+        setBuying(buying);
         
         iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
         amountLabel.setText(Integer.toString(1));
@@ -189,6 +206,10 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         int sliderValue = amountSlider.getValue();
         
         count = (sliderValue * countMax) / 100;
+        
+        if(count == 0)
+            count = 1;
+        
         amountLabel.setText(Integer.toString(count));
     }//GEN-LAST:event_amountSliderStateChanged
 
@@ -204,10 +225,15 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         
         if(originalFrame instanceof ShopFrame)
         {
-            if(!(item instanceof ShopItem))
-                System.out.println("Error when downcasting Item to ShopItem on slider...");
+            if(!buying)
+                ((ShopFrame) originalFrame).sellSliderAction(item, count);
             else
-                ((ShopFrame) originalFrame).shopSliderAction((ShopItem) item, count);
+            {      
+                if(!(item instanceof ShopItem))
+                    System.out.println("Error when downcasting Item to ShopItem on slider...");
+                else
+                    ((ShopFrame) originalFrame).shopSliderAction((ShopItem) item, count);
+            }
         }
         else if(originalFrame instanceof StashFrame)
         {
@@ -322,4 +348,5 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
     public void windowDeactivated(WindowEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

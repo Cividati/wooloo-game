@@ -8,9 +8,11 @@ package Test;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import namelessgame.Exception.StashFullException;
 import namelessgame.Gameplay.Game;
+import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
 import namelessgame.Gameplay.ShopItem;
 
@@ -24,45 +26,64 @@ public class ShopFrame extends javax.swing.JFrame {
      * Creates new form ShopFrame
      */
     
-    private Player player = null;
+    private Player player = Game.getPlayer();
     
     private Map<javax.swing.JButton, ShopItem> shopMap = new HashMap<>();
+    private Map<javax.swing.JButton, Item> sellMap = new HashMap<>();
+    private List<Item> inventory = player.getInventory();
     
     public void shopSliderAction(ShopItem item, int count)
     {
         long totalPrice = item.getPrice() * count;
         
         long pGold = player.getGold() - totalPrice;
+        
+        setEnabled(true);
             
         if(pGold < 0)
         {
             Game.sendErrorMessage("You don't have enough gold.");
-            setEnabled(true);
-
+            
             return;
         }
-
+        
         try
         {
             item.setCount(count);
             player.addItemToStash(item);
 
-            Game.sendSuccessMessage("You bought " + count + "x " + item.getName() + "(s).");
             player.setGold(pGold);
             playerGold.setText(pGold + " G");
-            setEnabled(true);
+            Game.sendSuccessMessage("You bought " + count + "x " + item.getName() + "(s).");
         }
         catch(StashFullException e)
         {
             Game.sendErrorMessage("You don't have space in your stash.");
         }
+        
+    }
+    
+    public void sellSliderAction(Item item, int count)
+    {
+        long totalPrice = Game.getSell().get(item.getName()) * count;
+        
+        long pGold = player.getGold() + totalPrice;
+        
+        setEnabled(true);
 
+        item.setCount(item.getCount() - count);
+        
+        if(item.getCount() <= 0)
+            inventory.remove(item);
+
+        player.setGold(pGold);
+        playerGold.setText(pGold + " G");
+        updateSellingItems();
+        Game.sendSuccessMessage("You sold " + count + "x " + item.getName() + "(s).");
     }
     
     public ShopFrame() {
         initComponents();
-        
-        setPlayer(Game.getPlayer());
         
         playerGold.setText(player.getGold() + " G");
     }
@@ -96,7 +117,7 @@ public class ShopFrame extends javax.swing.JFrame {
         
         if(item.isStackable())
         {
-            ItemSliderFrame amountSelector = new ItemSliderFrame(this, item, Game.MAX_STACKABLE_AMOUNT);
+            ItemSliderFrame amountSelector = new ItemSliderFrame(this, item, Game.MAX_STACKABLE_AMOUNT, true);
             
             setEnabled(false);
             amountSelector.setVisible(true);
@@ -127,13 +148,51 @@ public class ShopFrame extends javax.swing.JFrame {
         }
 
     }
+    
+    private void SellItemActionPerformed(java.awt.event.ActionEvent evt) { 
+        javax.swing.JButton itemButton = (javax.swing.JButton) evt.getSource();
+        
+        Item item = sellMap.get(itemButton);
+        String itemInfo = "";
+        
+        if(item == null)
+            return;
+        
+        final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(item.getIcon());
+        
+        itemInfo += item.getName() + (item.isStackable() ? " - " + item.getCount() + "x unit(s)." : "") + "\n\n";
+        
+        if(item.getHeal() > 0)
+            itemInfo += "Heals for " + item.getHeal() + " health.";
+        else
+            itemInfo += "Attack: " + item.getStr() + "\n"
+                      + "Agility: " + item.getAgi() + "\n"
+                      + "Constitution: " + item.getCon();
+        
+        itemInfo += "\n\n\tPrice per unit: " + Game.getSell().get(item.getName()) + "g";
+        
+        int decision = javax.swing.JOptionPane.showConfirmDialog(null, itemInfo, "Sell", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, icon);
+        
+        if(decision == 1)
+            return;
+        
+        if(item.isStackable())
+        {
+            ItemSliderFrame amountSelector = new ItemSliderFrame(this, item, item.getCount());
+            
+            setEnabled(false);
+            amountSelector.setVisible(true);
+        }
+        else
+        {
+            long pGold = player.getGold() + Game.getSell().get(item.getName());
+            
+            inventory.remove(item);
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
+            Game.sendSuccessMessage("You sold a(n) " + item.getName() + ".");
+            player.setGold(pGold);
+            playerGold.setText(pGold + " G");       
+        }
     }
 
     /**
@@ -228,7 +287,7 @@ public class ShopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void sellButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellButtonActionPerformed
-        // TODO add your handling code here:
+        updateSellingItems();
     }//GEN-LAST:event_sellButtonActionPerformed
 
     private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyButtonActionPerformed
@@ -262,6 +321,41 @@ public class ShopFrame extends javax.swing.JFrame {
         shopScrollPane.getViewport().add(shopPanel, null);
     }//GEN-LAST:event_buyButtonActionPerformed
 
+    public void updateSellingItems()
+    {
+        javax.swing.JPanel sellPanel = new javax.swing.JPanel();
+        
+        shopScrollPane.getViewport().removeAll();
+        
+        for (Item item : inventory) {
+            if(Game.getSell().get(item.getName()) == null)
+                continue;
+            
+            javax.swing.JButton itemButton = new javax.swing.JButton();
+            
+            itemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
+            itemButton.setToolTipText(item.getName() + " (" + Game.getSell().get(item.getName()) + "g)");
+            
+            itemButton.addActionListener(new java.awt.event.ActionListener() {           
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    SellItemActionPerformed(evt);
+                }
+            });
+
+            sellMap.put(itemButton, item);
+
+            sellPanel.add(itemButton);
+        }
+        
+        sellPanel.setLayout(new java.awt.GridLayout(Game.getSell().size() / 4, 4));
+        sellPanel.setSize(300, 300);
+        sellPanel.setVisible(true);
+        add(sellPanel);
+        
+        shopScrollPane.getViewport().add(sellPanel, null);
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -457,10 +457,19 @@ public class StatusFrame extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         Player player = Game.getPlayer();
         
+        if(player.getStatusPoints() == statusPoints)
+        {
+            Game.sendErrorMessage("You didn't distribute any points.");
+            
+            return;
+        }
+        
         player.setStr(player.getBaseStr() + (str - player.getStr()));
         player.setAgi(player.getBaseAgi() + (agi - player.getAgi()));
         player.setCon(player.getBaseCon() + (con - player.getCon()));
         player.setStatusPoints(statusPoints);
+        
+        Game.sendSuccessMessage("Point(s) distributed.");
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**

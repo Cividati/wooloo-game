@@ -159,7 +159,8 @@ public class Item implements Cloneable {
                 (isPotion() ? ("Heals for <font color=\"green\">" + getHeal() + "</font> health.") : ("" +
                 "Strenght: " + getStr() + "<br>" +
                 "Agility: " + getAgi() + "<br>" +
-                "Constitution: " + getCon() + "<br>")) +
+                "Constitution: " + getCon() + "<br><br>")) +
+                "Min. level: " + getMinLevel() +
                 "</html>";
     }
     
@@ -174,14 +175,16 @@ public class Item implements Cloneable {
         String agiFont = agiDiff > 0 ? "\"green\"" : "\"red\"";
         String conFont = conDiff > 0 ? "\"green\"" : "\"red\"";
         String hpFont = hpDiff > 0 ? "\"green\"" : "\"red\"";
+        String lvFont = player.getLevel() >= getMinLevel() ? "\"green\"" : "\"red\"";
 
         return "<html>" + getName() +               
                 (isStackable() ? (" - " + getCount() + "x unit(s).") : "") + "<br><br>" +
-                (isPotion() ? ("Heals for <font color=\"green\">" + getHeal() + "</font> health.") : ("" +
+                (isPotion() ? ("Heals for <font color=\"green\">" + getHeal() + "</font> health.<br>") : ("" +
                 "Strenght: " + getStr() + " (<font color=" + strFont + ">" + (strDiff > 0 ? ("+" + strDiff) : strDiff) + "</font>)<br>" +
                 "Agility: " + getAgi() + " (<font color=" + agiFont + ">" + (agiDiff > 0 ? ("+" + agiDiff) : agiDiff) + "</font>)<br>" +
                 "Constitution: " + getCon() + " (<font color=" + conFont + ">" + (conDiff > 0 ? ("+" + conDiff) : conDiff) + "</font>)<br>" +
                 "<font color =" + hpFont + ">" + (hpDiff > 0 ? ("+" + hpDiff) : hpDiff) + " health points</font><br>")) +
+                "<br>Min. level: <font color=" + lvFont + ">" + getMinLevel() + "</font>" +
                 "</html>";
     }
     
