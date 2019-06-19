@@ -28,7 +28,9 @@ OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote nam
   - Link com mais detalhes: https://pynative.com/install-mysql-connector-python/
 
 No código da loja alguns itens já estão configurados. Para que apareçam, é necessário criá-los primeiramente usando o script em Python (ou inserí-los no Banco de Dados diretamente).
+
 Pode-se criá-los manualmente seguindo as instruções, alterando os valores como bem entender, ou copiar e colar os dados disponíveis no arquivo de texto mencionado em `Diretórios importantes` no ambiente de interpretação que o script está sendo executado (terminal do Windows, do Linux, do VS Code, etc.).
+
 Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
 	`void fillShop()`
 de Game.java (pacote Gameplay), seguindo o que já foi feito como exemplo.
