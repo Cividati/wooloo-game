@@ -19,6 +19,7 @@ OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote nam
 * Instalar fonte Oscine (.zip disponível nesta pasta)
 
 * Para executar o script em Python: `pip install mysql-connector-python`
+
 Link com mais detalhes: (https://pynative.com/install-mysql-connector-python/)  
 
 No código da loja alguns itens já estão configurados. Para que apareçam, é necessário criá-los primeiramente usando o script em Python (ou inserindo no Banco de Dados diretamente).
