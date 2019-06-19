@@ -1,7 +1,7 @@
 package namelessgame.Gameplay;
 
 /**
- *
+ * Classe que representa um item que pode ser comprado na loja.
  * @author Henrique Barcia Lang
  */
 public class ShopItem extends Item {

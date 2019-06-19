@@ -1,4 +1,4 @@
-package Test;
+package namelessgame.View;
 
 import java.util.HashMap;
 import namelessgame.Database.PlayerDAO;
@@ -48,7 +48,9 @@ public class NewGameFrame extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("    New character");
         setBackground(new java.awt.Color(204, 204, 204));
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
@@ -121,6 +123,10 @@ public class NewGameFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao clicar no botão de sexo male
+     * @param evt 
+     */
     private void MaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleButtonActionPerformed
         sex = 'M';
 
@@ -133,6 +139,10 @@ public class NewGameFrame extends javax.swing.JFrame {
         charAvatar.setVisible(true);
     }//GEN-LAST:event_MaleButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de sexo female
+     * @param evt 
+     */
     private void FemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemButtonActionPerformed
         sex = 'F';
         
@@ -148,6 +158,10 @@ public class NewGameFrame extends javax.swing.JFrame {
         charAvatar.setVisible(true);
     }//GEN-LAST:event_FemButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em back 
+     * @param evt 
+     */
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
         
@@ -155,6 +169,10 @@ public class NewGameFrame extends javax.swing.JFrame {
         menuBack.setVisible(true);    
     }//GEN-LAST:event_BackButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em create
+     * @param evt 
+     */
     private void CreateCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCharButtonActionPerformed
         String characterName = nameField.getText();
         

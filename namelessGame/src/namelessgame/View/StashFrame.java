@@ -1,5 +1,6 @@
-package Test;
+package namelessgame.View;
 
+import namelessgame.Gameplay.ItemLabel;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.GridLayout;
@@ -26,7 +27,7 @@ import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
 
 /**
- *
+ * Classe que cria o frame do stash, inventário e equipamento do jogador e a inter-relação entre eles
  * @author Henrique Barcia Lang
  */
 public class StashFrame extends javax.swing.JFrame {
@@ -41,6 +42,15 @@ public class StashFrame extends javax.swing.JFrame {
     private DataFlavor dataFlavor = new DataFlavor(Item.class,
                     Item.class.getSimpleName());
     
+    /**
+     * Quando um item stackable é movido para o stash após lógica em ItemSliderFrame.java
+     * @param fromContainer List_Item - container onde o item estava armazenado
+     * @param toContainer List_Item - container onde o item será armazenado
+     * @param item Item - item movido
+     * @param toItem Item - caso haja, é o item no qual aquele movido foi jogado em cima
+     * @param count int - quantidade do item movida
+     * @throws CloneNotSupportedException - exceção pode ser lançada ao clonar item
+     */
     public void stashSliderAction(List<Item> fromContainer, List<Item> toContainer, Item item, Item toItem, int count) throws CloneNotSupportedException
     {
         setEnabled(true);
@@ -129,6 +139,10 @@ public class StashFrame extends javax.swing.JFrame {
 
     }
     
+    /**
+     * Atualiza front-end do equipamento do jogador
+     * @param slot int - slot de equipamento que será atualizado
+     */
     public void updatePlayerEquipment(int slot)
     {
         if(slot < Game.HEAD || slot > Game.BOOTS)
@@ -194,6 +208,9 @@ public class StashFrame extends javax.swing.JFrame {
         new MyDropTargetListImp(equipRef, null);
     }
     
+    /**
+     * Atualiza front-end do inventário do jogador
+     */
     public void updatePlayerInventory()
     {
         String path;
@@ -230,6 +247,9 @@ public class StashFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Atualiza front-end do stash do jogador
+     */
     public void updatePlayerStash()
     {
         String path;
@@ -267,6 +287,11 @@ public class StashFrame extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Pega o panel do componente passado
+     * @param comp Component - componente
+     * @return panel JPanel - panel do componente
+     */
     public JPanel getComponentPanel(Component comp)
     {
         JPanel panel = null;
@@ -598,19 +623,20 @@ public class StashFrame extends javax.swing.JFrame {
 
         infoLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        playerHead = new Test.ItemLabel();
-        playerBody = new Test.ItemLabel();
-        playerWeapon = new Test.ItemLabel();
-        playerShield = new Test.ItemLabel();
-        playerLegs = new Test.ItemLabel();
-        playerBoots = new Test.ItemLabel();
+        playerHead = new namelessgame.Gameplay.ItemLabel();
+        playerBody = new namelessgame.Gameplay.ItemLabel();
+        playerWeapon = new namelessgame.Gameplay.ItemLabel();
+        playerShield = new namelessgame.Gameplay.ItemLabel();
+        playerLegs = new namelessgame.Gameplay.ItemLabel();
+        playerBoots = new namelessgame.Gameplay.ItemLabel();
         inventoryScrollPane = new javax.swing.JScrollPane();
         stashScrollPane = new javax.swing.JScrollPane();
         backButton = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(786, 529));
+        setTitle("    Stash");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -726,12 +752,12 @@ public class StashFrame extends javax.swing.JFrame {
     private javax.swing.JLabel infoLabel;
     private javax.swing.JScrollPane inventoryScrollPane;
     private javax.swing.JPanel jPanel1;
-    private Test.ItemLabel playerBody;
-    private Test.ItemLabel playerBoots;
-    private Test.ItemLabel playerHead;
-    private Test.ItemLabel playerLegs;
-    private Test.ItemLabel playerShield;
-    private Test.ItemLabel playerWeapon;
+    private namelessgame.Gameplay.ItemLabel playerBody;
+    private namelessgame.Gameplay.ItemLabel playerBoots;
+    private namelessgame.Gameplay.ItemLabel playerHead;
+    private namelessgame.Gameplay.ItemLabel playerLegs;
+    private namelessgame.Gameplay.ItemLabel playerShield;
+    private namelessgame.Gameplay.ItemLabel playerWeapon;
     private javax.swing.JScrollPane stashScrollPane;
     // End of variables declaration//GEN-END:variables
 }

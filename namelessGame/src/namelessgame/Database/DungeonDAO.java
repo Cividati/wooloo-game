@@ -9,10 +9,15 @@ import namelessgame.Gameplay.LootItem;
 import namelessgame.Gameplay.Monster;
 
 /**
- *
+ * Classe que carrega dungeons do banco de dados.
  * @author Henrique Barcia Lang
  */
 public class DungeonDAO extends DAO {
+    
+    /**
+     * Carrega as dungeons do jogo
+     * @return List_Dungeon - lista com as dungeons do jogo
+     */
     public List<Dungeon> loadDungeons()
     {
         List<Dungeon> dungeonList = new ArrayList<>();

@@ -1,20 +1,9 @@
-package Test;
-
-
-
-
-
-
-
-
-
-
+package namelessgame.Gameplay;
 
 import javax.swing.JLabel;
-import namelessgame.Gameplay.Item;
 
 /**
- *
+ * Wrapper class que encapsula um Item a um JLabel.
  * @author Henrique Barcia Lang
  */
 public class ItemLabel extends JLabel {
@@ -29,4 +18,3 @@ public class ItemLabel extends JLabel {
     }
 
 }
-

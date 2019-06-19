@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Test;
+package namelessgame.View;
 
+import namelessgame.Gameplay.ItemLabel;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.GridLayout;
@@ -23,20 +25,27 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import namelessgame.Exception.InventoryFullException;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
 
 /**
- *
+ * Classe que cria o frame de vitória em uma batalha.
  * @author Henrique Barcia Lang
  */
-public class DefeatFrame extends javax.swing.JFrame {
+public class VictoryFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form DefeatFramer
+     * Creates new form VictoryFrame
      */
+    
+    private int statusPoints;
+    private int str;
+    private int agi;
+    private int con;
+    private int maxHp;
     
     private Player player = Game.getPlayer();
     
@@ -48,10 +57,48 @@ public class DefeatFrame extends javax.swing.JFrame {
     private DataFlavor dataFlavor = new DataFlavor(Item.class,
                     Item.class.getSimpleName());
     
-    public DefeatFrame() {
+    public VictoryFrame() {
+        initComponents();
+    }
+    
+    /**
+     * Mostra o frame com as informações de ouro e experiência adquiridos
+     * @param gold int - ouro adquirido
+     * @param exp int - experiência adquirida
+     */
+    public VictoryFrame(int gold, int exp) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(185, 0, 185)));
+                    
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StatusFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
         initComponents();
         
-        player.setExp((int) (player.getExp() * 0.9));
+        statusPoints = player.getStatusPoints();
+        str = player.getStr();
+        agi = player.getAgi();
+        con = player.getCon();
+        maxHp = player.getMaxHealth();
+        
+        playerStr.setText(Integer.toString(str));
+        playerAgi.setText(Integer.toString(agi));
+        playerConst.setText(Integer.toString(con));
+        playerHp.setText(Integer.toString(maxHp));
+        playerPoints.setText(Integer.toString(statusPoints));
+        playerLevel.setText(Integer.toString(player.getLevel()));
+        playerExp.setStringPainted(true);
+        playerExp.setValue((int) (((double) player.getExp() / player.getTotalExpToLevelUp()) * 100));  
+        playerExp.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
+        receivedGold.setText(gold + " G");
+        receivedExp.setText("(+ " + exp + ")");
         
         updatePlayerInventory();
         updatePlayerLoot();
@@ -67,9 +114,19 @@ public class DefeatFrame extends javax.swing.JFrame {
         
         add(lootPanel);
         lootScrollPane.getViewport().add(lootPanel, null);
+        
     }
     
-    public void stashSliderAction(List<Item> fromContainer, List<Item> toContainer, Item item, Item toItem, int count) throws CloneNotSupportedException
+    /**
+     * Quando um item stackable é movido para o inventário após lógica em ItemSliderFrame.java
+     * @param fromContainer List_Item - container onde o item estava armazenado
+     * @param toContainer List_Item - container onde o item será armazenado
+     * @param item Item - item movido
+     * @param toItem Item - caso haja, é o item no qual aquele movido foi jogado em cima
+     * @param count int - quantidade do item movida
+     * @throws CloneNotSupportedException - exceção pode ser lançada ao clonar item
+     */
+    public void inventorySliderAction(List<Item> fromContainer, List<Item> toContainer, Item item, Item toItem, int count) throws CloneNotSupportedException
     {
         setEnabled(true);
         
@@ -153,6 +210,9 @@ public class DefeatFrame extends javax.swing.JFrame {
 
     }
     
+    /**
+     * Atualiza o front-end do inventário do jogador
+     */
     public void updatePlayerInventory()
     {
         String path;
@@ -185,6 +245,9 @@ public class DefeatFrame extends javax.swing.JFrame {
   
     }
     
+    /**
+     * Atualiza o front-end do loot acumulado
+     */
     public void updatePlayerLoot()
     {
         String path;
@@ -205,7 +268,7 @@ public class DefeatFrame extends javax.swing.JFrame {
             
             path = item == null ? "/namelessgame/img/slots/back.png" : item.getIcon();
             
-            itemLabel.setItem(item);          
+            itemLabel.setItem(item);   
             itemLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
             
             if(item != null)
@@ -220,7 +283,12 @@ public class DefeatFrame extends javax.swing.JFrame {
   
     }
     
-     public JPanel getComponentPanel(Component comp)
+    /**
+     * Pega o panel do componente passado
+     * @param comp Component - componente
+     * @return panel JPanel - panel do componente
+     */
+    public JPanel getComponentPanel(Component comp)
     {
         JPanel panel = null;
         
@@ -395,7 +463,7 @@ public class DefeatFrame extends javax.swing.JFrame {
                                             
                         if(movedItem.isStackable())
                         {
-                            ItemSliderFrame amountSelector = new ItemSliderFrame(DefeatFrame.this, fromItemContainer, toItemContainer, movedItem, localItem, movedItem.getCount());
+                            ItemSliderFrame amountSelector = new ItemSliderFrame(VictoryFrame.this, fromItemContainer, toItemContainer, movedItem, localItem, movedItem.getCount());
                            
                             amountSelector.setVisible(true);
                             setEnabled(false);
@@ -451,66 +519,286 @@ public class DefeatFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         infoPanel = new javax.swing.JPanel();
-        infoText3 = new javax.swing.JLabel();
-        infoText1 = new javax.swing.JLabel();
-        infoText2 = new javax.swing.JLabel();
-        okayButton = new javax.swing.JButton();
-        lootScrollPane = new javax.swing.JScrollPane();
+        goldLabel = new javax.swing.JLabel();
+        levelLabel = new javax.swing.JLabel();
+        playerExp = new javax.swing.JProgressBar();
+        receivedExp = new javax.swing.JLabel();
+        playerLevel = new javax.swing.JLabel();
+        receivedGold = new javax.swing.JLabel();
+        pointsLabel = new javax.swing.JLabel();
+        playerPoints = new javax.swing.JLabel();
+        strLabel = new javax.swing.JLabel();
+        playerStr = new javax.swing.JLabel();
+        addStrButton = new javax.swing.JButton();
+        addAgiButton = new javax.swing.JButton();
+        playerAgi = new javax.swing.JLabel();
+        agiLabel = new javax.swing.JLabel();
+        constLabel = new javax.swing.JLabel();
+        playerConst = new javax.swing.JLabel();
+        addConstButton = new javax.swing.JButton();
+        hpLabel = new javax.swing.JLabel();
+        playerHp = new javax.swing.JLabel();
+        confirmButton = new javax.swing.JButton();
         inventoryScrollPane = new javax.swing.JScrollPane();
+        lootScrollPane = new javax.swing.JScrollPane();
+        nextButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setTitle("    Victory");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
-        infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Defeat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 24), new java.awt.Color(255, 0, 0))); // NOI18N
+        infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Victory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 24), new java.awt.Color(0, 255, 0))); // NOI18N
         infoPanel.setLayout(null);
 
-        infoText3.setFont(new java.awt.Font("OscineW04-Light", 1, 24)); // NOI18N
-        infoText3.setText("sacrifice. Simply click on 'Okay' to resume your journeys in Wooloo!");
-        infoPanel.add(infoText3);
-        infoText3.setBounds(30, 120, 760, 30);
+        goldLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        goldLabel.setForeground(new java.awt.Color(255, 255, 0));
+        goldLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/icons/gold.png"))); // NOI18N
+        goldLabel.setText("+");
+        infoPanel.add(goldLabel);
+        goldLabel.setBounds(20, 50, 50, 50);
 
-        infoText1.setFont(new java.awt.Font("OscineW04-Light", 1, 24)); // NOI18N
-        infoText1.setText("Alas! Brave adventurer, you have met a sad fate. But do not despair, ");
-        infoPanel.add(infoText1);
-        infoText1.setBounds(30, 40, 760, 30);
+        levelLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        levelLabel.setForeground(new java.awt.Color(102, 102, 102));
+        levelLabel.setText("Lv.:");
+        infoPanel.add(levelLabel);
+        levelLabel.setBounds(20, 110, 40, 30);
 
-        infoText2.setFont(new java.awt.Font("OscineW04-Light", 1, 24)); // NOI18N
-        infoText2.setText("for the gods will bring you back into the world in exchange for a small");
-        infoPanel.add(infoText2);
-        infoText2.setBounds(30, 80, 760, 30);
+        playerExp.setForeground(new java.awt.Color(204, 0, 255));
+        infoPanel.add(playerExp);
+        playerExp.setBounds(90, 110, 210, 30);
+
+        receivedExp.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        receivedExp.setForeground(new java.awt.Color(0, 0, 0));
+        receivedExp.setText("(+ 0)");
+        infoPanel.add(receivedExp);
+        receivedExp.setBounds(310, 110, 90, 30);
+
+        playerLevel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        playerLevel.setForeground(new java.awt.Color(0, 0, 0));
+        playerLevel.setText("0");
+        infoPanel.add(playerLevel);
+        playerLevel.setBounds(60, 110, 30, 30);
+
+        receivedGold.setFont(new java.awt.Font("OscineTrialW01-Regular", 1, 14)); // NOI18N
+        receivedGold.setForeground(new java.awt.Color(255, 255, 0));
+        receivedGold.setText("0 G");
+        infoPanel.add(receivedGold);
+        receivedGold.setBounds(70, 60, 70, 30);
 
         getContentPane().add(infoPanel);
-        infoPanel.setBounds(0, 0, 800, 180);
+        infoPanel.setBounds(0, 0, 510, 180);
 
-        okayButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        okayButton.setText("Okay");
-        okayButton.addActionListener(new java.awt.event.ActionListener() {
+        pointsLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        pointsLabel.setForeground(new java.awt.Color(102, 102, 102));
+        pointsLabel.setText("Points:");
+        getContentPane().add(pointsLabel);
+        pointsLabel.setBounds(610, 10, 60, 20);
+
+        playerPoints.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        playerPoints.setForeground(new java.awt.Color(51, 204, 0));
+        playerPoints.setText("+0");
+        getContentPane().add(playerPoints);
+        playerPoints.setBounds(680, 10, 40, 20);
+
+        strLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        strLabel.setForeground(new java.awt.Color(102, 102, 102));
+        strLabel.setText("Strength:");
+        getContentPane().add(strLabel);
+        strLabel.setBounds(550, 60, 73, 20);
+
+        playerStr.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        playerStr.setForeground(new java.awt.Color(0, 0, 0));
+        playerStr.setText("0");
+        getContentPane().add(playerStr);
+        playerStr.setBounds(680, 60, 38, 20);
+
+        addStrButton.setText("+");
+        addStrButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okayButtonActionPerformed(evt);
+                addStrButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(okayButton);
-        okayButton.setBounds(660, 410, 108, 55);
+        getContentPane().add(addStrButton);
+        addStrButton.setBounds(740, 60, 40, 30);
 
-        lootScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Loot", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-        getContentPane().add(lootScrollPane);
-        lootScrollPane.setBounds(20, 250, 250, 180);
+        addAgiButton.setText("+");
+        addAgiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAgiButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(addAgiButton);
+        addAgiButton.setBounds(740, 100, 40, 30);
+
+        playerAgi.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        playerAgi.setForeground(new java.awt.Color(0, 0, 0));
+        playerAgi.setText("0");
+        getContentPane().add(playerAgi);
+        playerAgi.setBounds(680, 100, 40, 20);
+
+        agiLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        agiLabel.setForeground(new java.awt.Color(102, 102, 102));
+        agiLabel.setText("Agility:");
+        getContentPane().add(agiLabel);
+        agiLabel.setBounds(550, 100, 52, 20);
+
+        constLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        constLabel.setForeground(new java.awt.Color(102, 102, 102));
+        constLabel.setText("Constitution:");
+        getContentPane().add(constLabel);
+        constLabel.setBounds(550, 140, 100, 20);
+
+        playerConst.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        playerConst.setForeground(new java.awt.Color(0, 0, 0));
+        playerConst.setText("0");
+        getContentPane().add(playerConst);
+        playerConst.setBounds(680, 140, 39, 20);
+
+        addConstButton.setText("+");
+        addConstButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addConstButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(addConstButton);
+        addConstButton.setBounds(740, 140, 40, 30);
+
+        hpLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        hpLabel.setForeground(new java.awt.Color(102, 102, 102));
+        hpLabel.setText("Max HP:");
+        getContentPane().add(hpLabel);
+        hpLabel.setBounds(550, 170, 68, 20);
+
+        playerHp.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        playerHp.setForeground(new java.awt.Color(0, 0, 0));
+        playerHp.setText("0");
+        getContentPane().add(playerHp);
+        playerHp.setBounds(680, 170, 39, 20);
+
+        confirmButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(confirmButton);
+        confirmButton.setBounds(620, 220, 108, 55);
 
         inventoryScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(inventoryScrollPane);
         inventoryScrollPane.setBounds(290, 250, 250, 180);
 
+        lootScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Loot", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        getContentPane().add(lootScrollPane);
+        lootScrollPane.setBounds(20, 250, 250, 180);
+
+        nextButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nextButton);
+        nextButton.setBounds(620, 410, 108, 55);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayButtonActionPerformed
-        this.dispose();
+    /**
+     * Ação realizada ao clicar em '+' (strenght)
+     * @param evt 
+     */
+    private void addStrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStrButtonActionPerformed
+        if(statusPoints <= 0)
+        {
+            Game.sendErrorMessage("You do not have points to distribute.");
 
-        (new GameFrame()).setVisible(true);       
-    }//GEN-LAST:event_okayButtonActionPerformed
+            return;
+        }
+
+        str++;
+        maxHp = Player.getMaxHealth(str, con);
+        statusPoints--;
+
+        playerStr.setText(Integer.toString(str));
+        playerHp.setText(Integer.toString(maxHp));
+        playerPoints.setText(Integer.toString(statusPoints));
+    }//GEN-LAST:event_addStrButtonActionPerformed
+
+    /**
+     * Ação realizada ao clicar em '+' (agility)
+     * @param evt 
+     */
+    private void addAgiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAgiButtonActionPerformed
+        if(statusPoints <= 0)
+        {
+            Game.sendErrorMessage("You do not have points to distribute.");
+
+            return;
+        }
+
+        agi++;
+        statusPoints--;
+
+        playerAgi.setText(Integer.toString(agi));
+        playerPoints.setText(Integer.toString(statusPoints));
+    }//GEN-LAST:event_addAgiButtonActionPerformed
+
+    /**
+     * Ação realizada ao clicar em '+' (constitution)
+     * @param evt 
+     */
+    private void addConstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstButtonActionPerformed
+        if(statusPoints <= 0)
+        {
+            Game.sendErrorMessage("You do not have points to distribute.");
+
+            return;
+        }
+
+        con++;
+        maxHp = Player.getMaxHealth(str, con);
+        statusPoints--;
+
+        playerConst.setText(Integer.toString(con));
+        playerHp.setText(Integer.toString(maxHp));
+        playerPoints.setText(Integer.toString(statusPoints));
+    }//GEN-LAST:event_addConstButtonActionPerformed
+
+    /**
+     * Ação realizada ao clicar em confirm
+     * @param evt 
+     */
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        if(player.getStatusPoints() == statusPoints)
+        {
+            Game.sendErrorMessage("You didn't distribute any points.");
+            
+            return;
+        }
+        
+        player.setStr(player.getBaseStr() + (str - player.getStr()));
+        player.setAgi(player.getBaseAgi() + (agi - player.getAgi()));
+        player.setCon(player.getBaseCon() + (con - player.getCon()));
+        player.setStatusPoints(statusPoints);
+        
+        Game.sendSuccessMessage("Point(s) distributed.");
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    /**
+     * Ação realizada ao clicar em next
+     * @param evt 
+     */
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        this.dispose();
+        
+        Game.advanceDungeon();
+    }//GEN-LAST:event_nextButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -525,36 +813,55 @@ public class DefeatFrame extends javax.swing.JFrame {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    
+                    // change progress bar color
+                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VictoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VictoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VictoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DefeatFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VictoryFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DefeatFrame().setVisible(true);
+                new VictoryFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAgiButton;
+    private javax.swing.JButton addConstButton;
+    private javax.swing.JButton addStrButton;
+    private javax.swing.JLabel agiLabel;
+    private javax.swing.JButton confirmButton;
+    private javax.swing.JLabel constLabel;
+    private javax.swing.JLabel goldLabel;
+    private javax.swing.JLabel hpLabel;
     private javax.swing.JPanel infoPanel;
-    private javax.swing.JLabel infoText1;
-    private javax.swing.JLabel infoText2;
-    private javax.swing.JLabel infoText3;
     private javax.swing.JScrollPane inventoryScrollPane;
+    private javax.swing.JLabel levelLabel;
     private javax.swing.JScrollPane lootScrollPane;
-    private javax.swing.JButton okayButton;
+    private javax.swing.JButton nextButton;
+    private javax.swing.JLabel playerAgi;
+    private javax.swing.JLabel playerConst;
+    private javax.swing.JProgressBar playerExp;
+    private javax.swing.JLabel playerHp;
+    private javax.swing.JLabel playerLevel;
+    private javax.swing.JLabel playerPoints;
+    private javax.swing.JLabel playerStr;
+    private javax.swing.JLabel pointsLabel;
+    private javax.swing.JLabel receivedExp;
+    private javax.swing.JLabel receivedGold;
+    private javax.swing.JLabel strLabel;
     // End of variables declaration//GEN-END:variables
 }

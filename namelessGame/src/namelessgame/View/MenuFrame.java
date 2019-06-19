@@ -1,7 +1,6 @@
-package Test;
+package namelessgame.View;
 
 import namelessgame.Gameplay.Game;
-import namelessgame.Threads.Audio;
 
 /**
  *
@@ -14,8 +13,6 @@ public class MenuFrame extends javax.swing.JFrame {
      */
     public MenuFrame() {
         initComponents();
-        
-        this.setSize(1280, 720);
         
         Game.playMusic("swordland");
     }
@@ -37,7 +34,9 @@ public class MenuFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("    Menu");
         setBackground(new java.awt.Color(102, 102, 102));
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
@@ -80,9 +79,9 @@ public class MenuFrame extends javax.swing.JFrame {
         getContentPane().add(loadGameButton);
         loadGameButton.setBounds(130, 360, 300, 100);
 
-        jLabel3.setText("Patch ver.: v0.00.000.01.14");
+        jLabel3.setText("Patch ver.: v0.01.002.0014");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(1110, 670, 170, 16);
+        jLabel3.setBounds(1110, 670, 160, 16);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
@@ -94,6 +93,10 @@ public class MenuFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao clicar em new game
+     * @param evt 
+     */
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.dispose();
         
@@ -103,6 +106,10 @@ public class MenuFrame extends javax.swing.JFrame {
         newG.setVisible(true);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em load game
+     * @param evt 
+     */
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         this.dispose();
         
@@ -113,6 +120,10 @@ public class MenuFrame extends javax.swing.JFrame {
         loadG.setSize(1280, 720);
     }//GEN-LAST:event_loadGameButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em exit
+     * @param evt 
+     */
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         Game.playSound("click");
         

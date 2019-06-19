@@ -1,4 +1,4 @@
-package Test;
+package namelessgame.View;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,7 +15,7 @@ import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.ShopItem;
 
 /**
- *
+ * Classe que cria o frame do item slider, responsável por selecionar a quantidade de um item stackable.
  * @author Henrique Barcia Lang
  */
 public class ItemSliderFrame extends javax.swing.JFrame implements WindowListener {
@@ -109,10 +109,23 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         initComponents();
     }
     
+    /**
+     * Cria o slider
+     * @param originalFrame javax.swing.JFrame - frame que criou o slider
+     * @param item Item - item que está tendo a quantidade selecionada
+     * @param countMax int - quantidade máxima do item
+     */
     public ItemSliderFrame(javax.swing.JFrame originalFrame, Item item, int countMax) {
         this(originalFrame, item, countMax, false);
     }
     
+    /**
+     * Cria o slider
+     * @param originalFrame javax.swing.JFrame - frame que criou o slider
+     * @param item Item - item que está tendo a quantidade selecionada
+     * @param countMax int - quantidade máxima do item
+     * @param buying boolean - está comprando o item ou não
+     */
     public ItemSliderFrame(javax.swing.JFrame originalFrame, Item item, int countMax, boolean buying) {
         initComponents();
         
@@ -126,6 +139,15 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         amountLabel.setText(Integer.toString(1));
     }
     
+    /**
+     * Cria o slider
+     * @param originalFrame javax.swing.JFrame - frame que criou o slider
+     * @param fromContainer List_Item - container onde o item estava armazenado
+     * @param toContainer List_Item - container onde o item será armazenado
+     * @param item Item - item movido
+     * @param toItem Item - caso haja, é o item no qual aquele movido foi jogado em cima
+     * @param countMax int - quantidade máxima do item
+     */
     public ItemSliderFrame(javax.swing.JFrame originalFrame, List<Item> fromContainer, List<Item> toContainer, Item item, Item toItem, int countMax) {
         initComponents();
         
@@ -158,7 +180,8 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         amountSlider = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(250, 120));
+        setTitle("    Choose an amount");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -202,6 +225,10 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao mover o slider
+     * @param evt 
+     */
     private void amountSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_amountSliderStateChanged
         int sliderValue = amountSlider.getValue();
         
@@ -213,12 +240,20 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         amountLabel.setText(Integer.toString(count));
     }//GEN-LAST:event_amountSliderStateChanged
 
+    /**
+     * Ação realizada ao clicar no cancel
+     * @param evt 
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         originalFrame.setEnabled(true);
         
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no ok
+     * @param evt 
+     */
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         originalFrame.setEnabled(true);
         this.dispose();
@@ -246,7 +281,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         else if(originalFrame instanceof VictoryFrame)
         {
             try {
-                ((VictoryFrame) originalFrame).stashSliderAction(fromContainer, toContainer, item, toItem, count);
+                ((VictoryFrame) originalFrame).inventorySliderAction(fromContainer, toContainer, item, toItem, count);
             } catch (CloneNotSupportedException ex) {
                 System.out.println("Error when cloning item on victory frame...");
             }
@@ -254,7 +289,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         else if(originalFrame instanceof DefeatFrame)
         {
             try {
-                ((DefeatFrame) originalFrame).stashSliderAction(fromContainer, toContainer, item, toItem, count);
+                ((DefeatFrame) originalFrame).inventorySliderAction(fromContainer, toContainer, item, toItem, count);
             } catch (CloneNotSupportedException ex) {
                 System.out.println("Error when cloning item on defeat frame...");
             }

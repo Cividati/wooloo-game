@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * Classe responsável por conexão com o banco de dados.
  * @author Henrique Barcia Lang
  */
 public abstract class DAO {
@@ -29,6 +29,10 @@ public abstract class DAO {
     private String user = "root";
     private String password = "admin";
     
+    /**
+     * Conecta ao banco de dados
+     * @return boolean - conexão com sucesso?
+     */
     public boolean connectToDatabase()
     {
         boolean connected = false;

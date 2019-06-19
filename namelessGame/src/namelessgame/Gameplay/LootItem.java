@@ -1,7 +1,7 @@
 package namelessgame.Gameplay;
 
 /**
- *
+ * Classe que representa um item saqueado de um monstro.
  * @author Henrique Barcia Lang
  */
 public class LootItem extends Item {

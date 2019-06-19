@@ -1,4 +1,4 @@
-package Test;
+package namelessgame.View;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,7 +9,6 @@ package Test;
 
 import java.util.Collections;
 import java.util.List;
-import Test.MenuFrame;
 import java.awt.Color;
 import javax.swing.UIManager;
 import namelessgame.Database.DungeonDAO;
@@ -19,7 +18,7 @@ import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
 
 /**
- *
+ * Classe que cria o frame do menu in-game (isto é, com personagem selecionado).
  * @author Henrique Barcia Lang
  */
 public class GameFrame extends javax.swing.JFrame {
@@ -99,7 +98,8 @@ public class GameFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setTitle("    Game");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -250,6 +250,10 @@ public class GameFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao clicar no botão de shop.
+     * @param evt 
+     */
     private void shopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopButtonActionPerformed
         this.dispose();
         
@@ -257,10 +261,18 @@ public class GameFrame extends javax.swing.JFrame {
         newShop.setVisible(true);
     }//GEN-LAST:event_shopButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de save.
+     * @param evt 
+     */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         (new PlayerDAO()).savePlayer(Game.getPlayer());
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de status.
+     * @param evt 
+     */
     private void statusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusButtonActionPerformed
         this.dispose();
         
@@ -268,6 +280,10 @@ public class GameFrame extends javax.swing.JFrame {
         newStatus.setVisible(true);
     }//GEN-LAST:event_statusButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de stash.
+     * @param evt 
+     */
     private void stashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stashButtonActionPerformed
         this.dispose();
         
@@ -275,6 +291,10 @@ public class GameFrame extends javax.swing.JFrame {
         newStash.setVisible(true);
     }//GEN-LAST:event_stashButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de back.
+     * @param evt 
+     */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
         
@@ -285,6 +305,10 @@ public class GameFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_backButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de dungeon.
+     * @param evt 
+     */
     private void dungeonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dungeonButtonActionPerformed
         this.dispose();
         

@@ -1,4 +1,4 @@
-package Test;
+package namelessgame.View;
 
 import java.awt.Color;
 import java.util.Map;
@@ -8,7 +8,7 @@ import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.Player;
 
 /**
- *
+ * Classe que cria o frame de status do jogador.
  * @author Henrique Barcia Lang
  */
 public class StatusFrame extends javax.swing.JFrame {
@@ -137,7 +137,8 @@ public class StatusFrame extends javax.swing.JFrame {
         backgroundFrame = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setTitle("    Status");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -398,6 +399,10 @@ public class StatusFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao clicar em back
+     * @param evt 
+     */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
         
@@ -405,6 +410,10 @@ public class StatusFrame extends javax.swing.JFrame {
         gameBack.setVisible(true);   
     }//GEN-LAST:event_backButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em '+' (strenght)
+     * @param evt 
+     */
     private void addStrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStrButtonActionPerformed
         if(statusPoints <= 0)
         {
@@ -422,6 +431,10 @@ public class StatusFrame extends javax.swing.JFrame {
         playerPoints.setText(Integer.toString(statusPoints));
     }//GEN-LAST:event_addStrButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em '+' (agility)
+     * @param evt 
+     */
     private void addAgiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAgiButtonActionPerformed
         if(statusPoints <= 0)
         {
@@ -437,6 +450,10 @@ public class StatusFrame extends javax.swing.JFrame {
         playerPoints.setText(Integer.toString(statusPoints));
     }//GEN-LAST:event_addAgiButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em '+' (constitution)
+     * @param evt 
+     */
     private void addConstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstButtonActionPerformed
         if(statusPoints <= 0)
         {
@@ -454,6 +471,10 @@ public class StatusFrame extends javax.swing.JFrame {
         playerPoints.setText(Integer.toString(statusPoints));
     }//GEN-LAST:event_addConstButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em confirm
+     * @param evt 
+     */
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         Player player = Game.getPlayer();
         

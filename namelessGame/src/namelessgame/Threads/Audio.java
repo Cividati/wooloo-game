@@ -6,10 +6,9 @@
 
 package namelessgame.Threads;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -17,7 +16,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- *
+ * Classe responsável pelo áudio do jogo.
  * @author Henrique Barcia Lang
  */
 public class Audio extends Thread {
@@ -33,7 +32,7 @@ public class Audio extends Thread {
     public Audio(String audioName, boolean isMusic) {
         this.isMusic = isMusic;
         
-        this.audioName = "./src/namelessgame/audio/" + (this.isMusic ? "musics" : "sounds") + "/" + audioName + ".wav";
+        this.audioName = "/namelessgame/audio/" + (this.isMusic ? "musics" : "sounds") + "/" + audioName + ".wav";
     }
     
     public void stopAudio()
@@ -48,7 +47,7 @@ public class Audio extends Thread {
         AudioInputStream inputStream = null;
         
         try {
-            inputStream = AudioSystem.getAudioInputStream(new File(audioName));
+            inputStream = AudioSystem.getAudioInputStream(getClass().getResource(audioName));
             
             clip = AudioSystem.getClip();
             clip.open(inputStream);

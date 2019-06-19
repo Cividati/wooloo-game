@@ -1,7 +1,7 @@
 package namelessgame.Gameplay;
 
-import Test.BattleFrame;
-import Test.GameFrame;
+import namelessgame.View.BattleFrame;
+import namelessgame.View.GameFrame;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +9,10 @@ import java.util.Map;
 import namelessgame.Database.ItemDAO;
 import namelessgame.Threads.Audio;
 
+/**
+ * Classe com constantes e métodos de uso geral no jogo.
+ * @author Henrique Barcia Lang
+ */
 public class Game {
     private static Player loggedPlayer;
     
@@ -47,48 +51,93 @@ public class Game {
     
     private static Audio audio;
 
+    /**
+     * Retorna o personagem logado
+     * @return Player - personagem logado
+     */
     public static Player getPlayer() {
         return loggedPlayer;
     }
 
+    /**
+     * Estabelece o personagem logado
+     * @param loggedPlayer Player - personagem logado
+     */
     public static void setPlayer(Player loggedPlayer) {
         Game.loggedPlayer = loggedPlayer;
     }
     
+    /**
+     * Mostra uma mensagem de erro
+     * @param message String - mensagem a ser mostrada
+     */
     public static void sendErrorMessage(String message)
     {
         javax.swing.JOptionPane.showMessageDialog(null, message, "Error", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
     
+    /**
+     * Mostra uma mensagem de sucesso
+     * @param message String - mensagem a ser msotrada
+     */
     public static void sendSuccessMessage(String message)
     {
         javax.swing.JOptionPane.showMessageDialog(null, message, "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Retorna as dungeons do jogo
+     * @return List_Dungeon - lista com as dungeons do jogo
+     */
     public static List<Dungeon> getDungeons() {
         return dungeons;
     }
 
+    /**
+     * Estabelece as dungeons do jogo
+     * @param dungeons List_Dungeon - lista com dungeons
+     */
     public static void setDungeons(List<Dungeon> dungeons) {
         Game.dungeons = dungeons;
     }
 
+    /**
+     * Retorna os itens que podem ser comprados na loja
+     * @return List_ShopItem - lista com os itens compráveis na loja
+     */
     public static List<ShopItem> getShop() {
         return shop;
     }
 
+    /**
+     * Estabelece os itens compráveis na loja
+     * @param shop List_ShopItem - lista com itens
+     */
     public static void setShop(List<ShopItem> shop) {
         Game.shop = shop;
     }
 
+    /**
+     * Retorna os itens que podem ser vendidos na loja
+     * @return List_ShopItem - lista com os itens vendíveis na loja
+     */
     public static Map<String, Long> getSell() {
         return sell;
     }
 
+    /**
+     * Estabelece os itens vendíveis na loja
+     * @param sell List_ShopItem - lista com itens
+     */
     public static void setSell(Map<String, Long> sell) {
         Game.sell = sell;
     }
     
+    /**
+     * Adiciona um item comprável na loja
+     * @param name String - nome do item
+     * @param price long - preço do item
+     */
     public static void addItemToShop(String name, long price)
     {
         ShopItem newItem = (new ItemDAO()).loadShopItemByName(name, price); 
@@ -99,12 +148,19 @@ public class Game {
         shop.add(newItem);
     }
     
+    /**
+     * Adiciona um item vendível na loja
+     * @param name String - nome do item
+     * @param price long - preço do item
+     */
     public static void addItemToBuy(String name, long price)
     {
         sell.put(name, price);
     }
     
-    // Add items to shop
+    /**
+     * Preenche a loja com os itens compráveis e vendíveis
+     */
     public static void fillShop()
     {
         // item_name, price
@@ -137,19 +193,34 @@ public class Game {
         
     }
 
+    /**
+     * Retorna o loot acumulado na dungeon pelo personagem até o momento
+     * @return List_Item - lista com o loot acumulado
+     */
     public static List<Item> getLoot() {
         return loot;
     }
 
+    /**
+     * Estabelece o loot acumulado na dungeon pelo personagem até o momento
+     * @param loot List_Item - lista com itens
+     */
     public static void setLoot(List<Item> loot) {
         Game.loot = loot;
     }
     
+    /**
+     * Adiciona um item à lista de loot acumulado
+     * @param item Item - loot a ser adicionado na lista de loot acumulado
+     */
     public static void addLoot(Item item)
     {
         getLoot().add(item);
     }
     
+    /**
+     * Inicia uma batalha contra o próximo monstro da dungeon
+     */
     public static void exploreDungeon()
     {
         try
@@ -166,6 +237,9 @@ public class Game {
         }
     }
     
+    /**
+     * Avança um round na dungeon
+     */
     public static void advanceDungeon()
     {
         roundNow++;
@@ -173,6 +247,10 @@ public class Game {
         exploreDungeon();
     }
     
+    /**
+     * Inicia a dungeon
+     * @param dungeon Dungeon - dungeon a ser explorada
+     */
     public static void startExploringDungeon(Dungeon dungeon) 
     {
         exploredDungeon = dungeon;
@@ -183,19 +261,30 @@ public class Game {
         loot = new ArrayList<>();
         
         exploreDungeon();
-        
     }
 
+    /**
+     * Retorna o áudio principal tocado no momento
+     * @return Audio - áudio principal sendo tocado no momento
+     */
     public static Audio getAudio() {
         return audio;
     }
 
+    /**
+     * Estabelece o áudio principal
+     * @param audio Audio - áudio sendo tocado
+     */
     public static void setAudio(Audio audio) {
         Game.audio = audio;
     }
     
-    // Plays a new audio (music or sound) and returns it
-    // The current audio remains untouched
+    /**
+     * Toca um novo áudio além do principal
+     * @param audioName String - nome do áudio a ser tocado
+     * @param isMusic boolean - é uma música ou não
+     * @return Audio - novo áudio sendo tocado
+     */
     public static Audio playNewAudio(String audioName, boolean isMusic)
     {
         Audio newAudio = new Audio(audioName, isMusic);
@@ -204,8 +293,11 @@ public class Game {
         
         return newAudio;
     }
-    
-    // Plays a new music, replacing the current audio with it
+
+    /**
+     * Toca uma nova música e a estabelece como aúdio principal
+     * @param audioName String - nome da música
+     */
     public static void playMusic(String audioName)
     {
         Audio newAudio = new Audio(audioName, true);
@@ -215,7 +307,10 @@ public class Game {
         setAudio(newAudio);
     }
     
-    // Plays a new sound, replacing the current audio with it
+    /**
+     * Toca um novo som e o estabelece como áudio principal
+     * @param audioName String - nome do som
+     */
     public static void playSound(String audioName)
     {
         Audio newAudio = new Audio(audioName);
@@ -225,7 +320,9 @@ public class Game {
         setAudio(newAudio);
     }
     
-    // Stop current audio
+    /**
+     * Interrompe o áudio principal
+     */
     public static void stopAudio()
     {
         Audio currentAudio = getAudio();

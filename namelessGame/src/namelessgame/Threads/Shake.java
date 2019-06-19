@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
- *
+ * Classe responsável pela animação ao receber um ataque.
  * @author Henrique Barcia Lang
  */
 public class Shake extends Thread {

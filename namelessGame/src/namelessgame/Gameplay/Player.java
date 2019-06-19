@@ -9,7 +9,7 @@ import namelessgame.Exception.NotEnoughLevelException;
 import namelessgame.Exception.StashFullException;
 
 /**
- *
+ * Classe que representa um personagem.
  * @author Henrique Barcia Lang
  */
 public class Player extends Creature implements Comparable<Player> {
@@ -45,6 +45,11 @@ public class Player extends Creature implements Comparable<Player> {
         setAvatar(avatar);
     }
     
+    /**
+     * Adiciona um item ao container
+     * @param item Item - item a ser adicionado
+     * @param toContainer List_Item - container que terá o item adicionado
+     */
     public void addItemToContainer(Item item, List<Item> toContainer)
     {
         if(toContainer == getStash())
@@ -62,6 +67,11 @@ public class Player extends Creature implements Comparable<Player> {
         toContainer.add(0, item);
     }
     
+    /**
+     * Retorna se o container está cheio ou não
+     * @param toContainer List_Item - container
+     * @return boolean - o container está cheio ou não
+     */
     public boolean isContainerFull(List<Item> toContainer)
     {
         if(toContainer == getStash())
@@ -72,6 +82,10 @@ public class Player extends Creature implements Comparable<Player> {
         return false;
     }
     
+    /**
+     * Adiciona um item ao stash
+     * @param item Item - item a ser adicionado
+     */
     public void addItemToStash(Item item)
     {
         if((getStash()).size() == Game.MAX_STASH_SIZE)
@@ -80,6 +94,10 @@ public class Player extends Creature implements Comparable<Player> {
         (getStash()).add(0, item);
     }
     
+    /**
+     * Adiciona um item ao inventário
+     * @param item Item - item a ser adicionado
+     */
     public void addItemToInventory(Item item)
     {
         if((getInventory()).size() == Game.MAX_INVENTORY_SIZE)
@@ -88,6 +106,11 @@ public class Player extends Creature implements Comparable<Player> {
         (getInventory()).add(0, item);
     }
     
+    /**
+     * Equipa um item
+     * @param item Item - item a ser equipado
+     * @param fromContainer List_Item - container de origem do item
+     */
     public void equipItem(Item item, List<Item> fromContainer)
     {
         int slot = item.getSlot();
@@ -108,19 +131,37 @@ public class Player extends Creature implements Comparable<Player> {
         playerEquip.put(slot, item);
     }
     
+    /**
+     * Remove um item do stash
+     * @param item Item - item a ser removido
+     */
     public void removeItemFromStash(Item item)
     {
         (getStash()).remove(item);
     }
     
+    /**
+     * Remove um item do inventário
+     * @param item Item - item a ser removido
+     */
     public void removeItemFromInventory(Item item)
     {
         (getInventory()).remove(item);
     }
     
+    /**
+     * Remove um item do equipamento
+     * @param item Item - item a ser removido
+     */
     public void removeItemFromEquip(Item item)
     {
-        (getEquip()).put(item.getSlot(), null);
+        Map<Integer, Item> playerEquip = getEquip();
+        
+        if(playerEquip.get(item.getSlot()) == null)
+            return;
+        
+        if(playerEquip.get(item.getSlot()) == item)
+            playerEquip.put(item.getSlot(), null);
     }
 
     public int getId() {
@@ -186,11 +227,19 @@ public class Player extends Creature implements Comparable<Player> {
         }
     }
     
+    /**
+     * Retorna a experiência total requirida para avançar de nível
+     * @return int - experiência total para avançar de nível
+     */
     public int getTotalExpToLevelUp()
     {
         return getLevel() * 10;
     }
     
+    /**
+     * Retorna a experiência restante para avançar de nível
+     * @return int - experiência restante para avançar de nível
+     */
     public int getExpNeededToLevelUp()
     {
         return getTotalExpToLevelUp() - getExp();
@@ -287,6 +336,11 @@ public class Player extends Creature implements Comparable<Player> {
         return super.getCon();
     }
     
+    /**
+     * Retorna a strenght do personagem considerando que item está equipado
+     * @param item Item - item a ser considerado que está equipado
+     * @return int - strenght restante
+     */
     public int getStr(Item item)
     {
         int str = getBaseStr();
@@ -311,6 +365,11 @@ public class Player extends Creature implements Comparable<Player> {
         return str;      
     }
     
+    /**
+     * Retorna a agility do personagem considerando que item está equipado
+     * @param item Item - item a ser considerado que está equipado
+     * @return int - agility resultante
+     */
     public int getAgi(Item item)
     {
         int agi = getBaseAgi();
@@ -335,6 +394,11 @@ public class Player extends Creature implements Comparable<Player> {
         return agi;      
     }
     
+    /**
+     * Retorna a constitution do personagem considerando que item está equipado
+     * @param item Item - item a ser considerado que está equipado
+     * @return int - constitution resultante
+     */
     public int getCon(Item item)
     {
         int con = getBaseCon();
@@ -359,6 +423,10 @@ public class Player extends Creature implements Comparable<Player> {
         return con;      
     }
     
+    /**
+     * Retorna a strenght total do personagem considerando equipamentos
+     * @return int - strenght total
+     */
     @Override
     public int getStr()
     {
@@ -378,6 +446,10 @@ public class Player extends Creature implements Comparable<Player> {
         return str;
     }
     
+    /**
+     * Retorna a agility total do personagem considerando equipamentos
+     * @return int - agility total
+     */
     @Override
     public int getAgi()
     {
@@ -397,6 +469,10 @@ public class Player extends Creature implements Comparable<Player> {
         return agi;
     }
     
+    /**
+     * Retorna a constitution total do personagem considerando equipamentos
+     * @return int - constitution total
+     */
     @Override
     public int getCon()
     {
@@ -419,13 +495,6 @@ public class Player extends Creature implements Comparable<Player> {
     public int getMaxHealth(Item item)
     {
         return (3 * getCon(item)) + getStr(item);
-    }
-    
-    public void useHealthPotion()
-    {
-        // show effect
-        
-        
     }
  
 }

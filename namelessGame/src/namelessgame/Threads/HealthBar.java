@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 /**
- *
+ * Classe responsável pela animação da health bar e mudança da health label.
  * @author Henrique Barcia Lang
  */
 public class HealthBar extends Thread {

@@ -1,7 +1,7 @@
 package namelessgame.Gameplay;
 
 /**
- *
+ * Classe que representa um item.
  * @author Henrique Barcia Lang
  */
 public class Item implements Cloneable {
@@ -152,6 +152,10 @@ public class Item implements Cloneable {
         this.stackable = stackable;
     }
     
+    /**
+     * Retorna descrição do item
+     * @return String - descrição do item
+     */
     public String getDescr()
     {
         return "<html>" + getName() +               
@@ -164,6 +168,11 @@ public class Item implements Cloneable {
                 "</html>";
     }
     
+    /**
+     * Retorna descrição do item considerando seu uso por um personagem
+     * @param player Player - personagem a ser considerado
+     * @return String - descrição do item
+     */
     public String getDescr(Player player)
     {
         int strDiff = player.getStr(this) - player.getStr();

@@ -1,4 +1,4 @@
-package Test;
+package namelessgame.View;
 
 import java.awt.Color;
 import java.util.Collections;
@@ -10,7 +10,7 @@ import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
 
 /**
- *
+ * Classe que cria o frame de disposição dos saves (personagens).
  * @author sin
  */
 public class LoadGameFrame extends javax.swing.JFrame {
@@ -21,6 +21,9 @@ public class LoadGameFrame extends javax.swing.JFrame {
     private int chosenId = -1;
     public List<Player> playerList;
     
+    /**
+     * Atualiza informação do save (personagem) atual na tela.
+     */
     public void setupPlayerInfo()
     {
         if(chosenId >= playerList.size())
@@ -46,6 +49,9 @@ public class LoadGameFrame extends javax.swing.JFrame {
         catch(ArrayIndexOutOfBoundsException e) {}
     }
     
+    /**
+     * Limpa a informação do save (personagem) na tela.
+     */
     public void clearPlayerInfo()
     {
         playerNameLabel.setText("Name: ");
@@ -168,7 +174,8 @@ public class LoadGameFrame extends javax.swing.JFrame {
         BG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setTitle("    Saves");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -350,6 +357,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao clicar no botão de delete
+     * @param evt 
+     */
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         try
         {
@@ -430,6 +441,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de load
+     * @param evt 
+     */
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         try
         {
@@ -447,6 +462,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         gameBack.setVisible(true);        
     }//GEN-LAST:event_loadButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de back
+     * @param evt 
+     */
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         this.dispose();
 
@@ -455,6 +474,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         menuBack.setSize(1280, 720);
     }//GEN-LAST:event_BackButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão 1 de personagem
+     * @param evt 
+     */
     private void Char1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char1MousePressed
         if(Char1.getText().equals(""))
         {
@@ -468,6 +491,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }//GEN-LAST:event_Char1MousePressed
 
+    /**
+     * Ação realizada ao clicar no botão 2 de personagem
+     * @param evt 
+     */
     private void Char2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char2MousePressed
         if(Char2.getText().equals(""))
         {
@@ -481,6 +508,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }//GEN-LAST:event_Char2MousePressed
 
+    /**
+     * Ação realizada ao clicar no botão 3 de personagem
+     * @param evt 
+     */
     private void Char3MousePressed(java.awt.event.MouseEvent evt) {
         if(Char3.getText().equals(""))
         {
@@ -494,6 +525,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }
 	
+    /**
+     * Ação realizada ao clicar no botão 4 de personagem
+     * @param evt 
+     */
     private void Char4MousePressed(java.awt.event.MouseEvent evt) {
         if(Char4.getText().equals(""))
         {
@@ -507,6 +542,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }
 
+    /**
+     * Ação realizada ao clicar no botão 5 de personagem
+     * @param evt 
+     */
     private void Char5MousePressed(java.awt.event.MouseEvent evt) {
         if(Char5.getText().equals(""))
         {
@@ -520,6 +559,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }
 
+    /**
+     * Ação realizada ao clicar no botão 6 de personagem
+     * @param evt 
+     */
     private void Char6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char6MousePressed
         if(Char6.getText().equals(""))
         {
@@ -533,6 +576,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }//GEN-LAST:event_Char6MousePressed
 
+    /**
+     * Ação realizada ao clicar no botão 7 de personagem
+     * @param evt 
+     */
     private void Char7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char7MousePressed
         if(Char7.getText().equals(""))
         {
@@ -546,6 +593,10 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setupPlayerInfo();
     }//GEN-LAST:event_Char7MousePressed
 
+    /**
+     * Ação realizada ao clicar no botão 8 de personagem
+     * @param evt 
+     */
     private void Char8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char8MousePressed
         if(Char8.getText().equals(""))
         {

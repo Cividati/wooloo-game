@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Test;
+package namelessgame.View;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +17,9 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import javax.swing.Timer;
 import javax.swing.UIManager;
 import namelessgame.Gameplay.Creature;
 import namelessgame.Gameplay.Game;
-import static namelessgame.Gameplay.Game.getPlayer;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.LootItem;
 import namelessgame.Gameplay.Monster;
@@ -32,8 +28,8 @@ import namelessgame.Threads.Attack;
 import namelessgame.Threads.HealthBar;
 import namelessgame.Threads.Shake;
 
-/**
- *
+/** 
+ * Classe que cria o frame do sistema de batalha, bem como sua implementação no back-end.
  * @author Henrique Barcia Lang
  */
 public class BattleFrame extends javax.swing.JFrame {
@@ -69,6 +65,11 @@ public class BattleFrame extends javax.swing.JFrame {
         initComponents();
     }
     
+    /** 
+     * Inicia a batalha entre o jogador e o oponente.
+     * @param target Creature - criatura (player ou monstro) que o jogador irá enfrentar
+     * @param background String - nome do background
+     */
     public BattleFrame(Creature target, String background) { 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -107,6 +108,12 @@ public class BattleFrame extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Realiza um ataque de attacker em target.
+     * @param attacker Creature - criatura que está atacando
+     * @param target Creature - criatura que está recebendo o ataque
+     * @return int - tempo total que o ataque levou para ser realizado
+     */
     public int doCombat(Creature attacker, Creature target)
     {
         if(attacker.getHealth() <= 0 || target.getHealth() <= 0)
@@ -196,6 +203,11 @@ public class BattleFrame extends javax.swing.JFrame {
         return totalHits * Shake.getShakes() * 100;
     }
     
+    /**
+     * Gera o loot provindo de monster
+     * @param monster Monster - monstro cujo loot será gerado
+     * @param random Random - gerador de números aleatórios
+     */
     public void generateLoot(Monster monster, Random random)
     {
         for(LootItem item : monster.getLoots()) 
@@ -218,6 +230,11 @@ public class BattleFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Realiza a animação de ataque
+     * @param creature Creature - criatura que está atacando
+     * @param times int - quantos ataques estão sendo realizados
+     */
     public void attack(Creature creature, int times)
     {
         Attack attacking = new Attack();
@@ -229,6 +246,11 @@ public class BattleFrame extends javax.swing.JFrame {
         attacking.start();
     }
     
+    /**
+     * Realiza a animação quando a criatura recebe um ataque
+     * @param creature Creature - criatura que está recebendo o ataque
+     * @param times int - quantos ataques a criatura está recebendo
+     */
     public void shake(Creature creature, int times)
     {
         Shake shaking = new Shake();
@@ -240,6 +262,11 @@ public class BattleFrame extends javax.swing.JFrame {
         shaking.start();
     }
     
+    /**
+     * Realiza a animação de atualizar a barra de HP
+     * @param creature Creature - criatura que está tendo sua barra de HP atualizada
+     * @param totalTime int - tempo total que a animação deverá levar
+     */
     public void updateHealthBar(Creature creature, int totalTime)
     {
         JLabel hpLabel = creature == player ? playerHp : targetHp;
@@ -271,6 +298,10 @@ public class BattleFrame extends javax.swing.JFrame {
         updating.start();    
     }
     
+    /**
+     * Mostra uma mensagem na área de texto.
+     * @param message String - mensagem a ser mostrada
+     */
     public void displayMessage(String message)
     {
         log += "\n" + message;
@@ -318,7 +349,8 @@ public class BattleFrame extends javax.swing.JFrame {
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setTitle("    Battle");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -473,6 +505,10 @@ public class BattleFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao clicar no botão de ataque.
+     * @param evt 
+     */
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
         int myAgility = player.getAgi();
         int targetAgility = target.getAgi();
@@ -511,6 +547,10 @@ public class BattleFrame extends javax.swing.JFrame {
         scheduler.shutdown();
     }//GEN-LAST:event_attackButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar no botão de poção.
+     * @param evt 
+     */
     private void potionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potionButtonActionPerformed
         // preencher scroll pane com botões das potions
         // clicou na potion -> efeito de heal
@@ -552,6 +592,10 @@ public class BattleFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_potionButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em uma poção.
+     * @param evt 
+     */
     private void PotionActionPerformed(java.awt.event.ActionEvent evt) {                                               
         javax.swing.JButton itemButton = (javax.swing.JButton) evt.getSource();
         
@@ -595,6 +639,10 @@ public class BattleFrame extends javax.swing.JFrame {
         scheduler.shutdown();
     }
     
+    /**
+     * Ação realizada ao clicar no botão de fugir.
+     * @param evt 
+     */
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         int myStatsMean = (player.getStr() + player.getAgi() + player.getCon()) / 3;
         int targetMean = (target.getStr() + target.getAgi() + target.getCon()) / 3;

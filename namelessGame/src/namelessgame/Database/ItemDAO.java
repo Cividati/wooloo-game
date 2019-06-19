@@ -1,23 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package namelessgame.Database;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.ShopItem;
 
 /**
- *
+ * Classe que carrega itens do banco de dados.
  * @author Henrique Barcia Lang
  */
 public class ItemDAO extends DAO {
+    
+    /**
+     * Carrega um ShopItem pelo nome
+     * @param name String - nome do item
+     * @param price long - preço do item
+     * @return ShopItem - item carregado
+     */
     public ShopItem loadShopItemByName(String name, long price)
     {
         String query = "SELECT * FROM item WHERE name = '" + name + "';";
@@ -56,6 +54,11 @@ public class ItemDAO extends DAO {
         return item;
     }
     
+    /**
+     * Carrega um Item pelo ID
+     * @param id int - ID do item
+     * @return Item - item carregado
+     */
     public Item loadItemById(int id)
     {
         String query = "SELECT * FROM item WHERE id = " + id + ";";
@@ -94,6 +97,12 @@ public class ItemDAO extends DAO {
         return item;
     }
     
+    /**
+     * Carrega um Item pelo ID e inserir sua quantidade
+     * @param id int - ID do item
+     * @param count int - quantidade do item
+     * @return Item - item carregado
+     */
     public Item loadItemById(int id, int count)
     {
         String query = "SELECT * FROM item WHERE id = " + id + ";";

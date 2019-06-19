@@ -3,7 +3,7 @@ package namelessgame.Gameplay;
 import java.util.List;
 
 /**
- *
+ * Classe que representa uma dungeon.  
  * @author Henrique Barcia Lang
  */
 public class Dungeon implements Comparable<Dungeon> {

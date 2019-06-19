@@ -3,7 +3,7 @@ package namelessgame.Gameplay;
 import java.util.List;
 
 /**
- *
+ * Classe que representa um monstro.
  * @author Henrique Barcia Lang
  */
 public class Monster extends Creature implements Comparable<Monster> {

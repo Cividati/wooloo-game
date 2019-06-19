@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Test;
+package namelessgame.View;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -18,7 +17,7 @@ import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Player;
 
 /**
- *
+ * Classe que cria o frame de seleção de dungeon.
  * @author Henrique Barcia Lang
  */
 public class DungeonFrame extends javax.swing.JFrame {
@@ -56,6 +55,10 @@ public class DungeonFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Ação realizada ao clicar em uma dungeon
+     * @param evt 
+     */
     private void DungeonActionPerformed(java.awt.event.ActionEvent evt) {
         javax.swing.JButton selectedButton = (javax.swing.JButton) evt.getSource();
         Dungeon myDungeon = dungeonMap.get(selectedButton);
@@ -77,7 +80,6 @@ public class DungeonFrame extends javax.swing.JFrame {
         
     }
         
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,7 +95,8 @@ public class DungeonFrame extends javax.swing.JFrame {
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setTitle("    Dungeons");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -153,34 +156,6 @@ public class DungeonFrame extends javax.swing.JFrame {
             }
         });
     }
-    
-    private static class RoundedBorder implements Border {
-
-    private int radius;
-
-
-    RoundedBorder(int radius) {
-        this.radius = radius;
-    }
-
-
-    @Override
-    public Insets getBorderInsets(Component c) {
-        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-    }
-
-
-    @Override
-    public boolean isBorderOpaque() {
-        return true;
-    }
-
-
-    @Override
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
-    }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundLabel;

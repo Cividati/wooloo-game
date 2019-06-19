@@ -6,16 +6,19 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Item;
 
 /**
- *
+ * Classe que carrega personagens do banco de dados.
  * @author Henrique Barcia Lang
  */
 public class PlayerDAO extends DAO {  
+    
+    /**
+     * Insere um novo personagem
+     * @param player Player - personagem a ser inserido
+     */
     public void insertPlayer(Player player)
     {
         if(!connectToDatabase())
@@ -52,6 +55,10 @@ public class PlayerDAO extends DAO {
         
     }
     
+    /**
+     * Salva o progresso do personagem
+     * @param player Player - personagem a ser salvo
+     */
     public void savePlayer(Player player)
     {
         if(!connectToDatabase())
@@ -130,10 +137,13 @@ public class PlayerDAO extends DAO {
             Game.sendSuccessMessage("You successfully saved your progress.");
         } catch (SQLException e) {
             System.out.println("Error when saving player on database..." + e.getMessage());
-        }
-        
+        }    
     }
     
+    /**
+     * Deleta um personagem
+     * @param player Player - personagem a ser deletado
+     */
     public void deletePlayer(Player player)
     { 
         if(!connectToDatabase())
@@ -150,6 +160,10 @@ public class PlayerDAO extends DAO {
         }
     }
     
+    /**
+     * Carrega os personagens salvos
+     * @return List_Player - lista com os jogadores salvos
+     */
     public List<Player> loadPlayers()
     {
         String query = "SELECT * FROM player;";

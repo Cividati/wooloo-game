@@ -1,11 +1,4 @@
-package Test;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+package namelessgame.View;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +25,11 @@ public class ShopFrame extends javax.swing.JFrame {
     private Map<javax.swing.JButton, Item> sellMap = new HashMap<>();
     private List<Item> inventory = player.getInventory();
     
+    /**
+     * Quando um item stackable é comprado após lógica em ItemSliderFrame.java
+     * @param item ShopItem - item comprado
+     * @param count int - quantidade do item selecionada
+     */
     public void shopSliderAction(ShopItem item, int count)
     {
         long totalPrice = item.getPrice() * count;
@@ -63,6 +61,11 @@ public class ShopFrame extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Quando um item stackable é vendido após lógica em ItemSliderFrame.java
+     * @param item ShopItem - item vendido
+     * @param count int - quantidade do item selecionada
+     */
     public void sellSliderAction(Item item, int count)
     {
         long totalPrice = Game.getSell().get(item.getName()) * count;
@@ -88,6 +91,10 @@ public class ShopFrame extends javax.swing.JFrame {
         playerGold.setText(player.getGold() + " G");
     }
     
+    /**
+     * Ação realizada ao clicar em um item comprável
+     * @param evt 
+     */
     private void ShopItemActionPerformed(java.awt.event.ActionEvent evt) {                                               
         javax.swing.JButton itemButton = (javax.swing.JButton) evt.getSource();
         
@@ -149,6 +156,10 @@ public class ShopFrame extends javax.swing.JFrame {
 
     }
     
+    /**
+     * Ação realizada ao clicar em um item vendível
+     * @param evt 
+     */
     private void SellItemActionPerformed(java.awt.event.ActionEvent evt) { 
         javax.swing.JButton itemButton = (javax.swing.JButton) evt.getSource();
         
@@ -215,7 +226,8 @@ public class ShopFrame extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setTitle("    Shop");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
         setResizable(false);
         getContentPane().setLayout(null);
         getContentPane().add(shopScrollPane);
@@ -279,6 +291,10 @@ public class ShopFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Ação realizada ao clicar em back
+     * @param evt 
+     */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
 
@@ -286,11 +302,27 @@ public class ShopFrame extends javax.swing.JFrame {
         gameBack.setVisible(true);  
     }//GEN-LAST:event_backButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em sell
+     * @param evt 
+     */
     private void sellButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellButtonActionPerformed
         updateSellingItems();
     }//GEN-LAST:event_sellButtonActionPerformed
 
+    /**
+     * Ação realizada ao clicar em buy
+     * @param evt 
+     */
     private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyButtonActionPerformed
+        updateBuyingItems();
+    }//GEN-LAST:event_buyButtonActionPerformed
+
+    /**
+     * Atualiza o front-end dos itens compráveis
+     */
+    public void updateBuyingItems()
+    {
         javax.swing.JPanel shopPanel = new javax.swing.JPanel();
         
         shopScrollPane.getViewport().removeAll();
@@ -319,8 +351,11 @@ public class ShopFrame extends javax.swing.JFrame {
         add(shopPanel);
         
         shopScrollPane.getViewport().add(shopPanel, null);
-    }//GEN-LAST:event_buyButtonActionPerformed
-
+    }
+    
+    /**
+     * Atualiza o front-end dos itens vendíveis
+     */
     public void updateSellingItems()
     {
         javax.swing.JPanel sellPanel = new javax.swing.JPanel();

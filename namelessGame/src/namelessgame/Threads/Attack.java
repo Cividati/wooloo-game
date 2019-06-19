@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
- *
+ * Classe responsável pela animação de ataque.
  * @author Henrique Barcia Lang
  */
 public class Attack extends Thread {
