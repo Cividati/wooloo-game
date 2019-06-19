@@ -25,7 +25,7 @@ No código da loja alguns itens já estão configurados. Para que apareçam, é 
 Pode-se criá-los manualmente seguindo as instruções, alterando os valores como bem entender, ou copiar e colar os seguintes dados no ambiente de interpretação no qual o script está sendo executado (terminal do Windows, do Linux, do VS Code, etc.).
 Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
 	`void fillShop()`
-de Game.Java (pacote Gameplay), seguindo o que já foi feito como exemplo.
+de Game.java (pacote Gameplay), seguindo o que já foi feito como exemplo.
 
 <details><summary>Itens</summary>
 //inicio
