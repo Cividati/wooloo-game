@@ -1,6 +1,10 @@
 # Wooloo - Projeto de C206/C207
 
 RPG desenvolvido como projeto final das disciplinas de Programação Orientada à Objetos e Banco de Dados.
+### Grupo
+1. Henrique Barcia Lang
+2. Gabriel Claret de Rezende
+3. Rubens Cividati
 
 ## Diretórios importantes
 
