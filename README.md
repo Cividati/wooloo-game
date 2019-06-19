@@ -16,7 +16,7 @@ OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote nam
 	
 ## Requerimentos para o projeto
 
-* Instalar fonte Oscine (.zip disponível nesta pasta)
+* Instalar fonte Oscine (.zip disponível no diretório do projeto)
 
 * Para executar o script em Python: `pip install mysql-connector-python`
   - Link com mais detalhes: https://pynative.com/install-mysql-connector-python/
