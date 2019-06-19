@@ -1,33 +1,33 @@
-					Projeto de C206 - C207
-		
-Diretório do executável (.jar):
-	namelessgame\namelessgame\dist
+# Wooloo - Projeto de C206/C207
+
+RPG desenvolvido como projeto final das disciplinas de Programação Orientada à Objetos e Banco de Dados.
+
+## Diretórios importantes
+
+* Diretório do executável (.jar): `namelessgame\namelessgame\dist`
 	
-Diretório do script em Python:
-	namelessGame\namelessGame
+* Diretório da documentação: `namelessgame\namelessgame\dist\javadoc`
 	
-Diretório do modelo do Banco de Dados e seu backup .sql:
-	namelessGame\namelessGame
+* Diretório do script em Python: `namelessGame\namelessGame`
 	
-
-* Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote namelessGame.Database.
+* Diretório do modelo do Banco de Dados e seu backup .sql: `namelessGame\namelessGame`
 	
-		
-		
-		--> Requerimentos para o projeto <--
+OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote namelessGame.Database.
+	
+## Requerimentos para o projeto
 
--> Instalar fonte Oscine (.zip disponível nesta pasta)
+* Instalar fonte Oscine (.zip disponível nesta pasta)
 
--> Para executar o script em Python: pip install mysql-connector-python
-(https://pynative.com/install-mysql-connector-python/)  
+* Para executar o script em Python: `pip install mysql-connector-python`
+Link com mais detalhes: (https://pynative.com/install-mysql-connector-python/)  
 
-
-** No shop alguns itens já estão configurados. Para que apareçam, é necessário criá-los primeiramente usando o script em Python (ou inserindo no Banco de Dados diretamente).
+No código da loja alguns itens já estão configurados. Para que apareçam, é necessário criá-los primeiramente usando o script em Python (ou inserindo no Banco de Dados diretamente).
 Pode-se criá-los manualmente seguindo as instruções, alterando os valores como bem entender, ou copiar e colar os seguintes dados no ambiente de interpretação no qual o script está sendo executado (terminal do Windows, do Linux, do VS Code, etc.).
 Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
-	void fillShop()
+	`void fillShop()`
 de Game.Java (pacote Gameplay), seguindo o que já foi feito como exemplo.
 
+<details><summary>Itens</summary>
 //inicio
 1
 Heavy Armor
@@ -283,3 +283,4 @@ hppot
 
 
 //fim
+</details>
