@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import namelessgame.Database.ItemDAO;
+import namelessgame.Threads.Audio;
 
 public class Game {
     private static Player loggedPlayer;
@@ -43,6 +44,8 @@ public class Game {
     
     private static Dungeon exploredDungeon;
     private static int roundNow;
+    
+    private static Audio audio;
 
     public static Player getPlayer() {
         return loggedPlayer;
@@ -182,5 +185,54 @@ public class Game {
         exploreDungeon();
         
     }
+
+    public static Audio getAudio() {
+        return audio;
+    }
+
+    public static void setAudio(Audio audio) {
+        Game.audio = audio;
+    }
+    
+    // Plays a new audio (music or sound) and returns it
+    // The current audio remains untouched
+    public static Audio playNewAudio(String audioName, boolean isMusic)
+    {
+        Audio newAudio = new Audio(audioName, isMusic);
+        
+        newAudio.start();
+        
+        return newAudio;
+    }
+    
+    // Plays a new music, replacing the current audio with it
+    public static void playMusic(String audioName)
+    {
+        Audio newAudio = new Audio(audioName, true);
+        newAudio.start();
+        
+        stopAudio();
+        setAudio(newAudio);
+    }
+    
+    // Plays a new sound, replacing the current audio with it
+    public static void playSound(String audioName)
+    {
+        Audio newAudio = new Audio(audioName);
+        newAudio.start();
+        
+        stopAudio();
+        setAudio(newAudio);
+    }
+    
+    // Stop current audio
+    public static void stopAudio()
+    {
+        Audio currentAudio = getAudio();
+        
+        if(currentAudio != null)
+            currentAudio.stopAudio();
+    }
+    
     
 }

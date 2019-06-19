@@ -1,5 +1,8 @@
 package Test;
 
+import namelessgame.Gameplay.Game;
+import namelessgame.Threads.Audio;
+
 /**
  *
  * @author sin
@@ -11,9 +14,12 @@ public class MenuFrame extends javax.swing.JFrame {
      */
     public MenuFrame() {
         initComponents();
+        
         this.setSize(1280, 720);
+        
+        Game.playMusic("swordland");
     }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,6 +97,8 @@ public class MenuFrame extends javax.swing.JFrame {
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.dispose();
         
+        Game.playSound("click");
+        
         NewGameFrame newG = new NewGameFrame();
         newG.setVisible(true);
     }//GEN-LAST:event_newGameButtonActionPerformed
@@ -98,19 +106,23 @@ public class MenuFrame extends javax.swing.JFrame {
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         this.dispose();
         
+        Game.playSound("click");
+        
         LoadGameFrame loadG = new LoadGameFrame();
         loadG.setVisible(true);
         loadG.setSize(1280, 720);
     }//GEN-LAST:event_loadGameButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        Game.playSound("click");
+        
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) { 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
