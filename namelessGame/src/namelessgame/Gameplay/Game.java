@@ -3,8 +3,9 @@ package namelessgame.Gameplay;
 import Test.BattleFrame;
 import Test.GameFrame;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.Map;
 import namelessgame.Database.ItemDAO;
 
 public class Game {
@@ -37,6 +38,7 @@ public class Game {
     
     private static List<Dungeon> dungeons = null;
     private static List<ShopItem> shop = new ArrayList<>();
+    private static Map<String, Long> buy = new HashMap<>();
     private static List<Item> loot;
     
     private static Dungeon exploredDungeon;
@@ -75,6 +77,14 @@ public class Game {
     public static void setShop(List<ShopItem> shop) {
         Game.shop = shop;
     }
+
+    public static Map<String, Long> getBuy() {
+        return buy;
+    }
+
+    public static void setBuy(Map<String, Long> buy) {
+        Game.buy = buy;
+    }
     
     public static void addItemToShop(String name, long price)
     {
@@ -86,10 +96,15 @@ public class Game {
         shop.add(newItem);
     }
     
+    public static void addItemToBuy(String name, long price)
+    {
+        buy.put(name, price);
+    }
+    
     // Add items to shop
     public static void fillShop()
     {
-        // Item_name, price
+        // item_name, price
         addItemToShop("Heavy Armor", 0);
         addItemToShop("Light Armor", 0);
         addItemToShop("Medium Armor", 0);
@@ -113,6 +128,9 @@ public class Game {
         addItemToShop("HP Potion", 10);
         addItemToShop("Small Health Potion", 0);
         addItemToShop("Small Health Potion", 10);
+        
+        addItemToBuy("Sword", 50);
+        addItemToBuy("Small Health Potion", 20);
         
     }
 

@@ -509,8 +509,7 @@ public class DefeatFrame extends javax.swing.JFrame {
     private void okayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayButtonActionPerformed
         this.dispose();
 
-        (new GameFrame()).setVisible(true);
-               
+        (new GameFrame()).setVisible(true);       
     }//GEN-LAST:event_okayButtonActionPerformed
 
     /**

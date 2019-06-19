@@ -92,7 +92,7 @@ public class HealthBar extends Thread {
             // value progress bar %
             // total_hp - 100
             // hpLabelValue - x
-            hpBar.setValue((hpLabelValue * 100) / maxHp);
+            hpBar.setValue((int) (((double) hpLabelValue * 100) / maxHp));
             
             try { Thread.sleep (timePerHealthPoint); } catch (InterruptedException ex) {}
         }

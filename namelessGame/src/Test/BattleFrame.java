@@ -53,13 +53,35 @@ public class BattleFrame extends javax.swing.JFrame {
     private Map<javax.swing.JButton, Item> potionMap = new HashMap<>();
     
     public BattleFrame() {
-        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 0)));
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 0)));
+                    
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StatusFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         
         initComponents();
     }
     
     public BattleFrame(Creature target, String background) { 
-        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 0)));
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 0)));
+                    
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StatusFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         
         initComponents();
         
@@ -72,15 +94,13 @@ public class BattleFrame extends javax.swing.JFrame {
         playerLevel.setText(Integer.toString(player.getLevel()));
         playerHp.setText(Integer.toString(player.getHealth()));
         playerMaxHp.setText(Integer.toString(player.getMaxHealth()));
-        playerHpBar.setStringPainted(true);
-        playerHpBar.setValue((player.getHealth() / player.getMaxHealth()) * 100);
+        playerHpBar.setValue((int) (((double) player.getHealth() / player.getMaxHealth()) * 100));
         playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
         
         targetName.setText(target.getName());
         targetHp.setText(Integer.toString(target.getHealth()));
         targetMaxHp.setText(Integer.toString(target.getMaxHealth()));
-        targetHpBar.setStringPainted(true);
-        targetHpBar.setValue((target.getHealth() / target.getMaxHealth()) * 100);
+        targetHpBar.setValue((int) (((double) target.getHealth() / target.getMaxHealth()) * 100));
         targetAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(target.getAvatar())));
         
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(background)));

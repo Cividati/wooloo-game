@@ -60,38 +60,11 @@ public class ShopFrame extends javax.swing.JFrame {
     }
     
     public ShopFrame() {
-        javax.swing.JPanel shopPanel = new javax.swing.JPanel();
-        
         initComponents();
         
         setPlayer(Game.getPlayer());
         
         playerGold.setText(player.getGold() + " G");
-
-        for (ShopItem item : Game.getShop()) {
-            javax.swing.JButton itemButton = new javax.swing.JButton();
-            
-            itemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
-            itemButton.setToolTipText(item.getName() + " (" + item.getPrice() + "g)");
-            
-            itemButton.addActionListener(new java.awt.event.ActionListener() {           
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    ShopItemActionPerformed(evt);
-                }
-            });
-
-            shopMap.put(itemButton, item);
-
-            shopPanel.add(itemButton);
-        }
-        
-        shopPanel.setLayout(new java.awt.GridLayout(Game.getShop().size() / 4, 4));
-        shopPanel.setSize(300, 300);
-        shopPanel.setVisible(true);
-        add(shopPanel);
-        
-        shopScrollPane.getViewport().add(shopPanel, null);
     }
     
     private void ShopItemActionPerformed(java.awt.event.ActionEvent evt) {                                               
@@ -178,6 +151,8 @@ public class ShopFrame extends javax.swing.JFrame {
         sellerLabel = new javax.swing.JLabel();
         playerGold = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
+        buyButton = new javax.swing.JButton();
+        sellButton = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -218,6 +193,24 @@ public class ShopFrame extends javax.swing.JFrame {
         getContentPane().add(backButton);
         backButton.setBounds(1040, 620, 130, 50);
 
+        buyButton.setText("Buy");
+        buyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buyButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buyButton);
+        buyButton.setBounds(110, 60, 130, 50);
+
+        sellButton.setText("Sell");
+        sellButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sellButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(sellButton);
+        sellButton.setBounds(250, 60, 130, 50);
+
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
         getContentPane().add(background);
@@ -233,6 +226,41 @@ public class ShopFrame extends javax.swing.JFrame {
         GameFrame gameBack = new GameFrame();
         gameBack.setVisible(true);  
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void sellButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sellButtonActionPerformed
+
+    private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyButtonActionPerformed
+        javax.swing.JPanel shopPanel = new javax.swing.JPanel();
+        
+        shopScrollPane.getViewport().removeAll();
+        
+        for (ShopItem item : Game.getShop()) {
+            javax.swing.JButton itemButton = new javax.swing.JButton();
+            
+            itemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(item.getIcon())));
+            itemButton.setToolTipText(item.getName() + " (" + item.getPrice() + "g)");
+            
+            itemButton.addActionListener(new java.awt.event.ActionListener() {           
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    ShopItemActionPerformed(evt);
+                }
+            });
+
+            shopMap.put(itemButton, item);
+
+            shopPanel.add(itemButton);
+        }
+        
+        shopPanel.setLayout(new java.awt.GridLayout(Game.getShop().size() / 4, 4));
+        shopPanel.setSize(300, 300);
+        shopPanel.setVisible(true);
+        add(shopPanel);
+        
+        shopScrollPane.getViewport().add(shopPanel, null);
+    }//GEN-LAST:event_buyButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,9 +300,11 @@ public class ShopFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JLabel background;
+    private javax.swing.JButton buyButton;
     private javax.swing.JLabel goldLabel;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel playerGold;
+    private javax.swing.JButton sellButton;
     private javax.swing.JLabel sellerLabel;
     private javax.swing.JScrollPane shopScrollPane;
     // End of variables declaration//GEN-END:variables

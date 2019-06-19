@@ -28,7 +28,18 @@ public class GameFrame extends javax.swing.JFrame {
      * Creates new form GameFrame
      */
     public GameFrame() {
-        UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(255, 0, 255)));
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.getLookAndFeelDefaults().put("nimbusOrange", (new Color(185, 0, 185)));
+                    
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StatusFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         
         Player player = Game.getPlayer();
         
@@ -111,7 +122,7 @@ public class GameFrame extends javax.swing.JFrame {
         playerPanel.add(playerAvatar);
         playerAvatar.setBounds(20, 130, 300, 400);
 
-        playerExp.setForeground(new java.awt.Color(204, 0, 255));
+        playerExp.setForeground(new java.awt.Color(0, 0, 0));
         playerPanel.add(playerExp);
         playerExp.setBounds(110, 80, 210, 30);
 

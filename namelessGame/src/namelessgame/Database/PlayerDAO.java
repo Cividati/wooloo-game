@@ -24,6 +24,7 @@ public class PlayerDAO extends DAO {
         String playerQuery = "INSERT INTO player(name, sex, avatar) VALUES (?, '" + player.getSex() + "', '" + player.getPureAvatar() + "');";
         String inventoryQuery = "INSERT INTO inventory(player_id) VALUES ((SELECT MAX(id) FROM player));";
         String stashQuery = "INSERT INTO stash(player_id) VALUES ((SELECT MAX(id) FROM player));";
+        String playerIdQuery = "SELECT MAX(id) FROM player;";
         
         try {
             pst = con.prepareStatement(playerQuery);
@@ -36,6 +37,13 @@ public class PlayerDAO extends DAO {
             pst = con.prepareStatement(stashQuery);
             pst.execute();
             
+            st = con.createStatement();
+            rs = st.executeQuery(playerIdQuery);
+            
+            if(rs.next())
+                player.setId(rs.getInt(1));
+            
+            st.close();
             con.close();
             Game.sendSuccessMessage("Character created successfully.");
         } catch (SQLException e) {
@@ -138,7 +146,7 @@ public class PlayerDAO extends DAO {
             pst.execute();
             con.close();
         } catch (SQLException ex) {
-            System.out.println("Error when deleting player from database...");
+            System.out.println("Error when deleting player from database..." + ex.getMessage());
         }
     }
     
