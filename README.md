@@ -14,7 +14,7 @@ RPG desenvolvido como projeto final das disciplinas de Programação Orientada �
 	
 * Diretório do script em Python: `namelessGame\namelessGame`
 
-* Diretório do arquivo de texto com itens: `namelessGame\data`
+* Diretório do arquivo de texto com itens: `namelessGame\namelessGame`
 	
 * Diretório do modelo do Banco de Dados e seu backup .sql: `namelessGame\namelessGame`
 	
