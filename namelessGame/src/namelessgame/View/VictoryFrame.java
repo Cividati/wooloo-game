@@ -546,6 +546,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("    Victory");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
+        setPreferredSize(new java.awt.Dimension(800, 500));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -565,7 +566,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         infoPanel.add(levelLabel);
         levelLabel.setBounds(20, 110, 40, 30);
 
-        playerExp.setForeground(new java.awt.Color(204, 0, 255));
+        playerExp.setForeground(new java.awt.Color(0, 0, 0));
         infoPanel.add(playerExp);
         playerExp.setBounds(90, 110, 210, 30);
 

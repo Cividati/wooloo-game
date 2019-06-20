@@ -30,7 +30,7 @@ public class MenuFrame extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         newGameButton = new javax.swing.JButton();
         loadGameButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        versionLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,9 +79,9 @@ public class MenuFrame extends javax.swing.JFrame {
         getContentPane().add(loadGameButton);
         loadGameButton.setBounds(130, 360, 300, 100);
 
-        jLabel3.setText("Patch ver.: v0.01.002.0014");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(1110, 670, 160, 16);
+        versionLabel.setText("Patch ver.: v0.01.002.0014");
+        getContentPane().add(versionLabel);
+        versionLabel.setBounds(1110, 670, 160, 16);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
@@ -170,8 +170,8 @@ public class MenuFrame extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loadGameButton;
     private javax.swing.JButton newGameButton;
+    private javax.swing.JLabel versionLabel;
     // End of variables declaration//GEN-END:variables
 }

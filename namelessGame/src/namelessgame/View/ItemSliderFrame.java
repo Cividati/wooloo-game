@@ -182,6 +182,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("    Choose an amount");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
+        setPreferredSize(new java.awt.Dimension(250, 100));
         setResizable(false);
         getContentPane().setLayout(null);
 

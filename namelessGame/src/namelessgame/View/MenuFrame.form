@@ -106,7 +106,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="versionLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Patch ver.: v0.01.002.0014"/>
       </Properties>

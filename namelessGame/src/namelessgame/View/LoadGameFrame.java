@@ -40,11 +40,11 @@ public class LoadGameFrame extends javax.swing.JFrame {
             constLabel.setText("Constitution: " + player.getCon());
             agiLabel.setText("Agility: " + player.getAgi());
             hpLabel.setText("Max HP: " + player.getMaxHealth());
-            expBar.setValue((int) (((double) player.getExp() / player.getTotalExpToLevelUp()) * 100)); 
-            expBar.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
+            playerExp.setValue((int) (((double) player.getExp() / player.getTotalExpToLevelUp()) * 100)); 
+            playerExp.setToolTipText(player.getExp() + " / " + player.getTotalExpToLevelUp());
             playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
             playerAvatar.setVisible(true);
-            expBar.setVisible(true);
+            playerExp.setVisible(true);
         }
         catch(ArrayIndexOutOfBoundsException e) {}
     }
@@ -61,8 +61,8 @@ public class LoadGameFrame extends javax.swing.JFrame {
         constLabel.setText("Constitution: ");
         agiLabel.setText("Agility: ");
         hpLabel.setText("Max HP: ");
-        expBar.setValue(0);
-        expBar.setToolTipText("");
+        playerExp.setValue(0);
+        playerExp.setToolTipText("");
         playerAvatar.setVisible(false);
     }
 
@@ -83,8 +83,8 @@ public class LoadGameFrame extends javax.swing.JFrame {
         initComponents();
         
         playerAvatar.setVisible(false);
-        expBar.setVisible(false);
-        expBar.setStringPainted(true);
+        playerExp.setVisible(false);
+        playerExp.setStringPainted(true);
         
         playerList = (new PlayerDAO()).loadPlayers();
         
@@ -153,7 +153,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         goldLabel = new javax.swing.JLabel();
         playerNameLabel = new javax.swing.JLabel();
         levelLabel = new javax.swing.JLabel();
-        expBar = new javax.swing.JProgressBar();
+        playerExp = new javax.swing.JProgressBar();
         strLabel = new javax.swing.JLabel();
         agiLabel = new javax.swing.JLabel();
         hpLabel = new javax.swing.JLabel();
@@ -176,6 +176,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("    Saves");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -206,11 +207,11 @@ public class LoadGameFrame extends javax.swing.JFrame {
         getContentPane().add(levelLabel);
         levelLabel.setBounds(900, 260, 160, 28);
 
-        expBar.setForeground(new java.awt.Color(0, 0, 0));
-        expBar.setToolTipText("");
-        expBar.setValue(50);
-        getContentPane().add(expBar);
-        expBar.setBounds(900, 300, 340, 40);
+        playerExp.setForeground(new java.awt.Color(0, 0, 0));
+        playerExp.setToolTipText("");
+        playerExp.setValue(50);
+        getContentPane().add(playerExp);
+        playerExp.setBounds(900, 300, 340, 40);
 
         strLabel.setBackground(new java.awt.Color(0, 0, 0));
         strLabel.setFont(new java.awt.Font("OscineW04-Light", 0, 24)); // NOI18N
@@ -661,13 +662,13 @@ public class LoadGameFrame extends javax.swing.JFrame {
     private javax.swing.JLabel agiLabel;
     private javax.swing.JLabel constLabel;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JProgressBar expBar;
     private javax.swing.JLabel goldLabel;
     private javax.swing.JLabel hpLabel;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel name1;
     private javax.swing.JLabel playerAvatar;
+    private javax.swing.JProgressBar playerExp;
     private javax.swing.JLabel playerGoldLabel;
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JLabel strLabel;
