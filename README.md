@@ -33,4 +33,4 @@ Pode-se criá-los manualmente seguindo as instruções, alterando os valores com
 
 Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
 	`void fillShop()`
-de Game.java (pacote Gameplay), seguindo o que já foi feito como exemplo.
+de Game.java (namelessGame.Gameplay), seguindo o que já foi feito como exemplo.
