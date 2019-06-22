@@ -2,8 +2,8 @@
 
 RPG desenvolvido como projeto final das disciplinas de Programação Orientada a Objetos e Banco de Dados.
 ### Grupo
-1. Henrique Barcia Lang
-2. Gabriel Claret de Rezende
+1. Gabriel Claret de Rezende
+2. Henrique Barcia Lang
 3. Rubens Cividati
 
 ## Diretórios importantes
