@@ -14,7 +14,11 @@ RPG desenvolvido como projeto final das disciplinas de Programação Orientada a
 	
 * Diretório do script em Python: `namelessGame\namelessGame`
 
-* Diretório do arquivo de texto com itens: `namelessGame\namelessGame`
+* Diretório do arquivo de texto com itens: `namelessGame\namelessGame\insertItems.txt`
+
+* Diretório do arquivo de texto com dungeons: `namelessGame\namelessGame\insertDungeons.txt`
+
+* Diretório do arquivo de texto com monstros: `namelessGame\namelessGame\insertMonsters.txt`
 	
 * Diretório do modelo do Banco de Dados e seu backup .sql: `namelessGame\namelessGame`
 	
@@ -30,6 +34,13 @@ OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote nam
 No código da loja alguns itens já estão configurados. Para que apareçam, é necessário criá-los primeiramente usando o script em Python (ou inserí-los no Banco de Dados diretamente).
 
 Pode-se criá-los manualmente seguindo as instruções, alterando os valores como bem entender, ou copiar e colar os dados disponíveis no arquivo de texto mencionado em `Diretórios importantes` no ambiente de interpretação que o script está sendo executado (terminal do Windows, do Linux, do VS Code, etc.).
+
+Para os Dungeons e Monstros, é necessário inserí-los, assim como os Itens, pelo script feito em Python(insert_values.py, se encontra nos diretorios importantes). Para inserí-los, é necessário apenas copiar o texto do bloco de notas e colar no terminal!!
+
+Ordem para inserir:
+	1º Itens
+	2º Dungeons
+	3º Monstros
 
 Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
 	`void fillShop()`
