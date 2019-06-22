@@ -104,7 +104,7 @@ public class BattleFrame extends javax.swing.JFrame {
         targetHpBar.setValue((int) (((double) target.getHealth() / target.getMaxHealth()) * 100));
         targetAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(target.getAvatar())));
         
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(background)));
+        //backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(background)));
         
     }
     
@@ -424,25 +424,21 @@ public class BattleFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionPanelLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(attackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(runButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(potionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         optionPanelLayout.setVerticalGroup(
             optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionPanelLayout.createSequentialGroup()
-                .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionPanelLayout.createSequentialGroup()
-                        .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(attackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(potionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 68, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(runButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(37, 37, 37)
+                .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(attackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(runButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(potionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         getContentPane().add(optionPanel);
@@ -454,7 +450,7 @@ public class BattleFrame extends javax.swing.JFrame {
 
         hpDivider.setBackground(new java.awt.Color(255, 255, 255));
         hpDivider.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        hpDivider.setForeground(new java.awt.Color(0, 0, 0));
+        hpDivider.setForeground(new java.awt.Color(255, 255, 255));
         hpDivider.setText("/");
         getContentPane().add(hpDivider);
         hpDivider.setBounds(180, 70, 10, 30);
@@ -493,14 +489,17 @@ public class BattleFrame extends javax.swing.JFrame {
 
         targetHpDivider.setBackground(new java.awt.Color(255, 255, 255));
         targetHpDivider.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        targetHpDivider.setForeground(new java.awt.Color(0, 0, 0));
+        targetHpDivider.setForeground(new java.awt.Color(255, 255, 255));
         targetHpDivider.setText("/");
         getContentPane().add(targetHpDivider);
         targetHpDivider.setBounds(940, 70, 10, 30);
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/dungeons/beach_background.png"))); // NOI18N
+        backgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/dungeons/bg.png"))); // NOI18N
+        backgroundLabel.setToolTipText("");
+        backgroundLabel.setAlignmentY(0.0F);
         getContentPane().add(backgroundLabel);
-        backgroundLabel.setBounds(0, 0, 1280, 720);
+        backgroundLabel.setBounds(0, 0, 1920, 1080);
 
         pack();
         setLocationRelativeTo(null);

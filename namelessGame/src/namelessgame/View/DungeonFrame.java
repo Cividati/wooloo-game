@@ -102,22 +102,22 @@ public class DungeonFrame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         infoLabel.setFont(new java.awt.Font("Yu Gothic Medium", 1, 48)); // NOI18N
-        infoLabel.setForeground(new java.awt.Color(51, 51, 51));
+        infoLabel.setForeground(new java.awt.Color(255, 255, 255));
         infoLabel.setText("Dungeons");
         getContentPane().add(infoLabel);
-        infoLabel.setBounds(530, 10, 270, 60);
+        infoLabel.setBounds(180, 10, 330, 110);
 
         dungeon2.setBackground(new java.awt.Color(255, 0, 0));
         getContentPane().add(dungeon2);
-        dungeon2.setBounds(280, 170, 30, 25);
+        dungeon2.setBounds(420, 310, 40, 30);
 
         dungeon1.setBackground(new java.awt.Color(255, 0, 0));
         getContentPane().add(dungeon1);
-        dungeon1.setBounds(280, 380, 30, 25);
+        dungeon1.setBounds(370, 500, 40, 30);
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/1200px-LGPE_Kanto_Map.png"))); // NOI18N
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/map.png"))); // NOI18N
         getContentPane().add(backgroundLabel);
-        backgroundLabel.setBounds(0, 0, 1280, 849);
+        backgroundLabel.setBounds(0, 0, 1280, 720);
 
         pack();
         setLocationRelativeTo(null);
