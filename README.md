@@ -31,11 +31,11 @@ OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote nam
 * Para conseguir executar o script em Python: `pip install mysql-connector-python`
   - Link com mais detalhes: https://pynative.com/install-mysql-connector-python/
 
-No código da loja alguns itens já estão configurados. Para que apareçam, é necessário criá-los primeiramente usando o script em Python (ou inserí-los no Banco de Dados diretamente).
+No código da loja alguns itens já estão configurados. Para que apareçam, é necessário criá-los primeiramente usando o script em Python (ou inseri-los no Banco de Dados diretamente).
 
 Pode-se criá-los manualmente seguindo as instruções, alterando os valores como bem entender, ou copiar e colar os dados disponíveis no arquivo de texto mencionado em `Diretórios importantes` no ambiente de interpretação que o script está sendo executado (terminal do Windows, do Linux, do VS Code, etc.).
 
-Para as dungeons e monstros, é necessário inserí-los, assim como os itens, pelo script feito em Python (insert_values.py, mencionado em `Diretórios importantes`). Para fazer isso, basta copiar o texto do bloco de notas e colar no no ambiente de interpretação.
+Para as dungeons e monstros, é necessário inseri-los, assim como os itens, pelo script feito em Python (insert_values.py, mencionado em `Diretórios importantes`). Para fazer isso, basta copiar o texto do bloco de notas e colar no no ambiente de interpretação.
 
 #### Ordem para inserir:
 1. Itens
