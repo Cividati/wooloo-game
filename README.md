@@ -45,3 +45,11 @@ Ordem para inserir:
 Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
 	`void fillShop()`
 de Game.java (namelessGame.Gameplay), seguindo o que já foi feito como exemplo.
+
+## Bugs conhecidos
+
+ * Ao explorar um dungeon após a mesma ter sido *cleared*, o monstro pode ter sua HP disposta com um valor negativo. 
+ **Solução:** reinicie o jogo.
+ 
+
+
