@@ -42,6 +42,6 @@ Para novas dungeons e monstros, o processo é semelhante. Caso não queira criá
 2. Dungeons
 3. Monstros
 
-Caso resolva alterar o nome dos itens, deve-se configurar de acordo no método `void fillShop()` de Game.java (namelessGame.Gameplay), seguindo o que já foi feito como exemplo.
+Caso resolva alterar o nome de itens presentes na loja, deve-se configurar de acordo no método `void fillShop()` de Game.java (namelessGame.Gameplay), seguindo o que já foi feito como exemplo.
 
 Use `addItemToShop` para adicionar itens que possam ser **comprados** na loja e `addItemToSell` para itens que possam ser **vendidos** na loja.
