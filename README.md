@@ -38,9 +38,9 @@ Pode-se criá-los manualmente seguindo as instruções, alterando os valores com
 Para os Dungeons e Monstros, é necessário inserí-los, assim como os Itens, pelo script feito em Python(insert_values.py, se encontra nos diretorios importantes). Para inserí-los, é necessário apenas copiar o texto do bloco de notas e colar no terminal!!
 
 Ordem para inserir:
-    * 1º Itens
-    * 2º Dungeons
-    * 3º Monstros
+1. Itens
+2. Dungeons
+3. Monstros
 
 Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
 	`void fillShop()`
