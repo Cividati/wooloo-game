@@ -16,24 +16,22 @@ import namelessgame.Threads.Audio;
 public class Game {
     private static Player loggedPlayer;
     
-    /** Player max level **/
+    /** Level máximo do personagem **/
     final public static int MAX_LEVEL = 100;
     
-    /** Stash max size **/
+    /** Capacidade do stash **/
     final public static int MAX_STASH_SIZE = 30;
     
-    /** Inventory max size **/
+    /** Capacidade do inventário **/
     final public static int MAX_INVENTORY_SIZE = 12;
     
-    /** Max units that a stack of item can have (if it is stackable) **/
+    /** Tamanho máximo de um stack de item **/
     final public static int MAX_STACKABLE_AMOUNT = 100;
     
-    /** Stash and inventory GridLayout information (used on StashFrame.java) **/
+    /** Quantidade de colunas do GridLayout do stash e inventário **/
     final public static int STASH_COLUMNS = 5;
     final public static int INVENTORY_COLUMNS = 3;
     
-    /** Equipment slots index **/
-    final public static int INVENTORY = 0;
     final public static int HEAD = 1;
     final public static int BODY = 2;
     final public static int WEAPON = 3;
@@ -264,7 +262,7 @@ public class Game {
     }
 
     /**
-     * Retorna o áudio principal tocado no momento
+     * Retorna o áudio principal
      * @return Audio - áudio principal sendo tocado no momento
      */
     public static Audio getAudio() {
