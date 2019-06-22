@@ -8,9 +8,9 @@ RPG desenvolvido como projeto final das disciplinas de Programação Orientada a
 
 ## Diretórios importantes
 
-* Diretório do executável (.jar): `namelessgame\namelessgame\dist`
+* Diretório do executável (.jar): `namelessgame\namelessgame\_dist`
 	
-* Diretório da documentação: `namelessgame\namelessgame\dist\javadoc`
+* Diretório da documentação: `namelessgame\namelessgame\_dist\javadoc`
 	
 * Diretório do script em Python: `namelessGame\namelessGame`
 
