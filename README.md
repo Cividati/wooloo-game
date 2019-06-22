@@ -35,16 +35,16 @@ No código da loja alguns itens já estão configurados. Para que apareçam, é 
 
 Pode-se criá-los manualmente seguindo as instruções, alterando os valores como bem entender, ou copiar e colar os dados disponíveis no arquivo de texto mencionado em `Diretórios importantes` no ambiente de interpretação que o script está sendo executado (terminal do Windows, do Linux, do VS Code, etc.).
 
-Para os Dungeons e Monstros, é necessário inserí-los, assim como os Itens, pelo script feito em Python(insert_values.py, se encontra nos diretorios importantes). Para inserí-los, é necessário apenas copiar o texto do bloco de notas e colar no terminal!!
+Para as dungeons e monstros, é necessário inserí-los, assim como os itens, pelo script feito em Python (insert_values.py, mencionado em `Diretórios importantes`). Para fazer isso, basta copiar o texto do bloco de notas e colar no no ambiente de interpretação.
 
-Ordem para inserir:
+#### Ordem para inserir:
 1. Itens
 2. Dungeons
 3. Monstros
 
-Caso resolva alterar o nome dos itens, para que apareçam na loja você deve configurar adequadamente no método
-	`void fillShop()`
-de Game.java (namelessGame.Gameplay), seguindo o que já foi feito como exemplo.
+Caso resolva alterar o nome dos itens, deve-se configurar de acordo no método `void fillShop()` de Game.java (namelessGame.Gameplay), seguindo o que já foi feito como exemplo.
+
+Use `addItemToShop` para adicionar itens que possam ser **comprados** na loja e `addItemToBuy` para itens que possam ser **vendidos** na loja.
 
 ## Bugs conhecidos
 
