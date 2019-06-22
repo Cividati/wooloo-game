@@ -1,0 +1,14 @@
+3
+DeadMines
+Deadly mines, be careful!
+westfall
+1
+1
+
+3
+Stratholme
+Dont step inside naked!
+stratholme
+3
+1
+

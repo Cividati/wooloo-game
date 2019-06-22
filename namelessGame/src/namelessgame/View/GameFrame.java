@@ -250,7 +250,7 @@ public class GameFrame extends javax.swing.JFrame {
      */
     private void shopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopButtonActionPerformed
         this.dispose();
-        
+        Game.playSound("click1");
         ShopFrame newShop = new ShopFrame();
         newShop.setVisible(true);
     }//GEN-LAST:event_shopButtonActionPerformed
@@ -261,6 +261,7 @@ public class GameFrame extends javax.swing.JFrame {
      */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         (new PlayerDAO()).savePlayer(Game.getPlayer());
+        Game.playSound("click1");
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
@@ -269,7 +270,7 @@ public class GameFrame extends javax.swing.JFrame {
      */
     private void statusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusButtonActionPerformed
         this.dispose();
-        
+        Game.playSound("click1");
         StatusFrame newStatus = new StatusFrame();
         newStatus.setVisible(true);
     }//GEN-LAST:event_statusButtonActionPerformed
@@ -280,7 +281,7 @@ public class GameFrame extends javax.swing.JFrame {
      */
     private void stashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stashButtonActionPerformed
         this.dispose();
-        
+        Game.playSound("click1");
         StashFrame newStash = new StashFrame();
         newStash.setVisible(true);
     }//GEN-LAST:event_stashButtonActionPerformed
@@ -291,7 +292,7 @@ public class GameFrame extends javax.swing.JFrame {
      */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
-        
+        Game.playSound("click1");
         Game.setPlayer(null);
         
         MenuFrame newMenu = new MenuFrame();
@@ -305,7 +306,7 @@ public class GameFrame extends javax.swing.JFrame {
      */
     private void dungeonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dungeonButtonActionPerformed
         this.dispose();
-        
+        Game.playSound("click1");
         DungeonFrame newDungeon = new DungeonFrame();
         newDungeon.setVisible(true);
     }//GEN-LAST:event_dungeonButtonActionPerformed

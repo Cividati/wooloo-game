@@ -510,6 +510,7 @@ public class BattleFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
+        Game.playSound("click1");
         int myAgility = player.getAgi();
         int targetAgility = target.getAgi();
         
@@ -555,7 +556,7 @@ public class BattleFrame extends javax.swing.JFrame {
         // preencher scroll pane com botões das potions
         // clicou na potion -> efeito de heal
         //                  -> mostra log
-        
+        Game.playSound("click1");
         javax.swing.JPanel potionPanel = new javax.swing.JPanel();
         
         scrollPane.getViewport().removeAll();
@@ -644,6 +645,7 @@ public class BattleFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
+        Game.playSound("click1");
         int myStatsMean = (player.getStr() + player.getAgi() + player.getCon()) / 3;
         int targetMean = (target.getStr() + target.getAgi() + target.getCon()) / 3;
         

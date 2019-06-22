@@ -405,6 +405,8 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        Game.playSound("click1");
+        
         this.dispose();
         
         GameFrame gameBack = new GameFrame();
@@ -416,6 +418,8 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addStrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStrButtonActionPerformed
+        Game.playSound("click1");
+        
         if(statusPoints <= 0)
         {
             Game.sendErrorMessage("You do not have points to distribute.");
@@ -437,6 +441,8 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addAgiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAgiButtonActionPerformed
+        Game.playSound("click1");
+        
         if(statusPoints <= 0)
         {
             Game.sendErrorMessage("You do not have points to distribute.");
@@ -456,6 +462,8 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addConstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstButtonActionPerformed
+        Game.playSound("click1");
+        
         if(statusPoints <= 0)
         {
             Game.sendErrorMessage("You do not have points to distribute.");
@@ -477,6 +485,8 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        Game.playSound("click1");
+        
         Player player = Game.getPlayer();
         
         if(player.getStatusPoints() == statusPoints)

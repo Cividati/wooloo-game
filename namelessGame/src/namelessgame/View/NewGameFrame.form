@@ -133,12 +133,13 @@
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/namelessgame/img/avatars/kirito.png"/>
+          <Image iconType="3" name="/namelessgame/img/avatars/Naofumi.png"/>
         </Property>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="490" y="30" width="300" height="400"/>
+          <AbsoluteConstraints x="480" y="40" width="300" height="400"/>
         </Constraint>
       </Constraints>
     </Component>

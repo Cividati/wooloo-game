@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
 import javax.swing.JFrame;
+import namelessgame.Gameplay.Game;
 import namelessgame.Gameplay.Item;
 import namelessgame.Gameplay.ShopItem;
 
@@ -247,7 +248,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
      */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         originalFrame.setEnabled(true);
-        
+        Game.playSound("click1");
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -258,6 +259,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         originalFrame.setEnabled(true);
         this.dispose();
+        Game.playSound("click1");
         
         if(originalFrame instanceof ShopFrame)
         {

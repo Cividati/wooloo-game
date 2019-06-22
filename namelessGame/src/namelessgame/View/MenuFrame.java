@@ -100,7 +100,7 @@ public class MenuFrame extends javax.swing.JFrame {
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.dispose();
         
-        Game.playSound("click");
+        Game.playSound("click1");
         
         NewGameFrame newG = new NewGameFrame();
         newG.setVisible(true);
@@ -113,7 +113,7 @@ public class MenuFrame extends javax.swing.JFrame {
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         this.dispose();
         
-        Game.playSound("click");
+        Game.playSound("click1");
         
         LoadGameFrame loadG = new LoadGameFrame();
         loadG.setVisible(true);
@@ -125,7 +125,7 @@ public class MenuFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        Game.playSound("click");
+        Game.playSound("click1");
         
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed

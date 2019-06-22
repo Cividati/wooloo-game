@@ -89,7 +89,7 @@ public class DungeonFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        infoLabel = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
         dungeon2 = new javax.swing.JButton();
         dungeon1 = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
@@ -97,31 +97,64 @@ public class DungeonFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("    Dungeons");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(827, 560));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        infoLabel.setFont(new java.awt.Font("Yu Gothic Medium", 1, 48)); // NOI18N
-        infoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        infoLabel.setText("Dungeons");
-        getContentPane().add(infoLabel);
-        infoLabel.setBounds(180, 10, 330, 110);
+        backButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backButton);
+        backButton.setBounds(710, 470, 100, 50);
 
         dungeon2.setBackground(new java.awt.Color(255, 0, 0));
+        dungeon2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dungeon2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(dungeon2);
-        dungeon2.setBounds(420, 310, 40, 30);
+        dungeon2.setBounds(420, 220, 40, 30);
 
         dungeon1.setBackground(new java.awt.Color(255, 0, 0));
+        dungeon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dungeon1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(dungeon1);
-        dungeon1.setBounds(370, 500, 40, 30);
+        dungeon1.setBounds(370, 360, 40, 30);
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/map.png"))); // NOI18N
         getContentPane().add(backgroundLabel);
-        backgroundLabel.setBounds(0, 0, 1280, 720);
+        backgroundLabel.setBounds(0, 0, 828, 550);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dungeon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dungeon1ActionPerformed
+        // TODO add your handling code here:
+        Game.playSound("click1");
+    }//GEN-LAST:event_dungeon1ActionPerformed
+
+    private void dungeon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dungeon2ActionPerformed
+        // TODO add your handling code here:
+        Game.playSound("click1");
+    }//GEN-LAST:event_dungeon2ActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        Game.playSound("click1");
+
+        this.dispose();
+
+        GameFrame gameBack = new GameFrame();
+        gameBack.setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,9 +192,9 @@ public class DungeonFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JButton dungeon1;
     private javax.swing.JButton dungeon2;
-    private javax.swing.JLabel infoLabel;
     // End of variables declaration//GEN-END:variables
 }

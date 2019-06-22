@@ -542,6 +542,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         inventoryScrollPane = new javax.swing.JScrollPane();
         lootScrollPane = new javax.swing.JScrollPane();
         nextButton = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("    Victory");
@@ -550,7 +551,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Victory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 24), new java.awt.Color(0, 255, 0))); // NOI18N
+        infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Victory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 24), new java.awt.Color(0, 255, 0))); // NOI18N
         infoPanel.setLayout(null);
 
         goldLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
@@ -589,10 +590,10 @@ public class VictoryFrame extends javax.swing.JFrame {
         receivedGold.setBounds(70, 60, 70, 30);
 
         getContentPane().add(infoPanel);
-        infoPanel.setBounds(0, 0, 510, 180);
+        infoPanel.setBounds(0, 0, 400, 180);
 
         pointsLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        pointsLabel.setForeground(new java.awt.Color(102, 102, 102));
+        pointsLabel.setForeground(new java.awt.Color(255, 255, 255));
         pointsLabel.setText("Points:");
         getContentPane().add(pointsLabel);
         pointsLabel.setBounds(610, 10, 60, 20);
@@ -604,10 +605,10 @@ public class VictoryFrame extends javax.swing.JFrame {
         playerPoints.setBounds(680, 10, 40, 20);
 
         strLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        strLabel.setForeground(new java.awt.Color(102, 102, 102));
+        strLabel.setForeground(new java.awt.Color(255, 255, 255));
         strLabel.setText("Strength:");
         getContentPane().add(strLabel);
-        strLabel.setBounds(550, 60, 73, 20);
+        strLabel.setBounds(550, 60, 71, 20);
 
         playerStr.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerStr.setForeground(new java.awt.Color(0, 0, 0));
@@ -640,16 +641,16 @@ public class VictoryFrame extends javax.swing.JFrame {
         playerAgi.setBounds(680, 100, 40, 20);
 
         agiLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        agiLabel.setForeground(new java.awt.Color(102, 102, 102));
+        agiLabel.setForeground(new java.awt.Color(255, 255, 255));
         agiLabel.setText("Agility:");
         getContentPane().add(agiLabel);
-        agiLabel.setBounds(550, 100, 52, 20);
+        agiLabel.setBounds(550, 100, 51, 20);
 
         constLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        constLabel.setForeground(new java.awt.Color(102, 102, 102));
+        constLabel.setForeground(new java.awt.Color(255, 255, 255));
         constLabel.setText("Constitution:");
         getContentPane().add(constLabel);
-        constLabel.setBounds(550, 140, 100, 20);
+        constLabel.setBounds(550, 140, 99, 20);
 
         playerConst.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerConst.setForeground(new java.awt.Color(0, 0, 0));
@@ -667,16 +668,16 @@ public class VictoryFrame extends javax.swing.JFrame {
         addConstButton.setBounds(740, 140, 40, 30);
 
         hpLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
-        hpLabel.setForeground(new java.awt.Color(102, 102, 102));
+        hpLabel.setForeground(new java.awt.Color(255, 255, 255));
         hpLabel.setText("Max HP:");
         getContentPane().add(hpLabel);
-        hpLabel.setBounds(550, 170, 68, 20);
+        hpLabel.setBounds(550, 180, 60, 20);
 
         playerHp.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerHp.setForeground(new java.awt.Color(0, 0, 0));
         playerHp.setText("0");
         getContentPane().add(playerHp);
-        playerHp.setBounds(680, 170, 39, 20);
+        playerHp.setBounds(680, 180, 39, 20);
 
         confirmButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         confirmButton.setText("Confirm");
@@ -706,6 +707,10 @@ public class VictoryFrame extends javax.swing.JFrame {
         getContentPane().add(nextButton);
         nextButton.setBounds(620, 410, 108, 55);
 
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 800, 500);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -715,6 +720,8 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addStrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStrButtonActionPerformed
+        Game.playSound("click1");
+        
         if(statusPoints <= 0)
         {
             Game.sendErrorMessage("You do not have points to distribute.");
@@ -736,6 +743,8 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addAgiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAgiButtonActionPerformed
+        Game.playSound("click1");
+        
         if(statusPoints <= 0)
         {
             Game.sendErrorMessage("You do not have points to distribute.");
@@ -755,6 +764,8 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addConstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstButtonActionPerformed
+        Game.playSound("click1");
+        
         if(statusPoints <= 0)
         {
             Game.sendErrorMessage("You do not have points to distribute.");
@@ -776,6 +787,8 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        Game.playSound("click1");
+        
         if(player.getStatusPoints() == statusPoints)
         {
             Game.sendErrorMessage("You didn't distribute any points.");
@@ -796,6 +809,8 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        Game.playSound("click1");
+        
         this.dispose();
         
         Game.advanceDungeon();
@@ -844,6 +859,7 @@ public class VictoryFrame extends javax.swing.JFrame {
     private javax.swing.JButton addConstButton;
     private javax.swing.JButton addStrButton;
     private javax.swing.JLabel agiLabel;
+    private javax.swing.JLabel background;
     private javax.swing.JButton confirmButton;
     private javax.swing.JLabel constLabel;
     private javax.swing.JLabel goldLabel;

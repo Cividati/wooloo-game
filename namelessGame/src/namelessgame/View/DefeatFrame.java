@@ -482,6 +482,7 @@ public class DefeatFrame extends javax.swing.JFrame {
         okayButton = new javax.swing.JButton();
         lootScrollPane = new javax.swing.JScrollPane();
         inventoryScrollPane = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("    Defeat");
@@ -490,7 +491,7 @@ public class DefeatFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Defeat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 24), new java.awt.Color(255, 0, 0))); // NOI18N
+        infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Defeat", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 24), new java.awt.Color(255, 0, 0))); // NOI18N
         infoPanel.setLayout(null);
 
         infoText3.setFont(new java.awt.Font("OscineW04-Light", 1, 24)); // NOI18N
@@ -519,15 +520,19 @@ public class DefeatFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(okayButton);
-        okayButton.setBounds(660, 410, 108, 55);
+        okayButton.setBounds(350, 420, 108, 55);
 
         lootScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Loot", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(lootScrollPane);
-        lootScrollPane.setBounds(20, 250, 250, 180);
+        lootScrollPane.setBounds(80, 220, 250, 180);
 
         inventoryScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("OscineTrialW01-Regular", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         getContentPane().add(inventoryScrollPane);
-        inventoryScrollPane.setBounds(290, 250, 250, 180);
+        inventoryScrollPane.setBounds(480, 220, 250, 180);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 800, 500);
 
         pack();
         setLocationRelativeTo(null);
@@ -538,6 +543,7 @@ public class DefeatFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void okayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayButtonActionPerformed
+        Game.playSound("click1");
         this.dispose();
 
         (new GameFrame()).setVisible(true);       
@@ -585,6 +591,7 @@ public class DefeatFrame extends javax.swing.JFrame {
     private javax.swing.JLabel infoText2;
     private javax.swing.JLabel infoText3;
     private javax.swing.JScrollPane inventoryScrollPane;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane lootScrollPane;
     private javax.swing.JButton okayButton;
     // End of variables declaration//GEN-END:variables

@@ -297,6 +297,8 @@ public class ShopFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        Game.playSound("click1");
+        
         this.dispose();
 
         GameFrame gameBack = new GameFrame();
@@ -308,6 +310,7 @@ public class ShopFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void sellButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellButtonActionPerformed
+        Game.playSound("click1");
         updateSellingItems();
     }//GEN-LAST:event_sellButtonActionPerformed
 
@@ -316,6 +319,7 @@ public class ShopFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyButtonActionPerformed
+        Game.playSound("click1");
         updateBuyingItems();
     }//GEN-LAST:event_buyButtonActionPerformed
 

@@ -637,7 +637,7 @@ public class StashFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("    Stash");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(786, 555));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -686,6 +686,7 @@ public class StashFrame extends javax.swing.JFrame {
         getContentPane().add(stashScrollPane);
         stashScrollPane.setBounds(30, 300, 250, 180);
 
+        backButton.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -693,7 +694,7 @@ public class StashFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(360, 430, 70, 50);
+        backButton.setBounds(340, 430, 100, 50);
 
         backgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
@@ -705,6 +706,8 @@ public class StashFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        Game.playSound("click1");
+        
         this.dispose();
 
         GameFrame gameBack = new GameFrame();

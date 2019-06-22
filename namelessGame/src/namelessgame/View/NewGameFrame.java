@@ -107,9 +107,10 @@ public class NewGameFrame extends javax.swing.JFrame {
         name.setBounds(580, 530, 110, 40);
 
         charAvatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/kirito.png"))); // NOI18N
+        charAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/avatars/Naofumi.png"))); // NOI18N
+        charAvatar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(charAvatar);
-        charAvatar.setBounds(490, 30, 300, 400);
+        charAvatar.setBounds(480, 40, 300, 400);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/bg.jpg"))); // NOI18N
@@ -128,8 +129,10 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void MaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleButtonActionPerformed
+        Game.playSound("click1");
+        
         sex = 'M';
-
+        
         if(nextIndexMale >= maleImages.length)
             nextIndexMale = 0;
         
@@ -144,8 +147,10 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void FemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemButtonActionPerformed
-        sex = 'F';
+        Game.playSound("click1"); 
         
+        sex = 'F';
+           
         if(femaleImages.length == 0)
             return;
         
@@ -163,8 +168,10 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        this.dispose();
+        Game.playSound("click1");
         
+        this.dispose();
+
         MenuFrame menuBack = new MenuFrame();
         menuBack.setVisible(true);    
     }//GEN-LAST:event_BackButtonActionPerformed
@@ -174,6 +181,8 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void CreateCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCharButtonActionPerformed
+        Game.playSound("click1");
+        
         String characterName = nameField.getText();
         
         if(characterName.length() < 1 || characterName.length() > 10)
