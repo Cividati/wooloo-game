@@ -48,7 +48,7 @@ de Game.java (namelessGame.Gameplay), seguindo o que já foi feito como exemplo.
 
 ## Bugs conhecidos
 
- * Ao explorar um dungeon após a mesma ter sido explorada, o monstro pode ter sua HP disposta com um valor negativo. 
+ * Ao explorar uma dungeon após a mesma ter sido finalizada, o monstro pode ter sua HP disposta com um valor negativo. 
  **Solução:** reinicie o jogo.
  
 
