@@ -35,7 +35,7 @@ No código da loja alguns itens já estão configurados. Para que apareçam, é 
 
 Pode-se criá-los manualmente seguindo as instruções, alterando os valores como bem entender, ou copiar e colar os dados disponíveis no arquivo de texto mencionado em `Diretórios importantes` no ambiente de interpretação que o script está sendo executado (terminal do Windows, do Linux, do VS Code, etc.).
 
-Para as dungeons e monstros, é necessário inseri-los, assim como os itens, pelo script feito em Python (insert_values.py, mencionado em `Diretórios importantes`). Para fazer isso, basta copiar o texto do bloco de notas e colar no no ambiente de interpretação.
+Para as dungeons e monstros, é necessário inseri-los, assim como os itens, pelo script feito em Python (insert_values.py, mencionado em `Diretórios importantes`). Para fazer isso, basta copiar o texto do bloco de notas e colar no ambiente de interpretação.
 
 #### Ordem para inserir:
 1. Itens
@@ -49,6 +49,7 @@ Use `addItemToShop` para adicionar itens que possam ser **comprados** na loja e 
 ## Bugs conhecidos
 
  * Ao explorar uma dungeon após a mesma ter sido finalizada, o monstro pode ter sua HP disposta com um valor negativo. 
+ 
  **Solução:** reinicie o jogo.
  
 
