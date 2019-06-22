@@ -405,7 +405,7 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         this.dispose();
         
@@ -418,7 +418,7 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addStrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStrButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(statusPoints <= 0)
         {
@@ -441,7 +441,7 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addAgiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAgiButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(statusPoints <= 0)
         {
@@ -462,7 +462,7 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addConstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(statusPoints <= 0)
         {
@@ -485,7 +485,7 @@ public class StatusFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         Player player = Game.getPlayer();
         

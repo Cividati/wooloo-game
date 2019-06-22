@@ -32,22 +32,27 @@ public class DungeonFrame extends javax.swing.JFrame {
     public DungeonFrame() {
         initComponents();
         
+        javax.swing.JButton[] dungeonButtons = {dungeon1, dungeon2};
+        
         try
         {
-            Dungeon dungeon1Data = Game.getDungeons().get(0);
+            for(int i = 0; i < dungeonButtons.length; i++)
+            {
+                Dungeon dungeonData = Game.getDungeons().get(i);
             
-            dungeonMap.put(dungeon1, dungeon1Data);
-            dungeon1.setToolTipText("<html><h1>" +
-                                    dungeon1Data.getName() + "</h1><br>" +
-                                    dungeon1Data.getDescr() + "<br><br>" +
-                                    "Minimum level: <font color = " + (player.getLevel() >= dungeon1Data.getMinLv() ? "\"green\"" : "\"red\"") + ">" + dungeon1Data.getMinLv() + "</font><br></html>");
-            
-            dungeon1.addActionListener(new java.awt.event.ActionListener() {           
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    DungeonActionPerformed(evt);
-                }
-            });
+                dungeonMap.put(dungeonButtons[i], dungeonData);
+                dungeonButtons[i].setToolTipText("<html><h1>" +
+                                        dungeonData.getName() + "</h1><br>" +
+                                        dungeonData.getDescr() + "<br><br>" +
+                                        "Minimum level: <font color = " + (player.getLevel() >= dungeonData.getMinLv() ? "\"green\"" : "\"red\"") + ">" + dungeonData.getMinLv() + "</font><br></html>");
+
+                dungeonButtons[i].addActionListener(new java.awt.event.ActionListener() {           
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        DungeonActionPerformed(evt);
+                    }
+                });
+            }
         }
         catch(Exception e)
         {
@@ -139,16 +144,16 @@ public class DungeonFrame extends javax.swing.JFrame {
 
     private void dungeon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dungeon1ActionPerformed
         // TODO add your handling code here:
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
     }//GEN-LAST:event_dungeon1ActionPerformed
 
     private void dungeon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dungeon2ActionPerformed
         // TODO add your handling code here:
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
     }//GEN-LAST:event_dungeon2ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
 
         this.dispose();
 

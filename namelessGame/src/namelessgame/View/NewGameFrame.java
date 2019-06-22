@@ -129,7 +129,7 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void MaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         sex = 'M';
         
@@ -147,7 +147,7 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void FemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FemButtonActionPerformed
-        Game.playSound("click1"); 
+        Game.playNewAudio("click1", false); 
         
         sex = 'F';
            
@@ -168,7 +168,7 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         this.dispose();
 
@@ -181,7 +181,7 @@ public class NewGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void CreateCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCharButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         String characterName = nameField.getText();
         

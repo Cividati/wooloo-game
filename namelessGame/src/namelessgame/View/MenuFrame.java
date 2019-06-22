@@ -12,9 +12,9 @@ public class MenuFrame extends javax.swing.JFrame {
      * Creates new form menuFrame
      */
     public MenuFrame() {
-        initComponents();
+        Game.playMusic("idlegame");
         
-        Game.playMusic("swordland");
+        initComponents();
     }
   
     /**
@@ -79,7 +79,7 @@ public class MenuFrame extends javax.swing.JFrame {
         getContentPane().add(loadGameButton);
         loadGameButton.setBounds(130, 360, 300, 100);
 
-        versionLabel.setText("Patch ver.: v0.01.002.0014");
+        versionLabel.setText("Patch ver.: v0.01.002.0015");
         getContentPane().add(versionLabel);
         versionLabel.setBounds(1110, 670, 160, 16);
 
@@ -100,7 +100,7 @@ public class MenuFrame extends javax.swing.JFrame {
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.dispose();
         
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         NewGameFrame newG = new NewGameFrame();
         newG.setVisible(true);
@@ -113,7 +113,7 @@ public class MenuFrame extends javax.swing.JFrame {
     private void loadGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadGameButtonActionPerformed
         this.dispose();
         
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         LoadGameFrame loadG = new LoadGameFrame();
         loadG.setVisible(true);
@@ -125,7 +125,7 @@ public class MenuFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed

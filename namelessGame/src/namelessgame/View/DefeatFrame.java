@@ -543,7 +543,7 @@ public class DefeatFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void okayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         this.dispose();
 
         (new GameFrame()).setVisible(true);       

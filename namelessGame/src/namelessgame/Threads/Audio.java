@@ -21,8 +21,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Audio extends Thread {
     
-    private String audioName;
     private boolean isMusic;
+    
+    private String audioName;
+    private String audioPath;
+    
     private Clip clip;
     
     public Audio(String audioName) {
@@ -32,7 +35,8 @@ public class Audio extends Thread {
     public Audio(String audioName, boolean isMusic) {
         this.isMusic = isMusic;
         
-        this.audioName = "/namelessgame/audio/" + (this.isMusic ? "musics" : "sounds") + "/" + audioName + ".wav";
+        this.audioName = audioName;
+        this.audioPath = "/namelessgame/audio/" + (this.isMusic ? "musics" : "sounds") + "/" + audioName + ".wav";
     }
     
     public void stopAudio()
@@ -41,13 +45,29 @@ public class Audio extends Thread {
             clip.stop();
     }
 
+    public String getAudioName() {
+        return audioName;
+    }
+
+    public void setAudioName(String audioName) {
+        this.audioName = audioName;
+    }
+
+    public boolean isMusic() {
+        return isMusic;
+    }
+
+    public void setIsMusic(boolean isMusic) {
+        this.isMusic = isMusic;
+    }
+
     @Override
     public void run()
     {
         AudioInputStream inputStream = null;
         
         try {
-            inputStream = AudioSystem.getAudioInputStream(getClass().getResource(audioName));
+            inputStream = AudioSystem.getAudioInputStream(getClass().getResource(audioPath));
             
             clip = AudioSystem.getClip();
             clip.open(inputStream);

@@ -153,7 +153,7 @@ public class Game {
      * @param name String - nome do item
      * @param price long - preço do item
      */
-    public static void addItemToBuy(String name, long price)
+    public static void addItemToSell(String name, long price)
     {
         sell.put(name, price);
     }
@@ -188,8 +188,8 @@ public class Game {
         addItemToShop("Small Health Potion", 0);
         addItemToShop("Small Health Potion", 10);
         
-        addItemToBuy("Sword", 50);
-        addItemToBuy("Small Health Potion", 20);
+        addItemToSell("Sword", 50);
+        addItemToSell("Small Health Potion", 20);
         
     }
 
@@ -299,7 +299,10 @@ public class Game {
      * @param audioName String - nome da música
      */
     public static void playMusic(String audioName)
-    {
+    {        
+        if(audio != null && audio.getAudioName().equals(audioName) && audio.isMusic())
+            return;
+
         Audio newAudio = new Audio(audioName, true);
         newAudio.start();
         
@@ -313,6 +316,9 @@ public class Game {
      */
     public static void playSound(String audioName)
     {
+        if(audio != null && audio.getAudioName().equals(audioName) && !audio.isMusic())
+            return;
+        
         Audio newAudio = new Audio(audioName);
         newAudio.start();
         

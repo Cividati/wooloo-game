@@ -608,7 +608,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         strLabel.setForeground(new java.awt.Color(255, 255, 255));
         strLabel.setText("Strength:");
         getContentPane().add(strLabel);
-        strLabel.setBounds(550, 60, 71, 20);
+        strLabel.setBounds(520, 60, 73, 20);
 
         playerStr.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerStr.setForeground(new java.awt.Color(0, 0, 0));
@@ -644,13 +644,13 @@ public class VictoryFrame extends javax.swing.JFrame {
         agiLabel.setForeground(new java.awt.Color(255, 255, 255));
         agiLabel.setText("Agility:");
         getContentPane().add(agiLabel);
-        agiLabel.setBounds(550, 100, 51, 20);
+        agiLabel.setBounds(520, 100, 52, 20);
 
         constLabel.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         constLabel.setForeground(new java.awt.Color(255, 255, 255));
         constLabel.setText("Constitution:");
         getContentPane().add(constLabel);
-        constLabel.setBounds(550, 140, 99, 20);
+        constLabel.setBounds(520, 140, 100, 20);
 
         playerConst.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerConst.setForeground(new java.awt.Color(0, 0, 0));
@@ -671,7 +671,7 @@ public class VictoryFrame extends javax.swing.JFrame {
         hpLabel.setForeground(new java.awt.Color(255, 255, 255));
         hpLabel.setText("Max HP:");
         getContentPane().add(hpLabel);
-        hpLabel.setBounds(550, 180, 60, 20);
+        hpLabel.setBounds(520, 180, 68, 20);
 
         playerHp.setFont(new java.awt.Font("OscineTrialW01-Regular", 0, 18)); // NOI18N
         playerHp.setForeground(new java.awt.Color(0, 0, 0));
@@ -720,7 +720,7 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addStrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStrButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(statusPoints <= 0)
         {
@@ -743,7 +743,7 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addAgiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAgiButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(statusPoints <= 0)
         {
@@ -764,7 +764,7 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void addConstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(statusPoints <= 0)
         {
@@ -787,7 +787,7 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(player.getStatusPoints() == statusPoints)
         {
@@ -809,7 +809,7 @@ public class VictoryFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         this.dispose();
         

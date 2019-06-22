@@ -25,6 +25,14 @@ public class ShopFrame extends javax.swing.JFrame {
     private Map<javax.swing.JButton, Item> sellMap = new HashMap<>();
     private List<Item> inventory = player.getInventory();
     
+    public ShopFrame() {
+        Game.playMusic("shop");
+        
+        initComponents();
+        
+        playerGold.setText(player.getGold() + " G");
+    }
+    
     /**
      * Quando um item stackable é comprado após lógica em ItemSliderFrame.java
      * @param item ShopItem - item comprado
@@ -84,13 +92,7 @@ public class ShopFrame extends javax.swing.JFrame {
         updateSellingItems();
         Game.sendSuccessMessage("You sold " + count + "x " + item.getName() + "(s).");
     }
-    
-    public ShopFrame() {
-        initComponents();
-        
-        playerGold.setText(player.getGold() + " G");
-    }
-    
+
     /**
      * Ação realizada ao clicar em um item comprável
      * @param evt 
@@ -297,7 +299,7 @@ public class ShopFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         this.dispose();
 
@@ -310,7 +312,7 @@ public class ShopFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void sellButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         updateSellingItems();
     }//GEN-LAST:event_sellButtonActionPerformed
 
@@ -319,7 +321,7 @@ public class ShopFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         updateBuyingItems();
     }//GEN-LAST:event_buyButtonActionPerformed
 

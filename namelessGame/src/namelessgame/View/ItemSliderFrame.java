@@ -181,9 +181,9 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
         amountSlider = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("    Choose an amount");
+        setTitle("    Amount");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/namelessgame/img/wooloo.png")).getImage());
-        setPreferredSize(new java.awt.Dimension(250, 100));
+        setPreferredSize(new java.awt.Dimension(250, 130));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -248,7 +248,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
      */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         originalFrame.setEnabled(true);
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -259,7 +259,7 @@ public class ItemSliderFrame extends javax.swing.JFrame implements WindowListene
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         originalFrame.setEnabled(true);
         this.dispose();
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         if(originalFrame instanceof ShopFrame)
         {

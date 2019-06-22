@@ -706,7 +706,7 @@ public class StashFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         
         this.dispose();
 

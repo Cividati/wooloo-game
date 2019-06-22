@@ -368,7 +368,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         try
         {
             (new PlayerDAO()).deletePlayer(playerList.get(chosenId));
@@ -453,7 +453,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         try
         {
             Game.setPlayer(playerList.get(chosenId));
@@ -475,7 +475,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         this.dispose();
         MenuFrame menuBack = new MenuFrame();
         menuBack.setVisible(true);
@@ -487,7 +487,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char1MousePressed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char1.getText().equals(""))
         {
             chosenId = -1;
@@ -505,7 +505,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char2MousePressed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char2.getText().equals(""))
         {
             chosenId = -1;
@@ -523,7 +523,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char3MousePressed(java.awt.event.MouseEvent evt) {
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char3.getText().equals(""))
         {
             chosenId = -1;
@@ -541,7 +541,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char4MousePressed(java.awt.event.MouseEvent evt) {
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char4.getText().equals(""))
         {
             chosenId = -1;
@@ -559,7 +559,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char5MousePressed(java.awt.event.MouseEvent evt) {
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char5.getText().equals(""))
         {
             chosenId = -1;
@@ -577,7 +577,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char6MousePressed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char6.getText().equals(""))
         {
             chosenId = -1;
@@ -595,7 +595,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char7MousePressed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char7.getText().equals(""))
         {
             chosenId = -1;
@@ -613,7 +613,7 @@ public class LoadGameFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void Char8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Char8MousePressed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         if(Char8.getText().equals(""))
         {
             chosenId = -1;

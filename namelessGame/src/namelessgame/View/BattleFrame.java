@@ -48,6 +48,8 @@ public class BattleFrame extends javax.swing.JFrame {
     private List<Item> inventory = player.getInventory();
     private Map<javax.swing.JButton, Item> potionMap = new HashMap<>();
     
+    String[] battleThemes = {"battle1", "battle2"};
+    
     public BattleFrame() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -61,6 +63,8 @@ public class BattleFrame extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(StatusFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
+        Game.playMusic(battleThemes[(new Random()).nextInt(battleThemes.length)]);
         
         initComponents();
     }
@@ -84,6 +88,8 @@ public class BattleFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StatusFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
+        Game.playMusic(battleThemes[(new Random()).nextInt(battleThemes.length)]);
+        
         initComponents();
         
         this.target = target;
@@ -97,6 +103,9 @@ public class BattleFrame extends javax.swing.JFrame {
         playerMaxHp.setText(Integer.toString(player.getMaxHealth()));
         playerHpBar.setValue((int) (((double) player.getHealth() / player.getMaxHealth()) * 100));
         playerAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(player.getAvatar())));
+        
+        if(target.getHealth() != target.getMaxHealth())
+            target.setHealth(target.getMaxHealth());
         
         targetName.setText(target.getName());
         targetHp.setText(Integer.toString(target.getHealth()));
@@ -510,7 +519,7 @@ public class BattleFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void attackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attackButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         int myAgility = player.getAgi();
         int targetAgility = target.getAgi();
         
@@ -556,7 +565,7 @@ public class BattleFrame extends javax.swing.JFrame {
         // preencher scroll pane com botões das potions
         // clicou na potion -> efeito de heal
         //                  -> mostra log
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         javax.swing.JPanel potionPanel = new javax.swing.JPanel();
         
         scrollPane.getViewport().removeAll();
@@ -645,7 +654,7 @@ public class BattleFrame extends javax.swing.JFrame {
      * @param evt 
      */
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
-        Game.playSound("click1");
+        Game.playNewAudio("click1", false);
         int myStatsMean = (player.getStr() + player.getAgi() + player.getCon()) / 3;
         int targetMean = (target.getStr() + target.getAgi() + target.getCon()) / 3;
         
