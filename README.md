@@ -10,15 +10,15 @@ RPG desenvolvido como projeto final das disciplinas de Programação Orientada a
 
 * Diretório da documentação: `namelessGame\namelessGame\javadoc`
 	
-* Diretório do script em Python: `namelessGame\namelessGame`
+* Diretório do script em Python: `namelessGame\namelessGame\database`
 
-* Diretório do arquivo de texto com itens: `namelessGame\namelessGame\insertItems.txt`
+* Diretório do arquivo de texto com itens: `namelessGame\namelessGame\database\data`
 
-* Diretório do arquivo de texto com dungeons: `namelessGame\namelessGame\insertDungeons.txt`
+* Diretório do arquivo de texto com dungeons: `namelessGame\namelessGame\database\data`
 
-* Diretório do arquivo de texto com monstros: `namelessGame\namelessGame\insertMonsters.txt`
+* Diretório do arquivo de texto com monstros: `namelessGame\namelessGame\database\data`
 	
-* Diretório do modelo do Banco de Dados e seu backup .sql: `namelessGame\namelessGame`
+* Diretório do modelo do Banco de Dados e seu backup .sql: `namelessGame\namelessGame\database\schema`
 	
 OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote namelessGame.Database.
 	
