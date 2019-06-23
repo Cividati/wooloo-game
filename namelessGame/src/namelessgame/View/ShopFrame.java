@@ -26,7 +26,7 @@ public class ShopFrame extends javax.swing.JFrame {
     private List<Item> inventory = player.getInventory();
     
     public ShopFrame() {
-        Game.playMusic("shop");
+        Game.playMusic("bar");
         
         initComponents();
         

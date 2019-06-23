@@ -183,11 +183,8 @@ public class Game {
         addItemToShop("Boots+", 20);
         addItemToShop("Boots++", 60);
         addItemToShop("HP Potion", 10);
-        addItemToShop("Small Health Potion", 0);
-        addItemToShop("Small Health Potion", 10);
         
-        addItemToSell("Sword", 50);
-        addItemToSell("Small Health Potion", 20);
+        //addItemToSell("item_name", price);
         
     }
 

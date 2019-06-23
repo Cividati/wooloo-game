@@ -1,5 +1,5 @@
 3
-DeadMines
+Dead Mines
 Deadly mines, be careful!
 westfall
 1
@@ -7,7 +7,7 @@ westfall
 
 3
 Stratholme
-Dont step inside naked!
+Don't step inside naked!
 stratholme
 3
 1
