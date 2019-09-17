@@ -2,24 +2,19 @@
 
 RPG desenvolvido como projeto final das disciplinas de Programação Orientada a Objetos e Banco de Dados.
 ### Grupo
-1. Gabriel Claret (https://github.com/claret1)
-2. Henrique Lang (https://github.com/henriqueblang)
-3. Rubens Cividati (https://github.com/Cividati)
+* [Gabriel Claret] (https://github.com/claret1)
+* [Henrique Lang] (https://github.com/henriqueblang)
+* [Rubens Cividati] (https://github.com/Cividati)
 
 ## Diretórios importantes
 
 * Diretório da documentação: `namelessGame\namelessGame\javadoc`
-	
 * Diretório do script em Python: `namelessGame\namelessGame\database`
-
 * Diretório do arquivo de texto com itens: `namelessGame\namelessGame\database\data`
-
 * Diretório do arquivo de texto com dungeons: `namelessGame\namelessGame\database\data`
-
 * Diretório do arquivo de texto com monstros: `namelessGame\namelessGame\database\data`
-	
 * Diretório do modelo do Banco de Dados e seu backup .sql: `namelessGame\namelessGame\database\schema`
-	
+
 OBS: Tudo relacionado à conexão com o Banco de Dados foi escrito no pacote namelessGame.Database.
 	
 ## Requerimentos para o projeto
