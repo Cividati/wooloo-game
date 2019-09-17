@@ -2,9 +2,9 @@
 
 RPG desenvolvido como projeto final das disciplinas de Programação Orientada a Objetos e Banco de Dados.
 ### Grupo
-* [Gabriel Claret] (https://github.com/claret1)
-* [Henrique Lang] (https://github.com/henriqueblang)
-* [Rubens Cividati] (https://github.com/Cividati)
+* [Gabriel Claret](https://github.com/claret1)
+* [Henrique Lang](https://github.com/henriqueblang)
+* [Rubens Cividati](https://github.com/Cividati)
 
 ## Diretórios importantes
 
